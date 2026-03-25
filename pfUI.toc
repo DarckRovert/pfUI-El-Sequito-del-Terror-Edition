@@ -1,9 +1,9 @@
 ## Interface: 11200
-## Title: |cff33ffccpf|cffffffffUI
-## Author: Shagu - modfied by me0wg4ming
+## Title: |cff33ffccpf|cffffffffUI |r|cff00ccff[Séquito del Terror]|r
+## Author: Shagu - modfied by me0wg4ming & El Séquito
 ## Notes: A complete user interface replacement.
 ## Notes-ruRU: Полная замена пользовательского интерфейса.
-## Version: 8.2.0
+## Version: 8.2.0-Terror
 ## SavedVariables: pfUI_profiles, pfUI_addon_profiles, pfUI_cache, pfUI_throttle
 ## SavedVariablesPerCharacter: pfUI_config, pfUI_init, pfUI_playerDB
 

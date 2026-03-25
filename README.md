@@ -1,6 +1,6 @@
-# pfUI - Turtle WoW Edition
+# pfUI - Séquito del Terror Edition
 
-[![Version](https://img.shields.io/badge/version-8.1.0-blue.svg)](https://github.com/me0wg4ming/pfUI)
+[![Version](https://img.shields.io/badge/version-8.2.0--Terror-ff00cc.svg)](https://github.com/DarckRovert)
 [![Turtle WoW](https://img.shields.io/badge/Turtle%20WoW-1.18.0-brightgreen.svg)](https://turtlecraft.gg/)
 [![SuperWoW](https://img.shields.io/badge/SuperWoW-Optional-yellow.svg)](https://github.com/balakethelock/SuperWoW)
 [![Nampower](https://img.shields.io/badge/Nampower-Required-purple.svg)](https://gitea.com/avitasia/nampower)
@@ -11,6 +11,19 @@
 This version includes significant performance improvements, DLL-enhanced features, and TBC spell indicators that work with Turtle WoW's expanded spell library.
 
 > **Looking for TBC support?** Visit the original pfUI by Shagu: [https://github.com/shagu/pfUI](https://github.com/shagu/pfUI)
+
+---
+
+## 🎯 What's New in Version 8.2.0-Terror (March 25, 2026)
+
+### 👑 El Séquito del Terror Integration
+* **Branding**: Full clan identity integration. Title and Version updated to the Séquito Edition.
+* **New Module: `sequito.lua`**: A centralized module for clan-specific features.
+* **Arsenal Tracker**: New settings tab in `/pfui` to monitor the status of the entire Séquito addon suite (WCS_Brain, DoTimer, TerrorMeter, etc.).
+* **Welcome Greeting**: Themed login messages in both English and Spanish.
+* **Custom Slash Command**: `/sequito` for rapid access to clan settings and information.
+* **i18n Support**: Full localization for English and Spanish clients.
+* **Lua 5.0 Compliance**: Optimized for the Turtle WoW 1.12 client with zero modern-syntax dependencies.
 
 ---
 

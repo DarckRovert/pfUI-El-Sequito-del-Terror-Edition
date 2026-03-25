@@ -102,11 +102,11 @@ nampowerCheckFrame:SetScript("OnEvent", function()
 
       else
         DEFAULT_CHAT_FRAME:AddMessage("|cffff0000[libdebuff] Debuff tracking disabled! Please update Nampower to v3.0.0 or higher.|r")
-        StaticPopup_Show("LIBDEBUFF_NAMPOWER_UPDATE", versionString)
+        -- StaticPopup_Show("LIBDEBUFF_NAMPOWER_UPDATE", versionString)
       end
     else
       DEFAULT_CHAT_FRAME:AddMessage("|cffff0000[libdebuff] Nampower not found! Debuff tracking disabled.|r")
-      StaticPopup_Show("LIBDEBUFF_NAMPOWER_MISSING")
+      -- StaticPopup_Show("LIBDEBUFF_NAMPOWER_MISSING")
     end
   end)
 end)
