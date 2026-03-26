@@ -50,7 +50,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
   welcome:RegisterEvent("PLAYER_ENTERING_WORLD")
   welcome:SetScript("OnEvent", function()
     this:UnregisterEvent("PLAYER_ENTERING_WORLD")
-    local ver = GetAddOnMetadata(pfUI.name, "Version") or "8.2.0-Terror"
+    local ver = GetAddOnMetadata(pfUI.name, "Version") or "9.3.0-Terror"
     DEFAULT_CHAT_FRAME:AddMessage("|cff" .. color_sequito .. "[Séquito del Terror]|r: |cffffffff" .. string.format(ST["WELCOME"], ver) .. "|r")
     
     if not IsAddOnLoaded("WCS_Brain") then
@@ -100,6 +100,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
     
     local arsenal = {
       { name = "WCS_Brain", label = "WCS_Brain" },
+      { name = "WCS_BrainIntegrations", label = "WCS_Integrations" },
       { name = "DoTimer", label = "DoTimer" },
       { name = "BigWigs", label = "BigWigs" },
       { name = "TerrorSquadAI", label = "TerrorSquadAI" },
@@ -107,6 +108,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       { name = "Atlas-TW", label = "Atlas-TW" },
       { name = "aux-addon", label = "AUX-Trading" },
       { name = "HealBot", label = "HealBot" },
+      { name = "pfQuest", label = "pfQuest Séquito" },
       { name = "Nampower", label = "Nampower (DLL)", check = function() return GetNampowerVersion ~= nil end },
       { name = "SuperWoW", label = "SuperWoW (DLL)", check = function() return GetSuperWoWVersion ~= nil end },
     }
@@ -122,6 +124,21 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       local status = loaded and ST["STATUS_ACTIVE"] or ST["STATUS_MISSING"]
       pfUI.gui.CreateConfig(nil, addon.label .. " " .. status, "header")
     end
+
+    pfUI.gui.CreateConfig(nil, " ", "header")
+    -- Botón Abrir Cerebro
+    local openBrain = CreateFrame("Button", nil, pfUI.gui.ScrollChild)
+    openBrain:SetWidth(200)
+    openBrain:SetHeight(25)
+    openBrain:SetText("|cff00ccffABRIR EL CEREBRO (v9.3.0)|r")
+    openBrain:SetNormalFontObject(GameFontNormalSmall)
+    pfUI.api.CreateBackdrop(openBrain)
+    openBrain:SetScript("OnClick", function()
+      if WCS_BrainUI and WCS_BrainUI.Toggle then
+        WCS_BrainUI:Toggle()
+      end
+    end)
+    pfUI.gui.ConfigToAdd(openBrain)
 
     pfUI.gui.CreateConfig(nil, " ", "header")
     pfUI.gui.CreateConfig(nil, "|cff" .. color_sequito .. ST["LORE_HEADER"] .. "|r", "header")
