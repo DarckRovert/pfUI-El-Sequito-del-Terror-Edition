@@ -1700,3 +1700,15 @@ Same as original pfUI - free to use and modify.
 **Release Date:** March 04, 2026  
 **Compatibility:** Turtle WoW 1.18.0  
 **Status:** Stable
+
+---
+
+## ?? Comunidad y Gobernanza
+
+Este proyecto es parte del ecosistema **El Séquito del Terror**. Nos comprometemos a mantener un ambiente sano y profesional:
+
+- ?? **[Código de Conducta](./CODE_OF_CONDUCT.md)**: Nuestras normas de convivencia.
+- ?? **[Guía de Contribución](./CONTRIBUTING.md)**: Cómo ayudar a expandir este addon.
+- ??? **[Licencia](./LICENSE)**: Este proyecto está bajo la Licencia MIT.
+
+---
