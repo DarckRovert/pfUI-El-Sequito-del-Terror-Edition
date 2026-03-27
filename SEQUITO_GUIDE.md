@@ -1,43 +1,37 @@
-# pfUI — Guía Séquito del Terror Edition
+# Guía de Configuración del Séquito — pfUI
 
-## Descripción
+## Configuración Recomendada para el Séquito del Terror
 
-Esta es la versión **"El Séquito del Terror Edition"** de pfUI, un reemplazo completo de la UI de World of Warcraft 1.12. Mantiene toda la funcionalidad original de pfUI y añade integración exclusiva con el ecosistema de addons del Séquito.
+Esta guía describe la configuración óptima de pfUI para integrarse con los demás addons del ecosistema.
 
-## Paleta de Colores
+## Paso 1: Instalar en Orden Correcto
+1. pfUI (base)
+2. pfQuest (mapas de misiones)
+3. WCS_Brain (hub central)
+4. TerrorMeter (medidor de daño)
 
-| Elemento | Color | Hex |
-|---|---|---|
-| Bordes / Tabs Activas | Warlock Purple | `#9482C9` |
-| Títulos / Acciones | Fel Green | `#00FF80` |
-| Fondo Principal | Deep Void | `#0A050F` |
+## Paso 2: Configuración Visual
+Abre /pfui → **Colores**:
 
-## Botón "ABRIR EL CEREBRO"
+| Elemento | Color sugerido |
+|---|---|
+| Fondo de marcos | #0D0D0D (negro puro) |
+| Bordes | #8B0000 (carmesí oscuro) |
+| Texto | #FFD700 (dorado del Séquito) |
+| Vida del jugador | #00CC44 (verde oscuro) |
+| Maná | #0044CC (azul mágico) |
 
-El módulo `modules/sequito.lua` añade un botón en el menú principal de pfUI:
+## Paso 3: Posición de Elementos
+- **WCS_Brain ButtonBar**: colocar en la esquina inferior derecha.
+- **TerrorMeter**: parte superior izquierda.
+- **HealBot Panel**: lado derecho de la pantalla.
 
-```
-/sequito brain   — Abre el panel WCS_Brain
-/sequito meter   — Abre TerrorMeter
-/sequito squad   — Abre TerrorSquadAI
-```
+## Paso 4: Addons a Desactivar
+Para evitar conflictos, desactiva:
+- CT_MOD
+- Discord Unit Frames
+- Discord Action Bars
+- Bongos (si está instalado)
 
-El botón azul "ABRIR EL CEREBRO" en el menú de pfUI abre directamente el panel principal de WCS_Brain (14 tabs).
-
-## Módulos Integrados
-
-- **WCS_Brain** → Cerebro del clan (14 tabs: DQN, Perfiles, Banco, etc.)
-- **TerrorMeter** → Medidor de daño/sanación con tema Séquito
-- **TerrorSquadAI** → IA táctica de escuadrón
-- **Atlas-TW** → Mapas de mazmorra con skin pfUI
-- **HealBot** → Panel de sanación con localización española
-
-## Personalización
-
-El archivo `modules/sequito.lua` contiene:
-- `SEQUITO_ARSENAL` — lista de todos los addons del clan
-- Función `OpenBrainPanel()` — hook al WCS_Brain
-- Integración con `pfUI_config` para tema visual
-
-## Changelog
-Ver [CHANGELOG.md](./CHANGELOG.md)
+## Paso 5: Verificación
+Escribe /reload y verifica que todos los marcos carguen correctamente. Si hay errores de Lua, consulta el [FAQ de pfUI](https://github.com/shagu/pfUI).
