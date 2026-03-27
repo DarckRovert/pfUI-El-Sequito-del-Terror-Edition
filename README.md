@@ -25,6 +25,20 @@ This version includes significant performance improvements, DLL-enhanced feature
 * **i18n Support**: Full localization for English and Spanish clients.
 * **Lua 5.0 Compliance**: Optimized for the Turtle WoW 1.12 client with zero modern-syntax dependencies.
 
+### 🌐 Séquito Ecosystem Compatible (SquadMind HUD)
+pfUI no es solo tu interfaz, es el **HUD Premium** donde confluye toda la telemetría de la red neural:
+
+```mermaid
+graph TD
+    classDef ui fill:#004d00,stroke:#00ff00,stroke-width:2px,color:#fff;
+    classDef core fill:#2C0000,stroke:#FF0000,stroke-width:2px,color:#fff;
+    PFUI["🖥️ pfUI<br/>(HUD Premium)"]:::ui
+    TSAI["🧠 TerrorSquadAI<br/>(Comandante Táctico)"]:::core
+    
+    TSAI ==>|Dibuja Hologramas y Alertas| PFUI
+```
+- **Simbiosis con TerrorSquadAI**: La IA utiliza la infraestructura gráfica de pfUI para dibujar el **TerrorBoard**, inyectar alertas de amenaza críticas en el centro de tu pantalla (Alto al DPS) y renderizar el radar 2.0.
+
 ---
 
 ## 🎯 What's New in Version 8.1.0 (March 03, 2026)
