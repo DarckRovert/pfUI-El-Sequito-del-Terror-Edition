@@ -1,0 +1,14 @@
+# pfUI GitIgnore
+*.toc.bak
+*.lua.bak
+*.xml.bak
+*.DS_Store
+*.swp
+*.tmp
+*~
+LAST_DEPLOY.txt
+.vscode/
+
+# Build assets
+img/*.psd
+fonts/*.ttf.bak

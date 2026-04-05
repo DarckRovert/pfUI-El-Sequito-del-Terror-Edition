@@ -1,14 +1,9 @@
-# Contribuyendo a El Séquito del Terror
+# Contributing to pfUI (El Séquito Edition)
 
-¡Gracias por tu interés en potenciar nuestro arsenal!
+Este es un fork especializado de pfUI. Solo aceptamos mejoras que no rompan la compatibilidad con el ecosistema **WCS_Brain**.
 
-## Cómo contribuir
-1. Haz un fork del repositorio.
-2. Crea una rama para tu mejora (git checkout -b feature/mejora).
-3. Envía tus cambios vía Pull Request.
+## Desarrollo
+1.  **Strict Lua 5.0**: Sin operadores modernos (`#`, `math.huge`, etc.).
+2.  **Skinning**: Cualquier nuevo skin debe seguir la paleta de colores de El Séquito.
 
-## Estándares
-- Compatibilidad total con **Turtle WoW (Lua 5.0)**.
-- Documentación clara en los commits.
-
-Lee nuestro [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) antes de empezar.
+Referencia: [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md).

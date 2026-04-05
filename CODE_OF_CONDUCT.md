@@ -1,15 +1,13 @@
-# Código de Conducta de El Séquito del Terror
+# Contributor Covenant Code of Conduct
 
-## Nuestro Compromiso
-Como miembros, contribuyentes y líderes de **El Séquito del Terror**, nos comprometemos a hacer de la participación en nuestra comunidad una experiencia libre de acoso para todos.
+## Our Pledge
+As members, contributors, and leaders of the El Séquito del Terror community, we pledge to make participation in our project a harassment-free experience for everyone.
 
-## Nuestros Estándares
-- Demostrar empatía y amabilidad.
-- Respetar las opiniones divergentes.
-- Aceptar la responsabilidad por nuestros actos.
+## Our Standards
+- Use welcoming and inclusive language
+- Be respectful of differing viewpoints
+- Gracefully accept constructive criticism
+- Focus on what is best for the community
+- Show empathy towards other community members
 
-## Aplicación
-Los incidentes pueden reportarse a través de GitHub Issues en el repositorio oficial.
-
----
-Adaptado del [Contributor Covenant](https://www.contributor-covenant.org) v2.1.
+Refer to the full text at the community root.
