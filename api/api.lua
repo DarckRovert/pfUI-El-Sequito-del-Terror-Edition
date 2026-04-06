@@ -28,6 +28,20 @@ function pfUI.api.HasNampower()
   return GetNampowerVersion and true or false
 end
 
+-- [ GetUnitGUID ]
+-- Returns the unique identifier of a unit.
+-- Provided as a shim for environments without Nampower/SuperWow DLLs.
+function pfUI.api.GetUnitGUID(unit)
+  if not unit then return nil end
+  if _G.GetUnitGUID then return _G.GetUnitGUID(unit) end
+  if _G.UnitGUID then return _G.UnitGUID(unit) end
+  if _G.UnitExists then
+    local _, guid = _G.UnitExists(unit)
+    if guid then return guid end
+  end
+  return nil
+end
+
 -- [ GetUnitDistance ]
 -- Returns distance to unit using best available method
 -- 'unit1'    [string]    first unit (default: "player")
