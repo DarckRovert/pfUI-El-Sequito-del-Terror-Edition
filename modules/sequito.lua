@@ -81,7 +81,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
       
       -- Copy Link Button
-      local copy = CreateFrame("Button", nil, pfUI.gui.ScrollChild)
+      local copy = CreateFrame("Button", nil, this)
       copy:SetWidth(200)
       copy:SetHeight(20)
       pfUI.api.CreateBackdrop(copy)
@@ -94,8 +94,8 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       end)
       
       -- Sistema Manual de Anclaje pfUI (Fix Error 145)
-      copy:SetPoint("TOPLEFT", pfUI.gui.ScrollChild, "TOPLEFT", 25, pfUI.gui.ScrollChild.objectCount * -15)
-      pfUI.gui.ScrollChild.objectCount = pfUI.gui.ScrollChild.objectCount + 1
+      copy:SetPoint("TOPLEFT", this, "TOPLEFT", 25, this.objectCount * -15)
+      this.objectCount = this.objectCount + 1
 
       pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
       pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
@@ -132,7 +132,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
 
     pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
     -- Botón Abrir Cerebro
-    local openBrain = CreateFrame("Button", nil, pfUI.gui.ScrollChild)
+    local openBrain = CreateFrame("Button", nil, this)
     openBrain:SetWidth(200)
     openBrain:SetHeight(25)
     pfUI.api.CreateBackdrop(openBrain)
@@ -147,8 +147,8 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
     end)
     
     -- Sistema Manual de Anclaje pfUI (Fix Error 145)
-    openBrain:SetPoint("TOPLEFT", pfUI.gui.ScrollChild, "TOPLEFT", 25, pfUI.gui.ScrollChild.objectCount * -15)
-    pfUI.gui.ScrollChild.objectCount = pfUI.gui.ScrollChild.objectCount + 1
+    openBrain:SetPoint("TOPLEFT", this, "TOPLEFT", 25, this.objectCount * -15)
+    this.objectCount = this.objectCount + 1
 
     pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
     pfUI.gui.CreateConfig(nil, "|cff" .. color_sequito .. ST["LORE_HEADER"] .. "|r", nil, nil, "header")

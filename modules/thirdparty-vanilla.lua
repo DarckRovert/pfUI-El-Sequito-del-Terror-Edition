@@ -543,9 +543,11 @@ pfUI:RegisterModule("thirdparty-vanilla", "vanilla", function()
     CreateBackdrop(WIM_ConversationMenu, 0, nil, .75)
     for i=1, _G.WIM_MaxMenuCount do
       local btn, btnClose = _G["WIM_ConversationMenuTellButton"..i], _G["WIM_ConversationMenuTellButton"..i.."Close"]
-      SkinCloseButton(btnClose, btn, -4, -1)
-      btnClose:SetWidth(13)
-      btnClose:SetHeight(13)
+      if btnClose and btn then
+        SkinCloseButton(btnClose, btn, -4, -1)
+        btnClose:SetWidth(13)
+        btnClose:SetHeight(13)
+      end
     end
     hooksecurefunc("WIM_Icon_DropDown_Update", function()
       for i=1,_G.WIM_MaxMenuCount do
