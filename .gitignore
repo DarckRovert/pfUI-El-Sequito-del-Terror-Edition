@@ -1,15 +1,31 @@
-# Visual Studio Code
-.vscode/
-*.code-workspace
+# pfUI [El Séquito del Terror Edition] — gitignore 🛠️
 
-# Temporary & Local files
+# WoW Excluidos
 *.bak
-*.cache
+*.old
+*.tmp
 *.log
-deploy_log.txt
-LAST_DEPLOY.txt
 
-# Gravity AI 
+# Workspace & OS
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Brain/Session Logs (Gravity)
+.brain/
 .system_generated/
-_knowledge.json
-bridge_log_tail.txt
+*.md_task
+*knowledge.json
+
+# Lua Binaries
+*.lua.compiled
+*.luac
+
+# Archivos de Desarrollo Local
+!README.md
+!CHANGELOG.md
+!LICENSE
+!CONTRIBUTING.md
+!CODE_OF_CONDUCT.md
+!SECURITY.md
+!wiki/
