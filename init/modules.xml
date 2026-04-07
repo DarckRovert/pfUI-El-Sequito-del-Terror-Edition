@@ -78,4 +78,6 @@
   <Include file="..\modules\unitxp.lua"/>
   <Include file="..\modules\bgscore.lua"/>
   <Include file="..\modules\sequito.lua"/>
+  <Include file="..\modules\translator_dict.lua"/>
+  <Include file="..\modules\translator.lua"/>
 </Ui>

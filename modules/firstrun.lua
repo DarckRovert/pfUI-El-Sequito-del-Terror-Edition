@@ -122,7 +122,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
   -- welcome dialog
   pfUI.firstrun:AddStep("init", function()
     local f = CreateFirstRunPage()
-    f.text:SetText(T["Welcome to |cff33ffccpf|cffffffffUI|r!\n\nI'm the first run wizard that will guide you through some basic configuration. If you're lazy, feel free to hit the \"Defaults\" button. If you wish to run this dialog again, go to the settings and hit the \"Reset Firstrun\" button.\n\nVisit |cff33ffcchttp://shagu.org|r to check for the latest version."])
+    f.text:SetText(T["Welcome to |cff33ffccpf|cffffffffUI|r!\n\nI'm the first run wizard that will guide you through some basic configuration. If you're lazy, feel free to hit the \"Defaults\" button. If you wish to run this dialog again, go to the settings and hit the \"Reset Firstrun\" button.\n\nVisit |cff33ffcchttps://sequitodelterror.netlify.app/"])
     return f
   end)
 
@@ -130,6 +130,20 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
   pfUI.firstrun:AddStep("profile", function()
     local f = CreateFirstRunPage()
     f.text:SetText(T["A new installation of |cff33ffccpf|rUI ships with 4 prebuilt design profiles. Click below if you wish to load one of these profiles."])
+
+    f.Apex = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
+    f.Apex:SetWidth(120)
+    f.Apex:SetHeight(20)
+    f.Apex:SetPoint("BOTTOM", 0, 125)
+    f.Apex:SetTextColor(1, 0.8, 0)
+    f.Apex:SetText("APEX")
+    f.Apex:SetScript("OnClick", function()
+      _G["pfUI_config"] = CopyTable(pfUI_profiles["Apex"])
+      pfUI_init.selected_profile = "Apex"
+      pfUI:LoadConfig()
+      ReloadUI()
+    end)
+    SkinButton(f.Apex)
 
     f.Modern = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
     f.Modern:SetWidth(120)

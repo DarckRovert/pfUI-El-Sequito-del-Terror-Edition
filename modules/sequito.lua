@@ -6,6 +6,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
   -- Branding Colors
   local color_sequito = "00ccff"
   local color_pink = "ff00cc"
+  
   -- Séquito Translations (Lua 5.0 Compatible)
   local locale = GetLocale()
   local SL = {
@@ -18,6 +19,11 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       ["STATUS_ACTIVE"] = "|cff00ff00[ACTIVE]|r",
       ["STATUS_MISSING"] = "|cffff4444[MISSING]|r",
       ["CLAN_TAB"] = "Séquito del Terror",
+      ["NAMPOWER_TITLE"] = "|cffff0000!!! SETUP REQUIRED !!!|r",
+      ["NAMPOWER_BODY"] = "Nampower DLL (v3.0.0+) is missing. To fix the 'Nampower Not Found' error and enable full UI power:",
+      ["NAMPOWER_STEP1"] = "1. Click the button below to copy the link.",
+      ["NAMPOWER_STEP2"] = "2. Download and place the .dll in your WoW folder (where WoW.exe is).",
+      ["NAMPOWER_COPY"] = "COPY DOWNLOAD LINK",
     },
     ["esES"] = {
       ["WELCOME"] = "pfUI v%s-Terror detectado. Elnazzareno te da la bienvenida al ecosistema táctico.",
@@ -28,6 +34,11 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       ["STATUS_ACTIVE"] = "|cff00ff00[ACTIVO]|r",
       ["STATUS_MISSING"] = "|cffff4444[AUSENTE]|r",
       ["CLAN_TAB"] = "Séquito del Terror",
+      ["NAMPOWER_TITLE"] = "|cffff0000!!! REQUIERE CONFIGURACIÓN !!!|r",
+      ["NAMPOWER_BODY"] = "Falta la DLL de Nampower (v3.0.0+). Para arreglar el error y activar todo el poder del UI:",
+      ["NAMPOWER_STEP1"] = "1. Pulsa el botón de abajo para copiar el enlace.",
+      ["NAMPOWER_STEP2"] = "2. Descarga y pon la .dll en la carpeta de tu WoW (donde está el WoW.exe).",
+      ["NAMPOWER_COPY"] = "COPIAR ENLACE DE DESCARGA",
     },
   }
   -- Fallback to enUS for everything else
@@ -39,7 +50,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
   welcome:RegisterEvent("PLAYER_ENTERING_WORLD")
   welcome:SetScript("OnEvent", function()
     this:UnregisterEvent("PLAYER_ENTERING_WORLD")
-    local ver = GetAddOnMetadata(pfUI.name, "Version") or "9.3.0-Terror"
+    local ver = GetAddOnMetadata(pfUI.name, "Version") or "9.4.0 [Omni-Tier]"
     DEFAULT_CHAT_FRAME:AddMessage("|cff" .. color_sequito .. "[Séquito del Terror]|r: |cffffffff" .. string.format(ST["WELCOME"], ver) .. "|r")
     
     if not IsAddOnLoaded("WCS_Brain") then
@@ -61,7 +72,31 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
 
   -- GUI Integration
   pfUI.gui.CreateGUIEntry(ST["CLAN_TAB"], nil, function()
-    pfUI.gui.CreateConfig(nil, "|cff" .. color_pink .. ST["ARSENAL_HEADER"] .. "|r", "header")
+    -- Nampower Setup Wizard (Only show if missing)
+    if not GetNampowerVersion then
+      pfUI.gui.CreateConfig(nil, ST["NAMPOWER_TITLE"], nil, nil, "header")
+      pfUI.gui.CreateConfig(nil, ST["NAMPOWER_BODY"], nil, nil, "header")
+      pfUI.gui.CreateConfig(nil, ST["NAMPOWER_STEP1"], nil, nil, "header")
+      pfUI.gui.CreateConfig(nil, ST["NAMPOWER_STEP2"], nil, nil, "header")
+      pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
+      
+      -- Copy Link Button
+      local copy = CreateFrame("Button", nil, pfUI.gui.ScrollChild)
+      copy:SetWidth(200)
+      copy:SetHeight(20)
+      copy:SetText(ST["NAMPOWER_COPY"])
+      copy:SetNormalFontObject(GameFontNormalSmall)
+      pfUI.api.CreateBackdrop(copy)
+      copy:SetScript("OnClick", function()
+        pfUI.chat.urlcopy.CopyText("https://gitea.com/avitasia/nampower/releases")
+      end)
+      pfUI.gui.ConfigToAdd(copy)
+      
+      pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
+      pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
+    end
+
+    pfUI.gui.CreateConfig(nil, "|cff" .. color_pink .. ST["ARSENAL_HEADER"] .. "|r", nil, nil, "header")
     
     local arsenal = {
       { name = "WCS_Brain", label = "WCS_Brain" },
@@ -74,6 +109,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       { name = "aux-addon", label = "AUX-Trading" },
       { name = "HealBot", label = "HealBot" },
       { name = "pfQuest", label = "pfQuest Séquito" },
+      { name = "Nampower", label = "Nampower (DLL)", check = function() return GetNampowerVersion ~= nil end },
       { name = "SuperWoW", label = "SuperWoW (DLL)", check = function() return GetSuperWoWVersion ~= nil end },
     }
 
@@ -86,15 +122,15 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       end
       
       local status = loaded and ST["STATUS_ACTIVE"] or ST["STATUS_MISSING"]
-      pfUI.gui.CreateConfig(nil, addon.label .. " " .. status, "header")
+      pfUI.gui.CreateConfig(nil, addon.label .. " " .. status, nil, nil, "header")
     end
 
-    pfUI.gui.CreateConfig(nil, " ", "header")
+    pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
     -- Botón Abrir Cerebro
     local openBrain = CreateFrame("Button", nil, pfUI.gui.ScrollChild)
     openBrain:SetWidth(200)
     openBrain:SetHeight(25)
-    openBrain:SetText("|cff00ccffABRIR EL CEREBRO (v9.3.0)|r")
+    openBrain:SetText("|cff00ccffABRIR EL CEREBRO (v9.4.0)|r")
     openBrain:SetNormalFontObject(GameFontNormalSmall)
     pfUI.api.CreateBackdrop(openBrain)
     openBrain:SetScript("OnClick", function()
@@ -104,11 +140,11 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
     end)
     pfUI.gui.ConfigToAdd(openBrain)
 
-    pfUI.gui.CreateConfig(nil, " ", "header")
-    pfUI.gui.CreateConfig(nil, "|cff" .. color_sequito .. ST["LORE_HEADER"] .. "|r", "header")
-    pfUI.gui.CreateConfig(nil, ST["LORE_TEXT"], "header")
+    pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
+    pfUI.gui.CreateConfig(nil, "|cff" .. color_sequito .. ST["LORE_HEADER"] .. "|r", nil, nil, "header")
+    pfUI.gui.CreateConfig(nil, ST["LORE_TEXT"], nil, nil, "header")
     
-    pfUI.gui.CreateConfig(nil, " ", "header")
-    pfUI.gui.CreateConfig(nil, "|cff00ccffDiscord:|r |cffffffffdiscord.gg/SfY8vfFWTC|r", "header")
+    pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
+    pfUI.gui.CreateConfig(nil, "|cff00ccffDiscord:|r |cffffffffdiscord.gg/SfY8vfFWTC|r", nil, nil, "header")
   end)
 end)
