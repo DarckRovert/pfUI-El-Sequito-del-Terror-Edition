@@ -1,9 +1,9 @@
-# pfUI — El Séquito del Terror Edition (v9.4.0 [Omni-Tier]) 🔮⚔️
+# pfUI — El Séquito del Terror Edition (v5.1.4 [Omni-Tier]) 🌐⚔️
 
 > **The definitive interface for Turtle WoW.** Una versión de grado industrial, altamente optimizada y profesionalmente equilibrada para la élite de **El Séquito del Terror**. Bajo la supervisión técnica y arquitectónica de **DarckRovert**.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![Version](https://img.shields.io/badge/version-v9.4.0--Omni--Tier-red)](./CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-v5.1.4--Omni--Tier-red)](./CHANGELOG.md)
 [![World of Warcraft](https://img.shields.io/badge/WoW-1.12.1--Turtle-orange)](https://turtle-wow.org)
 [![Support](https://img.shields.io/badge/Support-Ko--fi-blue)](https://ko-fi.com/darckrovert)
 

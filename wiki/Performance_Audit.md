@@ -1,36 +1,37 @@
-# 📉 Wiki: Auditoría de Rendimiento — pfUI [El Séquito del Terror]
+﻿# ðŸ“‰ Wiki: AuditorÃ­a de Rendimiento â€” pfUI [El SÃ©quito del Terror]
 
-El estándar **Diamond Tier** de **DarckRovert** exige un impacto de FPS nulo en situaciones de combate intenso y alta densidad de entidades (Raid 40 y BG).
+El estÃ¡ndar **Diamond Tier** de **DarckRovert** exige un impacto de FPS nulo en situaciones de combate intenso y alta densidad de entidades (Raid 40 y BG).
 
 ---
 
-## ⚡ Optimizaciones de CPU (Throttling)
+## âš¡ Optimizaciones de CPU (Throttling)
 
-El motor original de pfUI procesa cientos de eventos por segundo. En la **Sequito Edition**, hemos inyectado reguladores de frecuencia en los módulos más pesados:
+El motor original de pfUI procesa cientos de eventos por segundo. En la **Sequito Edition**, hemos inyectado reguladores de frecuencia en los mÃ³dulos mÃ¡s pesados:
 
-### 🌐 Traductor Universal v2.0
-- **Caché LRU**: Almacenamiento instantáneo de strings traducidos. Reduce las operaciones Regex de `O(N*M)` a `O(1)` tras el primer encuentro.
-- **Throttling de WIM**: Los susurros entrantes se procesan asíncronamente con un retardo de `1ms` para no bloquear el hilo de renderizado.
+### ðŸŒ Traductor Universal v2.0
+- **CachÃ© LRU**: Almacenamiento instantÃ¡neo de strings traducidos. Reduce las operaciones Regex de `O(N*M)` a `O(1)` tras el primer encuentro.
+- **Throttling de WIM**: Los susurros entrantes se procesan asÃ­ncronamente con un retardo de `1ms` para no bloquear el hilo de renderizado.
 
-### 🛡️ Lag-Free Core (v9.4.0)
-| Módulo | Frecuencia Standard | Frecuencia Séquito | Impacto en CPU |
+### ðŸ›¡ï¸ Lag-Free Core (v5.1.4)
+| MÃ³dulo | Frecuencia Standard | Frecuencia SÃ©quito | Impacto en CPU |
 | :--- | :---: | :---: | :---: |
 | **Buscador de Misiones** | Cada Frame | 0.2s | -75% |
-| **Cálculo de Rutas** | 0.1s | 0.25s | -15% |
+| **CÃ¡lculo de Rutas** | 0.1s | 0.25s | -15% |
 | **Animaciones Map** | Cada Frame | 0.05s | -90% |
 
 ---
 
-## 💾 Gestión de Memoria (Footprint)
+## ðŸ’¾ GestiÃ³n de Memoria (Footprint)
 
 Hemos implementado un sistema de "Silent Logging" y limpieza de basura (`collectgarbage`) controlada para evitar picos de stuttering:
 
-1.  **Cache Cap**: El motor de traducción tiene un tope estricto de **64 entradas**. Superar este límite desencadena la expulsión de la entrada más antigua (LRU).
-2.  **String Concatenation**: Se ha optimizado el uso de `..` en bucles `pairs`, sustituyéndolos por tablas temporales e `table.concat` para reducir la fragmentación de la memoria.
+1.  **Cache Cap**: El motor de traducciÃ³n tiene un tope estricto de **64 entradas**. Superar este lÃ­mite desencadena la expulsiÃ³n de la entrada mÃ¡s antigua (LRU).
+2.  **String Concatenation**: Se ha optimizado el uso de `..` en bucles `pairs`, sustituyÃ©ndolos por tablas temporales e `table.concat` para reducir la fragmentaciÃ³n de la memoria.
 
-## 📊 Metas de FPS
-Nuestro objetivo es mantener una fluctuación de **menos de 3 FPS** entre estados de reposo y combate masivo, garantizando que el HUD de **El Séquito** sea siempre el más fluido en **Turtle WoW**.
+## ðŸ“Š Metas de FPS
+Nuestro objetivo es mantener una fluctuaciÃ³n de **menos de 3 FPS** entre estados de reposo y combate masivo, garantizando que el HUD de **El SÃ©quito** sea siempre el mÃ¡s fluido en **Turtle WoW**.
 
 ---
-© 2026 **DarckRovert** — El Séquito del Terror.
-*Ingeniería de software para la conquista de Azeroth.*
+Â© 2026 **DarckRovert** â€” El SÃ©quito del Terror.
+*IngenierÃ­a de software para la conquista de Azeroth.*
+

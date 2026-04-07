@@ -50,7 +50,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
   welcome:RegisterEvent("PLAYER_ENTERING_WORLD")
   welcome:SetScript("OnEvent", function()
     this:UnregisterEvent("PLAYER_ENTERING_WORLD")
-    local ver = GetAddOnMetadata(pfUI.name, "Version") or "9.4.0 [Omni-Tier]"
+    local ver = GetAddOnMetadata(pfUI.name, "Version") or "5.1.4 [Omni-Tier]"
     DEFAULT_CHAT_FRAME:AddMessage("|cff" .. color_sequito .. "[Séquito del Terror]|r: |cffffffff" .. string.format(ST["WELCOME"], ver) .. "|r")
     
     if not IsAddOnLoaded("WCS_Brain") then
@@ -139,7 +139,7 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
     local brainFS = openBrain:CreateFontString(nil, "OVERLAY")
     brainFS:SetFont("Fonts\\ARIALN.TTF", 12, "OUTLINE")
     brainFS:SetAllPoints(openBrain)
-    brainFS:SetText("|cff00ccffABRIR EL CEREBRO |cffffd700(v9.4.0)|r")
+    brainFS:SetText("|cff00ccffABRIR EL CEREBRO |cffffd700(v5.1.4)|r")
     openBrain:SetScript("OnClick", function()
       if WCS_BrainUI and WCS_BrainUI.Toggle then
         WCS_BrainUI:Toggle()

@@ -4,7 +4,7 @@ Todos los cambios notables en este proyecto serán documentados en este archivo 
 
 ---
 
-## [v9.4.0] — 2026-04-07 [Omni-Tier]
+## [v5.1.4] — 2026-04-07 [Omni-Tier]
 
 ### 🌐 Traductor Universal (Nativo v2.0)
 - **Motor Offline**: Nuevo motor de traducción bidireccional ES ↔ EN sin dependencias externas.
@@ -25,7 +25,7 @@ Todos los cambios notables en este proyecto serán documentados en este archivo 
 
 | Versión | Fecha | Nombre Clave | Estado | Resumen |
 | :--- | :--- | :--- | :---: | :--- |
-| **9.4.0** | 2026-04-07 | **Omni-Tier** | ✅ | Traductor v2.0, WIM Bridge, ApexUI Fix. |
+| **5.1.4** | 2026-04-07 | **Omni-Tier** | ✅ | Traductor v2.0, WIM Bridge, ApexUI Fix. |
 | **9.3.0** | 2026-04-05 | **Sequito-Rise** | ⚠️ | Integración WCS_Brain & Skins Custom. |
 | **9.2.0** | 2026-03-20 | **Stability** | ❌ | Versión inicial estable para Turtle WoW. |
 
