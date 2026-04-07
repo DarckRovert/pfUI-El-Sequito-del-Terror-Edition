@@ -1,13 +1,19 @@
-# Contributor Covenant Code of Conduct
+# Code of Conduct — El Séquito del Terror 🛡️⚔️
 
-## Our Pledge
-As members, contributors, and leaders of the El Séquito del Terror community, we pledge to make participation in our project a harassment-free experience for everyone.
+Como miembros de **El Séquito del Terror** y colaboradores de **DarckRovert**, nos comprometemos a mantener un ambiente colaborativo y técnico respetuoso.
 
-## Our Standards
-- Use welcoming and inclusive language
-- Be respectful of differing viewpoints
-- Gracefully accept constructive criticism
-- Focus on what is best for the community
-- Show empathy towards other community members
+## ⚖️ Nuestra Conducta
+- **Respeto**: Comunicación profesional y directa.
+- **Transparencia**: Todo cambio debe ser auditable y documentado en `CHANGELOG.md`.
+- **Excelencia**: Priorizamos la estabilidad de los FPS sobre cualquier añadido visual.
 
-Refer to the full text at the community root.
+## 🚫 Comportamientos Inaceptables
+- Uso de placeholders o código de baja calidad que cause lag.
+- Eludir la coherencia de marca oficial.
+- Maltrato a la infraestructura local o remota del ecosistema **Gravity**.
+
+## 🛑 Reportes
+Cualquier incidente debe reportarse directamente vía **Twitch** o **Discord** de **DarckRovert**.
+
+---
+© 2026 **DarckRovert** — El Séquito del Terror.
