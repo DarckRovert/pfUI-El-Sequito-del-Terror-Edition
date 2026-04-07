@@ -84,14 +84,19 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
       local copy = CreateFrame("Button", nil, pfUI.gui.ScrollChild)
       copy:SetWidth(200)
       copy:SetHeight(20)
-      copy:SetText(ST["NAMPOWER_COPY"])
-      copy:SetNormalFontObject(GameFontNormalSmall)
       pfUI.api.CreateBackdrop(copy)
+      local copyFS = copy:CreateFontString(nil, "OVERLAY")
+      copyFS:SetFont("Fonts\\ARIALN.TTF", 11, "OUTLINE")
+      copyFS:SetAllPoints(copy)
+      copyFS:SetText("|cff00ccff" .. ST["NAMPOWER_COPY"] .. "|r")
       copy:SetScript("OnClick", function()
         pfUI.chat.urlcopy.CopyText("https://gitea.com/avitasia/nampower/releases")
       end)
-      pfUI.gui.ConfigToAdd(copy)
       
+      -- Sistema Manual de Anclaje pfUI (Fix Error 145)
+      copy:SetPoint("TOPLEFT", pfUI.gui.ScrollChild, "TOPLEFT", 25, pfUI.gui.ScrollChild.objectCount * -15)
+      pfUI.gui.ScrollChild.objectCount = pfUI.gui.ScrollChild.objectCount + 1
+
       pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
       pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
     end
@@ -130,15 +135,20 @@ pfUI:RegisterModule("sequito", "vanilla:tbc:wotlk", function ()
     local openBrain = CreateFrame("Button", nil, pfUI.gui.ScrollChild)
     openBrain:SetWidth(200)
     openBrain:SetHeight(25)
-    openBrain:SetText("|cff00ccffABRIR EL CEREBRO (v9.4.0)|r")
-    openBrain:SetNormalFontObject(GameFontNormalSmall)
     pfUI.api.CreateBackdrop(openBrain)
+    local brainFS = openBrain:CreateFontString(nil, "OVERLAY")
+    brainFS:SetFont("Fonts\\ARIALN.TTF", 12, "OUTLINE")
+    brainFS:SetAllPoints(openBrain)
+    brainFS:SetText("|cff00ccffABRIR EL CEREBRO |cffffd700(v9.4.0)|r")
     openBrain:SetScript("OnClick", function()
       if WCS_BrainUI and WCS_BrainUI.Toggle then
         WCS_BrainUI:Toggle()
       end
     end)
-    pfUI.gui.ConfigToAdd(openBrain)
+    
+    -- Sistema Manual de Anclaje pfUI (Fix Error 145)
+    openBrain:SetPoint("TOPLEFT", pfUI.gui.ScrollChild, "TOPLEFT", 25, pfUI.gui.ScrollChild.objectCount * -15)
+    pfUI.gui.ScrollChild.objectCount = pfUI.gui.ScrollChild.objectCount + 1
 
     pfUI.gui.CreateConfig(nil, " ", nil, nil, "header")
     pfUI.gui.CreateConfig(nil, "|cff" .. color_sequito .. ST["LORE_HEADER"] .. "|r", nil, nil, "header")
