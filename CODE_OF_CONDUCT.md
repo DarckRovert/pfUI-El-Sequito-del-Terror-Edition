@@ -1,19 +1,22 @@
-# Code of Conduct — El Séquito del Terror 🛡️⚔️
+# Código de Conducta - El Séquito del Terror
 
-Como miembros de **El Séquito del Terror** y colaboradores de **DarckRovert**, nos comprometemos a mantener un ambiente colaborativo y técnico respetuoso.
+## Nuestro Compromiso
+En el interés de fomentar un entorno abierto y acogedor, nosotros como colaboradores y mantenedores nos comprometemos a hacer de la participación en nuestro proyecto una experiencia libre de acoso para todos, independientemente de su nivel de experiencia, género, identidad y expresión de género, orientación sexual, discapacidad, apariencia personal, tamaño corporal, raza, etnia, edad, religión o nacionalidad.
 
-## ⚖️ Nuestra Conducta
-- **Respeto**: Comunicación profesional y directa.
-- **Transparencia**: Todo cambio debe ser auditable y documentado en `CHANGELOG.md`.
-- **Excelencia**: Priorizamos la estabilidad de los FPS sobre cualquier añadido visual.
+## Nuestros Estándares
+Ejemplos de comportamiento que contribuyen a crear un entorno positivo incluyen:
+* Uso de lenguaje acogedor e inclusivo.
+* Respeto a los diferentes puntos de vista y experiencias.
+* Aceptación de críticas constructivas.
+* Enfoque en lo que es mejor para la comunidad.
+* Mostrar empatía hacia otros miembros de la comunidad.
 
-## 🚫 Comportamientos Inaceptables
-- Uso de placeholders o código de baja calidad que cause lag.
-- Eludir la coherencia de marca oficial.
-- Maltrato a la infraestructura local o remota del ecosistema **Gravity**.
-
-## 🛑 Reportes
-Cualquier incidente debe reportarse directamente vía **Twitch** o **Discord** de **DarckRovert**.
+Ejemplos de comportamiento inaceptable incluyen:
+* El uso de lenguaje o imágenes sexuales y atención sexual no deseada.
+* Comentarios insultantes o despectivos (trolling) y ataques personales o políticos.
+* Acoso público o privado.
+* Publicar información privada de otros, como direcciones físicas o electrónicas, sin permiso explícito.
+* Otras conductas que podrían considerarse inapropiadas en un entorno profesional.
 
 ---
-© 2026 **DarckRovert** — El Séquito del Terror.
+Administrado por **DarckRovert**.

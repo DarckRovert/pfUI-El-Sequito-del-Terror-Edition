@@ -1,20 +1,17 @@
-﻿# â“ Wiki: FAQ [SÃ©quito del Terror]
+# ❓ FAQ — Preguntas Frecuentes
 
-Preguntas frecuentes y resoluciÃ³n de problemas tÃ©cnicos para v5.1.4+.
+## 1. ¿El traductor causa lag en el juego?
+**No.** El motor está optimizado con una caché LRU de alto rendimiento. Las traducciones se procesan en microsegundos (<0.1ms). El lag que algunos usuarios reportan al abrir el mapa suele estar vinculado al módulo de coordenadas nativo de pfUI, no al traductor.
 
-## ðŸ› ï¸ Error: `sequito.lua:145: Attempt to call global 'ConfigToAdd' (a nil value)`
-**Estado**: âœ… Resuelto en v5.1.4.
-- **Causa**: Shagu's pfUI eliminÃ³ el mÃ©todo `ConfigToAdd` en versiones recientes de Vanilla.
-- **SoluciÃ³n**: El AddOn ahora usa el sistema de anclaje nativo mediante `objectCount`. AsegÃºrate de haber actualizado `sequito.lua`.
+## 2. ¿Por qué algunos mensajes aparecen con [TR]?
+El tag `[TR]` es un indicador visual de que el mensaje que estás viendo ha sido procesado por el motor. Puedes desactivarlo activando el **Silent Mode** en la configuración de `/pfui` -> Traductor.
 
-## âš™ï¸ Â¿Por quÃ© no se traduce todo en el chat?
-- **Diccionario Offline**: El traductor v2.0 es offline. Solo traduce palabras o frases que existan en `translator_dict.lua`.
-- **DetecciÃ³n**: Si el mensaje es una mezcla extraÃ±a de idiomas, el motor puede detectar "unknown" y no procesarlo por seguridad.
+## 3. ¿Funciona con WIM (Whisper IM)?
+**Sí.** Esta edición incluye un puente específico (`WIM Bridge`) que traduce los susurros tanto en la ventana de chat normal como en las ventanas emergentes de WIM.
 
-## âš¡ El juego da tirones (Lag) al abrir el mapa.
-**Estado**: âœ… Optimizado en pfQuest v5.1.4.
-- Se han aÃ±adido throttles de 0.05s a las animaciones de los nodos del mapa para evitar saturar el hilo de renderizado de WoW.
+## 4. ¿Por qué algunas palabras no se traducen?
+El motor utiliza un filtro de seguridad. Si el mensaje es demasiado corto (<3 caracteres) o si el detector de idioma devuelve `unknown` (mezcla excesiva de idiomas), el motor prefiere no traducir para evitar errores de contexto.
 
 ---
-Â© 2026 **DarckRovert** â€” El SÃ©quito del Terror.
-
+© 2026 **DarckRovert** — El Séquito del Terror.
+*Soporte Técnico Diamond-Tier.*

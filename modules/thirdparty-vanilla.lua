@@ -552,6 +552,7 @@ pfUI:RegisterModule("thirdparty-vanilla", "vanilla", function()
     hooksecurefunc("WIM_Icon_DropDown_Update", function()
       for i=1,_G.WIM_MaxMenuCount do
         local btn = _G["WIM_ConversationMenuTellButton"..i]
+        if not btn then return end
         if i==1 and btn:IsEnabled() == 0 then return end
         if not btn:IsShown() then return end
         local btn_txt = btn:GetText()

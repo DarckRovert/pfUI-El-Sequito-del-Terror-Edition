@@ -849,4 +849,335 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   table.insert(pfUI.translator_dicts.enUS_keys, "r")
   pfUI.translator_dicts.enUS_esES["a"] = "un"
   table.insert(pfUI.translator_dicts.enUS_keys, "a")
+  -- BLOQUE LÉXICO DIAMOND-TIER (Adverbios / Conectores / Economía)
+  pfUI.translator_dicts.esES_enUS["siempre"] = "always"
+  table.insert(pfUI.translator_dicts.esES_keys, "siempre")
+  pfUI.translator_dicts.esES_enUS["casa de subastas"] = "ah"
+  table.insert(pfUI.translator_dicts.esES_keys, "casa de subastas")
+  pfUI.translator_dicts.esES_enUS["reclutando"] = "recruiting"
+  table.insert(pfUI.translator_dicts.esES_keys, "reclutando")
+  pfUI.translator_dicts.esES_enUS["hermandad"] = "guild"
+  table.insert(pfUI.translator_dicts.esES_keys, "hermandad")
+  pfUI.translator_dicts.esES_enUS["buscando grupo"] = "lfg"
+  table.insert(pfUI.translator_dicts.esES_keys, "buscando grupo")
+  pfUI.translator_dicts.esES_enUS["busco dps"] = "looking for dps"
+  table.insert(pfUI.translator_dicts.esES_keys, "busco dps")
+  pfUI.translator_dicts.esES_enUS["busco healer"] = "looking for healer"
+  table.insert(pfUI.translator_dicts.esES_keys, "busco healer")
+  pfUI.translator_dicts.esES_enUS["busco sanador"] = "looking for healer"
+  table.insert(pfUI.translator_dicts.esES_keys, "busco sanador")
+  pfUI.translator_dicts.esES_enUS["busco tanque"] = "looking for tank"
+  table.insert(pfUI.translator_dicts.esES_keys, "busco tanque")
+  pfUI.translator_dicts.esES_enUS["barato"] = "cheap"
+  table.insert(pfUI.translator_dicts.esES_keys, "barato")
+  pfUI.translator_dicts.esES_enUS["mas barato"] = "cheaper"
+  table.insert(pfUI.translator_dicts.esES_keys, "mas barato")
+  pfUI.translator_dicts.esES_enUS["que"] = "than"
+  table.insert(pfUI.translator_dicts.esES_keys, "que")
+  pfUI.translator_dicts.esES_enUS["hablas ingles?"] = "do you speak english?"
+  table.insert(pfUI.translator_dicts.esES_keys, "hablas ingles?")
+  pfUI.translator_dicts.esES_enUS["para mas info"] = "for more info"
+  table.insert(pfUI.translator_dicts.esES_keys, "para mas info")
+  pfUI.translator_dicts.esES_enUS["invitame"] = "invite me"
+  table.insert(pfUI.translator_dicts.esES_keys, "invitame")
+  pfUI.translator_dicts.esES_enUS["gracias"] = "thanks"
+  table.insert(pfUI.translator_dicts.esES_keys, "gracias")
+  pfUI.translator_dicts.esES_enUS["por favor"] = "please"
+  table.insert(pfUI.translator_dicts.esES_keys, "por favor")
+  pfUI.translator_dicts.esES_enUS["ayuda"] = "help"
+  table.insert(pfUI.translator_dicts.esES_keys, "ayuda")
+  pfUI.translator_dicts.esES_enUS["donde"] = "where"
+  table.insert(pfUI.translator_dicts.esES_keys, "donde")
+  pfUI.translator_dicts.esES_enUS["quien"] = "who"
+  table.insert(pfUI.translator_dicts.esES_keys, "quien")
+  
+  -- INVERSO (EN -> ES)
+  pfUI.translator_dicts.enUS_esES["always"] = "siempre"
+  table.insert(pfUI.translator_dicts.enUS_keys, "always")
+  pfUI.translator_dicts.enUS_esES["recruiting"] = "reclutando"
+  table.insert(pfUI.translator_dicts.enUS_keys, "recruiting")
+  pfUI.translator_dicts.enUS_esES["guild"] = "hermandad"
+  table.insert(pfUI.translator_dicts.enUS_keys, "guild")
+  pfUI.translator_dicts.enUS_esES["than"] = "que"
+  table.insert(pfUI.translator_dicts.enUS_keys, "than")
+  pfUI.translator_dicts.enUS_esES["looking for"] = "buscando"
+  table.insert(pfUI.translator_dicts.enUS_keys, "looking for")
+  pfUI.translator_dicts.enUS_esES["cheaper"] = "mas barato"
+  table.insert(pfUI.translator_dicts.enUS_keys, "cheaper")
+  pfUI.translator_dicts.enUS_esES["cheap"] = "barato"
+  table.insert(pfUI.translator_dicts.enUS_keys, "cheap")
+  pfUI.translator_dicts.enUS_esES["who"] = "quien"
+  table.insert(pfUI.translator_dicts.enUS_keys, "who")
+  pfUI.translator_dicts.enUS_esES["want"] = "quiere"
+  table.insert(pfUI.translator_dicts.enUS_keys, "want")
+  pfUI.translator_dicts.enUS_esES["efficient"] = "eficiente"
+  table.insert(pfUI.translator_dicts.enUS_keys, "efficient")
+  pfUI.translator_dicts.enUS_esES["fun"] = "divertido"
+  table.insert(pfUI.translator_dicts.enUS_keys, "fun")
+  pfUI.translator_dicts.enUS_esES["pst for info"] = "susurra para info"
+  table.insert(pfUI.translator_dicts.enUS_keys, "pst for info")
+  pfUI.translator_dicts.enUS_esES["progression"] = "progresion"
+  table.insert(pfUI.translator_dicts.enUS_keys, "progression")
+  
+  -- BLOQUE LÉXICO v2.5 (Auxiliares y Conectores)
+  pfUI.translator_dicts.enUS_esES["are"] = "son"
+  table.insert(pfUI.translator_dicts.enUS_keys, "are")
+  pfUI.translator_dicts.enUS_esES["is"] = "es"
+  table.insert(pfUI.translator_dicts.enUS_keys, "is")
+  pfUI.translator_dicts.enUS_esES["have"] = "tengo"
+  table.insert(pfUI.translator_dicts.enUS_keys, "have")
+  pfUI.translator_dicts.enUS_esES["has"] = "tiene"
+  table.insert(pfUI.translator_dicts.enUS_keys, "has")
+  pfUI.translator_dicts.enUS_esES["prices"] = "precios"
+  table.insert(pfUI.translator_dicts.enUS_keys, "prices")
+  pfUI.translator_dicts.enUS_esES["price"] = "precio"
+  table.insert(pfUI.translator_dicts.enUS_keys, "price")
+  pfUI.translator_dicts.enUS_esES["stock"] = "existencia"
+  table.insert(pfUI.translator_dicts.enUS_keys, "stock")
+  pfUI.translator_dicts.enUS_esES["any"] = "cualquier"
+  table.insert(pfUI.translator_dicts.enUS_keys, "any")
+  pfUI.translator_dicts.enUS_esES["the"] = "el"
+  table.insert(pfUI.translator_dicts.enUS_keys, "the")
+
+  -- INVERSO (ES -> EN)
+  pfUI.translator_dicts.esES_enUS["son"] = "are"
+  table.insert(pfUI.translator_dicts.esES_keys, "son")
+  pfUI.translator_dicts.esES_enUS["están"] = "are"
+  table.insert(pfUI.translator_dicts.esES_keys, "están")
+  pfUI.translator_dicts.esES_enUS["es"] = "is"
+  table.insert(pfUI.translator_dicts.esES_keys, "es")
+  pfUI.translator_dicts.esES_enUS["tengo"] = "have"
+  table.insert(pfUI.translator_dicts.esES_keys, "tengo")
+  pfUI.translator_dicts.esES_enUS["precios"] = "prices"
+  table.insert(pfUI.translator_dicts.esES_keys, "precios")
+  pfUI.translator_dicts.esES_enUS["esto"] = "this"
+  table.insert(pfUI.translator_dicts.esES_keys, "esto")
+  pfUI.translator_dicts.esES_enUS["el"] = "the"
+  table.insert(pfUI.translator_dicts.esES_keys, "el")
+  pfUI.translator_dicts.esES_enUS["con"] = "with"
+  table.insert(pfUI.translator_dicts.esES_keys, "con")
+
+  -- ORDENAMIENTO LEXICOGRÁFICO: Priorizar frases largas (Greedy Matching)
+  pfUI.translator_dicts.esES_enUS["sueño esmeralda"] = "emerald dream"
+  table.insert(pfUI.translator_dicts.esES_keys, "sueño esmeralda")
+  pfUI.translator_dicts.esES_enUS["isla de hiraeth"] = "hiraeth island"
+  table.insert(pfUI.translator_dicts.esES_keys, "isla de hiraeth")
+  pfUI.translator_dicts.esES_enUS["isla de tel'abim"] = "tel'abim"
+  table.insert(pfUI.translator_dicts.esES_keys, "isla de tel'abim")
+  pfUI.translator_dicts.esES_enUS["archipiélago del sol"] = "sun archipelago"
+  table.insert(pfUI.translator_dicts.esES_keys, "archipiélago del sol")
+  pfUI.translator_dicts.esES_enUS["tierras devastadas"] = "blasted lands"
+  table.insert(pfUI.translator_dicts.esES_keys, "tierras devastadas")
+  pfUI.translator_dicts.esES_enUS["paso de la muerte"] = "deadwind pass"
+  table.insert(pfUI.translator_dicts.esES_keys, "paso de la muerte")
+  pfUI.translator_dicts.esES_enUS["karazhan inferior"] = "lower karazhan"
+  table.insert(pfUI.translator_dicts.esES_keys, "karazhan inferior")
+  pfUI.translator_dicts.esES_enUS["ciudad de forjaz"] = "ironforge"
+  table.insert(pfUI.translator_dicts.esES_keys, "ciudad de forjaz")
+  pfUI.translator_dicts.esES_enUS["necesito ayuda"] = "i need help"
+  table.insert(pfUI.translator_dicts.esES_keys, "necesito ayuda")
+  pfUI.translator_dicts.esES_enUS["dame un buff"] = "buff me"
+  table.insert(pfUI.translator_dicts.esES_keys, "dame un buff")
+  pfUI.translator_dicts.esES_enUS["dame agua"] = "water plx"
+  table.insert(pfUI.translator_dicts.esES_keys, "dame agua")
+  pfUI.translator_dicts.esES_enUS["dame comida"] = "food plx"
+  table.insert(pfUI.translator_dicts.esES_keys, "dame comida")
+  pfUI.translator_dicts.esES_enUS["buen trabajo"] = "gj"
+  table.insert(pfUI.translator_dicts.esES_keys, "buen trabajo")
+  pfUI.translator_dicts.esES_enUS["mala suerte"] = "unlucky"
+  table.insert(pfUI.translator_dicts.esES_keys, "mala suerte")
+  pfUI.translator_dicts.esES_enUS["lo siento"] = "sorry"
+  table.insert(pfUI.translator_dicts.esES_keys, "lo siento")
+  pfUI.translator_dicts.esES_enUS["no te preocupes"] = "no worries"
+  table.insert(pfUI.translator_dicts.esES_keys, "no te preocupes")
+  pfUI.translator_dicts.esES_enUS["ataca mi target"] = "attack my target"
+  table.insert(pfUI.translator_dicts.esES_keys, "ataca mi target")
+  pfUI.translator_dicts.esES_enUS["pull con cuidado"] = "careful pull"
+  table.insert(pfUI.translator_dicts.esES_keys, "pull con cuidado")
+  pfUI.translator_dicts.esES_enUS["esperen maná"] = "wait for mana"
+  table.insert(pfUI.translator_dicts.esES_keys, "esperen maná")
+  pfUI.translator_dicts.esES_enUS["usa el portal"] = "use portal"
+  table.insert(pfUI.translator_dicts.esES_keys, "usa el portal")
+  pfUI.translator_dicts.esES_enUS["invócame"] = "summon me"
+  table.insert(pfUI.translator_dicts.esES_keys, "invócame")
+  pfUI.translator_dicts.esES_enUS["invocame"] = "summon me"
+  table.insert(pfUI.translator_dicts.esES_keys, "invocame")
+
+  pfUI.translator_dicts.enUS_esES["emerald dream"] = "sueño esmeralda"
+  table.insert(pfUI.translator_dicts.enUS_keys, "emerald dream")
+  pfUI.translator_dicts.enUS_esES["hiraeth island"] = "isla de hiraeth"
+  table.insert(pfUI.translator_dicts.enUS_keys, "hiraeth island")
+  pfUI.translator_dicts.enUS_esES["tel'abim"] = "isla de tel'abim"
+  table.insert(pfUI.translator_dicts.enUS_keys, "tel'abim")
+  pfUI.translator_dicts.enUS_esES["sun archipelago"] = "archipiélago del sol"
+  table.insert(pfUI.translator_dicts.enUS_keys, "sun archipelago")
+  pfUI.translator_dicts.enUS_esES["blasted lands"] = "tierras devastadas"
+  table.insert(pfUI.translator_dicts.enUS_keys, "blasted lands")
+  pfUI.translator_dicts.enUS_esES["deadwind pass"] = "paso de la muerte"
+  table.insert(pfUI.translator_dicts.enUS_keys, "deadwind pass")
+  pfUI.translator_dicts.enUS_esES["lower karazhan"] = "karazhan inferior"
+  table.insert(pfUI.translator_dicts.enUS_keys, "lower karazhan")
+  pfUI.translator_dicts.enUS_esES["i need help"] = "necesito ayuda"
+  table.insert(pfUI.translator_dicts.enUS_keys, "i need help")
+  pfUI.translator_dicts.enUS_esES["buff me"] = "dame un buff"
+  table.insert(pfUI.translator_dicts.enUS_keys, "buff me")
+  pfUI.translator_dicts.enUS_esES["gj"] = "buen trabajo"
+  table.insert(pfUI.translator_dicts.enUS_keys, "gj")
+  pfUI.translator_dicts.enUS_esES["sorry"] = "lo siento"
+  table.insert(pfUI.translator_dicts.enUS_keys, "sorry")
+  pfUI.translator_dicts.enUS_esES["no worries"] = "no te preocupes"
+  table.insert(pfUI.translator_dicts.enUS_keys, "no te preocupes")
+  pfUI.translator_dicts.enUS_esES["wait for mana"] = "esperen maná"
+  table.insert(pfUI.translator_dicts.enUS_keys, "wait for mana")
+  pfUI.translator_dicts.enUS_esES["summon me"] = "invócame"
+  table.insert(pfUI.translator_dicts.enUS_keys, "summon me")
+
+  -- EXPANSIÓN LÉXICA TURTLE WOW (Séquito Tier)
+  pfUI.translator_dicts.esES_enUS["mision"] = "quest"
+  table.insert(pfUI.translator_dicts.esES_keys, "mision")
+  pfUI.translator_dicts.esES_enUS["misión"] = "quest"
+  table.insert(pfUI.translator_dicts.esES_keys, "misión")
+  pfUI.translator_dicts.esES_enUS["mazmorra"] = "dungeon"
+  table.insert(pfUI.translator_dicts.esES_keys, "mazmorra")
+  pfUI.translator_dicts.esES_enUS["comerciar"] = "trade"
+  table.insert(pfUI.translator_dicts.esES_keys, "comerciar")
+  pfUI.translator_dicts.esES_enUS["vender"] = "sell"
+  table.insert(pfUI.translator_dicts.esES_keys, "vender")
+  pfUI.translator_dicts.esES_enUS["comprar"] = "buy"
+  table.insert(pfUI.translator_dicts.esES_keys, "comprar")
+
+  pfUI.translator_dicts.enUS_esES["quest"] = "misión"
+  table.insert(pfUI.translator_dicts.enUS_keys, "quest")
+  pfUI.translator_dicts.enUS_esES["dungeon"] = "mazmorra"
+  table.insert(pfUI.translator_dicts.enUS_keys, "dungeon")
+  pfUI.translator_dicts.enUS_esES["trade"] = "comercia"
+  table.insert(pfUI.translator_dicts.enUS_keys, "trade")
+  pfUI.translator_dicts.enUS_esES["sell"] = "vender"
+  table.insert(pfUI.translator_dicts.enUS_keys, "sell")
+  pfUI.translator_dicts.enUS_esES["buy"] = "comprar"
+  table.insert(pfUI.translator_dicts.enUS_keys, "buy")
+
+  -- BLOQUE DE COMBATE Y TÁCTICAS
+  pfUI.translator_dicts.esES_enUS["ataca"] = "attack"
+  table.insert(pfUI.translator_dicts.esES_keys, "ataca")
+  pfUI.translator_dicts.esES_enUS["no ataquen"] = "don't attack"
+  table.insert(pfUI.translator_dicts.esES_keys, "no ataquen")
+  pfUI.translator_dicts.esES_enUS["mátalo"] = "kill it"
+  table.insert(pfUI.translator_dicts.esES_keys, "mátalo")
+  pfUI.translator_dicts.esES_enUS["matalo"] = "kill it"
+  table.insert(pfUI.translator_dicts.esES_keys, "matalo")
+  pfUI.translator_dicts.esES_enUS["atrapado"] = "trapped"
+  table.insert(pfUI.translator_dicts.esES_keys, "atrapado")
+  pfUI.translator_dicts.esES_enUS["oveja"] = "sheep"
+  table.insert(pfUI.translator_dicts.esES_keys, "oveja")
+  pfUI.translator_dicts.esES_enUS["miedo"] = "fear"
+  table.insert(pfUI.translator_dicts.esES_keys, "miedo")
+  pfUI.translator_dicts.esES_enUS["congelado"] = "frozen"
+  table.insert(pfUI.translator_dicts.esES_keys, "congelado")
+  pfUI.translator_dicts.enUS_esES["attack"] = "ataca"
+  table.insert(pfUI.translator_dicts.enUS_keys, "attack")
+  pfUI.translator_dicts.enUS_esES["kill it"] = "mátalo"
+  table.insert(pfUI.translator_dicts.enUS_keys, "kill it")
+  pfUI.translator_dicts.enUS_esES["kite it"] = "cometalo"
+  table.insert(pfUI.translator_dicts.enUS_keys, "kite it")
+  pfUI.translator_dicts.enUS_esES["sheep him"] = "hazle oveja"
+  table.insert(pfUI.translator_dicts.enUS_keys, "sheep him")
+
+  -- BLOQUE DE LOOT Y ECONOMÍA
+  pfUI.translator_dicts.esES_enUS["necesidad"] = "need"
+  table.insert(pfUI.translator_dicts.esES_keys, "necesidad")
+  pfUI.translator_dicts.esES_enUS["codicia"] = "greed"
+  table.insert(pfUI.translator_dicts.esES_keys, "codicia")
+  pfUI.translator_dicts.esES_enUS["pasar"] = "pass"
+  table.insert(pfUI.translator_dicts.esES_keys, "pasar")
+  pfUI.translator_dicts.esES_enUS["tirar dados"] = "roll"
+  table.insert(pfUI.translator_dicts.esES_keys, "tirar dados")
+  pfUI.translator_dicts.esES_enUS["dame eso"] = "i need that"
+  table.insert(pfUI.translator_dicts.esES_keys, "dame eso")
+  pfUI.translator_dicts.esES_enUS["cuanto cuesta?"] = "how much?"
+  table.insert(pfUI.translator_dicts.esES_keys, "cuanto cuesta?")
+  pfUI.translator_dicts.esES_enUS["oferta"] = "offer"
+  table.insert(pfUI.translator_dicts.esES_keys, "oferta")
+  pfUI.translator_dicts.esES_enUS["vendo"] = "wts"
+  table.insert(pfUI.translator_dicts.esES_keys, "vendo")
+  pfUI.translator_dicts.esES_enUS["compro"] = "wtb"
+  table.insert(pfUI.translator_dicts.esES_keys, "compro")
+  pfUI.translator_dicts.esES_enUS["cambio"] = "wtt"
+  table.insert(pfUI.translator_dicts.esES_keys, "cambio")
+  pfUI.translator_dicts.enUS_esES["need"] = "necesidad"
+  table.insert(pfUI.translator_dicts.enUS_keys, "need")
+  pfUI.translator_dicts.enUS_esES["greed"] = "codicia"
+  table.insert(pfUI.translator_dicts.enUS_keys, "greed")
+  pfUI.translator_dicts.enUS_esES["pass"] = "pasar"
+  table.insert(pfUI.translator_dicts.enUS_keys, "pass")
+  pfUI.translator_dicts.enUS_esES["roll"] = "tirar dados"
+  table.insert(pfUI.translator_dicts.enUS_keys, "roll")
+  pfUI.translator_dicts.enUS_esES["wts"] = "vendo"
+  table.insert(pfUI.translator_dicts.enUS_keys, "wts")
+  pfUI.translator_dicts.enUS_esES["wtb"] = "compro"
+  table.insert(pfUI.translator_dicts.enUS_keys, "wtb")
+
+  -- BLOQUE TURTLE WOW Y COMUNICACIÓN RÁPIDA
+  pfUI.translator_dicts.esES_enUS["carpas"] = "tents"
+  table.insert(pfUI.translator_dicts.esES_keys, "carpas")
+  pfUI.translator_dicts.esES_enUS["carpa"] = "tent"
+  table.insert(pfUI.translator_dicts.esES_keys, "carpa")
+  pfUI.translator_dicts.esES_enUS["donde estan las carpas?"] = "where are the tents?"
+  table.insert(pfUI.translator_dicts.esES_keys, "donde estan las carpas?")
+  pfUI.translator_dicts.esES_enUS["lista"] = "ready"
+  table.insert(pfUI.translator_dicts.esES_keys, "lista")
+  pfUI.translator_dicts.esES_enUS["listo"] = "ready"
+  table.insert(pfUI.translator_dicts.esES_keys, "listo")
+  pfUI.translator_dicts.esES_enUS["espera"] = "wait"
+  table.insert(pfUI.translator_dicts.esES_keys, "espera")
+  pfUI.translator_dicts.esES_enUS["vengo ahora"] = "brb"
+  table.insert(pfUI.translator_dicts.esES_keys, "vengo ahora")
+  pfUI.translator_dicts.esES_enUS["en camino"] = "omw"
+  table.insert(pfUI.translator_dicts.esES_keys, "en camino")
+  pfUI.translator_dicts.esES_enUS["no hay problema"] = "no problem"
+  table.insert(pfUI.translator_dicts.esES_keys, "no hay problema")
+  pfUI.translator_dicts.esES_enUS["fue mi culpa"] = "my bad"
+  table.insert(pfUI.translator_dicts.esES_keys, "fue mi culpa")
+  pfUI.translator_dicts.enUS_esES["tents"] = "carpas"
+  table.insert(pfUI.translator_dicts.enUS_keys, "tents")
+  pfUI.translator_dicts.enUS_esES["tent"] = "carpa"
+  table.insert(pfUI.translator_dicts.enUS_keys, "tent")
+  pfUI.translator_dicts.enUS_esES["ready?"] = "listos?"
+  table.insert(pfUI.translator_dicts.enUS_keys, "ready?")
+  pfUI.translator_dicts.enUS_esES["omw"] = "en camino"
+  table.insert(pfUI.translator_dicts.enUS_keys, "omw")
+  pfUI.translator_dicts.enUS_esES["brb"] = "vengo ahora"
+  table.insert(pfUI.translator_dicts.enUS_keys, "brb")
+
+  -- BLOQUE DE UTILIDADES DE CLASE
+  pfUI.translator_dicts.esES_enUS["portal a"] = "portal to"
+  table.insert(pfUI.translator_dicts.esES_keys, "portal a")
+  pfUI.translator_dicts.esES_enUS["invocacion"] = "summon"
+  table.insert(pfUI.translator_dicts.esES_keys, "invocacion")
+  pfUI.translator_dicts.esES_enUS["invocame"] = "summon me"
+  table.insert(pfUI.translator_dicts.esES_keys, "invocame")
+  pfUI.translator_dicts.esES_enUS["agua"] = "water"
+  table.insert(pfUI.translator_dicts.esES_keys, "agua")
+  pfUI.translator_dicts.esES_enUS["comida"] = "food"
+  table.insert(pfUI.translator_dicts.esES_keys, "comida")
+  pfUI.translator_dicts.esES_enUS["intelecto"] = "intel"
+  table.insert(pfUI.translator_dicts.esES_keys, "intelecto")
+  pfUI.translator_dicts.esES_enUS["espíritu"] = "spirit"
+  table.insert(pfUI.translator_dicts.esES_keys, "espíritu")
+  pfUI.translator_dicts.esES_enUS["marca"] = "mark"
+  table.insert(pfUI.translator_dicts.esES_keys, "marca")
+  pfUI.translator_dicts.esES_enUS["fortaleza"] = "fort"
+  table.insert(pfUI.translator_dicts.esES_keys, "fortaleza")
+  pfUI.translator_dicts.enUS_esES["portal"] = "portal"
+  table.insert(pfUI.translator_dicts.enUS_keys, "portal")
+  pfUI.translator_dicts.enUS_esES["summon"] = "invocación"
+  table.insert(pfUI.translator_dicts.enUS_keys, "summon")
+  pfUI.translator_dicts.enUS_esES["water"] = "agua"
+  table.insert(pfUI.translator_dicts.enUS_keys, "water")
+  pfUI.translator_dicts.enUS_esES["food"] = "comida"
+  table.insert(pfUI.translator_dicts.enUS_keys, "food")
+
+  -- ORDENAMIENTO FINAL
+  table.sort(pfUI.translator_dicts.esES_keys, function(a,b) return string.len(a) > string.len(b) end)
+  table.sort(pfUI.translator_dicts.enUS_keys, function(a,b) return string.len(a) > string.len(b) end)
 end)

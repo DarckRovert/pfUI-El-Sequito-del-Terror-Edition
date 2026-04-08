@@ -1,31 +1,11 @@
-# pfUI [El Séquito del Terror Edition] — gitignore 🛠️
-
-# WoW Excluidos
-*.bak
-*.old
-*.tmp
 *.log
-
-# Workspace & OS
+*.bak
+*.tmp
 .DS_Store
-Thumbs.db
-.vscode/
-
-# Brain/Session Logs (Gravity)
-.brain/
-.system_generated/
-*.md_task
-*knowledge.json
-
-# Lua Binaries
-*.lua.compiled
-*.luac
-
-# Archivos de Desarrollo Local
-!README.md
-!CHANGELOG.md
-!LICENSE
-!CONTRIBUTING.md
-!CODE_OF_CONDUCT.md
-!SECURITY.md
-!wiki/
+__pycache__/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+_knowledge.json
+/tmp/

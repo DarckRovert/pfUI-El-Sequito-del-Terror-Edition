@@ -1,24 +1,13 @@
-# Security Policy — El Séquito del Terror 🔒
+# Política de Seguridad
 
-Protegemos la integridad de tu interfaz y la seguridad de tu cuenta en **Turtle WoW**.
+## Versiones Soportadas
+Solo la versión actual (**v9.4.5 Omni-Tier**) recibe actualizaciones de seguridad y parches de estabilidad.
 
-## 🛡️ Soporte por Versión
-| Versión | Estado |
-| --- | --- |
-| v9.4.x | ✅ Soportada |
-| v9.3.x | ⚠️ Crítico |
-| < v9.2.0 | ❌ Sin soporte |
-
-## 🛡️ Reporte de Vulnerabilidades
-Si descubres un bug que comprometa la ejecución del juego o que cause desbordamientos de memoria:
-
-1.  **NO publique el exploit masivamente.**
-2.  Reporta vía **Discord oficial** de **DarckRovert**.
-3.  Incluye el log de `pfUI -> Debug`.
-
-## 🛡️ Protecciones Integradas
-- **Sanitización**: Todo mensaje interceptado por el Traductor pasa por una limpieza Regex.
-- **Memoria**: Límites estrictos de caché (64 entradas) en el Traductor Universal.
+## Reporte de Vulnerabilidades
+Si descubres una vulnerabilidad que comprometa la integridad de la interfaz o la cuenta del usuario, por favor NO abras un Issue público.
+* Contacta directamente a **DarckRovert** a través de su canal oficial de Twitch o Discord.
+* Proporciona detalles técnicos completos y pasos para replicar el fallo.
+* Nos comprometemos a responder en menos de 48 horas.
 
 ---
-© 2026 **DarckRovert** — El Séquito del Terror.
+Blindaje Nuclear Omni-Tier.

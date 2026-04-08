@@ -1241,6 +1241,11 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
         "None:"..T["None"],
         "Gryphon:"..T["Gryphon"],
         "Lion:"..T["Lion"],
+      },
+      ["translator_direction"] = {
+        "0:" .. (T["Auto-Detection"] or "Auto-Detección"),
+        "1:Español -> Inglés",
+        "2:Inglés -> Español",
       }
     }
 
@@ -1423,7 +1428,7 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
       github:SetHeight(20)
       github:SetText(T["GitHub"])
       github:SetScript("OnClick", function()
-        pfUI.chat.urlcopy.CopyText("https://github.com/DarckRovert/pfUI-El-Sequito-del-Terror-Edition")
+        pfUI.chat.urlcopy.CopyText("https://github.com/DarckRovert")
       end)
       SkinButton(github)
 
@@ -1433,7 +1438,7 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
       website:SetHeight(20)
       website:SetText(T["Website"])
       website:SetScript("OnClick", function()
-        pfUI.chat.urlcopy.CopyText("https://github.com/DarckRovert/pfUI-El-Sequito-del-Terror-Edition")
+        pfUI.chat.urlcopy.CopyText("https://sequitodelterror.netlify.app/")
       end)
       SkinButton(website)
     end)
@@ -2955,6 +2960,23 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
       CreateConfig(nil, "MyRolePlay", C.thirdparty.myroleplay, "enable", "checkbox", nil, nil, nil, nil, "vanilla")
       CreateConfig(nil, "DruidManaBar", C.thirdparty.druidmana, "enable", "checkbox", nil, nil, nil, nil, "vanilla")
       CreateConfig(nil, "NoteIt", C.thirdparty.noteit, "enable", "checkbox", nil, nil, nil, nil, "vanilla")
+    end)
+
+    CreateGUIEntry(T["Translator"] or "Traductor", nil, function()
+      CreateConfig(nil, T["Enable Translator"] or "Activar Traductor", pfUI_config.translator, "enable", "checkbox")
+      CreateConfig(nil, T["Translate Outgoing Messages"] or "Traducir Salida", pfUI_config.translator, "outgoing", "checkbox")
+      CreateConfig(nil, T["Outgoing Translation Direction"] or "Dirección de Salida", pfUI_config.translator, "direction", "dropdown", pfUI.gui.dropdowns.translator_direction)
+      CreateConfig(nil, T["Silent Mode (No [TR] Prefix)"] or "Modo Silencioso", pfUI_config.translator, "silent_mode", "checkbox")
+      CreateConfig(nil, T["Enable WIM Integration"] or "Sincronizar WIM", pfUI_config.translator, "wim_bridge", "checkbox")
+      CreateConfig(nil, T["Debug Mode"] or "Modo Debug", pfUI_config.translator, "debug_mode", "checkbox")
+
+      CreateConfig(nil, T["Channels"] or "Canales", nil, nil, "header")
+      CreateConfig(nil, T["Say"] or "Say", pfUI_config.translator, "chan_say", "checkbox")
+      CreateConfig(nil, T["Whisper"] or "Whisper", pfUI_config.translator, "chan_whisper", "checkbox")
+      CreateConfig(nil, T["Guild"] or "Guild", pfUI_config.translator, "chan_guild", "checkbox")
+      CreateConfig(nil, T["Raid"] or "Raid", pfUI_config.translator, "chan_raid", "checkbox")
+      CreateConfig(nil, T["World"] or "World", pfUI_config.translator, "chan_world", "checkbox")
+      CreateConfig(nil, T["LFG"] or "LFG", pfUI_config.translator, "chan_lfg", "checkbox")
     end)
 
     CreateGUIEntry(T["Components"], T["Modules"], function()

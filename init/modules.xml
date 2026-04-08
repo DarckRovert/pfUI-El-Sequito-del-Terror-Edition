@@ -80,6 +80,5 @@
   <Include file="..\modules\sequito.lua"/>
   <Include file="..\modules\translator_dict.lua"/>
   <Include file="..\modules\translator.lua"/>
-  <Include file="..\modules\translator_gui.lua"/>
 </Ui>
 

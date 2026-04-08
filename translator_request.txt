@@ -1,0 +1,13 @@
+Genera un archivo LUA completo llamado 'translator_dict.lua' para WoW Vanilla 1.12.1 (pfUI).
+REQUISITOS OMNI-TIER:
+1. Crea dos tablas masivas: pfUI.translator_dicts.esES_enUS (1000+ entradas) y pfUI.translator_dicts.enUS_esES (1000+ entradas).
+2. CONTENIDO: Incluye vocabulario exhaustivo de Turtle WoW en ES/EN:
+   - Nombres de todas las mazmorras (BRD, Strat, Scholo, SM, etc.) y sus abreviaturas.
+   - Términos de comercio (WTS, WTB, WTT, AH, prices, discount, cheap, gold).
+   - Verbos auxiliares (have, want, need, is, are, go, come, find).
+   - Social (hello, thanks, please, sorry, welcome).
+   - Táctico (aggro, pull, kite, sheep, trap, focus, kill).
+   - Objetos y Misiones (quest, item, loot, roll, gear).
+3. ESTRUCTURA: Usa pfUI.translator_dicts.esES_keys y enUS_keys para almacenar las llaves y aplica table.sort para Greedy Matching al final.
+4. ESTILO: Código limpio, profesional, sin comentarios innecesarios excepto el encabezado Omni-Tier v9.4.5 de DarckRovert.
+5. IDIOMA: Solo responde con el código LUA completo. No traduzcas este pedido, cúmplelo literalmente.
