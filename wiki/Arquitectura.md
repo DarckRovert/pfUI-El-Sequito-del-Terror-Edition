@@ -1,31 +1,45 @@
-# 🏰 Arquitectura Técnica — Global Translator (V1.0.0 [OMNI-TIER])
+# 🏰 Wiki: Arquitectura 'Diamond Tier' — pfUI [v5.1.4]
 
-## 1. Diseño de Hooks Nucleares
-La interceptación se realiza en la capa más profunda posible de la interfaz de WoW Vanilla para garantizar que el traductor sea la última autoridad:
-*   **ChatEdit_SendText**: Punto de captura final antes de que el mensaje salga del cliente. Al modificar el `EditBox` directamente, garantizamos que cualquier addon que lea el buffer de salida vea el mensaje ya traducido.
-*   **AddMessage**: Hook sobre los frames globales `ChatFrame1..10`. Actúa como un filtro de post-procesado para mensajes entrantes.
+Estructura modular del ecosistema **El Séquito del Terror** mantenido por **DarckRovert**.
 
-## 2. Motor de Traducción Bidireccional
-El motor implementa una lógica de decisión basada en la configuración `direction`:
-*   **Auto-Detección**: Utiliza un análisis de frecuencias léxicas (`EN_MARKERS` vs `ES_MARKERS`) para determinar el idioma de origen sin impacto en la latencia.
-*   **Manual Override**: Permite forzar la dirección **ES -> EN** o **EN -> ES**, ignorando la detección automática para garantizar fluidez en canales de comercio internacionales.
+## 🌐 Jerarquía de Carga (Boot Sequence)
 
-## 3. Protección de Enlaces y Símbolos
-Para evitar la corrupción de datos, el motor utiliza un filtro de exclusión de enlaces WoW:
-*   **Regex Matching**: Detecta patrones `|cff...|H...|h...|h|r` antes del proceso de traducción.
-*   **Encapsulamiento**: Los enlaces se reemplazan temporalmente por tokens `\127L#\127` y se restauran tras la traducción para preservar su interactividad en el chat.
+El AddOn inicia mediante `modules.xml` con los siguientes puntos críticos de inyección:
 
-## 4. Motor Lexicográfico (Greedy Matching)
-A diferencia de traductores simples palabra-por-palabra, nuestro motor utiliza un ordenamiento por longitud (`strlen` descending).
-*   **Razón**: Evita que palabras cortas (ej: "si") "rompan" frases más largas (ej: "siempre") durante el reemplazo con `gsub`.
+1.  **Lexical Engine (`translator_dict.lua`)**: Carga los diccionarios indexados por longitud (ES-EN / EN-ES) para optimización de búsqueda (**Greedy Matching**).
+2.  **Core Translator (`translator.lua`)**: Inyecciones en `ChatEdit_SendText` y `AddMessage` de los ChatFrames.
+3.  **WIM Bridge**: Hook asíncrono sobre `WIM_PostMessage` para susurros.
+4.  **GUI Integration (`gui.lua`)**: Registro de pestañas de configuración nativas de pfUI.
 
-## 5. Caché Nuclear LRU
-Implementamos una caché LRU (Least Recently Used) con un límite de 128 entradas.
-*   **Métrica**: En entornos de raid o World Chat, el hit rate alcanza el **>85%**, eliminando la necesidad de re-procesar strings idénticos y salvando ciclos de CPU críticos.
+## 📊 Diagrama de Flujo: Traductor Universal v1.0.0
 
-## 6. Puente WIM (Neural Sync)
-Integración directa con el motor de `WIM_PostMessage`, permitiendo que los susurros sean interceptados y traducidos antes de ser renderizados en sus ventanas independientes.
+```mermaid
+graph TD
+    A[Mensaje de Chat Event] --> B{Filtro de Canal}
+    B -- Habilitado --> C[Detección de Idioma]
+    B -- Deshabilitado --> Z[Render Estándar]
+    C -- "Inglés/Desc." --> D{Consulta Caché LRU}
+    C -- Español --> Z
+    D -- Cache Hit --> E[Aplicar Traducción Instantánea]
+    D -- Cache Miss --> F[Motor Regex ES-EN/EN-ES]
+    F --> G["Reemplazo de Word Boundary %A"]
+    G --> H[Almacenar en Caché 128 entradas]
+    H --> E
+    E --> I["Añadir Tag [TR] opcional"]
+    I --> J["Render en Chat Frame / WIM"]
+```
+
+## 🔐 Diseño de Seguridad y Optimización
+
+### Protección de Enlaces y Símbolos
+El motor utiliza un sistema de **Regex Matching** para detectar patrones `|cff...|H...|h...|h|r` antes del proceso de traducción. Los enlaces se encapsulan en tokens temporales para preservar su integridad y permitir que sigan funcionando en el chat traducido.
+
+### Control de Dirección Bidireccional
+La versión **Omni-Tier** introduce el soporte para forzar la dirección de salida:
+- **Auto-Detección**: Fallback inteligente.
+- **ES -> EN**: Prioridad de exportación técnica.
+- **EN -> ES**: Prioridad de localización local.
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Soberanía Técnica Omni-Tier.*
+*Soberanía Técnica Omni-Tier Consolidada.*
