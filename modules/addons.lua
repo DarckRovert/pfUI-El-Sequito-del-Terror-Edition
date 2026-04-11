@@ -1,19 +1,7 @@
 pfUI:RegisterModule("addons", "vanilla:tbc", function ()
   local rawborder, border = GetBorderSize()
 
-  -- add main menu button
-  local pfUIAddonButton = CreateFrame("Button", "GameMenuButtonPFUIAddOns", GameMenuFrame, "GameMenuButtonTemplate")
-  pfUIAddonButton:SetPoint("TOP", 0, -32)
-  pfUIAddonButton:SetText(T["AddOns"])
-  pfUIAddonButton:SetScript("OnClick", function()
-    pfUI.addons:Show()
-    HideUIPanel(GameMenuFrame)
-  end)
-  SkinButton(pfUIAddonButton)
-
-  local point, relativeTo, relativePoint, xOffset, yOffset = GameMenuButtonOptions:GetPoint()
-  GameMenuButtonOptions:SetPoint(point, relativeTo, relativePoint, xOffset, yOffset - 22)
-  GameMenuFrame:SetHeight(GameMenuFrame:GetHeight()+22)
+  -- add main menu button logic (delegated to game_menu skin)
 
   -- addon window
   pfUI.addons = CreateFrame("Frame", "pfAddons", UIParent)

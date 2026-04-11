@@ -1243,9 +1243,14 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
         "Lion:"..T["Lion"],
       },
       ["translator_direction"] = {
-        "0:" .. (T["Auto-Detection"] or "Auto-Detección"),
-        "1:Español -> Inglés",
-        "2:Inglés -> Español",
+        "0:Automatic",
+        "1:ES -> EN",
+        "2:EN -> ES",
+      },
+      ["translator_server"] = {
+        "0:Automatic",
+        "1:English Server (Translate Incoming EN->ES)",
+        "2:Spanish Server (Translate Incoming ES->EN)",
       }
     }
 
@@ -2964,8 +2969,12 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
 
     CreateGUIEntry(T["Translator"] or "Traductor", nil, function()
       CreateConfig(nil, T["Enable Translator"] or "Activar Traductor", pfUI_config.translator, "enable", "checkbox")
-      CreateConfig(nil, T["Translate Outgoing Messages"] or "Traducir Salida", pfUI_config.translator, "outgoing", "checkbox")
-      CreateConfig(nil, T["Outgoing Translation Direction"] or "Dirección de Salida", pfUI_config.translator, "direction", "dropdown", pfUI.gui.dropdowns.translator_direction)
+      CreateConfig(nil, T["Translate Incoming Messages"] or "Traducir Entrante", pfUI_config.translator, "incoming", "checkbox")
+      CreateConfig(nil, T["Translate Outgoing Messages"] or "Traducir Saliente", pfUI_config.translator, "outgoing", "checkbox")
+      CreateConfig(nil, " ", nil, nil, "header")
+      CreateConfig(nil, T["Server Environment"] or "Entorno de Servidor", pfUI_config.translator, "server_type", "dropdown", pfUI.gui.dropdowns.translator_server)
+      CreateConfig(nil, T["Force Outgoing Direction"] or "Forzar Dirección de Salida", pfUI_config.translator, "direction", "dropdown", pfUI.gui.dropdowns.translator_direction)
+      CreateConfig(nil, " ", nil, nil, "header")
       CreateConfig(nil, T["Silent Mode (No [TR] Prefix)"] or "Modo Silencioso", pfUI_config.translator, "silent_mode", "checkbox")
       CreateConfig(nil, T["Enable WIM Integration"] or "Sincronizar WIM", pfUI_config.translator, "wim_bridge", "checkbox")
       CreateConfig(nil, T["Debug Mode"] or "Modo Debug", pfUI_config.translator, "debug_mode", "checkbox")

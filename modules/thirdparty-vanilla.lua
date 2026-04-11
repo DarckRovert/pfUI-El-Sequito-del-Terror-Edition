@@ -1210,7 +1210,6 @@ pfUI:RegisterModule("thirdparty-vanilla", "vanilla", function()
 
   HookAddonOrVariable("HardcoreDeath", function()
     SkinButton(GameMenuButtonHardcoreDeathLogGUI)
-    GameMenuFrame:SetHeight(GameMenuFrame:GetHeight() + 20)
   end)
 
   HookAddonOrVariable("MacroExtender", function()
