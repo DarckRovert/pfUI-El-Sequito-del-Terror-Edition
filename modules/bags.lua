@@ -407,18 +407,20 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       end
 
       local highlight = pfUI.bags[bag].slots[slot].frame:GetHighlightTexture()
-      if highlight then highlight:SetTexture(.5, .5, .5, .5) end
+      if highlight and highlight.SetTexture then highlight:SetTexture(.5, .5, .5, .5) end
 
       local pushed = pfUI.bags[bag].slots[slot].frame:GetPushedTexture()
-      if pushed then pushed:SetTexture(.5, .5, .5, .5) end
+      if pushed and pushed.SetTexture then pushed:SetTexture(.5, .5, .5, .5) end
 
       local questText = pfUI.bags[bag].slots[slot].frame.qtext
-      questText:SetFont(pfUI.font_default, 13, "THICKOUTLINE")
-      questText:SetPoint("TOPLEFT", 0, 0)
-      questText:SetTextColor(1, .8, .2, 1)
+      if questText and questText.SetFont then
+        questText:SetFont(pfUI.font_default, 13, "THICKOUTLINE")
+        questText:SetPoint("TOPLEFT", 0, 0)
+        questText:SetTextColor(1, .8, .2, 1)
+      end
 
       local countFrame = _G[pfUI.bags[bag].slots[slot].frame:GetName() .. "Count"]
-      if countFrame then
+      if countFrame and countFrame.SetFont then
         countFrame:SetFont(pfUI.font_unit, C.global.font_unit_size, "OUTLINE")
         countFrame:SetAllPoints()
         countFrame:SetJustifyH("RIGHT")
@@ -426,7 +428,7 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       end
 
       local icon = _G[pfUI.bags[bag].slots[slot].frame:GetName() .. "IconTexture"]
-      if icon then
+      if icon and icon.SetTexCoord then
         icon:SetTexCoord(.08, .92, .08, .92)
         icon:ClearAllPoints()
         icon:SetPoint("TOPLEFT", 1, -1)
@@ -434,7 +436,7 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       end
 
       local border = _G[pfUI.bags[bag].slots[slot].frame:GetName() .. "NormalTexture"]
-      if border then border:SetTexture("") end
+      if border and border.SetTexture then border:SetTexture("") end
 
       if ShaguScore then
         pfUI.bags[bag].slots[slot].frame.scoreText = pfUI.bags[bag].slots[slot].frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
