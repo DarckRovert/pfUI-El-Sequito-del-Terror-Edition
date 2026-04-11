@@ -9,3 +9,5 @@ __pycache__/
 *.sln.docstates
 _knowledge.json
 /tmp/
+LAST_DEPLOY.txt 
+deploy_log.txt 

@@ -208,12 +208,14 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
 
     if maxslots ~= pfUI.bag.maxslots then
       for bag = -2,11 do
-        for slot, f in ipairs(pfUI.bags[bag].slots) do
-          local bagsize = GetContainerNumSlots(bag)
-          if bag == -2 and pfUI.bag.showKeyring == true then bagsize = GetKeyRingSize() end
+        if pfUI.bags[bag] then
+          for slot, f in ipairs(pfUI.bags[bag].slots) do
+            local bagsize = GetContainerNumSlots(bag)
+            if bag == -2 and pfUI.bag.showKeyring == true then bagsize = GetKeyRingSize() end
 
-          if slot > bagsize then
-            pfUI.bags[bag].slots[slot].frame:Hide()
+            if slot > bagsize then
+              pfUI.bags[bag].slots[slot].frame:Hide()
+            end
           end
         end
       end
@@ -428,7 +430,7 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       icon:SetPoint("BOTTOMRIGHT", -1, 1)
 
       local border = _G[pfUI.bags[bag].slots[slot].frame:GetName() .. "NormalTexture"]
-      border:SetTexture("")
+      if border then border:SetTexture("") end
 
       if ShaguScore then
         pfUI.bags[bag].slots[slot].frame.scoreText = pfUI.bags[bag].slots[slot].frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
