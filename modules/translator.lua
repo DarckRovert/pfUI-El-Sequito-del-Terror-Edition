@@ -200,6 +200,12 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     local function TranslatorAddMessage(frame, text, r, g, b, id)
       if not text or type(text) ~= "string" then return frame:pfOriginalAddMessage(text, r, g, b, id) end
       
+      -- SOBERANÍA HUMANA: Solo traducir si detectamos un enlace de jugador o canal
+      -- Esto evita traducir NPCs, nombres de mobs y mensajes de sistema.
+      if not strfind(text, "|Hplayer:") and not strfind(text, "|Hchannel:") then
+        return frame:pfOriginalAddMessage(text, r, g, b, id)
+      end
+
       local low = strlower(text)
       if strfind(low, "error:") or strfind(low, "lua:") or strfind(low, "attempt to") then
         return frame:pfOriginalAddMessage(text, r, g, b, id)

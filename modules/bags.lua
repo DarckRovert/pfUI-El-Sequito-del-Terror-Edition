@@ -407,10 +407,10 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       end
 
       local highlight = pfUI.bags[bag].slots[slot].frame:GetHighlightTexture()
-      highlight:SetTexture(.5, .5, .5, .5)
+      if highlight then highlight:SetTexture(.5, .5, .5, .5) end
 
       local pushed = pfUI.bags[bag].slots[slot].frame:GetPushedTexture()
-      pushed:SetTexture(.5, .5, .5, .5)
+      if pushed then pushed:SetTexture(.5, .5, .5, .5) end
 
       local questText = pfUI.bags[bag].slots[slot].frame.qtext
       questText:SetFont(pfUI.font_default, 13, "THICKOUTLINE")
@@ -418,16 +418,20 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       questText:SetTextColor(1, .8, .2, 1)
 
       local countFrame = _G[pfUI.bags[bag].slots[slot].frame:GetName() .. "Count"]
-      countFrame:SetFont(pfUI.font_unit, C.global.font_unit_size, "OUTLINE")
-      countFrame:SetAllPoints()
-      countFrame:SetJustifyH("RIGHT")
-      countFrame:SetJustifyV("BOTTOM")
+      if countFrame then
+        countFrame:SetFont(pfUI.font_unit, C.global.font_unit_size, "OUTLINE")
+        countFrame:SetAllPoints()
+        countFrame:SetJustifyH("RIGHT")
+        countFrame:SetJustifyV("BOTTOM")
+      end
 
       local icon = _G[pfUI.bags[bag].slots[slot].frame:GetName() .. "IconTexture"]
-      icon:SetTexCoord(.08, .92, .08, .92)
-      icon:ClearAllPoints()
-      icon:SetPoint("TOPLEFT", 1, -1)
-      icon:SetPoint("BOTTOMRIGHT", -1, 1)
+      if icon then
+        icon:SetTexCoord(.08, .92, .08, .92)
+        icon:ClearAllPoints()
+        icon:SetPoint("TOPLEFT", 1, -1)
+        icon:SetPoint("BOTTOMRIGHT", -1, 1)
+      end
 
       local border = _G[pfUI.bags[bag].slots[slot].frame:GetName() .. "NormalTexture"]
       if border then border:SetTexture("") end
