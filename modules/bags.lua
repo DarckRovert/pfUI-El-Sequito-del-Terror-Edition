@@ -257,7 +257,7 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       frame.init = true
     end
 
-    if pfUI.chat and C.appearance.bags.icon_size == "-1" then
+    if pfUI.chat and anchor[2] and C.appearance.bags.icon_size == "-1" then
       -- align bags to chat if no custom size is set
       frame:SetWidth(cwidth * anchor[2]:GetScale())
     elseif C.appearance.bags.icon_size ~= "-1" then
@@ -268,10 +268,10 @@ pfUI:RegisterModule("bags", "vanilla:tbc", function ()
       frame:SetWidth((22 + default_border*3) * rowlength - default_border)
     end
 
-    if pfUI.chat and C.appearance.bags.icon_size ~= "-1" then
+    if pfUI.chat and anchor[2] and C.appearance.bags.icon_size ~= "-1" then
       -- ignore custom icon size
       frame:SetPoint(anchor[1], anchor[2], anchor[1], 0, 0)
-    elseif pfUI.chat then
+    elseif pfUI.chat and anchor[2] then
       -- use chat frame as anchor if existing
       if C.appearance.bags.abovechat == "0" then
         frame:SetPoint(anchor[1], anchor[2], anchor[1], 0, 0)
