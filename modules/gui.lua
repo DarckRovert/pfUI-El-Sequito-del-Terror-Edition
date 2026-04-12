@@ -1243,14 +1243,14 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
         "Lion:"..T["Lion"],
       },
       ["translator_direction"] = {
-        "0:Automatic",
+        "0:" .. (T["Automatic"] or "Automático"),
         "1:ES -> EN",
         "2:EN -> ES",
       },
       ["translator_server"] = {
-        "0:Automatic",
-        "1:English Server (Translate Incoming EN->ES)",
-        "2:Spanish Server (Translate Incoming ES->EN)",
+        "0:" .. (T["Automatic"] or "Automático"),
+        "1:" .. (T["English Server"] or "Servidor Inglés"),
+        "2:" .. (T["Spanish Server"] or "Servidor Español"),
       }
     }
 
@@ -2967,25 +2967,29 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
       CreateConfig(nil, "NoteIt", C.thirdparty.noteit, "enable", "checkbox", nil, nil, nil, nil, "vanilla")
     end)
 
+    -- [[ Translator ]]
     CreateGUIEntry(T["Translator"] or "Traductor", nil, function()
-      CreateConfig(nil, T["Enable Translator"] or "Activar Traductor", pfUI_config.translator, "enable", "checkbox")
-      CreateConfig(nil, T["Translate Incoming Messages"] or "Traducir Entrante", pfUI_config.translator, "incoming", "checkbox")
-      CreateConfig(nil, T["Translate Outgoing Messages"] or "Traducir Saliente", pfUI_config.translator, "outgoing", "checkbox")
-      CreateConfig(nil, " ", nil, nil, "header")
-      CreateConfig(nil, T["Server Environment"] or "Entorno de Servidor", pfUI_config.translator, "server_type", "dropdown", pfUI.gui.dropdowns.translator_server)
-      CreateConfig(nil, T["Force Outgoing Direction"] or "Forzar Dirección de Salida", pfUI_config.translator, "direction", "dropdown", pfUI.gui.dropdowns.translator_direction)
-      CreateConfig(nil, " ", nil, nil, "header")
-      CreateConfig(nil, T["Silent Mode (No [TR] Prefix)"] or "Modo Silencioso", pfUI_config.translator, "silent_mode", "checkbox")
-      CreateConfig(nil, T["Enable WIM Integration"] or "Sincronizar WIM", pfUI_config.translator, "wim_bridge", "checkbox")
-      CreateConfig(nil, T["Debug Mode"] or "Modo Debug", pfUI_config.translator, "debug_mode", "checkbox")
+      CreateConfig(nil, T["Enable Translator"] or "Activar Traductor", C.translator, "enable", "checkbox")
+      CreateConfig(nil, T["Translate Incoming Messages"] or "Traducir Entrante", C.translator, "incoming", "checkbox")
+      CreateConfig(nil, T["Translate Outgoing Messages"] or "Traducir Saliente", C.translator, "outgoing", "checkbox")
+
+      CreateConfig(nil, T["Environment"] or "Entorno", nil, nil, "header")
+      CreateConfig(nil, T["Server Type"] or "Tipo de Servidor", C.translator, "server_type", "dropdown", pfUI.gui.dropdowns.translator_server)
+      CreateConfig(nil, T["Force Direction"] or "Forzar Dirección", C.translator, "direction", "dropdown", pfUI.gui.dropdowns.translator_direction)
+
+      CreateConfig(nil, T["Options"] or "Opciones", nil, nil, "header")
+      CreateConfig(nil, T["Silent Mode (No [TR])"] or "Modo Silencioso (Sin [TR])", C.translator, "silent_mode", "checkbox")
+      CreateConfig(nil, T["WIM Integration"] or "Integración WIM", C.translator, "wim_bridge", "checkbox")
+      CreateConfig(nil, T["Debug Mode"] or "Modo Debug", C.translator, "debug_mode", "checkbox")
 
       CreateConfig(nil, T["Channels"] or "Canales", nil, nil, "header")
-      CreateConfig(nil, T["Say"] or "Say", pfUI_config.translator, "chan_say", "checkbox")
-      CreateConfig(nil, T["Whisper"] or "Whisper", pfUI_config.translator, "chan_whisper", "checkbox")
-      CreateConfig(nil, T["Guild"] or "Guild", pfUI_config.translator, "chan_guild", "checkbox")
-      CreateConfig(nil, T["Raid"] or "Raid", pfUI_config.translator, "chan_raid", "checkbox")
-      CreateConfig(nil, T["World"] or "World", pfUI_config.translator, "chan_world", "checkbox")
-      CreateConfig(nil, T["LFG"] or "LFG", pfUI_config.translator, "chan_lfg", "checkbox")
+      CreateConfig(nil, T["Say"] or "Say", C.translator, "chan_say", "checkbox")
+      CreateConfig(nil, T["Party"] or "Grupo", C.translator, "chan_party", "checkbox")
+      CreateConfig(nil, T["Raid"] or "Banda", C.translator, "chan_raid", "checkbox")
+      CreateConfig(nil, T["Guild"] or "Hermandad", C.translator, "chan_guild", "checkbox")
+      CreateConfig(nil, T["Whisper"] or "Susurros", C.translator, "chan_whisper", "checkbox")
+      CreateConfig(nil, T["World (Global)"] or "Mundo (Global)", C.translator, "chan_world", "checkbox")
+      CreateConfig(nil, T["LFG"] or "LFG", C.translator, "chan_lfg", "checkbox")
     end)
 
     CreateGUIEntry(T["Components"], T["Modules"], function()

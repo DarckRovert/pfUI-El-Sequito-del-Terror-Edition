@@ -177,6 +177,7 @@ function pfUI:LoadConfig()
   pfUI:UpdateConfig("appearance", "minimap",     "zonetext",         "off")
   pfUI:UpdateConfig("appearance", "minimap",     "coordstext",       "mouseover")
   pfUI:UpdateConfig("appearance", "minimap",     "coordsloc",        "bottomleft")
+  pfUI:UpdateConfig("appearance", "minimap",     "square",           "1")
   pfUI:UpdateConfig("appearance", "minimap",     "tracking_size",    "16")
   pfUI:UpdateConfig("appearance", "minimap",     "tracking_pulse",   "1")
   pfUI:UpdateConfig("appearance", "minimap",     "addon_buttons",    "0")
@@ -1380,6 +1381,25 @@ function pfUI:MigrateConfig()
     end
   end
 
+
+  -- translator settings (defaults for channels are 0 as requested)
+  pfUI:UpdateConfig("translator", nil, "enable", "1")
+  pfUI:UpdateConfig("translator", nil, "incoming", "1")
+  pfUI:UpdateConfig("translator", nil, "outgoing", "1")
+  pfUI:UpdateConfig("translator", nil, "server_type", "0")
+  pfUI:UpdateConfig("translator", nil, "direction", "0")
+  pfUI:UpdateConfig("translator", nil, "silent_mode", "0")
+  pfUI:UpdateConfig("translator", nil, "debug_mode", "0")
+  pfUI:UpdateConfig("translator", nil, "wim_bridge", "1")
+  
+  -- Default channel settings (Disabled by default as requested)
+  pfUI:UpdateConfig("translator", nil, "chan_say", "0")
+  pfUI:UpdateConfig("translator", nil, "chan_party", "0")
+  pfUI:UpdateConfig("translator", nil, "chan_raid", "0")
+  pfUI:UpdateConfig("translator", nil, "chan_guild", "0")
+  pfUI:UpdateConfig("translator", nil, "chan_whisper", "1") -- Whispers usually wanted
+  pfUI:UpdateConfig("translator", nil, "chan_world", "0")
+  pfUI:UpdateConfig("translator", nil, "chan_lfg", "0")
 
   pfUI_config.version = pfUI.version.string
 end

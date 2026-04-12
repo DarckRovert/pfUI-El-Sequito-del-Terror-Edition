@@ -9,13 +9,13 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
   -- Estructura de Diccionarios V3 (Híbrida)
   pfUI.translator_dicts = pfUI.translator_dicts or {}
-  pfUI.translator_dicts.es_en_words = {}
-  pfUI.translator_dicts.es_en_phrases = {}
-  pfUI.translator_dicts.es_en_keys = {}
+  pfUI.translator_dicts.es_en_words = pfUI.translator_dicts.es_en_words or {}
+  pfUI.translator_dicts.es_en_phrases = pfUI.translator_dicts.es_en_phrases or {}
+  pfUI.translator_dicts.es_en_keys = pfUI.translator_dicts.es_en_keys or {}
   
-  pfUI.translator_dicts.en_es_words = {}
-  pfUI.translator_dicts.en_es_phrases = {}
-  pfUI.translator_dicts.en_es_keys = {}
+  pfUI.translator_dicts.en_es_words = pfUI.translator_dicts.en_es_words or {}
+  pfUI.translator_dicts.en_es_phrases = pfUI.translator_dicts.en_es_phrases or {}
+  pfUI.translator_dicts.en_es_keys = pfUI.translator_dicts.en_es_keys or {}
 
   pfUI.translator_stats = pfUI.translator_stats or { total_in = 0, total_out = 0, cache_hits = 0 }
 
@@ -167,15 +167,15 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     if not C.translator or C.translator.enable ~= "1" then return false end
     local lower = strlower(chatType or "")
     
-    -- Whitelist estricta: Solo canales de interacción humana
+    -- Mapeo dinámico de canales basado en configuración
     if strfind(lower, "say")     then return C.translator.chan_say     == "1" end
-    if strfind(lower, "party")   then return C.translator.chan_raid    == "1" end
+    if strfind(lower, "party")   then return C.translator.chan_party   == "1" end
     if strfind(lower, "raid")    then return C.translator.chan_raid    == "1" end
     if strfind(lower, "guild")   then return C.translator.chan_guild   == "1" end
     if strfind(lower, "whisper") then return C.translator.chan_whisper == "1" end
-    if strfind(lower, "world") or strfind(lower, "channel") or strfind(lower, "lfg") then 
-       return C.translator.chan_world == "1" or C.translator.chan_lfg == "1" 
-    end
+    if strfind(lower, "world")   then return C.translator.chan_world   == "1" end
+    if strfind(lower, "lfg")     then return C.translator.chan_lfg     == "1" end
+    if strfind(lower, "channel") then return C.translator.chan_world   == "1" end -- Fallback para canales personalizados
 
     -- Bloqueo absoluto de cualquier otro evento (NPCs, Sistema, Emotes)
     return false

@@ -5,101 +5,107 @@ apex_loader:RegisterEvent("VARIABLES_LOADED")
 apex_loader:SetScript("OnEvent", function()
   apex_loader:UnregisterAllEvents()
   
-  -- Clonamos estructura base para evitar corrupciones numéricas
+  -- Base Modern as foundation
   local apex = pfUI.api.CopyTable(pfUI_profiles["Modern"])
   if not apex then return end
 
   -------------------------------------------------------------
-  -- 1. LAYOUT POSICIONES (APEX: Centralizado y Agresivo)     --
+  -- 1. LAYOUT POSICIONES (APEX v2.0: Dragonflight HUD)      --
   -------------------------------------------------------------
   apex["position"] = apex["position"] or {}
-  -- HUD del combate agrupado justo debajo de los pies
-  apex.position["pfPlayer"] = { anchor = "BOTTOM", parent = "UIParent", xpos = -250, ypos = 280 }
-  apex.position["pfTarget"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 250, ypos = 280 }
-  apex.position["pfTargetTarget"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 450, ypos = 250 }
-  apex.position["pfPet"] = { anchor = "BOTTOM", parent = "UIParent", xpos = -350, ypos = 280 }
   
-  -- Rejilla ActionBars minimalista sin arte
-  apex.position["pfActionBarMain"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 0, ypos = 40 }
-  apex.position["pfActionBarBottomLeft"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 0, ypos = 80 }
-  apex.position["pfActionBarBottomRight"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 0, ypos = 120 }
+  -- UnitFrames Centralizados (±180x para enfoque táctico)
+  apex.position["pfPlayer"] = { anchor = "BOTTOM", parent = "UIParent", xpos = -180, ypos = 260 }
+  apex.position["pfTarget"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 180, ypos = 260 }
+  apex.position["pfTargetTarget"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 360, ypos = 240 }
+  apex.position["pfPet"] = { anchor = "BOTTOM", parent = "UIParent", xpos = -320, ypos = 240 }
   
-  -- Casteos
-  apex.position["pfPlayerCastbar"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 0, ypos = 200 }
-  apex.position["pfTargetCastbar"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 0, ypos = 360 }
-  apex.position["pfMinimap"] = { anchor = "TOPRIGHT", parent = "UIParent", xpos = -20, ypos = -20 }
+  -- ActionBars: Agrupación en el fondo (Look Minimalista Flotante)
+  apex.position["pfActionBarMain"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 0, ypos = 45 }
+  apex.position["pfActionBarBottomLeft"] = { anchor = "BOTTOM", parent = "pfActionBarMain", xpos = 0, ypos = 42 }
+  apex.position["pfActionBarBottomRight"] = { anchor = "BOTTOM", parent = "pfActionBarBottomLeft", xpos = 0, ypos = 42 }
+  
+  -- Micro Bar & Bags (Esquina inferior derecha, horizontal)
+  apex.position["pfMicroBar"] = { anchor = "BOTTOMRIGHT", parent = "UIParent", xpos = -10, ypos = 45 }
+  apex.position["pfBagBar"] = { anchor = "BOTTOMRIGHT", parent = "pfMicroBar", xpos = 0, ypos = 30 }
+
+  -- Castbars Modernas
+  apex.position["pfPlayerCastbar"] = { anchor = "BOTTOM", parent = "UIParent", xpos = 0, ypos = 210 }
+  apex.position["pfTargetCastbar"] = { anchor = "TOP", parent = "pfTarget", xpos = 0, ypos = 15 } -- Bajo el objetivo (Retail feel)
+  
+  -- Minimap circular
+  apex.position["pfMinimap"] = { anchor = "TOPRIGHT", parent = "UIParent", xpos = -25, ypos = -25 }
 
   -------------------------------------------------------------
-  -- 2. UNITFRAMES ESTÉTICA AVANZADA (Cinematografía HUD)     --
+  -- 2. UNITFRAMES: ESTÉTICA RETAIL (Dragonflight Style)      --
   -------------------------------------------------------------
   apex["unitframes"] = apex["unitframes"] or {}
   apex.unitframes.disable = "0"
-  apex.unitframes.pastel = "1" -- Colores suaves y saturados
-  apex.unitframes.animation_speed = "5" -- Smooth Health transitions !!
-
-  -- PLAYER 
+  apex.unitframes.pastel = "1"
+  apex.unitframes.animation_speed = "5"
+  apex.unitframes.all = apex.unitframes.all or {}
+  apex.unitframes.all.statusbar = "img:custom\\health_df" -- Inyección de textura HD
+  
+  -- Player Settings
   apex.unitframes.player = apex.unitframes.player or {}
-  apex.unitframes.player.width = "240"
-  apex.unitframes.player.height = "55"
-  apex.unitframes.player.pheight = "8"
-  apex.unitframes.player.portrait = "bar" -- Modelo 3D INCRUSTADO en la barra de vida
-  apex.unitframes.player.portraitalpha = "0.15" -- Holográfico ligero
-  apex.unitframes.player.txthpcenter = "none"
+  apex.unitframes.player.width = "235"
+  apex.unitframes.player.height = "56"
+  apex.unitframes.player.pheight = "10" -- Poder más visible
+  apex.unitframes.player.portrait = "bar"
+  apex.unitframes.player.portraitalpha = "0.20"
   apex.unitframes.player.txthpright = "curmax"
-  apex.unitframes.player.showtooltip = "0"
-  apex.unitframes.player.invert_healthbar = "0"
-  apex.unitframes.player.portraitcolor = "0"
+  apex.unitframes.player.txthpcenter = "none"
   
-  -- TARGET
+  -- Target Settings
   apex.unitframes.target = apex.unitframes.target or {}
-  apex.unitframes.target.width = "240"
-  apex.unitframes.target.height = "55"
-  apex.unitframes.target.pheight = "8"
+  apex.unitframes.target.width = "235"
+  apex.unitframes.target.height = "56"
+  apex.unitframes.target.pheight = "10"
   apex.unitframes.target.portrait = "bar"
-  apex.unitframes.target.portraitalpha = "0.15"
-  apex.unitframes.target.animation_speed = "5"
-  apex.unitframes.target.portraitcolor = "0"
+  apex.unitframes.target.portraitalpha = "0.20"
+  apex.unitframes.target.txthpleft = "curmax"
+  apex.unitframes.target.txthpcenter = "none"
+
+  -------------------------------------------------------------
+  -- 3. MINIMAP: RECREACIÓN GEOMÉTRICA                        --
+  -------------------------------------------------------------
+  apex["appearance"] = apex["appearance"] or {}
+  apex.appearance.minimap = apex.appearance.minimap or {}
+  apex.appearance.minimap.size = "165"
+  apex.appearance.minimap.square = "0" -- Forzamos modo circular de Dragonflight
   
   -------------------------------------------------------------
-  -- 3. FADER / DARK GLASS (Dinámica fuera de combate)        --
+  -- 4. BARS: CONFIGURACIÓN FLOTANTE                          --
   -------------------------------------------------------------
-  -- Convertimos la barra izquierda y las posturas a opacos en combate
   apex["bars"] = apex["bars"] or {}
   apex.bars.icon_size = "34"
-  apex.bars.spacing = "2"
-  apex.bars.background = "0"
-  apex.bars.glowaction = "1" 
-  apex.bars.right = apex.bars.right or {}
-  apex.bars.right.autohide = "0"
-  apex.bars.pet = apex.bars.pet or {}
-  apex.bars.pet.autohide = "0"
-  apex.bars.shapeshift = apex.bars.shapeshift or {}
-  apex.bars.shapeshift.autohide = "0"
-
+  apex.bars.spacing = "3"
+  apex.bars.background = "0" -- Quita el arte de fondo de las barras
+  apex.bars.glowaction = "1"
+  
+  -- Microbar Horizontal
+  apex.bars.micro = apex.bars.micro or {}
+  apex.bars.micro.enable = "1"
+  apex.bars.micro.horizontal = "1"
+  
   -------------------------------------------------------------
-  -- 4. ESTÁNDARES TIPOGRÁFICOS Y GRÁFICOS                    --
+  -- 5. GLOBALES & TIPOGRAFÍA                                 --
   -------------------------------------------------------------
   apex["global"] = apex["global"] or {}
+  apex.global.font_size = "12"
   apex.global.font_unit_size = "13"
-  apex.global.pixelperfect = "1" -- Bordes limpios de cristal negro
-  apex.global.offcolor = "0.1,0.1,0.1,1" -- Sombras profundas
-  apex.global.shadow = "1"
-  apex.global.errors_limit = "1" -- Quita el spam de errores rojos ("Fuera de rango")
+  apex.global.pixelperfect = "1"
+  apex.global.offcolor = "0.05,0.05,0.05,1" -- Color de fondo más profundo
   
-  apex["tooltip"] = apex["tooltip"] or {}
-  apex.tooltip.alpha = "0.85" -- Glass tooltip
-  
-  apex["nameplates"] = apex["nameplates"] or {}
-  apex.nameplates.use_target = "1"
-  apex.nameplates.overlap = "0"
-
   pfUI_profiles["Apex"] = apex
   
+  -- Registro de posiciones corregido para el Wizard
   pfUI_profiles["Apex"].new_module_positions = {
     pfPlayer = apex.position["pfPlayer"],
     pfTarget = apex.position["pfTarget"],
     pfPlayerCastbar = apex.position["pfPlayerCastbar"],
     pfTargetCastbar = apex.position["pfTargetCastbar"],
-    pfActionBarMain = apex.position["pfActionBarMain"]
+    pfActionBarMain = apex.position["pfActionBarMain"],
+    pfMinimap = apex.position["pfMinimap"]
   }
 end)

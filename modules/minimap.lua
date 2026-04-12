@@ -24,7 +24,23 @@ pfUI:RegisterModule("minimap", "vanilla:tbc", function ()
   Minimap:SetParent(pfUI.minimap)
   Minimap:SetPoint("CENTER", pfUI.minimap, "CENTER", 0.5, -.5)
   Minimap:SetFrameLevel(1)
-  Minimap:SetMaskTexture(pfUI.media["img:minimap"])
+
+  local mask = C.appearance.minimap.square == "1" and pfUI.media["img:minimap"] or "Textures\\MinimapMask"
+  Minimap:SetMaskTexture(mask)
+
+  -- Dragonflight Border Injection
+  if C.appearance.minimap.square ~= "1" then
+    pfUI.minimap.df_border = pfUI.minimap:CreateTexture(nil, "OVERLAY")
+    pfUI.minimap.df_border:SetTexture(pfUI.media["img:custom\\minimap_border"])
+    pfUI.minimap.df_border:SetAllPoints(pfUI.minimap)
+    
+    pfUI.minimap.df_shadow = pfUI.minimap:CreateTexture(nil, "BACKGROUND")
+    pfUI.minimap.df_shadow:SetTexture(pfUI.media["img:custom\\minimap_shadow"])
+    pfUI.minimap.df_shadow:SetAllPoints(pfUI.minimap)
+
+    if pfUI.minimap.backdrop then pfUI.minimap.backdrop:Hide() end
+  end
+
   Minimap:EnableMouseWheel(true)
   Minimap:SetScript("OnMouseWheel", function()
     if(arg1 > 0) then Minimap_ZoomIn() else Minimap_ZoomOut() end
