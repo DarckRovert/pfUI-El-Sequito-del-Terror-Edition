@@ -1,21 +1,20 @@
 pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
-  -- TRADUCTOR UNIVERSAL v3.1.0 — Omni-Tier Séquito Edition
-  -- Motor Híbrido de Alto Rendimiento (Hash + Greedy)
+  -- TRADUCTOR UNIVERSAL v4.0.0 — Omni-Tier Séquito Edition
+  -- Motor Híbrido Trilingüe de Alto Rendimiento (ES / ZH / EN)
   -- ============================================================
 
   local C = pfUI_config
   local T = pfUI_translation[GetLocale()] or pfUI_translation["enUS"]
 
-  -- Estructura de Diccionarios V3 (Híbrida)
+  -- Estructura de Diccionarios V4 (Híbrida Trilingüe)
   pfUI.translator_dicts = pfUI.translator_dicts or {}
-  pfUI.translator_dicts.es_en_words = pfUI.translator_dicts.es_en_words or {}
-  pfUI.translator_dicts.es_en_phrases = pfUI.translator_dicts.es_en_phrases or {}
-  pfUI.translator_dicts.es_en_keys = pfUI.translator_dicts.es_en_keys or {}
-  
-  pfUI.translator_dicts.en_es_words = pfUI.translator_dicts.en_es_words or {}
-  pfUI.translator_dicts.en_es_phrases = pfUI.translator_dicts.en_es_phrases or {}
-  pfUI.translator_dicts.en_es_keys = pfUI.translator_dicts.en_es_keys or {}
+  local pairs = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
+  for _, p in ipairs(pairs) do
+    pfUI.translator_dicts[p .. "_words"] = pfUI.translator_dicts[p .. "_words"] or {}
+    pfUI.translator_dicts[p .. "_phrases"] = pfUI.translator_dicts[p .. "_phrases"] or {}
+    pfUI.translator_dicts[p .. "_keys"] = pfUI.translator_dicts[p .. "_keys"] or {}
+  end
 
   pfUI.translator_stats = pfUI.translator_stats or { total_in = 0, total_out = 0, cache_hits = 0 }
 
@@ -36,43 +35,58 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   end
 
   -- Heurística de Reino (Séquito Intelligence)
-  pfUI.translator_realm_votes = pfUI.translator_realm_votes or { en = 0, es = 0, detected = nil }
+  pfUI.translator_realm_votes = pfUI.translator_realm_votes or { en = 0, es = 0, zh = 0, detected = nil }
 
   -- ============================================================
-  -- LÓGICA DE BILATERALIDAD (Séquito Intelligence v3.2.0)
+  -- LÓGICA TRILINGÜE (Séquito Intelligence v4.0.0)
   -- ============================================================
   local function GetTranslationMode(isIncoming)
     local locale = GetLocale()
-    local server = C.translator.server_type or "0" -- 0:Auto, 1:EN, 2:ES
+    local server = C.translator.server_type or "0" -- 0:Auto, 1:EN, 2:ES, 3:ZH
     local force_dir = C.translator.direction or "0"
 
-    -- Determinar entorno (English o Spanish)
+    -- Determinar idioma del cliente local
+    local myLang = "en"
+    if locale == "esES" or locale == "esMX" then myLang = "es"
+    elseif locale == "zhCN" or locale == "zhTW" then myLang = "zh"
+    end
+
+    -- Determinar entorno del servidor
     local env = "en" -- Fallback global
     if server == "1" then 
       env = "en" -- Manual EN
     elseif server == "2" then 
       env = "es" -- Manual ES
+    elseif server == "3" then 
+      env = "zh" -- Manual ZH
     elseif server == "0" then
-      -- Inteligencia: Heurística primero, Paradoja después
       if pfUI.translator_realm_votes.detected then
         env = pfUI.translator_realm_votes.detected
       else
-        -- Lógica de Paradoja: Si mi cliente es ES, asumo que el reino es EN
-        env = (locale == "esES" or locale == "esMX") and "en" or "es"
+        env = (myLang == "es" or myLang == "zh") and "en" or "es"
       end
     end
 
-    -- Si el entorno SOCIAL es igual al de mi CLIENTE, no traduzco nada
-    local myLang = (locale == "esES" or locale == "esMX") and "es" or "en"
-    if env == myLang and server == "0" then return nil, nil end
+    -- Si el entorno SOCIAL es igual al de mi CLIENTE, no traduzco nada (en modo automático)
+    if env == myLang and server == "0" and force_dir == "0" then return nil, nil end
 
     if not isIncoming then
       -- Dirección de Salida
       if force_dir == "1" then return "es", "en" end
       if force_dir == "2" then return "en", "es" end
+      if force_dir == "3" then return "zh", "en" end
+      if force_dir == "4" then return "en", "zh" end
+      if force_dir == "5" then return "es", "zh" end
+      if force_dir == "6" then return "zh", "es" end
       return myLang, env
     else
       -- Dirección de Entrada
+      if force_dir == "1" then return "es", "en" end
+      if force_dir == "2" then return "en", "es" end
+      if force_dir == "3" then return "zh", "en" end
+      if force_dir == "4" then return "en", "zh" end
+      if force_dir == "5" then return "es", "zh" end
+      if force_dir == "6" then return "zh", "es" end
       return env, myLang
     end
   end
@@ -148,15 +162,18 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
   local EN_MARKERS = { "the", "and", "you", "are", "for", "have", "with", "not", "this", "that", "but", "they", "from", "will", "what", "your", "know", "how", "well" }
   local ES_MARKERS = { "que", "por", "una", "con", "los", "las", "del", "les", "como", "pero", "para", "este", "esta", "hay", "muy", "mas", "aqui", "todos", "bien" }
+  local ZH_MARKERS = { "的", "了", "是", "我", "你", "他", "在", "有", "和", "就", "不", "人", "都", "一", "没有", "我们", "寻找", "队伍", "去", "打", "求组", "需要", "来", "打本", "找组" }
 
   local function DetectLanguage(text)
     if not text then return "unknown" end
     local lower = " " .. strlower(text) .. " "
-    local en_hits, es_hits = 0, 0
+    local en_hits, es_hits, zh_hits = 0, 0, 0
     for _, w in ipairs(EN_MARKERS) do if strfind(lower, " " .. w .. " ", 1, true) then en_hits = en_hits + 1 end end
     for _, w in ipairs(ES_MARKERS) do if strfind(lower, " " .. w .. " ", 1, true) then es_hits = es_hits + 1 end end
-    if en_hits > es_hits and en_hits >= 1 then return "en" end
-    if es_hits > en_hits and es_hits >= 1 then return "es" end
+    for _, w in ipairs(ZH_MARKERS) do if strfind(text, w, 1, true) then zh_hits = zh_hits + 1 end end
+    if zh_hits > en_hits and zh_hits > es_hits and zh_hits >= 1 then return "zh" end
+    if en_hits > es_hits and en_hits > zh_hits and en_hits >= 1 then return "en" end
+    if es_hits > en_hits and es_hits > zh_hits and es_hits >= 1 then return "es" end
     return "unknown"
   end
 
@@ -197,9 +214,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     local src, dest = GetTranslationMode(false)
     if not src or not dest then return nil end
 
-    local words = (src == "es") and pfUI.translator_dicts.es_en_words or pfUI.translator_dicts.en_es_words
-    local phrases = (src == "es") and pfUI.translator_dicts.es_en_phrases or pfUI.translator_dicts.en_es_phrases
-    local keys = (src == "es") and pfUI.translator_dicts.es_en_keys or pfUI.translator_dicts.en_es_keys
+    local prefix = src .. "_" .. dest
+    local words = pfUI.translator_dicts[prefix .. "_words"]
+    local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
+    local keys = pfUI.translator_dicts[prefix .. "_keys"]
 
     local trans = LocalTranslate(msg, words, phrases, keys)
     if trans then
@@ -267,6 +285,8 @@ pfUI:RegisterModule("translator", "vanilla", function ()
             pfUI.translator_realm_votes.en = pfUI.translator_realm_votes.en + 1
           elseif lang == "es" then 
             pfUI.translator_realm_votes.es = pfUI.translator_realm_votes.es + 1
+          elseif lang == "zh" then 
+            pfUI.translator_realm_votes.zh = pfUI.translator_realm_votes.zh + 1
           end
           
           -- Umbral de decisión (5 votos)
@@ -276,14 +296,18 @@ pfUI:RegisterModule("translator", "vanilla", function ()
           elseif pfUI.translator_realm_votes.es >= 5 then 
             pfUI.translator_realm_votes.detected = "es"
             if C.translator.debug_mode == "1" then DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado: ESPAÑOL") end
+          elseif pfUI.translator_realm_votes.zh >= 5 then 
+            pfUI.translator_realm_votes.detected = "zh"
+            if C.translator.debug_mode == "1" then DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado: CHINO") end
           end
         end
       end
 
       if lang == src or lang == "unknown" then
-        local words = (src == "en") and pfUI.translator_dicts.en_es_words or pfUI.translator_dicts.es_en_words
-        local phrases = (src == "en") and pfUI.translator_dicts.en_es_phrases or pfUI.translator_dicts.es_en_phrases
-        local keys = (src == "en") and pfUI.translator_dicts.en_es_keys or pfUI.translator_dicts.es_en_keys
+        local prefix = src .. "_" .. dest
+        local words = pfUI.translator_dicts[prefix .. "_words"]
+        local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
+        local keys = pfUI.translator_dicts[prefix .. "_keys"]
         
         local trans = LocalTranslate(text, words, phrases, keys)
         if trans then
@@ -317,9 +341,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         if mode_check then
           local src, dest = GetTranslationMode(isIncoming)
           if src and dest then
-            local words = (src == "en") and pfUI.translator_dicts.en_es_words or pfUI.translator_dicts.es_en_words
-            local phrases = (src == "en") and pfUI.translator_dicts.en_es_phrases or pfUI.translator_dicts.es_en_phrases
-            local keys = (src == "en") and pfUI.translator_dicts.en_es_keys or pfUI.translator_dicts.es_en_keys
+            local prefix = src .. "_" .. dest
+            local words = pfUI.translator_dicts[prefix .. "_words"]
+            local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
+            local keys = pfUI.translator_dicts[prefix .. "_keys"]
             local trans = LocalTranslate(raw_msg, words, phrases, keys)
             if trans then
               msg = string.gsub(msg, string.gsub(raw_msg, "(%W)", "%%%1"), trans .. GetTRTag())
@@ -346,7 +371,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       pcall(HookIncomingChat)
       if IsAddOnLoaded("WIM") then pcall(HookWIMBridge) end
       if C.translator and C.translator.enable == "1" then
-        DEFAULT_CHAT_FRAME:AddMessage("|cff00ccff[Translator v3.1.0]|r " .. (T["Enable Translator"] or "Traductor Bilateral Activo") .. ".")
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ccff[Translator v4.0.0]|r " .. (T["Enable Translator"] or "Traductor Trilingüe Activo") .. ".")
       end
     elseif event == "ADDON_LOADED" and arg1 == "WIM" then pcall(HookWIMBridge) end
   end)

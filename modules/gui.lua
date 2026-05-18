@@ -1246,11 +1246,16 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
         "0:" .. (T["Automatic"] or "Automático"),
         "1:ES -> EN",
         "2:EN -> ES",
+        "3:ZH -> EN",
+        "4:EN -> ZH",
+        "5:ES -> ZH",
+        "6:ZH -> ES",
       },
       ["translator_server"] = {
         "0:" .. (T["Automatic"] or "Automático"),
         "1:" .. (T["English Server"] or "Servidor Inglés"),
         "2:" .. (T["Spanish Server"] or "Servidor Español"),
+        "3:" .. (T["Chinese Server"] or "Servidor Chino"),
       }
     }
 
