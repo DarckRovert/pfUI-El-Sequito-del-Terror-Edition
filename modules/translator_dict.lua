@@ -4278,9 +4278,33 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   local p_keys = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
   for _, p in ipairs(p_keys) do
     table.sort(pfUI.translator_dicts[p .. "_keys"], function(a, b) return strlen(a) > strlen(b) end)
+
+    -- Inicializar Token-Bucket ( buckets de coincidencia rapida )
+    pfUI.translator_dicts[p .. "_buckets"] = {}
+    local buckets = pfUI.translator_dicts[p .. "_buckets"]
+    local keys = pfUI.translator_dicts[p .. "_keys"]
+    local src_lang = strsub(p, 1, 2)
+
+    for _, key in ipairs(keys) do
+      local first_key = nil
+      if src_lang == "zh" then
+        local b = string.byte(key, 1)
+        local char_len = 1
+        if b and b >= 224 and b <= 239 then char_len = 3
+        elseif b and b >= 192 and b <= 223 then char_len = 2 end
+        first_key = strsub(key, 1, char_len)
+      else
+        first_key = string.gsub(key, "^([%a%d\128-\255]+).*", "%1")
+      end
+
+      if first_key and first_key ~= "" then
+        buckets[first_key] = buckets[first_key] or {}
+        table.insert(buckets[first_key], key)
+      end
+    end
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v5.0.0 Colossal-Tier — 200 categorias cargadas.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v6.0.0 Ultimate-Tier — 200 categorias y buckets de coincidencia inicializados.")
   end
 end)

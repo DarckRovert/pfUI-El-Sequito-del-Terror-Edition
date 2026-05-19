@@ -1,11 +1,11 @@
 pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
-  -- TRADUCTOR UNIVERSAL v5.0.0 — Colossal-Tier Sequito Edition
+  -- TRADUCTOR UNIVERSAL v6.0.0 — Ultimate-Tier Sequito Edition
   -- Motor Hibrido Trilingue de Alto Rendimiento (ES / ZH / EN)
   -- Soporte Nativo UTF-8 y Resolucion de Coincidencias Dinamicas
   -- ============================================================
 
-  pfUI.translator_version = "5.0.0"
+  pfUI.translator_version = "6.0.0"
 
   local C = pfUI_config
   local T = pfUI_translation[GetLocale()] or pfUI_translation["enUS"]
@@ -189,7 +189,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     end
   end
 
-  local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang)
+  local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang, buckets)
     if not text or type(text) ~= "string" or strlen(text) < 2 then return nil end
 
     -- Consultar cache LRU primero
@@ -211,7 +211,52 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
     -- Fase 1: Greedy Matching (Frases Compuestas / Soporte UTF-8 Multibyte)
     if phraseDict and phraseKeys then
-      for _, key in ipairs(phraseKeys) do
+      local candidateKeys = nil
+      if buckets then
+        candidateKeys = {}
+        local unique_candidates = {}
+        if srcLang == "zh" then
+          local len = strlen(proc_text)
+          local i = 1
+          while i <= len do
+            local b = string.byte(proc_text, i)
+            local char_len = 1
+            if b and b >= 224 and b <= 239 then char_len = 3
+            elseif b and b >= 192 and b <= 223 then char_len = 2 end
+            local ch = strsub(proc_text, i, i + char_len - 1)
+            i = i + char_len
+            if ch and ch ~= "" and ch ~= " " then
+              local bucket = buckets[ch]
+              if bucket then
+                for _, k in ipairs(bucket) do
+                  if not unique_candidates[k] then
+                    unique_candidates[k] = true
+                    table.insert(candidateKeys, k)
+                  end
+                end
+              end
+            end
+          end
+        else
+          string.gsub(proc_text, "([%a%d\128-\255]+)", function(w)
+            local bucket = buckets[w]
+            if bucket then
+              for _, k in ipairs(bucket) do
+                if not unique_candidates[k] then
+                  unique_candidates[k] = true
+                  table.insert(candidateKeys, k)
+                end
+              end
+            end
+            return w
+          end)
+        end
+        table.sort(candidateKeys, function(a, b) return strlen(a) > strlen(b) end)
+      else
+        candidateKeys = phraseKeys
+      end
+
+      for _, key in ipairs(candidateKeys) do
         if strfind(proc_text, key, 1, true) then
           -- Escapa solo metacaracteres Lua, sin alterar bytes multibyte UTF-8
           local safe_key = string.gsub(key, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1")
@@ -231,6 +276,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         end
       end
     end
+
 
     -- Fase 2: Hash Lookup (Palabras Simples — solo idiomas occidentales)
     if wordDict and srcLang ~= "zh" then
@@ -353,8 +399,9 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     local words   = pfUI.translator_dicts[prefix .. "_words"]
     local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
     local keys    = pfUI.translator_dicts[prefix .. "_keys"]
+    local buckets = pfUI.translator_dicts[prefix .. "_buckets"]
 
-    local trans = LocalTranslate(msg, words, phrases, keys, src)
+    local trans = LocalTranslate(msg, words, phrases, keys, src, buckets)
     if trans then
       pfUI.translator_stats.total_out = pfUI.translator_stats.total_out + 1
       return trans
@@ -494,10 +541,11 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         local words   = pfUI.translator_dicts[prefix_dict .. "_words"]
         local phrases = pfUI.translator_dicts[prefix_dict .. "_phrases"]
         local keys    = pfUI.translator_dicts[prefix_dict .. "_keys"]
+        local buckets = pfUI.translator_dicts[prefix_dict .. "_buckets"]
 
         -- Solo intentar si el par de idiomas tiene datos cargados
         if words and phrases and keys then
-          local trans = LocalTranslate(body, words, phrases, keys, final_src)
+          local trans = LocalTranslate(body, words, phrases, keys, final_src, buckets)
           if trans then
             pfUI.translator_stats.total_in = pfUI.translator_stats.total_in + 1
             text = prefix .. trans .. GetTRTag()
@@ -541,7 +589,8 @@ pfUI:RegisterModule("translator", "vanilla", function ()
             local words   = pfUI.translator_dicts[prefix .. "_words"]
             local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
             local keys    = pfUI.translator_dicts[prefix .. "_keys"]
-            local trans   = LocalTranslate(raw_msg, words, phrases, keys, src)
+            local buckets = pfUI.translator_dicts[prefix .. "_buckets"]
+            local trans   = LocalTranslate(raw_msg, words, phrases, keys, src, buckets)
             if trans then
               -- FIX: Escape correcto de raw_msg antes de string.gsub
               --      (raw_msg puede contener metacaracteres Lua como .-?+[])
@@ -572,7 +621,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       if IsAddOnLoaded("WIM") then pcall(HookWIMBridge) end
       if C.translator and C.translator.enable == "1" then
         DEFAULT_CHAT_FRAME:AddMessage(
-          "|cff00ccff[Translator v5.0.0]|r " ..
+          "|cff00ccff[Translator v6.0.0]|r " ..
           (T["Enable Translator"] or "Traductor Trilingue Activo") .. "."
         )
       end

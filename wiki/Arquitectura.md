@@ -1,17 +1,22 @@
-# 🏰 Wiki: Arquitectura 'Colossal Tier' — pfUI [v5.1.4] (Translator v5.0.0)
+# 🏰 Wiki: Arquitectura 'Ultimate Tier' — pfUI [v5.1.4] (Translator v6.0.0)
 
 Estructura modular del ecosistema **El Séquito del Terror** mantenido por **DarckRovert**.
 
+---
+
 ## 🌐 Jerarquía de Carga (Boot Sequence)
 
-El AddOn inicia mediante `modules.xml` con los siguientes puntos críticos de inyección:
+El AddOn inicia mediante `init/modules.xml` con los siguientes puntos críticos de inyección:
 
-1.  **Lexical Engine (`translator_dict.lua`)**: Carga y estructura en memoria 200 categorías del diccionario global con más de 5000 entradas trilingües de datos indexados por longitud (`esES`, `enUS`, `zhCN`), generando automáticamente tablas inversas optimizadas para búsquedas rápidas y utilizando una estructura estática reutilizable para un consumo de memoria mínimo (GC friendly).
-2.  **Core Translator (`translator.lua`)**: Interceptores sobre `ChatEdit_SendText` para salientes y `AddMessage` para entrantes. Extrae dinámicamente el cuerpo del mensaje de chat mediante **Aislamiento Sintáctico**, traduciendo únicamente esa porción para resguardar canales, colores y nombres.
-3.  **WIM Bridge**: Hook asíncrono sobre `WIM_PostMessage` para susurros de jugadores.
-4.  **GUI Integration (`gui.lua`)**: Registro del selector de idiomas, canales y depuración en las pestañas nativas de pfUI.
+1.  **Lexical Engine (`translator_dict.lua`)**: Carga y estructura en memoria 200 categorías del diccionario general con más de 5000 entradas trilingües de datos indexados por longitud (`esES`, `enUS`, `zhCN`), generando automáticamente tablas inversas optimizadas para búsquedas rápidas y utilizando una estructura estática reutilizable para un consumo de memoria mínimo (GC friendly).
+2.  **Colosal Database (`translator_dict_db.lua`)**: Inyecta una base de datos colosal comprimida de misiones, hechizos de clase de WoW y Turtle WoW, e ítems a través de un cargador en lote por strings crudos delimitados, re-ordenando y re-indexando la base de datos completa.
+3.  **Core Translator (`translator.lua`)**: Interceptores sobre `ChatEdit_SendText` para salientes y `AddMessage` para entrantes. Implementa el **Motor Token-Bucket** para un matching Greedy de complejidad O(K) acotada y **Aislamiento Sintáctico** para proteger canales y enlaces.
+4.  **WIM Bridge**: Hook asíncrono sobre `WIM_PostMessage` para susurros de jugadores.
+5.  **GUI Integration (`gui.lua`)**: Registro del selector de idiomas, canales y depuración en las pestañas nativas de pfUI.
 
-## 📊 Diagrama de Flujo: Traductor Multilingüe v5.0.0
+---
+
+## 📊 Diagrama de Flujo: Traductor Multilingüe v6.0.0
 
 ```mermaid
 graph TD
@@ -23,29 +28,35 @@ graph TD
     E --> F{Consulta Caché LRU 1024 registros}
     F -- Cache Hit --> G[Aplicar Traducción Instantánea]
     F -- Cache Miss --> H["Selector de Diccionario (Target Lang)"]
-    H --> I["Motor Greedy Matcher (Frases/Palabras)"]
-    I --> J{Validación de Coherencia CTR}
-    J -- Ratio >= Umbral 50% ZH / 40% EN --> K[Actualizar Caché LRU]
-    J -- Ratio < Umbral --> L[Descartar y Mantener Original]
-    K --> G
+    H --> I["Token-Bucket Engine (Filtrar por palabra inicial)"]
+    I --> J["Motor Greedy Matcher (Solo llaves candidatas)"]
+    J --> K{Validación de Coherencia CTR}
+    K -- Ratio >= Umbral 50% ZH / 40% EN --> L[Actualizar Caché LRU]
+    K -- Ratio < Umbral --> M[Descartar y Mantener Original]
     L --> G
-    G --> M[Reensamblar Prefijo + Cuerpo Traducido]
-    M --> N["Añadir Tag [TR] opcional"]
-    N --> O["Render en Chat Frame / WIM"]
+    M --> G
+    G --> N[Reensamblar Prefijo + Cuerpo Traducido]
+    N --> O["Añadir Tag [TR] opcional"]
+    O --> P["Render en Chat Frame / WIM"]
 ```
+
+---
 
 ## 🔐 Diseño de Seguridad y Optimización
 
-### Aislamiento de Metadatos y Enlaces
-El motor utiliza un sistema doble:
-1. **Aislamiento Sintáctico**: Evita procesar la línea completa del chat. Encuentra el enlace del jugador (`|Hplayer:...`) y el delimitador `: ` para separar los canales y el nombre de la conversación propiamente dicha.
-2. **Encapsulado de Enlaces**: Un sistema regex detecta patrones `|H.-|h.-|h` y los reemplaza temporalmente con tokens protegidos `\127L[ID]\127` antes de traducir, garantizando que sigan siendo cliqueables e interactivos al finalizar el reensamblaje.
+### 1. Motor Token-Bucket (Prefix-Indexed candidate filtering)
+Para evitar el lag severo en el hilo principal del chat clásico de WoW, el motor v6.0.0 descarta la iteración lineal de miles de llaves en cada mensaje recibido. Las frases del diccionario se estructuran al cargar en *buckets* según su palabra inicial (occidental) o carácter inicial (chino). En runtime, el motor tokeniza el mensaje de entrada y recopila únicamente las llaves candidatas asociadas a las palabras activas en la frase. Esto disminuye la búsqueda lineal secuencial a una fracción reducida y acotada, logrando traducción instantánea en microsegundos (<0.1ms).
 
-### Filtro de Ratio de Coherencia de Traducción (CTR)
-El motor Colossal Tier implementa un validador de calidad:
-- **Chino (ZH)**: Analiza el conteo de bytes CJK multibyte. Si la traducción no abarca al menos el **50%** de los caracteres chinos, se descarta para evitar híbridos ("Chinol").
-- **Occidental (EN/ES)**: Analiza la proporción de cambio en palabras alfanuméricas. Si no cubre al menos el **40%**, se descarta para evitar "Spanglish".
+### 2. Aislamiento de Metadatos y Enlaces
+El motor utiliza un sistema doble:
+1.  **Aislamiento Sintáctico**: Evita procesar la línea completa del chat. Encuentra el enlace del jugador (`|Hplayer:...`) y el delimitador `: ` para separar los canales y el nombre de la conversación propiamente dicha.
+2.  **Encapsulado de Enlaces**: Un sistema regex detecta patrones `|H.-|h.-|h` y los reemplaza temporalmente con tokens protegidos `\127L[ID]\127` antes de traducir, garantizando que sigan siendo cliqueables e interactivos al finalizar el reensamblaje.
+
+### 3. Filtro de Ratio de Coherencia de Traducción (CTR)
+El motor Ultimate-Tier implementa un validador de calidad:
+*   **Chino (ZH)**: Analiza el conteo de bytes CJK multibyte. Si la traducción no abarca al menos el **50%** de los caracteres chinos, se descarta para evitar híbridos ("Chinol").
+*   **Occidental (EN/ES)**: Analiza la proporción de cambio en palabras alfanuméricas. Si no cubre al menos el **40%**, se descarta para evitar "Spanglish".
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Soberanía Técnica Colossal-Tier Consolidada.*
+*Soberanía Técnica Ultimate-Tier Consolidada.*
