@@ -1,4 +1,4 @@
-# 📖 Manual de Usuario (v6.0.0 [ULTIMATE-TIER])
+# 📖 Manual de Usuario (v6.8.0 [ULTIMATE-TIER])
 
 Guía oficial para dominar el sistema de comunicación multilingüe de **El Séquito Edition**.
 
@@ -16,16 +16,19 @@ Accede al panel de control escribiendo `/pfui` y navegando a la pestaña **Trans
 
 ---
 
-## 2. Traducción de Misiones, Hechizos y Objetos
-La versión **v6.0.0 (Ultimate-Tier)** integra de forma nativa la traducción en tiempo real de:
+## 2. Traducción Integral en el Juego
+La versión **v6.8.0 (Ultimate Absolute-Tier)** integra de forma nativa la traducción en tiempo real de:
 1.  **Facultades de Clase (Spells)**: Tus hechizos principales y los de tus compañeros en ES / EN / ZH (ej. *Frostbolt*, *Flash Heal*, *Mortal Strike*).
 2.  **Misiones (Quests)**: Nombres de misiones emblemáticas clásicas y de Turtle WoW (ej. *The Missing Diplomat*, *Survival Tent Quest*).
-3.  **Ítems y Equipamiento**: Objetos populares y de la tienda (ej. *Thunderfury*, *Sweet Nectar*).
+3.  **Ítems y Equipamiento**: Objetos populares, legendarios y de la tienda (ej. *Thunderfury*, *Atiesh*, *Ashbringer*).
+4.  **Estadísticas y Talentos (Specs)**: Atributos base y secundarios (*fuerza, agilidad, golpe crítico, sp, ap*) y especializaciones (*Furia, Sutileza, Restauración*).
+5.  **Campos de Batalla (BGs & PvP)**: Objetivos, cementerios, BGs y rangos (*WSG, AB, AV, HKs, marcas*).
+6.  **Profesiones y Comercio**: Primarias, secundarias y custom (*Supervivencia, Herrería, etc.*) y consumibles de raid.
 
 ---
 
 ## 3. Prevención Activa contra la Mezcla de Idiomas (CTR)
-El motor de la v6.0.0 incluye **Séquito Intelligence** para prevenir textos incomprensibles. Si el diccionario offline no logra traducir la mayor parte de un mensaje (ej: menos del 50% de caracteres chinos en una frase, o menos del 40% de palabras en inglés), la traducción parcial se descarta automáticamente.
+El motor de la v6.8.0 incluye **Séquito Intelligence** para prevenir textos incomprensibles. Si el diccionario offline no logra traducir la mayor parte de un mensaje (ej: menos del 50% de caracteres chinos en una frase, o menos del 40% de palabras en inglés), la traducción parcial se descarta automáticamente.
 *   **Resultado**: Verás el texto original limpio en lugar de una mezcla molesta ("Spanglish" o "Chinol" rota, como `那tú又sidónde...`).
 
 ---

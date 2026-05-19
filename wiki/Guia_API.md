@@ -1,4 +1,4 @@
-# ⚙️ Guía de API — Global Translator (v6.0.0 [ULTIMATE-TIER])
+# ⚙️ Guía de API — Global Translator (v6.8.0 [ULTIMATE-TIER])
 
 El traductor expone métodos públicos y estructuras de datos que pueden ser utilizados por otros componentes del ecosistema **pfUI** o addons de terceros compatibles con WoW Vanilla.
 
