@@ -24,13 +24,14 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
         if i ~= j and src_text and dest_text and src_text ~= "" and dest_text ~= "" then
           local isPhrase = strfind(src_text, " ") or strfind(dest_text, " ") or strlen(src_text) > 12 or src_lang == "zh"
           local prefix = src_lang .. "_" .. dest_lang
+          local key = strlower(src_text)
           if isPhrase then
-            if not pfUI.translator_dicts[prefix .. "_phrases"][src_text] then
-              pfUI.translator_dicts[prefix .. "_phrases"][src_text] = dest_text
-              table.insert(pfUI.translator_dicts[prefix .. "_keys"], src_text)
+            if not pfUI.translator_dicts[prefix .. "_phrases"][key] then
+              pfUI.translator_dicts[prefix .. "_phrases"][key] = dest_text
+              table.insert(pfUI.translator_dicts[prefix .. "_keys"], key)
             end
           else
-            pfUI.translator_dicts[prefix .. "_words"][src_text] = dest_text
+            pfUI.translator_dicts[prefix .. "_words"][key] = dest_text
           end
         end
       end

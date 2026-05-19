@@ -120,6 +120,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     -- Fase 1: Greedy Matching (Frases Compuestas / Soporte UTF-8 Multibyte)
     if phraseDict and phraseKeys then
       for _, key in ipairs(phraseKeys) do
+        -- Dado que el diccionario y proc_text ya están en minúsculas, la búsqueda es directa e infalible
         if strfind(proc_text, key, 1, true) then
           local safe_key = string.gsub(key, "(%W)", "%%%1")
           local res, count
@@ -142,9 +143,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     -- Fase 2: Hash Lookup (Palabras Simples - Solo occidentales)
     if wordDict and srcLang ~= "zh" then
       local hashed_text = string.gsub(proc_text, "([\128-\255%w]+)", function(w)
-        if wordDict[w] then
+        local lower_w = strlower(w)
+        if wordDict[lower_w] then
           trans_occurred = true
-          return wordDict[w]
+          return wordDict[lower_w]
         end
         return w
       end)
@@ -153,8 +155,8 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
     if trans_occurred then
       local result = strsub(proc_text, 2, -2)
-      -- Restaurar Enlaces Protegidos
-      result = string.gsub(result, "\127L(%d+)\127", function(id)
+      -- Restaurar Enlaces Protegidos de forma robusta e inmune a strlower (soporte L y l)
+      result = string.gsub(result, "\127[lL](%d+)\127", function(id)
         return links[tonumber(id)]
       end)
       CacheSet(text, result)
@@ -319,14 +321,16 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
       -- Selección de Idioma de Origen Dinámica
       local src_env, dest_env = GetTranslationMode(true)
+      if not src_env or not dest_env then return frame:pfOriginalAddMessage(text, r, g, b, id) end
+
       local final_src = lang
       if final_src == "unknown" then
-        final_src = src_env or "en"
+        final_src = src_env
       end
 
-      -- Traducimos si el mensaje no está en el idioma local del usuario
-      if final_src ~= myLang then
-        local prefix = final_src .. "_" .. myLang
+      -- Traducimos si el mensaje no está en el idioma de destino deseado
+      if final_src ~= dest_env then
+        local prefix = final_src .. "_" .. dest_env
         if pfUI.translator_dicts[prefix .. "_phrases"] then
           local words = pfUI.translator_dicts[prefix .. "_words"]
           local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
