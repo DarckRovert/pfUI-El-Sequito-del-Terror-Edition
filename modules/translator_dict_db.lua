@@ -395,7 +395,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "la prueba de los elementos|the test of elements|元素的试炼",
     "el libro de ur|the book of ur|乌尔之书",
     "el regreso de helcular|helcular's revenge|赫尔库拉的复仇",
-    "el fin de los hermitas|the hermit's end|隐士的终结",
+    "el fin de los hermitas|the hermit's end|隐士 de 终结",
     "la leyenda de stalvan|the legend of stalvan|斯塔文的传说",
     "mor'ladim|mor'ladim|摩拉迪姆",
     "la caida de rocanegra|the fall of blackrock|黑石山的沦陷",
@@ -591,11 +591,121 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "buen grupo|good group|优秀的队伍"
   }
 
+  -- ============================================================
+  -- LOTE E: ZONAS Y CAPITALES (ZONES)
+  -- ============================================================
+  local zones_batch = {
+    "páramos de poniente|westfall|西部荒野",
+    "paramos de poniente|westfall|西部荒野",
+    "bosque de elwynn|elwynn forest|艾尔文森林",
+    "bosque del ocaso|duskwood|暮色森林",
+    "crestagrana|redridge|赤脊山",
+    "montañas de crestagrana|redridge mountains|赤脊山",
+    "vallesangre|stranglethorn vale|荆棘谷",
+    "tuercespina|stranglethorn vale|荆棘谷",
+    "valle de tuercespina|stranglethorn vale|荆棘谷",
+    "arathi|arathi|阿拉希高地",
+    "tierras altas de arathi|arathi highlands|阿拉希高地",
+    "los páramos|the barrens|贫瘠之地",
+    "los paramos|the barrens|贫瘠之地",
+    "páramos|barrens|贫瘠之地",
+    "paramos|barrens|贫瘠之地",
+    "marjal revolcafango|dustwallow marsh|尘泥沼泽",
+    "mil agujas|thousand needles|千针石林",
+    "tanaris|tanaris|塔纳利斯",
+    "cráter de un'goro|un'goro crater|安戈洛环形山",
+    "crater de un'goro|un'goro crater|安戈洛环形山",
+    "silithus|silithus|希利苏斯",
+    "cuna de invierno|winterspring|冬泉谷",
+    "tierras de la peste del este|eastern plaguelands|东瘟疫之地",
+    "tierras de la peste del oeste|western plaguelands|西瘟疫之地",
+    "estepas ardientes|burning steppes|燃烧平原",
+    "garganta de fuego|searing gorge|灼热峡谷",
+    "el paso de la muerte|deadwind pass|逆风小径",
+    "valle de fresno|ashenvale|灰谷",
+    "ashenvale|ashenvale|灰谷",
+    "desolace|desolace|凄凉之地",
+    "claros de tirisfal|tirisfal glades|提瑞斯法林地",
+    "bosque de argénteos|silverpine forest|银松森林",
+    "bosque de argenteos|silverpine forest|银松森林",
+    "laderas de trabalomas|hillsbrad foothills|希尔斯布莱德丘陵",
+    "trabalomas|hillsbrad|希尔斯布莱德",
+    "tierras del interior|the hinterlands|辛特兰",
+    "ventormenta|stormwind|暴风城",
+    "forjaz|ironforge|铁炉堡",
+    "darnassus|darnassus|达纳苏斯",
+    "orgrimmar|orgrimmar|奥格瑞玛",
+    "cima del trueno|thunder bluff|雷霆崖",
+    "entrañas|undercity|幽暗城",
+    "entranas|undercity|幽暗城",
+    "bahía del botín|booty bay|藏宝海湾",
+    "bahia del botin|booty bay|藏宝海湾",
+    "booty bay|booty bay|藏宝海湾"
+  }
+
+  -- ============================================================
+  -- LOTE F: MECÁNICAS DE COMBATE Y TERMINOLOGÍA PVE/PVP (MECHANICS)
+  -- ============================================================
+  local mechanics_batch = {
+    "control de masas|crowd control|控怪/羊/恐惧",
+    "cc|crowd control|控制/控怪",
+    "linea de vision|line of sight|卡视角",
+    "línea de visión|line of sight|卡视角",
+    "los|line of sight|卡视角",
+    "daño en el tiempo|damage over time|持续伤害",
+    "dano en el tiempo|damage over time|持续伤害",
+    "dot|damage over time|持续伤害/DOT",
+    "sanacion en el tiempo|healing over time|持续治疗",
+    "sanación en el tiempo|healing over time|持续治疗",
+    "hot|healing over time|持续治疗/HOT",
+    "daño por segundo|damage per second|伤害输出/DPS",
+    "dano por segundo|damage per second|伤害输出/DPS",
+    "dps|damage per second|输出/伤害",
+    "tanque|tank|坦克/防战/熊T",
+    "healer|healer|治疗/奶妈",
+    "curador|healer|治疗/奶妈",
+    "esbirro|add|小怪",
+    "esbirros|adds|小怪",
+    "bicho|mob|小怪",
+    "bichos|mobs|怪",
+    "jefe|boss|首领/BOSS",
+    "limpiar|clear|清怪",
+    "pull|pull|拉怪",
+    "atraer|pull|拉怪",
+    "foco|focus|集火/单点",
+    "disipar|dispel|驱散",
+    "cortar hechizo|interrupt|打断施法",
+    "cortar cast|interrupt|打断",
+    "amenaza|threat|仇恨",
+    "aggro|aggro|仇恨/怪打我",
+    "robar agro|draw aggro|OT/抢仇恨",
+    "robar aggro|draw aggro|OT/抢仇恨",
+    "ot|overthreat|OT/仇恨失控",
+    "kitear|kiting|风筝",
+    "hacer cometa|kiting|拉风筝",
+    "combatir|combat|战斗",
+    "en combate|in combat|战斗中",
+    "fuera de combate|out of combat|脱战/战斗外",
+    "resucitar|resurrect|复活",
+    "revivir|revive|复活",
+    "buff|buff|增益/Buff",
+    "debuff|debuff|减益/Debuff",
+    "veneno|poison|毒",
+    "maldicion|curse|诅咒",
+    "maldición|curse|诅咒",
+    "enfermedad|disease|疾病",
+    "magia|magic|魔法",
+    "resistencia|resistance|抗性",
+    "armadura|armor|护甲"
+  }
+
   -- Ejecutar la carga masiva en lotes comprimidos
   load_batch(spells_batch)
   load_batch(quests_batch)
   load_batch(items_batch)
   load_batch(slang_batch)
+  load_batch(zones_batch)
+  load_batch(mechanics_batch)
 
   -- ============================================================
   -- RE-INDEXACIÓN DE BUCKETS POST-CARGA DE BASE DE DATOS
@@ -631,6 +741,6 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Base de Datos v6.0.0 cargada. Spells, Quests y items indexados.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Base de Datos v6.0.0 cargada. Spells, Quests, Items, Zones y Mechanics indexados.")
   end
 end)
