@@ -15,7 +15,7 @@ Accede al panel de control escribiendo `/pfui` y navegando a la pestaña **Trans
 ---
 
 ## 2. Prevención Activa contra la Mezcla de Idiomas (CTR)
-El motor de la v4.2.2 incluye **Séquito Intelligence** para prevenir textos incomprensibles. Si el diccionario offline no logra traducir la mayor parte de un mensaje (ej: menos del 50% de caracteres chinos en una frase, o menos del 40% de palabras en inglés), la traducción parcial se descarta automáticamente.
+El motor de la v5.0.0 incluye **Séquito Intelligence** para prevenir textos incomprensibles. Si el diccionario offline no logra traducir la mayor parte de un mensaje (ej: menos del 50% de caracteres chinos en una frase, o menos del 40% de palabras en inglés), la traducción parcial se descarta automáticamente.
 * **Resultado**: Verás el texto original limpio en lugar de una mezcla molesta ("Spanglish" o "Chinol" rota).
 
 ---
@@ -38,4 +38,4 @@ Puedes activar o desactivar selectivamente qué canales de chat deseas traducir:
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Soberanía del Usuario Diamond-Tier.*
+*Soberanía del Usuario Colossal-Tier.*

@@ -1,4 +1,4 @@
-# ⚙️ Guía de API — Global Translator (v4.2.2 [DIAMOND-TIER])
+# ⚙️ Guía de API — Global Translator (v5.0.0 [COLOSSAL-TIER])
 
 El traductor expone métodos públicos y estructuras de datos que pueden ser utilizados por otros componentes del ecosistema **pfUI** o addons de terceros compatibles con WoW Vanilla.
 
@@ -31,4 +31,4 @@ Tabla de telemetría y rendimiento en tiempo real:
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Ingeniería Diamond-Tier.*
+*Ingeniería Colossal-Tier.*

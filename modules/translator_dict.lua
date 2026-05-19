@@ -1,8 +1,8 @@
-﻿pfUI:RegisterModule("translator_dict", "vanilla", function ()
+pfUI:RegisterModule("translator_dict", "vanilla", function ()
   -- ╔══════════════════════════════════════════════════════════════╗
-  -- ║  LIBRERIA LEXICA OFFLINE v4.2.2 — DIAMOND-TIER TRILINGUE   ║
+  -- ║  LIBRERIA LEXICA OFFLINE v5.0.0 — COLOSSAL-TIER TRILINGUE    ║
   -- ║  Motor Hibrido Hash+Greedy | ES <-> ZH <-> EN              ║
-  -- ║  3800+ entradas | 140 categorias | WoW Classic + Chat Real ║
+  -- ║  5000+ entradas | 200 categorias | WoW Classic + Chat Real  ║
   -- ╚══════════════════════════════════════════════════════════════╝
 
   pfUI.translator_dicts = pfUI.translator_dicts or {}
@@ -13,25 +13,39 @@
     pfUI.translator_dicts[p .. "_keys"]    = pfUI.translator_dicts[p .. "_keys"] or {}
   end
 
+  local items = {
+    {lang="es", text=""},
+    {lang="en", text=""},
+    {lang="zh", text=""}
+  }
+
   local function add(es, en, zh)
-    local items = { {lang="es", text=es}, {lang="en", text=en}, {lang="zh", text=zh} }
+    items[1].text = es
+    items[2].text = en
+    items[3].text = zh
     for i = 1, 3 do
-      for j = 1, 3 do
-        local src_lang = items[i].lang
-        local dest_lang = items[j].lang
-        local src_text = items[i].text
-        local dest_text = items[j].text
-        if i ~= j and src_text and dest_text and src_text ~= "" and dest_text ~= "" then
-          local isPhrase = strfind(src_text, " ") or strfind(dest_text, " ") or strlen(src_text) > 12 or src_lang == "zh"
-          local prefix = src_lang .. "_" .. dest_lang
-          local key = string.lower(src_text)
-          if isPhrase then
-            if not pfUI.translator_dicts[prefix .. "_phrases"][key] then
-              pfUI.translator_dicts[prefix .. "_phrases"][key] = dest_text
-              table.insert(pfUI.translator_dicts[prefix .. "_keys"], key)
+      local item_i = items[i]
+      local src_lang = item_i.lang
+      local src_text = item_i.text
+      if src_text and src_text ~= "" then
+        for j = 1, 3 do
+          if i ~= j then
+            local item_j = items[j]
+            local dest_lang = item_j.lang
+            local dest_text = item_j.text
+            if dest_text and dest_text ~= "" then
+              local isPhrase = strfind(src_text, " ") or strfind(dest_text, " ") or strlen(src_text) > 12 or src_lang == "zh"
+              local prefix = src_lang .. "_" .. dest_lang
+              local key = string.lower(src_text)
+              if isPhrase then
+                if not pfUI.translator_dicts[prefix .. "_phrases"][key] then
+                  pfUI.translator_dicts[prefix .. "_phrases"][key] = dest_text
+                  table.insert(pfUI.translator_dicts[prefix .. "_keys"], key)
+                end
+              else
+                pfUI.translator_dicts[prefix .. "_words"][key] = dest_text
+              end
             end
-          else
-            pfUI.translator_dicts[prefix .. "_words"][key] = dest_text
           end
         end
       end
@@ -3767,6 +3781,498 @@
   add("parche",                                 "patch",                              "补丁")
 
   -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 141: Interacción de la Comunidad        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("buena vibra",                            "good vibes",                         "正能量")
+  add("gente maja",                             "nice people",                        "友善的人")
+  add("buena onda",                             "good vibes",                         "正能量")
+  add("buen rollo",                             "good vibes",                         "和谐氛围")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 142: Tácticas de Combate Avanzadas      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("hacer foco",                             "focus target",                       "集火目标")
+  add("dispersarse",                            "spread out",                         "分散站位")
+  add("interrumpir casteo",                     "interrupt cast",                     "打断施法")
+  add("interrumpir el casteo",                  "interrupt the cast",                 "打断施法")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 143: Negociación en Subasta             ║
+  -- ╚══════════════════════════════════════════════╝
+  add("precio fijo",                            "fixed price",                        "一口价")
+  add("precio negociable",                      "negotiable price",                   "价格可议")
+  add("ultima oferta",                          "last offer",                         "最后出价")
+  add("última oferta",                          "last offer",                         "最后出价")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 144: Exploración y Rutas                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("camino seguro",                          "safe path",                          "安全路径")
+  add("atajo",                                  "shortcut",                           "捷径")
+  add("zona peligrosa",                         "dangerous zone",                     "危险区域")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 145: Alertas de Estado                  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tengo agro",                             "i have aggro",                       "我OT了")
+  add("sin mana",                               "out of mana",                        "没蓝了")
+  add("sin maná",                               "out of mana",                        "没蓝了")
+  add("healer muerto",                          "healer is dead",                     "奶妈死了")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 146: Profesiones y Recolección          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("mena de oro",                            "gold vein",                          "金矿")
+  add("hierba rara",                            "rare herb",                          "稀有草药")
+  add("crafteo gratis",                         "free crafting",                      "免费代工")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 147: Orientación y Brújula              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("al norte",                               "to the north",                       "向北")
+  add("al sur",                                 "to the south",                       "向南")
+  add("al este",                                "to the east",                        "向东")
+  add("al oeste",                               "to the west",                        "向西")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 148: Alertas de Emergencia              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("corran por sus vidas",                   "run for your lives",                 "快逃命吧")
+  add("cuidado atras",                          "watch out behind",                   "小心后面")
+  add("cuidado atrás",                          "watch out behind",                   "小心后面")
+  add("patrulla cerca",                         "patrol nearby",                      "巡逻怪靠近")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 149: Saludos Especiales de Rol          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("que la luz te guie",                     "may the light guide you",            "愿圣光指引你")
+  add("que la luz te guíe",                     "may the light guide you",            "愿圣光指引你")
+  add("por la horda",                           "for the horde",                      "为了部落")
+  add("por la alianza",                         "for the alliance",                   "为了联盟")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 150: Comentarios de Rendimiento         ║
+  -- ╚══════════════════════════════════════════════╝
+  add("buen dps",                               "good dps",                           "输出给力")
+  add("curas excelentes",                       "excellent heals",                    "治疗给力")
+  add("buen tanqueo",                           "good tanking",                       "拉得稳")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 151: Verbos de Movimiento               ║
+  -- ╚══════════════════════════════════════════════╝
+  add("correr",                                 "to run",                             "奔跑")
+  add("corres",                                 "you run",                            "你跑")
+  add("saltar",                                 "to jump",                            "跳跃")
+  add("saltas",                                 "you jump",                           "你跳")
+  add("volar",                                  "to fly",                             "飞行")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 152: Verbos de Percepción               ║
+  -- ╚══════════════════════════════════════════════╝
+  add("mirar",                                  "to look",                            "观看")
+  add("miras",                                  "you look",                           "你看")
+  add("ver",                                    "to see",                             "看见")
+  add("ves",                                    "you see",                            "你看见")
+  add("escuchar",                               "to listen",                          "聆听")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 153: Verbos de Transacción              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("comprar",                                "to buy",                             "购买")
+  add("compras",                                "you buy",                            "你买")
+  add("vender",                                 "to sell",                            "出售")
+  add("vendes",                                 "you sell",                           "你卖")
+  add("pagar",                                  "to pay",                             "付款")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 154: Verbos de Acción Social            ║
+  -- ╚══════════════════════════════════════════════╝
+  add("jugar",                                  "to play",                            "玩耍")
+  add("jugas",                                  "you play",                           "你玩")
+  add("hablar",                                 "to speak",                           "说话")
+  add("hablas",                                 "you speak",                          "你说话")
+  add("cantar",                                 "to sing",                            "唱歌")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 155: Verbos de Intelecto                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("entender",                               "to understand",                      "理解")
+  add("entiendes",                              "you understand",                     "你理解")
+  add("saber",                                  "to know",                            "知道")
+  add("sabes",                                  "you know",                           "你知道")
+  add("aprender",                               "to learn",                           "学习")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 156: Verbos de Ayuda y Soporte          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("ayudar",                                 "to help",                            "帮助")
+  add("ayudas",                                 "you help",                           "你帮助")
+  add("proteger",                               "to protect",                         "保护")
+  add("curar",                                  "to heal",                            "治疗")
+  add("curas",                                  "you heal",                           "你治疗")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 157: Verbos de Combate General          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("atacar",                                 "to attack",                          "攻击")
+  add("atacas",                                 "you attack",                         "你攻击")
+  add("defender",                               "to defend",                          "防守")
+  add("luchar",                                 "to fight",                           "战斗")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 158: Verbos de Creación                 ║
+  -- ╚══════════════════════════════════════════════╝
+  add("crear",                                  "to create",                          "创造")
+  add("creas",                                  "you create",                         "你创造")
+  add("hacer",                                  "to do",                              "做")
+  add("haces",                                  "you do",                             "你做")
+  add("construir",                              "to build",                           "建造")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 159: Verbos de Necesidad                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("necesitar",                              "to need",                            "需要")
+  add("necesitas",                              "you need",                           "你需要")
+  add("querer",                                 "to want",                            "想要")
+  add("quieres",                                "you want",                           "你想要")
+  add("buscar",                                 "to search",                          "寻找")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 160: Verbos de Comunicación             ║
+  -- ╚══════════════════════════════════════════════╝
+  add("decir",                                  "to say",                             "说")
+  add("dices",                                  "you say",                            "你说")
+  add("preguntar",                              "to ask",                             "询问")
+  add("responder",                              "to answer",                          "回答")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 161: Relaciones y Personas              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("amigo",                                  "friend",                             "朋友")
+  add("companero",                              "companion",                          "伙伴")
+  add("compañero",                              "companion",                          "伙伴")
+  add("enemigo",                                "enemy",                              "敌人")
+  add("lider",                                  "leader",                             "领袖")
+  add("líder",                                  "leader",                             "领袖")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 162: Lugares y Vivienda                 ║
+  -- ╚══════════════════════════════════════════════╝
+  add("casa",                                   "house",                              "房子")
+  add("ciudad",                                 "city",                               "城市")
+  add("taberna",                                "tavern",                             "旅店")
+  add("castillo",                               "castle",                             "城堡")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 163: Recursos y Riqueza                 ║
+  -- ╚══════════════════════════════════════════════╝
+  add("oro",                                    "gold",                               "金子")
+  add("plata",                                  "silver",                             "银子")
+  add("tesoro",                                 "treasure",                           "宝藏")
+  add("dinero",                                 "money",                              "钱")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 164: Sustento y Consumibles             ║
+  -- ╚══════════════════════════════════════════════╝
+  add("comida",                                 "food",                               "食物")
+  add("agua",                                   "water",                              "水")
+  add("pan",                                    "bread",                              "面包")
+  add("vino",                                   "wine",                               "红酒")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 165: Viaje y Orientación                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("camino",                                 "path",                               "道路")
+  add("mapa",                                   "map",                                "地图")
+  add("sendero",                                "trail",                              "小径")
+  add("puente",                                 "bridge",                             "桥梁")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 166: Tiempo y Ciclos                    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tiempo",                                 "time",                               "时间")
+  add("hora",                                   "hour",                               "小时")
+  add("dia",                                    "day",                                "白天")
+  add("día",                                    "day",                                "白天")
+  add("noche",                                  "night",                              "夜晚")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 167: Elementos Naturales                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("fuego",                                  "fire",                               "火焰")
+  add("tierra",                                 "earth",                              "大地")
+  add("aire",                                   "air",                                "空气")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 168: Equipamiento y Armas               ║
+  -- ╚══════════════════════════════════════════════╝
+  add("espada",                                 "sword",                              "宝剑")
+  add("escudo",                                 "shield",                             "盾牌")
+  add("armadura",                               "armor",                              "护甲")
+  add("arco",                                   "bow",                                "长弓")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 169: Flora y Fauna                      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("animal",                                 "animal",                             "野兽")
+  add("planta",                                 "plant",                              "植物")
+  add("arbol",                                  "tree",                               "树木")
+  add("árbol",                                  "tree",                               "树木")
+  add("monstruo",                               "monster",                            "怪物")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 170: Objetos Cotidianos                 ║
+  -- ╚══════════════════════════════════════════════╝
+  add("bolsa",                                  "bag",                                "包包")
+  add("cofre",                                  "chest",                              "宝箱")
+  add("llave",                                  "key",                                "钥匙")
+  add("libro",                                  "book",                               "书本")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 171: Adjetivos de Calidad               ║
+  -- ╚══════════════════════════════════════════════╝
+  add("bueno",                                  "good",                               "好的")
+  add("malo",                                   "bad",                                "坏的")
+  add("excelente",                              "excellent",                          "极好的")
+  add("pesimo",                                 "terrible",                           "糟糕的")
+  add("pésimo",                                 "terrible",                           "糟糕的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 172: Adjetivos de Velocidad             ║
+  -- ╚══════════════════════════════════════════════╝
+  add("rapido",                                 "fast",                               "快速的")
+  add("rápido",                                 "fast",                               "快速的")
+  add("lento",                                  "slow",                               "慢速的")
+  add("veloz",                                  "swift",                              "迅捷的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 173: Adjetivos de Fuerza                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("fuerte",                                 "strong",                             "强壮的")
+  add("debil",                                  "weak",                               "虚弱的")
+  add("débil",                                  "weak",                               "虚弱的")
+  add("poderoso",                               "powerful",                           "强力的")
+  add("fragil",                                 "fragile",                            "脆弱的")
+  add("frágil",                                 "fragile",                            "脆弱的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 174: Adjetivos de Edad                  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("nuevo",                                  "new",                                "崭新的")
+  add("viejo",                                  "old",                                "陈旧的")
+  add("joven",                                  "young",                              "年轻的")
+  add("antiguo",                                "ancient",                            "远古的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 175: Adjetivos de Temperatura           ║
+  -- ╚══════════════════════════════════════════════╝
+  add("frio",                                   "cold",                               "寒冷的")
+  add("frío",                                   "cold",                               "寒冷的")
+  add("calor",                                  "hot",                                "炎热的")
+  add("calido",                                 "warm",                               "温暖的")
+  add("cálido",                                 "warm",                               "温暖的")
+  add("helado",                                 "frozen",                             "冰冷的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 176: Adjetivos de Tamaño                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("grande",                                 "big",                                "巨大的")
+  add("pequeno",                                "small",                              "娇小的")
+  add("pequeño",                                "small",                              "娇小的")
+  add("enorme",                                 "huge",                               "庞大的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 177: Adjetivos de Dificultad            ║
+  -- ╚══════════════════════════════════════════════╝
+  add("facil",                                  "easy",                               "简单的")
+  add("fácil",                                  "easy",                               "简单的")
+  add("dificil",                                "difficult",                          "困难的")
+  add("difícil",                                "difficult",                          "困难的")
+  add("complejo",                               "complex",                            "复杂的")
+  add("simple",                                 "simple",                             "简单的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 178: Adjetivos de Estado Emocional      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("feliz",                                  "happy",                              "开心的")
+  add("triste",                                 "sad",                                "难过的")
+  add("enojado",                                "angry",                              "愤怒的")
+  add("cansado",                                "tired",                              "疲惫的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 179: Adverbios de Tiempo                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("ahora",                                  "now",                                "现在")
+  add("luego",                                  "later",                              "稍后")
+  add("antes",                                  "before",                             "之前")
+  add("despues",                                "after",                              "之后")
+  add("después",                                "after",                              "之后")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 180: Adverbios de Cantidad              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("mucho",                                  "much",                               "很多")
+  add("poco",                                   "little",                             "很少")
+  add("bastante",                               "enough",                             "足够")
+  add("demasiado",                              "too much",                           "太多")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 181: Nuevas Razas de Turtle WoW         ║
+  -- ╚══════════════════════════════════════════════╝
+  add("alto elfo",                              "high elf",                           "高等精灵")
+  add("elfo noble",                             "noble elf",                          "高等精灵")
+  add("goblin verde",                           "green goblin",                       "绿皮地精")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 182: Supervivencia y Campamentos        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tienda de campana",                      "survival tent",                      "野外帐篷")
+  add("tienda de campaña",                      "survival tent",                      "野外帐篷")
+  add("supervivencia",                          "survival skill",                     "生存技能")
+  add("fogata",                                 "campfire",                           "营火")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 183: Modo Desafío Hardcore              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("un solo intento",                        "one life only",                      "一命通关")
+  add("modo hardcore",                          "hardcore mode",                      "硬核模式")
+  add("inmortal",                               "immortal challenge",                 "不朽挑战")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 184: Modo de Guerra Warmode             ║
+  -- ╚══════════════════════════════════════════════╝
+  add("modo guerra",                            "war mode",                           "战争模式")
+  add("pvp activo",                             "active pvp",                         "开启PVP")
+  add("bonificacion de experiencia",            "xp bonus",                           "经验加成")
+  add("bonificación de experiencia",            "xp bonus",                           "经验加成")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 185: Zonas Exclusivas de Turtle WoW     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("alah'thalas",                            "alah'thalas",                        "亚拉萨拉斯")
+  add("isla de gillijim",                       "gillijim's isle",                    "吉利吉姆岛")
+  add("isla de lapidis",                        "lapidis isle",                       "拉皮迪斯岛")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 186: Mazmorras Custom                   ║
+  -- ╚══════════════════════════════════════════════╝
+  add("karazhan inferior",                      "lower karazhan",                     "卡拉赞下层")
+  add("criptas de karazhan",                    "karazhan crypts",                    "卡拉赞地穴")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 187: Facciones Personalizadas           ║
+  -- ╚══════════════════════════════════════════════╝
+  add("gremio de artesanos",                    "craftsmen guild",                    "工匠协会")
+  add("expedicion de la horda",                 "horde expedition",                   "部落远征军")
+  add("expedición de la horda",                 "horde expedition",                   "部落远征军")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 188: Mecánicas de Rol                   ║
+  -- ╚══════════════════════════════════════════════╝
+  add("moneda de oro turtle",                   "turtle gold coin",                   "乌龟金币")
+  add("fichas de rol",                          "roleplay tokens",                    "角色扮演代币")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 189: Cosméticos y Tienda Custom         ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tienda turtle",                          "turtle shop",                        "乌龟商城")
+  add("montura custom",                         "custom mount",                       "定制坐骑")
+  add("mascota bonita",                         "cute pet",                           "可爱宠物")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 190: Eventos de Servidor                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("evento festivo",                         "festive event",                      "节日活动")
+  add("invasion de monstruos",                  "monster invasion",                   "怪物入侵")
+  add("invasión de monstruos",                  "monster invasion",                   "怪物入侵")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 191: El Clima y Entorno                 ║
+  -- ╚══════════════════════════════════════════════╝
+  add("lluvia",                                 "rain",                               "下雨")
+  add("sol",                                    "sun",                                "太阳")
+  add("viento",                                 "wind",                               "大风")
+  add("tormenta",                               "storm",                              "暴风雨")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 192: Hobbies y Pasatiempos              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("musica",                                 "music",                              "音乐")
+  add("música",                                 "music",                              "音乐")
+  add("peliculas",                              "movies",                             "电影")
+  add("películas",                              "movies",                             "电影")
+  add("leer",                                   "reading",                            "阅读")
+  add("viajar",                                 "traveling",                          "旅游")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 193: Estructura Familiar                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("padre",                                  "father",                             "父亲")
+  add("madre",                                  "mother",                             "母亲")
+  add("hermano",                                "brother",                            "兄弟")
+  add("hijo",                                   "son",                                "儿子")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 194: Entorno de Trabajo                 ║
+  -- ╚══════════════════════════════════════════════╝
+  add("trabajo",                                "work",                               "工作")
+  add("oficina",                                "office",                             "办公室")
+  add("reunion",                                "meeting",                            "会议")
+  add("reunión",                                "meeting",                            "会议")
+  add("jefe",                                   "boss",                               "老板")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 195: Computación y Hardware             ║
+  -- ╚══════════════════════════════════════════════╝
+  add("computadora",                            "computer",                           "电脑")
+  add("teclado",                                "keyboard",                           "键盘")
+  add("mouse",                                  "mouse",                              "鼠标")
+  add("pantalla",                               "screen",                             "屏幕")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 196: Conectividad y Redes               ║
+  -- ╚══════════════════════════════════════════════╝
+  add("internet lento",                         "slow internet",                      "网速很慢")
+  add("desconexion",                            "disconnection",                      "掉线")
+  add("desconexión",                            "disconnection",                      "掉线")
+  add("router",                                 "router",                             "路由器")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 197: Comidas y Bebidas cotidianas       ║
+  -- ╚══════════════════════════════════════════════╝
+  add("cafe",                                   "coffee",                             "咖啡")
+  add("café",                                   "coffee",                             "咖啡")
+  add("te",                                     "tea",                                "茶")
+  add("té",                                     "tea",                                "茶")
+  add("pizza",                                  "pizza",                              "披萨")
+  add("cerveza",                                "beer",                               "啤酒")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 198: Salud y Bienestar                  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("dolor de cabeza",                        "headache",                           "头疼")
+  add("enfermo",                                "sick",                               "生病")
+  add("sueno",                                  "sleepiness",                         "犯困")
+  add("sueño",                                  "sleepiness",                         "犯困")
+  add("descanso",                               "rest",                               "休息")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 199: Noticias y Actualidad              ║
+  -- ╚══════════════════════════════════════════════╝
+  add("noticias",                               "news",                               "新闻")
+  add("mundo",                                  "world",                              "世界")
+  add("leer el foro",                           "read the forum",                     "看论坛")
+  add("enterado",                               "informed",                           "知晓了")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 200: Mensajes de Despedida Afectuosa    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("cuidate mucho",                          "take good care of yourself",         "多保重")
+  add("cuídate mucho",                          "take good care of yourself",         "多保重")
+  add("buen viaje",                             "safe travels",                       "旅途愉快")
+  add("hasta pronto",                           "see you soon",                       "后会有期")
+
+  -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
   -- ╚══════════════════════════════════════════════╝
   local p_keys = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
@@ -3775,6 +4281,6 @@
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v4.2.2 Diamond-Tier — 140 categorias cargadas.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v5.0.0 Colossal-Tier — 200 categorias cargadas.")
   end
 end)
