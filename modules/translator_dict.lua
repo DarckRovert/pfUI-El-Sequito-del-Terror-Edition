@@ -1,8 +1,8 @@
 pfUI:RegisterModule("translator_dict", "vanilla", function ()
   -- ╔══════════════════════════════════════════════════════════════╗
-  -- ║  LIBRERIA LEXICA OFFLINE v4.2.0 — DIAMOND-TIER TRILINGUE   ║
+  -- ║  LIBRERIA LEXICA OFFLINE v4.2.2 — DIAMOND-TIER TRILINGUE   ║
   -- ║  Motor Hibrido Hash+Greedy | ES <-> ZH <-> EN              ║
-  -- ║  3600+ entradas | 130 categorias | WoW Classic + Chat Real ║
+  -- ║  3800+ entradas | 140 categorias | WoW Classic + Chat Real ║
   -- ╚══════════════════════════════════════════════════════════════╝
 
   pfUI.translator_dicts = pfUI.translator_dicts or {}
@@ -3599,6 +3599,174 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("orgulloso de ti",                        "proud of you",                       "为你骄傲")
 
   -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 131: Saludos y Despedidas Conversación  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("hola amigo",                             "hello friend",                       "你好朋友")
+  add("buenos días",                            "good morning",                       "早上好")
+  add("buenos dias",                            "good morning",                       "早上好")
+  add("buenas tardes",                          "good afternoon",                     "下午好")
+  add("buenas noches",                          "good night",                         "晚安")
+  add("hasta luego",                            "see you later",                      "回头见")
+  add("nos vemos",                              "see you",                            "再见")
+  add("cuídate",                                "take care",                          "保重")
+  add("cuidate",                                "take care",                          "保重")
+  add("bienvenido",                             "welcome",                            "欢迎")
+  add("hola a todos",                           "hello everyone",                     "大家好")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 132: Expresiones de Cortesía Social     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("por favor",                              "please",                             "请")
+  add("muchas gracias",                         "thank you very much",                "非常感谢")
+  add("de nada",                                "you are welcome",                    "不客气")
+  add("disculpa",                               "excuse me",                          "打扰一下")
+  add("perdón",                                 "sorry",                              "对不起")
+  add("perdon",                                 "sorry",                              "对不起")
+  add("no te preocupes",                        "don't worry",                        "别担心")
+  add("está bien",                              "it's okay",                          "没关系")
+  add("esta bien",                              "it's okay",                          "没关系")
+  add("con gusto",                              "with pleasure",                      "乐意效劳")
+  add("igualmente",                             "likewise",                           "你也一样")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 133: Acuerdo y Desacuerdo de Chat       ║
+  -- ╚══════════════════════════════════════════════╝
+  add("estoy de acuerdo",                       "i agree",                            "我同意")
+  add("tienes razón",                           "you are right",                      "你说得对")
+  add("tienes razon",                           "you are right",                      "你说得对")
+  add("no estoy de acuerdo",                    "i disagree",                         "我不同意")
+  add("claro que sí",                           "of course yes",                      "当然可以")
+  add("claro que si",                           "of course yes",                      "当然可以")
+  add("por supuesto",                           "of course",                          "当然")
+  add("de ninguna manera",                      "no way",                             "绝对不行")
+  add("tal vez",                                "maybe",                              "也许")
+  add("quizás",                                 "perhaps",                            "可能")
+  add("quizas",                                 "perhaps",                            "可能")
+  add("creo que sí",                            "i think so",                         "我想是的")
+  add("creo que si",                            "i think so",                         "我想是的")
+  add("creo que no",                            "i don't think so",                   "我看不行")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 134: Preguntas Cotidianas de Conversación║
+  -- ╚══════════════════════════════════════════════╝
+  add("¿cómo estás?",                           "how are you?",                       "你好吗？")
+  add("como estas",                             "how are you?",                       "你好吗？")
+  add("¿qué tal?",                              "how's it going?",                    "怎么样？")
+  add("que tal",                                "how's it going?",                    "怎么样？")
+  add("¿de dónde eres?",                        "where are you from?",                "你来自哪里？")
+  add("de donde eres",                          "where are you from?",                "你来自哪里？")
+  add("¿qué haces?",                            "what are you doing?",                "你在干嘛？")
+  add("que haces",                              "what are you doing?",                "你在干嘛？")
+  add("¿puedes ayudarme?",                      "can you help me?",                   "你能帮我吗？")
+  add("puedes ayudarme",                        "can you help me?",                   "你能帮我吗？")
+  add("¿qué pasa?",                             "what's happening?",                  "怎么了？")
+  add("que pasa",                               "what's happening?",                  "怎么了？")
+  add("¿a qué hora?",                           "at what time?",                      "什么时候？")
+  add("a que hora",                             "at what time?",                      "什么时候？")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 135: Expresiones de Tiempo e Intervalos ║
+  -- ╚══════════════════════════════════════════════╝
+  add("hoy",                                    "today",                              "今天")
+  add("mañana",                                 "tomorrow",                           "明天")
+  add("manana",                                 "tomorrow",                           "明天")
+  add("ayer",                                   "yesterday",                          "昨天")
+  add("ahora",                                  "now",                                "现在")
+  add("después",                                "later",                              "稍后")
+  add("despues",                                "later",                              "稍后")
+  add("tarde",                                  "late",                               "迟到")
+  add("temprano",                               "early",                              "早起")
+  add("siempre",                                "always",                             "总是")
+  add("nunca",                                  "never",                              "从不")
+  add("a veces",                                "sometimes",                          "有时")
+  add("un momento",                             "one moment",                         "稍等一下")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 136: Sentimientos, Estados y Opinión    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("estoy cansado",                          "i am tired",                         "我很累")
+  add("estoy feliz",                            "i am happy",                         "我很开心")
+  add("tengo hambre",                           "i am hungry",                        "我饿了")
+  add("tengo sueño",                            "i am sleepy",                        "我困了")
+  add("tengo sueno",                            "i am sleepy",                        "我困了")
+  add("estoy aburrido",                         "i am bored",                         "我很无聊")
+  add("es difícil",                             "it is hard",                         "很难")
+  add("es dificil",                             "it is hard",                         "很难")
+  add("es fácil",                               "it is easy",                         "很简单")
+  add("es facil",                               "it is easy",                         "很简单")
+  add("me gusta",                               "i like it",                          "我喜欢")
+  add("no me gusta",                            "i don't like it",                    "我不喜欢")
+  add("es genial",                              "it is great",                        "太棒了")
+  add("es increíble",                           "it is amazing",                      "太不可思议了")
+  add("es increible",                           "it is amazing",                      "太不可思议了")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 137: Respuestas Cortas y Conectores     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("entonces",                               "then",                               "然后")
+  add("además",                                 "besides",                            "此外")
+  add("ademas",                                 "besides",                            "此外")
+  add("también",                                "also",                               "也")
+  add("tambien",                                "also",                               "也")
+  add("porque",                                 "because",                            "因为")
+  add("pero",                                   "but",                                "但是")
+  add("entendido",                              "understood",                         "明白了")
+  add("correcto",                               "correct",                            "对 de")
+  add("perfecto",                               "perfect",                            "完美")
+  add("listo",                                  "ready",                              "准备好了")
+  add("vamos",                                  "let's go",                           "走吧")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 138: Localización e Indicadores         ║
+  -- ╚══════════════════════════════════════════════╝
+  add("aquí",                                   "here",                               "这里")
+  add("aqui",                                   "here",                               "这里")
+  add("allí",                                   "there",                              "那里")
+  add("alli",                                   "there",                              "那里")
+  add("cerca",                                  "near",                               "附近")
+  add("lejos",                                  "far",                                "远")
+  add("derecha",                                "right",                              "右边")
+  add("izquierda",                              "left",                               "左边")
+  add("recto",                                  "straight ahead",                     "直走")
+  add("arriba",                                 "up",                                 "上面")
+  add("abajo",                                  "down",                               "下面")
+  add("dentro",                                 "inside",                             "里面")
+  add("fuera",                                  "outside",                            "外面")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 139: Cantidades y Números Básicos       ║
+  -- ╚══════════════════════════════════════════════╝
+  add("uno",                                    "one",                                "一")
+  add("dos",                                    "two",                                "二")
+  add("tres",                                    "three",                              "三")
+  add("mucho",                                  "a lot",                              "很多")
+  add("poco",                                   "a little",                           "很少")
+  add("todo",                                   "all",                                "全部")
+  add("nada",                                   "nothing",                            "没有")
+  add("algunos",                                "some",                               "一些")
+  add("más",                                    "more",                               "更多")
+  add("mas",                                    "more",                               "更多")
+  add("menos",                                  "less",                               "更少")
+  add("suficiente",                             "enough",                             "足够")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 140: Soporte, Red y Servidor General    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("lag",                                    "latency",                            "延迟")
+  add("ping alto",                              "high ping",                          "高延迟")
+  add("caída de servidor",                      "server crash",                       "服务器崩溃")
+  add("caida de servidor",                      "server crash",                       "服务器崩溃")
+  add("reinicio",                               "restart",                            "重启")
+  add("actualización",                          "update",                             "更新")
+  add("actualizacion",                          "update",                             "更新")
+  add("bugueado",                               "bugged",                             "卡bug")
+  add("soporte técnico",                        "technical support",                  "技术支持")
+  add("soporte tecnico",                        "technical support",                  "技术支持")
+  add("foro",                                   "forum",                              "论坛")
+  add("discord",                                "discord server",                     "DC群")
+  add("parche",                                 "patch",                              "补丁")
+
+  -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
   -- ╚══════════════════════════════════════════════╝
   local p_keys = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
@@ -3607,6 +3775,6 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v4.2.0 Diamond-Tier — 130 categorias cargadas.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v4.2.2 Diamond-Tier — 140 categorias cargadas.")
   end
 end)

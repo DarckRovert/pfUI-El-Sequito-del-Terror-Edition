@@ -1,4 +1,4 @@
-# 🏰 Wiki: Arquitectura 'Diamond Tier' — pfUI [v5.1.4] (Translator v4.2.1)
+# 🏰 Wiki: Arquitectura 'Diamond Tier' — pfUI [v5.1.4] (Translator v4.2.2)
 
 Estructura modular del ecosistema **El Séquito del Terror** mantenido por **DarckRovert**.
 
@@ -6,12 +6,12 @@ Estructura modular del ecosistema **El Séquito del Terror** mantenido por **Dar
 
 El AddOn inicia mediante `modules.xml` con los siguientes puntos críticos de inyección:
 
-1.  **Lexical Engine (`translator_dict.lua`)**: Carga y estructura en memoria 130 categorías del diccionario global con más de 3600 líneas de datos indexados por longitud (`esES`, `enUS`, `zhCN`), generando automáticamente tablas inversas optimizadas para búsquedas rápidas.
+1.  **Lexical Engine (`translator_dict.lua`)**: Carga y estructura en memoria 140 categorías del diccionario global con más de 3800 líneas de datos indexados por longitud (`esES`, `enUS`, `zhCN`), generando automáticamente tablas inversas optimizadas para búsquedas rápidas.
 2.  **Core Translator (`translator.lua`)**: Interceptores sobre `ChatEdit_SendText` para salientes y `AddMessage` para entrantes. Extrae dinámicamente el cuerpo del mensaje de chat mediante **Aislamiento Sintáctico**, traduciendo únicamente esa porción para resguardar canales, colores y nombres.
 3.  **WIM Bridge**: Hook asíncrono sobre `WIM_PostMessage` para susurros de jugadores.
 4.  **GUI Integration (`gui.lua`)**: Registro del selector de idiomas, canales y depuración en las pestañas nativas de pfUI.
 
-## 📊 Diagrama de Flujo: Traductor Multilingüe v4.2.1
+## 📊 Diagrama de Flujo: Traductor Multilingüe v4.2.2
 
 ```mermaid
 graph TD

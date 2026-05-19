@@ -5,7 +5,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- Soporte Nativo UTF-8 y Resolucion de Coincidencias Dinamicas
   -- ============================================================
 
-  pfUI.translator_version = "4.2.1"
+  pfUI.translator_version = "4.2.2"
 
   local C = pfUI_config
   local T = pfUI_translation[GetLocale()] or pfUI_translation["enUS"]
