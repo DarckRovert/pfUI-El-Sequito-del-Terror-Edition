@@ -1,6 +1,6 @@
 pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
-  -- TRADUCTOR UNIVERSAL v4.1.0 — Omni-Tier Séquito Edition
+  -- TRADUCTOR UNIVERSAL v4.2.0 — Diamond-Tier Séquito Edition
   -- Motor Híbrido Trilingüe de Alto Rendimiento (ES / ZH / EN)
   -- Soporte Nativo UTF-8 y Resolución de Coincidencias Dinámicas
   -- ============================================================
@@ -39,7 +39,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   pfUI.translator_realm_votes = pfUI.translator_realm_votes or { en = 0, es = 0, zh = 0, detected = nil }
 
   -- ============================================================
-  -- LÓGICA TRILINGÜE (Séquito Intelligence v4.1.0)
+  -- LÓGICA TRILINGÜE (Séquito Intelligence v4.2.0)
   -- ============================================================
   local function GetTranslationMode(isIncoming)
     local locale = GetLocale()
@@ -481,7 +481,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       pcall(HookIncomingChat)
       if IsAddOnLoaded("WIM") then pcall(HookWIMBridge) end
       if C.translator and C.translator.enable == "1" then
-        DEFAULT_CHAT_FRAME:AddMessage("|cff00ccff[Translator v4.1.0]|r " .. (T["Enable Translator"] or "Traductor Trilingüe Activo") .. ".")
+        DEFAULT_CHAT_FRAME:AddMessage("|cff00ccff[Translator v4.2.0]|r " .. (T["Enable Translator"] or "Traductor Trilingüe Activo") .. ".")
       end
     elseif event == "ADDON_LOADED" and arg1 == "WIM" then pcall(HookWIMBridge) end
   end)
