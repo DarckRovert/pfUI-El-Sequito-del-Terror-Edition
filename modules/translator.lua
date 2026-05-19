@@ -1,6 +1,6 @@
 pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
-  -- TRADUCTOR UNIVERSAL v4.2.1 — Diamond-Tier Sequito Edition
+  -- TRADUCTOR UNIVERSAL v4.2.2 — Diamond-Tier Sequito Edition
   -- Motor Hibrido Trilingue de Alto Rendimiento (ES / ZH / EN)
   -- Soporte Nativo UTF-8 y Resolucion de Coincidencias Dinamicas
   -- ============================================================

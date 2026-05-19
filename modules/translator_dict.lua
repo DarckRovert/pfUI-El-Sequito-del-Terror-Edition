@@ -1,4 +1,4 @@
-pfUI:RegisterModule("translator_dict", "vanilla", function ()
+﻿pfUI:RegisterModule("translator_dict", "vanilla", function ()
   -- ╔══════════════════════════════════════════════════════════════╗
   -- ║  LIBRERIA LEXICA OFFLINE v4.2.2 — DIAMOND-TIER TRILINGUE   ║
   -- ║  Motor Hibrido Hash+Greedy | ES <-> ZH <-> EN              ║
@@ -3711,7 +3711,7 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("porque",                                 "because",                            "因为")
   add("pero",                                   "but",                                "但是")
   add("entendido",                              "understood",                         "明白了")
-  add("correcto",                               "correct",                            "对 de")
+  add("correcto",                               "correct",                            "正确")
   add("perfecto",                               "perfect",                            "完美")
   add("listo",                                  "ready",                              "准备好了")
   add("vamos",                                  "let's go",                           "走吧")

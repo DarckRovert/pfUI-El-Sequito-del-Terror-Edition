@@ -1,5 +1,23 @@
 # CHANGELOG - Global Chat Translator
 
+## [4.2.2] - 2026-05-19
+### Añadido
+- **Expansión Conversacional Trilingüe (Categorías 131 a 140)**: Inyección masiva de más de 100 expresiones trilingües de uso cotidiano optimizadas, logrando soporte real para conversaciones cotidianas completas y fluidas (ES / EN / ZH) en el chat de juego:
+  - **CAT 131**: Saludos y Despedidas Conversacionales.
+  - **CAT 132**: Expresiones de Cortesía y Relaciones Sociales.
+  - **CAT 133**: Expresiones de Acuerdo, Desacuerdo y Duda.
+  - **CAT 134**: Preguntas Cotidianas de Conversación.
+  - **CAT 135**: Marcadores de Tiempo e Intervalos de Frecuencia.
+  - **CAT 136**: Expresiones de Sentimientos, Estados de Ánimo y Opinión.
+  - **CAT 137**: Respuestas Cortas e Indicadores/Conectores Conversacionales.
+  - **CAT 138**: Direcciones, Posición e Indicadores de Espacio.
+  - **CAT 139**: Cantidades, Mediciones y Números Básicos.
+  - **CAT 140**: Expresiones de Soporte, Red (Lag/Ping/Crash) y Servidor General.
+- **Normalización de Español**: Doble mapeo redundante de claves con y sin acentos (e.g., `mañana` y `manana`) para garantizar la coincidencia exacta bajo el indexador de Lua 5.0.
+
+### Cambiado
+- **Alineación de Versión Global**: Actualización integral del número de versión a `v4.2.2` en `translator.lua`, `translator_dict.lua` (cabecera e informes de debug) y toda la documentación técnica de la Wiki.
+
 ## [4.2.1] - 2026-05-19 (Hotfix)
 ### Corregido — Bugs Críticos de Runtime
 - **[CRÍTICO] Shadowing de `pairs()` en Lua 5.0**: La variable local `local pairs` en `translator.lua` sombrea el iterador global `pairs()` de Lua 5.0. Dentro de `GetTranslationRatio()`, el código `for w, count in pairs(orig_words)` intentaba llamar una *tabla* como función, causando un error silencioso de runtime para todos los mensajes EN/ES. El filtro CTR nunca funcionó para idiomas occidentales. **Fix**: Renombrado a `LANG_PAIRS` y la iteración se migró a `next()` (Lua 5.0 nativo, sin riesgo de shadowing).
