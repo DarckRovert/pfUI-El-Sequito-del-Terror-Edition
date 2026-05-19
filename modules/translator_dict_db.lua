@@ -798,6 +798,153 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "modo exhausto|exhausted mode|精疲力竭模式"
   }
 
+  -- ============================================================
+  -- LOTE I: ESTADÍSTICAS, ATRIBUTOS, RESISTENCIAS Y TALENTOS (STATS & SPECS)
+  -- ============================================================
+  local stats_talents_batch = {
+    -- Atributos Principales
+    "fuerza|strength|力量",
+    "agilidad|agility|敏捷",
+    "aguante|stamina|耐力",
+    "intelecto|intellect|智力",
+    "espíritu|spirit|精神",
+    "espiritu|spirit|精神",
+
+    -- Estadísticas Secundarias de Combate
+    "índice de golpe|hit rating|命中等级",
+    "indice de golpe|hit rating|命中等级",
+    "golpe crítico|crit rating|爆击等级",
+    "golpe critico|crit rating|爆击等级",
+    "crítico|crit|爆击",
+    "critico|crit|爆击",
+    "esquivar|dodge|躲闪",
+    "parada|parry|招架",
+    "bloqueo|block|格挡",
+    "poder de ataque|attack power|攻击强度",
+    "ap|attack power|攻强",
+    "poder con hechizos|spell power|法术强度",
+    "sp|spell power|法强",
+    "sanación|healing power|治疗效果",
+    "sanacion|healing power|治疗效果",
+    "penetración de armadura|armor penetration|护甲穿透",
+    "penetracion de armadura|armor penetration|护甲穿透",
+    "defensa|defense|防御",
+
+    -- Tipos de Daño y Resistencias
+    "daño físico|physical damage|物理伤害",
+    "daño fisico|physical damage|物理伤害",
+    "fuego|fire|火焰",
+    "escarcha|frost|冰霜",
+    "naturaleza|nature|自然",
+    "sombras|shadow|暗影",
+    "arcano|arcane|奥术",
+    "sagrado|holy|神圣",
+    "resistencia al fuego|fire resistance|火焰抗性",
+    "resistencia a la escarcha|frost resistance|冰霜抗性",
+    "resistencia a la naturaleza|nature resistance|自然抗性",
+    "resistencia a las sombras|shadow resistance|暗影抗性",
+    "resistencia a lo arcano|arcane resistance|奥术抗性",
+
+    -- Clases y Especializaciones de Talentos
+    "guerrero|warrior|战士",
+    "paladín|paladin|圣骑士",
+    "paladin|paladin|圣骑士",
+    "cazador|hunter|猎人",
+    "pícaro|rogue|潜行者/盗贼",
+    "picaro|rogue|潜行者/盗贼",
+    "sacerdote|priest|牧师",
+    "chamán|shaman|萨满",
+    "chaman|shaman|萨满",
+    "mago|mage|法师",
+    "brujo|warlock|术士",
+    "druida|druid|德鲁伊",
+    "armas|arms|武器",
+    "furia|fury|狂暴",
+    "protección|protection|防护",
+    "proteccion|protection|防护",
+    "retribución|retribution|惩戒",
+    "retribucion|retribution|惩戒",
+    "bestias|beast mastery|野兽控制",
+    "puntería|marksmanship|射击",
+    "punteria|marksmanship|射击",
+    "sutileza|subtlety|敏锐",
+    "asesinato|assassination|刺杀",
+    "disciplina|discipline|戒律",
+    "elemental|elemental|元素",
+    "mejora|enhancement|增强",
+    "restauración|restoration|恢复",
+    "restauracion|restoration|恢复",
+    "aflicción|affliction|痛苦",
+    "afliccion|affliction|痛苦",
+    "demonología|demonology|恶魔学识",
+    "demonologia|demonology|恶魔学识",
+    "destrucción|destruction|毁灭",
+    "destruccion|destruction|毁灭",
+    "equilibrio|balance|平衡",
+    "combate feral|feral combat|野性战斗"
+  }
+
+  -- ============================================================
+  -- LOTE J: PVP, CAMPOS DE BATALLA Y CONSUMIBLES DE RAID (PVP & CONSUMABLES)
+  -- ============================================================
+  local pvp_consumables_batch = {
+    -- Campos de Batalla (BGs)
+    "garganta grito de guerra|warsong gulch|战歌峡谷",
+    "garganta de grito de guerra|warsong gulch|战歌峡谷",
+    "wsg|warsong gulch|战歌",
+    "valle de alterac|alterac valley|奥特兰克山谷",
+    "av|alterac valley|奥山",
+    "cuenca de arathi|arathi basin|阿拉希盆地",
+    "ab|arathi basin|阿拉希",
+
+    -- Objetivos PvP y Estructuras
+    "cementerio|graveyard|墓地",
+    "gy|graveyard|墓地",
+    "bandera|flag|旗帜",
+    "mina|mine|矿洞",
+    "aserradero|lumber mill|伐木场",
+    "lm|lumber mill|伐木场",
+    "establo|stables|马厩",
+    "establos|stables|马厩",
+    "herrería|blacksmith|铁匠铺",
+    "herreria|blacksmith|铁匠铺",
+    "bs|blacksmith|铁匠铺",
+    "granja|farm|农场",
+
+    -- Rangos y Mecánicas PvP
+    "rango pvp|pvp rank|PVP军衔",
+    "muertes con honor|honorable kills|荣誉击杀",
+    "hk|honorable kills|击杀",
+    "puntos de honor|honor points|荣誉点",
+    "marcas de warsong|warsong marks|战歌牌子",
+    "marcas de arathi|arathi marks|阿拉希牌子",
+    "marcas de alterac|alterac marks|奥山牌子",
+
+    -- Consumibles de Raid y Soporte
+    "agua de maná|mana water|法力水",
+    "agua de mana|mana water|法力水",
+    "pan|bread|面包",
+    "comida|food|食物",
+    "bebida|drink|饮料",
+    "té de cardo|thistle tea|菊花茶",
+    "te de cardo|thistle tea|菊花茶",
+    "pocion de mana mayor|major mana potion|大蓝",
+    "poción de maná mayor|major mana potion|大蓝",
+    "pocion de vida mayor|major healing potion|大红",
+    "poción de vida mayor|major healing potion|大红",
+    "runa demoníaca|demonic rune|恶魔符文",
+    "runa demoniaca|demonic rune|恶魔符文",
+    "runa oscura|dark rune|黑暗符文",
+    "venda de tejido de runas gruesa|heavy runecloth bandage|厚符文布绷带",
+    "venda de tejido de runas|runecloth bandage|符文布绷带",
+    "busco calabozo|looking for dungeon|求组副本",
+    "busco mazmorra|looking for dungeon|求组副本",
+    "hacer misiones|do quests|做任务",
+    "subir nivel|leveling|升级",
+    "levear|leveling|升级",
+    "boostear|boosting|带刷"
+  }
+
   -- Ejecutar la carga masiva en lotes comprimidos
   load_batch(spells_batch)
   load_batch(quests_batch)
@@ -807,6 +954,8 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   load_batch(mechanics_batch)
   load_batch(professions_batch)
   load_batch(turtle_custom_batch)
+  load_batch(stats_talents_batch)
+  load_batch(pvp_consumables_batch)
 
   -- ============================================================
   -- RE-INDEXACIÓN DE BUCKETS POST-CARGA DE BASE DE DATOS
@@ -842,6 +991,6 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Base de Datos v6.5.0 cargada. Spells, Quests, Items, Slang, Zones, Mechanics, Professions y Turtle Custom indexados.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Base de Datos v6.8.0 cargada. Spells, Quests, Items, Slang, Zones, Mechanics, Professions, Turtle Custom, Stats, Specs, PvP y Consumables indexados.")
   end
 end)
