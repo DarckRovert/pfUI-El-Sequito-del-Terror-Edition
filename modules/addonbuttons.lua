@@ -242,7 +242,7 @@ pfUI:RegisterModule("addonbuttons", "vanilla:tbc", function ()
       if frame:HasScript("OnUpdate") then
         frame.backup.on_update = frame:GetScript("OnUpdate")
       end
-      -- TODO: find a way to avoid such hardcoding
+      -- Note: Hardcoded due to MetaMap's intrusive button logic that resists standard reparenting.
       if frame:GetName() == "MetaMapButton" then
         frame.backup.MetaMapButton_UpdatePosition = MetaMapButton_UpdatePosition
         pfUI.addonbuttons.overrides.MetaMapButton_UpdatePosition = function () return end

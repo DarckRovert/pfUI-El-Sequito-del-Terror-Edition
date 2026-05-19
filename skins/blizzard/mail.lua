@@ -19,7 +19,8 @@ pfUI:RegisterSkin("Mailbox", "vanilla:tbc", function ()
 
           local link = GetSendMailItemLink(i)
           if link then
-            local r,g,b = GetItemQualityColor(select(3, GetItemInfo(link)))
+            local _, _, quality = GetItemInfo(link)
+            local r,g,b = GetItemQualityColor(quality)
             btn:SetBackdropBorderColor(r,g,b,1)
             else
             btn:SetBackdropBorderColor(GetStringColor(pfUI_config.appearance.border.color))
@@ -39,7 +40,8 @@ pfUI:RegisterSkin("Mailbox", "vanilla:tbc", function ()
         for i=1, ATTACHMENTS_MAX_RECEIVE do
           local link = GetInboxItemLink(index, i)
           if not link then return end
-          local r,g,b = GetItemQualityColor(select(3, GetItemInfo(link)))
+          local _, _, quality = GetItemInfo(link)
+          local r,g,b = GetItemQualityColor(quality)
           _G["OpenMailAttachmentButton"..i]:SetBackdropBorderColor(r,g,b,1)
         end
       end)

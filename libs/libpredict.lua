@@ -534,8 +534,7 @@ function libpredict:ParseComm(sender, msg)
         heal = tonumber(string.sub(msg, 4, 8))
         target = string.sub(msg,9, -1)
 
-        local starttime = select(5, pfGetCastInfo(sender))
-        local endtime = select(6, pfGetCastInfo(sender))
+        local _, _, _, _, starttime, endtime = pfGetCastInfo(sender)
         if not starttime or not endtime then return end
         time = endtime - starttime
       elseif msgtype == 1 then
@@ -544,8 +543,7 @@ function libpredict:ParseComm(sender, msg)
         msgtype = "Heal"
         heal = tonumber(string.sub(msg,4, 8))
         target = {strsplit(":", string.sub(msg,9, -1))}
-        local starttime = select(5, pfGetCastInfo(sender))
-        local endtime = select(6, pfGetCastInfo(sender))
+        local _, _, _, _, starttime, endtime = pfGetCastInfo(sender)
         if not starttime or not endtime then return end
         time = endtime - starttime
       end

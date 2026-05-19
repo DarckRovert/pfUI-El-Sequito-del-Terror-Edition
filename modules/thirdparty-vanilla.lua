@@ -36,7 +36,7 @@ pfUI:RegisterModule("thirdparty-vanilla", "vanilla", function()
       KLHTM_UpdateFrame()
     end
 
-    local docktable = { "ktm", "TODO", "KLHTM_Frame",
+    local docktable = { "ktm", "KLHThreatMeter", "KLHTM_Frame",
       function() -- single
         RefreshKtmWidth()
         KLHTM_Frame:ClearAllPoints()
@@ -160,7 +160,7 @@ pfUI:RegisterModule("thirdparty-vanilla", "vanilla", function()
   end)
 
   HookAddonOrVariable("TWThreat", function()
-    local docktable = { "twt", "TODO", "TWTMain",
+    local docktable = { "twt", "TWThreat", "TWTMain",
       function() -- single
         TWTMain:ClearAllPoints()
         TWTMain:SetPoint("TOPLEFT", pfUI.chat.right, "TOPLEFT", 0, 0)
@@ -233,7 +233,7 @@ pfUI:RegisterModule("thirdparty-vanilla", "vanilla", function()
   end)
 
   HookAddonOrVariable("SW_Stats", function()
-    local docktable = { "swstats", "TODO", "SW_BarFrame1",
+    local docktable = { "swstats", "SW_Stats", "SW_BarFrame1",
       function() -- single
         SW_BarFrame1:SetWidth(pfUI.chat.right:GetWidth())
         SW_BarFrame1:ClearAllPoints()

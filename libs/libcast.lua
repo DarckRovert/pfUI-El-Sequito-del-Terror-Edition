@@ -111,7 +111,7 @@ pfGetChannelInfo = function(unit)
         start = castData.startTime,
         casttime = castData.duration * 1000, -- Convert back to ms
         icon = castData.icon,
-        channel = nil -- TODO: libdebuff should distinguish channel vs cast
+        channel = nil -- Note: Vanilla combat log does not provide SPELLCAST_CHANNEL_START for other units.
       }
     end
   end
@@ -204,7 +204,7 @@ pfGetCastInfo = function(unit)
         start = castData.startTime,
         casttime = castData.duration * 1000, -- Convert back to ms
         icon = castData.icon,
-        channel = nil -- TODO: libdebuff should distinguish channel vs cast
+        channel = nil -- Note: Vanilla combat log does not provide SPELLCAST_CHANNEL_START for other units.
       }
     end
   end

@@ -79,7 +79,7 @@ pfUI:RegisterSkin("Inspect", "tbc", function ()
         local unit = InspectFrame.unit
         local link = GetInventoryItemLink(unit, button:GetID())
         if link then
-          local quality = select(3, GetItemInfo(link))
+          local _, _, quality = GetItemInfo(link)
           button:SetBackdropBorderColor(GetItemQualityColor(quality))
         else
           button:SetBackdropBorderColor(pfUI.cache.er, pfUI.cache.eg, pfUI.cache.eb, pfUI.cache.ea)

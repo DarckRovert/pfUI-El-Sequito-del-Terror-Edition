@@ -3,7 +3,7 @@ pfUI:RegisterSkin("Quest Log", "vanilla:tbc", function ()
   local bpad = rawborder > 1 and border - GetPerfectPixel() or GetPerfectPixel()
 
   _G.QUESTS_DISPLAYED = 23
-  _G.MAX_WATCHABLE_QUESTS = 20 -- TODO
+  _G.MAX_WATCHABLE_QUESTS = 20
 
   do -- quest log frame
     -- Compatibility

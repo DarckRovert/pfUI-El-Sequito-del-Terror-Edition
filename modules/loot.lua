@@ -371,22 +371,22 @@ pfUI:RegisterModule("loot", "vanilla:tbc", function ()
   function pfUI.loot:RemoveMasterlootMenus()
     for index = table.getn(UnitPopupMenus["SELF"]),1,-1 do
       if UnitPopupMenus["SELF"][index] == "PF_BANKLOOTER" or UnitPopupMenus["SELF"][index] == "PF_DISENCHANTLOOTER" then
-        table.remove(UnitPopupMenus["SELF"],index,value)
+        table.remove(UnitPopupMenus["SELF"],index)
       end
     end
     for index = table.getn(UnitPopupMenus["PARTY"]),1,-1 do
       if UnitPopupMenus["PARTY"][index] == "PF_BANKLOOTER" or UnitPopupMenus["PARTY"][index] == "PF_DISENCHANTLOOTER" then
-        table.remove(UnitPopupMenus["PARTY"],index,value)
+        table.remove(UnitPopupMenus["PARTY"],index)
       end
     end
     for index = table.getn(UnitPopupMenus["PLAYER"]),1,-1 do
       if UnitPopupMenus["PLAYER"][index] == "PF_BANKLOOTER" or UnitPopupMenus["PLAYER"][index] == "PF_DISENCHANTLOOTER" then
-        table.remove(UnitPopupMenus["PLAYER"],index,value)
+        table.remove(UnitPopupMenus["PLAYER"],index)
       end
     end
     for index = table.getn(UnitPopupMenus["RAID"]),1,-1 do
       if UnitPopupMenus["RAID"][index] == "PF_BANKLOOTER" or UnitPopupMenus["RAID"][index] == "PF_DISENCHANTLOOTER" then
-        table.remove(UnitPopupMenus["RAID"],index,value)
+        table.remove(UnitPopupMenus["RAID"],index)
       end
     end
   end

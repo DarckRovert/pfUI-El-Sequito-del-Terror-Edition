@@ -68,14 +68,15 @@ pfUI:RegisterSkin("Guild Bank", "tbc", function ()
         if GuildBankFrame.mode ~= "bank" then return end
 
         for i = 1, MAX_GUILDBANK_SLOTS_PER_TAB do
-          local index = math.fmod(i, NUM_SLOTS_PER_GUILDBANK_GROUP)
+          local index = math.mod(i, NUM_SLOTS_PER_GUILDBANK_GROUP)
           if index == 0 then index = NUM_SLOTS_PER_GUILDBANK_GROUP end
           local column = ceil((i-.5)/NUM_SLOTS_PER_GUILDBANK_GROUP)
           local slot = _G["GuildBankColumn"..column.."Button"..index]
           local tab = GetCurrentGuildBankTab()
           local link = GetGuildBankItemLink(tab, i)
           if link then
-            local r,g,b = GetItemQualityColor(select(3, GetItemInfo(link)))
+            local _, _, quality = GetItemInfo(link)
+            local r,g,b = GetItemQualityColor(quality)
             slot:SetBackdropBorderColor(r,g,b,1)
           else
             slot:SetBackdropBorderColor(GetStringColor(pfUI_config.appearance.border.color))

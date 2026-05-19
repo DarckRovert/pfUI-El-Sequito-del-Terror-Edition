@@ -133,7 +133,7 @@ pfUI:RegisterModule("addons", "vanilla:tbc", function ()
   pfUI.addons.profile.del:GetFontString():SetPoint("CENTER", 1, 0)
   pfUI.addons.profile.del:SetText("-")
   pfUI.addons.profile.del:SetTextColor(1,.5,.5,1)
-  pfUI.addons.profile.del:SetScript("OnClick", function() -- TODO
+  pfUI.addons.profile.del:SetScript("OnClick", function()
     local id, name = pfUI.addons.profile.dropdown:GetSelection()
     if not name then return end
     CreateQuestionDialog(T["Delete profile"] .. " '|cff33ffcc" .. name .. "|r'?", function()
