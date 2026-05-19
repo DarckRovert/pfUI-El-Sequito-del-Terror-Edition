@@ -1393,14 +1393,14 @@ function pfUI:MigrateConfig()
   pfUI:UpdateConfig("translator", nil, "debug_mode", "0")
   pfUI:UpdateConfig("translator", nil, "wim_bridge", "1")
   
-  -- Default channel settings (Disabled by default as requested)
-  pfUI:UpdateConfig("translator", nil, "chan_say", "0")
-  pfUI:UpdateConfig("translator", nil, "chan_party", "0")
-  pfUI:UpdateConfig("translator", nil, "chan_raid", "0")
-  pfUI:UpdateConfig("translator", nil, "chan_guild", "0")
+  -- Default channel settings (Enabled by default to ensure out-of-the-box operation)
+  pfUI:UpdateConfig("translator", nil, "chan_say", "1")
+  pfUI:UpdateConfig("translator", nil, "chan_party", "1")
+  pfUI:UpdateConfig("translator", nil, "chan_raid", "1")
+  pfUI:UpdateConfig("translator", nil, "chan_guild", "1")
   pfUI:UpdateConfig("translator", nil, "chan_whisper", "1") -- Whispers usually wanted
-  pfUI:UpdateConfig("translator", nil, "chan_world", "0")
-  pfUI:UpdateConfig("translator", nil, "chan_lfg", "0")
+  pfUI:UpdateConfig("translator", nil, "chan_world", "1")
+  pfUI:UpdateConfig("translator", nil, "chan_lfg", "1")
 
   pfUI_config.version = pfUI.version.string
 end

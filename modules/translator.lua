@@ -262,8 +262,8 @@ pfUI:RegisterModule("translator", "vanilla", function ()
           local safe_key = string.gsub(key, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1")
           local res, count
           if srcLang == "zh" then
-            -- Chino: reemplazo directo (sin delimitadores de palabra ASCII)
-            res, count = string.gsub(proc_text, safe_key, phraseDict[key])
+            -- Chino: reemplazo con acolchado inteligente para evitar fusiones de palabras occidentales
+            res, count = string.gsub(proc_text, safe_key, " " .. phraseDict[key] .. " ")
           else
             -- Occidental: requiere delimitadores de no-letra para evitar falsos positivos
             local pattern = "(%A)(" .. safe_key .. ")(%A)"
@@ -293,6 +293,13 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
     if trans_occurred then
       local result = strsub(proc_text, 2, -2)
+
+      -- Colapsar espacios múltiples y limpiar extremos en traducciones de origen Chino
+      if srcLang == "zh" then
+        result = string.gsub(result, "%s+", " ")
+        result = string.gsub(result, "^%s*(.-)%s*$", "%1")
+      end
+
       -- Restaurar enlaces protegidos
       -- Patron [lL] cubre ambos casos: \127L original y \127l tras strlower()
       result = string.gsub(result, "\127[lL](%d+)\127", function(lid)
