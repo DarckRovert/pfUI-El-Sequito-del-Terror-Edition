@@ -1,28 +1,38 @@
 # 📖 Manual de Usuario
 
-Guía para dominar el sistema de comunicación multilingüe de **El Séquito Edition**.
+Guía oficial para dominar el sistema de comunicación multilingüe de **El Séquito Edition**.
 
 ## 1. Configuración Inicial
-Accede al panel de control escribiendo `/pfui` y navegando a la sección **Translator** (Traductor).
+Accede al panel de control escribiendo `/pfui` y navegando a la pestaña **Translator** (Traductor).
 
-### Selector de Idioma de Destino (Target Language)
-Esta es la característica nuclear de la versión v1.1.0:
-- **Español (`esES`)**: Traduce las conversaciones entrantes y salientes al español.
-- **Inglés (`enUS`)**: Traduce las conversaciones al inglés estándar (ideal para raids internacionales).
-- **Ruso (`ruRU`)**: Habilita la traducción y mapeo cirílico para comunidades rusoparlantes.
-- **Chino (`zhCN`)**: Habilita la traducción y renderizado de caracteres simplificados para comunidades asiáticas.
+### Opciones de Configuración
+- **Enable Translator**: Activa o desactiva por completo el motor de traducción.
+- **Translate Incoming**: Habilita la traducción en tiempo real de los mensajes que recibes de otros jugadores.
+- **Translate Outgoing**: Traduce automáticamente los mensajes que tú escribes al idioma del servidor antes de enviarlos.
+- **Silent Mode**: Si está activo, oculta el tag `[TR]` al final de los mensajes traducidos para tener un chat visualmente más limpio.
+- **WIM Bridge**: Habilita la traducción transparente en las ventanas de chat de susurros de WIM.
 
-### Opciones de Dirección (Direction)
-- **Auto-Detección**: El motor decide dinámicamente si aplicar el tesauro normal o el invertido según el idioma de origen detectado.
-- **Forzar Salida**: Permite que tus propios mensajes salientes sean convertidos al idioma de destino seleccionado antes de enviarse al servidor.
+---
 
-## 2. Comandos de Chat
-Puedes usar el comando raíz `/tr` para las siguientes acciones:
-- `/tr`: Abre directamente la configuración del traductor en la GUI de pfUI.
-- `/tr stats`: Muestra en el chat las estadísticas de rendimiento, aciertos de caché y mensajes procesados.
+## 2. Prevención Activa contra la Mezcla de Idiomas (CTR)
+El motor de la v4.2.0 incluye **Séquito Intelligence** para prevenir textos incomprensibles. Si el diccionario offline no logra traducir la mayor parte de un mensaje (ej: menos del 50% de caracteres chinos en una frase, o menos del 40% de palabras en inglés), la traducción parcial se descarta automáticamente.
+* **Resultado**: Verás el texto original limpio en lugar de una mezcla molesta ("Spanglish" o "Chinol" rota).
 
-## 3. Integración con Canales
-Puedes habilitar o deshabilitar la traducción para canales específicos (Say, Guild, World, LFG, Party). Se recomienda mantener **World** y **LFG** activos para una experiencia global inmersiva en Turtle WoW.
+---
+
+## 3. Comandos de Chat
+Puedes usar el comando raíz `/tr` en el chat del juego:
+- `/tr`: Abre directamente la ventana de configuración del traductor en la interfaz de pfUI.
+- `/tr stats`: Muestra en tu consola local las estadísticas de telemetría (mensajes entrantes/salientes procesados y aciertos de la caché LRU).
+
+---
+
+## 4. Gestión Granular de Canales
+Puedes activar o desactivar selectivamente qué canales de chat deseas traducir:
+- **Decir (Say)**: Para interacción local en el mundo de juego.
+- **Grupo (Party) / Banda (Raid)**: Ideal para coordinar mazmorras y bandas internacionales.
+- **Hermandad (Guild)**: Mantiene la comunicación fluida con tus compañeros de hermandad.
+- **Mundo (World) / LFG**: Altamente recomendado para el chat global y comercial de Turtle WoW.
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.

@@ -95,6 +95,61 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
   -- MOTOR HÍBRIDO (El corazón del sistema)
   -- ============================================================
+  local function CountChineseChars(text)
+    if not text or type(text) ~= "string" then return 0 end
+    local count = 0
+    local i = 1
+    local len = strlen(text)
+    while i <= len do
+      local byte = strbyte(text, i)
+      if byte >= 224 and byte <= 239 then
+        count = count + 1
+        i = i + 3
+      elseif byte >= 192 and byte <= 223 then
+        i = i + 2
+      elseif byte >= 240 then
+        i = i + 4
+      else
+        i = i + 1
+      end
+    end
+    return count
+  end
+
+  local function GetTranslationRatio(orig_text, dest_text, srcLang)
+    if srcLang == "zh" then
+      local orig_zh = CountChineseChars(orig_text)
+      if orig_zh == 0 then return 1.0 end
+      local dest_zh = CountChineseChars(dest_text)
+      return (orig_zh - dest_zh) / orig_zh
+    else
+      local orig_words = {}
+      local total = 0
+      for w in string.gfind(orig_text, "([\128-\255%w]+)") do
+        local lw = strlower(w)
+        orig_words[lw] = (orig_words[lw] or 0) + 1
+        total = total + 1
+      end
+      if total == 0 then return 1.0 end
+
+      local dest_words = {}
+      for w in string.gfind(dest_text, "([\128-\255%w]+)") do
+        local lw = strlower(w)
+        dest_words[lw] = (dest_words[lw] or 0) + 1
+      end
+
+      local unchanged = 0
+      for w, count in pairs(orig_words) do
+        if dest_words[w] then
+          local d_count = dest_words[w]
+          unchanged = unchanged + (count < d_count and count or d_count)
+        end
+      end
+
+      return (total - unchanged) / total
+    end
+  end
+
   local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang)
     if not text or type(text) ~= "string" or strlen(text) < 2 then return nil end
     
@@ -160,6 +215,14 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       result = string.gsub(result, "\127[lL](%d+)\127", function(id)
         return links[tonumber(id)]
       end)
+
+      -- Validar la coherencia de la traduccion (CTR)
+      local ratio = GetTranslationRatio(text, result, srcLang)
+      local min_ratio = (srcLang == "zh") and 0.50 or 0.40
+      if ratio < min_ratio then
+        return nil
+      end
+
       CacheSet(text, result)
       return result
     end
@@ -285,6 +348,22 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
+      -- Aislar el cuerpo del mensaje (body) y mantener el prefijo original (canales, links, colores)
+      local prefix, body
+      local p_start, p_end = string.find(text, "|Hplayer:.-|h.-|h")
+      if p_end then
+        local col_start, col_end = string.find(text, ": ", p_end, true)
+        if col_start then
+          prefix = string.sub(text, 1, col_end)
+          body = string.sub(text, col_end + 1)
+        end
+      end
+
+      -- Fallback si no logramos aislar el cuerpo (evitar romper mensajes no estandarizados)
+      if not prefix or not body or strlen(body) < 2 then
+        return frame:pfOriginalAddMessage(text, r, g, b, id)
+      end
+
       -- Determinar idioma local del cliente
       local locale = GetLocale()
       local myLang = "en"
@@ -292,7 +371,8 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       elseif locale == "zhCN" or locale == "zhTW" then myLang = "zh"
       end
 
-      local lang = DetectLanguage(text)
+      -- Detectar el idioma del cuerpo real
+      local lang = DetectLanguage(body)
       
       -- VOTACIÓN HEURÍSTICA: Escucha canales globales para detectar el idioma del reino
       if C.translator.server_type == "0" and not pfUI.translator_realm_votes.detected then
@@ -331,16 +411,16 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
       -- Traducimos si el mensaje no está en el idioma de destino deseado
       if final_src ~= dest_env then
-        local prefix = final_src .. "_" .. dest_env
-        if pfUI.translator_dicts[prefix .. "_phrases"] then
-          local words = pfUI.translator_dicts[prefix .. "_words"]
-          local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
-          local keys = pfUI.translator_dicts[prefix .. "_keys"]
+        local prefix_dict = final_src .. "_" .. dest_env
+        if pfUI.translator_dicts[prefix_dict .. "_phrases"] then
+          local words = pfUI.translator_dicts[prefix_dict .. "_words"]
+          local phrases = pfUI.translator_dicts[prefix_dict .. "_phrases"]
+          local keys = pfUI.translator_dicts[prefix_dict .. "_keys"]
           
-          local trans = LocalTranslate(text, words, phrases, keys, final_src)
+          local trans = LocalTranslate(body, words, phrases, keys, final_src)
           if trans then
             pfUI.translator_stats.total_in = pfUI.translator_stats.total_in + 1
-            text = trans .. GetTRTag()
+            text = prefix .. trans .. GetTRTag()
           end
         end
       end

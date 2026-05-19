@@ -4,7 +4,7 @@ Este proyecto es propiedad intelectual de **DarckRovert** bajo el ecosistema "El
 
 ## Toma de Decisiones
 - Todas las decisiones arquitectónicas finales son competencia exclusiva de **DarckRovert**.
-- El desarrollo se guía por la búsqueda del estándar **Omni-Tier** (estabilidad nuclear, cero mediocridad, máximo rendimiento).
+- El desarrollo se guía por la búsqueda del estándar **Diamond-Tier** (estabilidad nuclear, cero mediocridad, máximo rendimiento).
 
 ## Mantenedores
 - **DarckRovert** (Líder del Proyecto)

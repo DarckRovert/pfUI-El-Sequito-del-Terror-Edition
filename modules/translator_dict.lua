@@ -2894,6 +2894,711 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("casado",                                "married",                            "已婚")
 
   -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 83: WoW Consumibles y Frascos   ║
+  -- ╚══════════════════════════════════════════════╝
+  add("poción de maná mayor",                  "major mana potion",                  "大强效法力药水")
+  add("pocion de mana mayor",                  "major mana potion",                  "大强效法力药水")
+  add("poción de salud mayor",                 "major healing potion",               "大强效治疗药水")
+  add("pocion de salud mayor",                 "major healing potion",               "大强效治疗药水")
+  add("elixir de poder de las sombras",        "elixir of shadow power",             "暗影之力药剂")
+  add("elixir de poder de fuego",              "elixir of greater firepower",        "火力药剂")
+  add("frasco de poder supremo",               "flask of supreme power",             "超能合剂")
+  add("frasco de agua destilada",              "flask of distilled wisdom",          "精炼智慧合剂")
+  add("poción de protección de fuego",         "greater fire protection potion",     "强效火焰防护药水")
+  add("pocion de proteccion de fuego",         "greater fire protection potion",     "强效火焰防护药水")
+  add("poción de protección de naturaleza",    "greater nature protection potion",   "强效自然防护药水")
+  add("pocion de proteccion de naturaleza",    "greater nature protection potion",   "强效自然防护药水")
+  add("poción de acción libre",                "free action potion",                 "自由行动药剂")
+  add("pocion de accion libre",                "free action potion",                 "自由行动药剂")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 84: Atributos de Combate        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("probabilidad de golpe",                 "hit chance",                         "命中率")
+  add("golpe crítico",                         "critical strike",                    "暴击")
+  add("golpe critico",                         "critical strike",                    "暴击")
+  add("celeridad",                             "haste",                              "急速")
+  add("esquiva",                               "dodge",                              "躲闪")
+  add("parada",                                "parry",                              "招架")
+  add("bloqueo",                               "block",                              "格挡")
+  add("penetración de armadura",               "armor penetration",                  "护甲穿透")
+  add("penetracion de armadura",               "armor penetration",                  "护甲穿透")
+  add("penetración de hechizos",               "spell penetration",                  "法术穿透")
+  add("penetracion de hechizos",               "spell penetration",                  "法术穿透")
+  add("poder de hechizo",                      "spell power",                        "法术能量")
+  add("poder de curación",                     "healing power",                      "治疗能量")
+  add("poder de curacion",                     "healing power",                      "治疗能量")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 85: WoW Mecánicas Crowd Control ║
+  -- ╚══════════════════════════════════════════════╝
+  add("aturdir",                               "stun",                               "昏迷")
+  add("aturdido",                              "stunned",                            "被昏迷")
+  add("silenciar",                             "silence",                            "沉默")
+  add("silenciado",                            "silenced",                           "被沉默")
+  add("miedo",                                 "fear",                               "恐惧")
+  add("temor",                                 "fear",                               "恐惧")
+  add("polimorfia",                            "polymorph",                          "变形术")
+  add("oveja",                                 "sheep",                              "变羊")
+  add("desterrar",                             "banish",                             "放逐")
+  add("desterrado",                            "banished",                           "被放逐")
+  add("cegar",                                 "blind",                              "致盲")
+  add("ralentizar",                            "slow",                               "减速")
+  add("inmovilizar",                           "root",                               "定身")
+  add("enraizar",                              "root",                               "定身")
+  add("hipnotizar",                            "hypnotize",                          "催眠")
+  add("embelesar",                             "charm",                              "魅惑")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 86: WoW Jerga de Botín y DKP    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("puja",                                  "bid",                                "出价")
+  add("puja mínima",                           "min bid",                            "最低出价")
+  add("puja minima",                           "min bid",                            "最低出价")
+  add("tirar dados",                           "roll",                               "掷骰子")
+  add("ligado al equipar",                     "boe",                                "装备后绑定")
+  add("ligado al recoger",                     "bop",                                "拾取后绑定")
+  add("reserva de botín",                      "loot reserve",                       "分配权保留")
+  add("reserva de botin",                      "loot reserve",                       "分配权保留")
+  add("maestro despojador",                    "master looter",                      "队长分配")
+  add("botín del grupo",                       "group loot",                         "队伍分配")
+  add("botin del grupo",                       "group loot",                         "队伍分配")
+  add("necesidad antes que codicia",           "need before greed",                  "需求大于贪婪")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 87: WoW Campos de Batalla       ║
+  -- ╚══════════════════════════════════════════════╝
+  add("garganta grito de guerra",              "wsg",                                "战歌峡谷")
+  add("cuenca de arathi",                      "ab",                                 "阿拉希盆地")
+  add("valle de alterac",                      "av",                                 "奥特兰克山谷")
+  add("capturar bandera",                      "capture flag",                       "夺旗")
+  add("asaltar base",                          "assault base",                       "开旗")
+  add("defender base",                         "defend base",                        "守旗")
+  add("cementerio",                            "graveyard",                          "墓地")
+  add("mina de hierro",                        "iron mines",                         "铁矿洞")
+  add("establo",                               "stables",                            "马厩")
+  add("aserradero",                            "lumber mill",                        "伐木场")
+  add("granja",                                "farm",                               "农场")
+  add("herreria",                              "smithy",                             "铁匠铺")
+  add("herrería",                              "smithy",                             "铁匠铺")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 88: WoW Buffs del Mundo         ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tributo de masacre",                    "dm tribute",                         "厄运贡品")
+  add("cabeza de onyxia",                      "onyxia head",                        "奥妮克希亚的头颅")
+  add("corazón de hakkar",                     "heart of hakkar",                    "哈卡的心脏")
+  add("corazon de hakkar",                     "heart of hakkar",                    "哈卡的心脏")
+  add("feria de la luna negra",                "dmf",                                "暗月马戏团")
+  add("canción de flor de azote",              "songflower",                         "风歌夜霜")
+  add("cancion de flor de azote",              "songflower",                         "风歌夜霜")
+  add("grito de convocación",                  "rallying cry",                       "屠龙者的咆哮")
+  add("grito de convocacion",                  "rallying cry",                       "屠龙者的咆哮")
+  add("bendición de warchief",                 "warchief blessing",                  "大酋长的祝福")
+  add("bendicion de warchief",                 "warchief blessing",                  "大酋长的祝福")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 89: WoW Fórmulas y Transmutas   ║
+  -- ╚══════════════════════════════════════════════╝
+  add("transmutar arcanita",                   "transmute arcanite",                 "转化奥金")
+  add("refinar sal profunda",                  "refine deeprock salt",               "筛盐")
+  add("barra de arcanita",                     "arcanite bar",                       "奥金锭")
+  add("paño de pirotejido",                    "flarecore cloth",                    "炽热之线")
+  add("pano de pirotejido",                    "flarecore cloth",                    "炽热之线")
+  add("aceite de maná menor",                  "minor mana oil",                     "次级法力油")
+  add("aceite de mana menor",                  "minor mana oil",                     "次级法力油")
+  add("aceite de mago menor",                  "minor wizard oil",                   "次级巫师油")
+  add("cuero curado de pellejo de roca",       "cured rugged hide",                  "熟化毛皮")
+  add("paño de runas",                         "runecloth",                          "符文布")
+  add("pano de runas",                         "runecloth",                          "符文布")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 90: WoW Hardcore y Seguridad    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("agro invisible",                        "invisible aggro",                    "隐性仇恨")
+  add("atraer con mascota",                    "pet pull",                           "宠物拉怪")
+  add("zona segura",                           "safe spot",                          "安全点")
+  add("pérdida de conexión",                   "disconnect",                         "掉线")
+  add("perdida de conexion",                   "disconnect",                         "掉线")
+  add("burbuja de piedra de hogar",            "bubble hearth",                      "无敌炉石")
+  add("guardia de alma",                       "soulstone",                          "灵魂石")
+  add("morir en hardcore",                     "hardcore death",                     "硬核死亡")
+  add("evitar combate",                        "avoid combat",                       "脱战")
+  add("limpiar agro",                          "clear threat",                       "清仇恨")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 91: Turtle WoW Zonas Custom     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("alah'thalas",                           "alah'thalas",                        "阿拉萨拉斯")
+  add("tierras de la peste del sur",           "southern plaguelands",               "南瘟疫之地")
+  add("isla de la disputa",                    "island of disputation",              "争议之岛")
+  add("cavernas del tiempo custom",            "custom cot",                         "时光之穴")
+  add("forjadores de hierro",                  "ironforge builders",                 "铁炉堡建造者")
+  add("bahía del botín custom",                 "custom booty bay",                   "藏宝海湾")
+  add("bahia del botin custom",                 "custom booty bay",                   "藏宝海湾")
+  add("pueblo revantusk",                      "revantusk village",                  "恶齿村")
+  add("bosque de elwynn custom",               "custom elwynn",                      "艾尔文森林")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 92: Turtle WoW Supervivencia    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tienda de campaña",                     "tent",                               "帐篷")
+  add("tienda de campana",                     "tent",                               "帐篷")
+  add("fogata de supervivencia",               "survival campfire",                  "生存篝火")
+  add("jardinería",                            "gardening",                          "园艺")
+  add("jardineria",                            "gardening",                          "园艺")
+  add("despellejar custom",                    "custom skinning",                    "剥皮")
+  add("pesca de supervivencia",                "survival fishing",                   "生存钓鱼")
+  add("hacha de supervivencia",                "survival axe",                       "生存手斧")
+  add("bolsa de dormir",                       "sleeping bag",                       "睡袋")
+  add("palo de fogata",                        "campfire wood",                      "篝火木柴")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 93: Turtle WoW Modos de Juego   ║
+  -- ╚══════════════════════════════════════════════╝
+  add("vagabundo",                             "vagrant",                            "流浪者")
+  add("lento y constante",                     "slow and steady",                    "龟速模式")
+  add("modo desafío",                          "challenge mode",                     "挑战模式")
+  add("modo desafio",                          "challenge mode",                     "挑战模式")
+  add("modo pacifista",                        "pacifist mode",                      "和平主义")
+  add("glifo del guerrero",                    "glyph of the warrior",               "战士雕文")
+  add("glifo de experiencia",                  "glyph of experience",                "经验雕文")
+  add("sin talentos",                          "no talents challenge",               "无天赋挑战")
+  add("viaje de tortuga",                      "turtle journey",                     "乌龟之旅")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 94: Slang y Modismos de España  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("guay",                                  "cool",                               "酷")
+  add("molar",                                 "to like / cool",                     "喜欢/很酷")
+  add("tío",                                   "guy / dude",                         "哥们")
+  add("tio",                                   "guy / dude",                         "哥们")
+  add("chaval",                                "kid / boy",                          "小子")
+  add("vale",                                  "ok",                                 "好的")
+  add("currar",                                "to work",                            "工作")
+  add("pasta",                                 "money",                              "钱")
+  add("chungo",                                "bad / difficult",                    "糟糕/棘手")
+  add("gilipollas",                            "asshole",                            "白痴")
+  add("hostia",                                "wow / hit",                          "天哪")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 95: Slang y Modismos de México  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("chido",                                 "cool",                               "很棒")
+  add("wey",                                   "dude",                               "兄弟")
+  add("güey",                                  "dude",                               "兄弟")
+  add("no manches",                            "no way",                             "不会吧")
+  add("órale",                                 "come on / ok",                       "好啦/天哪")
+  add("orale",                                 "come on / ok",                       "好啦/天哪")
+  add("chavo",                                 "kid / boy",                          "小伙子")
+  add("neta",                                  "truth / really",                     "真的吗")
+  add("chamba",                                "work / job",                         "工作")
+  add("compa",                                 "pal / friend",                       "朋友")
+  add("fresa",                                 "snobby",                             "做作的")
+  add("chafa",                                 "cheap / bad quality",                "山寨/劣质")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 96: Slang y Modismos Argentina ║
+  -- ╚══════════════════════════════════════════════╝
+  add("che",                                   "hey",                                "嘿")
+  add("boludo",                                "idiot / friend",                     "笨蛋/伙计")
+  add("copado",                                "cool",                               "太棒了")
+  add("mina",                                  "girl / woman",                       "女孩")
+  add("pibe",                                  "boy / kid",                          "小子")
+  add("bondi",                                 "bus",                                "公交车")
+  add("laburar",                               "work",                               "工作")
+  add("cheto",                                 "fancy / snobby",                     "装腔作势")
+  add("quilombo",                              "mess / trouble",                     "混乱/大麻烦")
+  add("guita",                                 "money",                              "钱")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 97: Slang de Internet Chino     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("yyds",                                  "greatest of all time",               "永远的神")
+  add("run",                                   "run away",                           "润")
+  add("tang ping",                             "lying flat",                         "躺平")
+  add("niubi",                                 "awesome",                            "牛逼")
+  add("diao",                                  "cool",                               "屌")
+  add("666",                                   "smooth / awesome",                   "溜溜溜")
+  add("2333",                                  "laughing out loud",                  "大笑")
+  add("555",                                   "crying",                             "呜呜呜")
+  add("886",                                   "bye bye",                            "拜拜啦")
+  add("kawayi",                                "cute",                               "可爱")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 98: Dinero y Finanzas Reales    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("préstamo",                              "loan",                               "贷款")
+  add("prestamo",                              "loan",                               "贷款")
+  add("tasa de interés",                       "interest rate",                      "利率")
+  add("tasa de interes",                       "interest rate",                      "利率")
+  add("transferencia bancaria",                 "bank transfer",                      "银行转账")
+  add("tarjeta de crédito",                    "credit card",                        "信用卡")
+  add("tarjeta de credito",                    "credit card",                        "信用卡")
+  add("cajero automático",                     "atm",                                "自动取款机")
+  add("cajero automatico",                     "atm",                                "自动取款机")
+  add("depósito",                              "deposit",                            "存款")
+  add("deposito",                              "deposit",                            "存款")
+  add("cuenta de ahorros",                     "savings account",                    "储蓄账户")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 99: Salud y Emergencias Médicas ║
+  -- ╚══════════════════════════════════════════════╝
+  add("me siento mal",                         "i feel sick",                        "我感觉不舒服")
+  add("necesito un médico",                    "i need a doctor",                    "我需要医生")
+  add("necesito un medico",                    "i need a doctor",                    "我需要医生")
+  add("ambulancia",                            "ambulance",                          "救护车")
+  add("hospital",                              "hospital",                           "医院")
+  add("dolor de cabeza",                       "headache",                           "头痛")
+  add("farmacia",                              "pharmacy",                           "药房")
+  add("receta médica",                         "medical prescription",               "医生处方")
+  add("receta medica",                         "medical prescription",               "医生处方")
+  add("fractura",                              "fracture",                           "骨折")
+  add("fiebre",                                "fever",                              "发烧")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 100: Redes y Streaming          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("seguidores",                            "followers",                          "粉丝")
+  add("transmisión en vivo",                   "livestream",                         "直播")
+  add("transmision en vivo",                   "livestream",                         "直播")
+  add("me gusta",                              "likes",                              "点赞")
+  add("suscribirse",                           "subscribe",                          "订阅")
+  add("compartir enlace",                      "share link",                         "分享链接")
+  add("creador de contenido",                  "content creator",                    "内容创作者")
+  add("canal de youtube",                      "youtube channel",                    "油管频道")
+  add("video viral",                           "viral video",                        "热门视频")
+  add("bloquear usuario",                      "block user",                         "拉黑")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 101: Gastronomía Restaurante    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("camarero",                              "waiter",                             "服务员")
+  add("cuenta por favor",                      "bill please",                        "请结账")
+  add("menú del día",                          "menu of the day",                    "今日菜单")
+  add("menu del dia",                          "menu of the day",                    "今日菜单")
+  add("propina",                               "tip",                                "小费")
+  add("alergia alimentaria",                   "food allergy",                       "食物过敏")
+  add("vegetariano",                           "vegetarian",                         "素食主义者")
+  add("vegano",                                "vegan",                              "纯素食者")
+  add("vaso de agua",                          "glass of water",                     "一杯水")
+  add("carta de vinos",                        "wine list",                          "酒单")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 102: Trabajo y Teletrabajo      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("reunión virtual",                       "virtual meeting",                    "视频会议")
+  add("reunion virtual",                       "virtual meeting",                    "视频会议")
+  add("fecha límite",                          "deadline",                           "截止日期")
+  add("fecha limite",                          "deadline",                           "截止日期")
+  add("jefe de proyecto",                      "project manager",                    "项目经理")
+  add("correo corporativo",                    "work email",                         "工作邮箱")
+  add("horario de trabajo",                    "work hours",                         "工作时间")
+  add("salario mensual",                       "monthly salary",                     "月薪")
+  add("contrato laboral",                      "employment contract",                "劳动合同")
+  add("videollamada",                          "video call",                         "视频通话")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 103: Ciencia y Física Básica    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("gravedad",                              "gravity",                            "重力")
+  add("órbita planetaria",                     "planetary orbit",                    "行星轨道")
+  add("orbita planetaria",                     "planetary orbit",                    "行星轨道")
+  add("telescopio espacial",                   "space telescope",                    "空间望远镜")
+  add("átomo",                                 "atom",                               "原子")
+  add("atomo",                                 "atom",                               "原子")
+  add("sistema solar",                         "solar system",                       "太阳系")
+  add("agujero negro",                         "black hole",                         "黑洞")
+  add("molécula",                              "molecule",                           "分子")
+  add("molecula",                              "molecule",                           "分子")
+  add("elemento químico",                      "chemical element",                   "化学元素")
+  add("elemento quimico",                      "chemical element",                   "化学元素")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 104: Fenómenos Extremos y Clima ║
+  -- ╚══════════════════════════════════════════════╝
+  add("terremoto",                             "earthquake",                         "地震")
+  add("huracán",                               "hurricane",                          "飓风")
+  add("huracan",                               "hurricane",                          "飓风")
+  add("inundación repentina",                  "flash flood",                        "山洪暴发")
+  add("inundacion repentina",                  "flash flood",                        "山洪暴发")
+  add("sequía prolongada",                     "prolonged drought",                  "长期干旱")
+  add("sequia prolongada",                     "prolonged drought",                  "长期干旱")
+  add("tornado",                               "tornado",                            "龙卷风")
+  add("tormenta de arena",                     "sandstorm",                          "沙尘暴")
+  add("erupción volcánica",                    "volcanic eruption",                  "火山喷发")
+  add("erupcion volcanica",                    "volcanic eruption",                  "火山喷发")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 105: Cortesía y Expresiones     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("disculpe las molestias",                "sorry for the inconvenience",        "抱歉给您带来不便")
+  add("con su permiso",                        "with your permission",               "打扰一下")
+  add("es usted muy amable",                   "you are very kind",                  "您太客气了")
+  add("lo aprecio sinceramente",               "i sincerely appreciate it",          "由衷感谢")
+  add("mucho gusto en conocerle",              "pleasure to meet you",               "很高兴认识您")
+  add("le deseo lo mejor",                     "wish you the best",                  "祝您一切顺利")
+  add("que tenga un buen día",                 "have a nice day",                    "祝你度过美好的一天")
+  add("que tenga un buen dia",                 "have a nice day",                    "祝你度过美好的一天")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 106: Ansiedad y Carga Emocional ║
+  -- ╚══════════════════════════════════════════════╝
+  add("estoy agobiado",                        "i am overwhelmed",                   "我快崩溃了")
+  add("tengo dudas",                           "i have doubts",                      "我有疑虑")
+  add("ataque de pánico",                      "panic attack",                       "恐慌发作")
+  add("ataque de panico",                      "panic attack",                       "恐慌发作")
+  add("ansiedad social",                       "social anxiety",                     "社交焦虑")
+  add("estrés acumulado",                      "accumulated stress",                 "压力累积")
+  add("estres acumulado",                      "accumulated stress",                 "压力累积")
+  add("me siento bajo presión",                "i feel under pressure",              "我感到压力很大")
+  add("me siento bajo presion",                "i feel under pressure",              "我感到压力很大")
+  add("tensión mental",                        "mental tension",                     "精神紧张")
+  add("tension mental",                        "mental tension",                     "精神紧张")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 107: Compras y Regateo          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("¿cuánto cuesta?",                       "how much does it cost?",             "这个多少钱？")
+  add("¿cuanto cuesta?",                       "how much does it cost?",             "这个多少钱？")
+  add("¿tiene descuento?",                     "is there a discount?",               "有折扣吗？")
+  add("rebajas de temporada",                  "seasonal sales",                     "季节性打折")
+  add("precio mínimo",                         "minimum price",                      "最低价")
+  add("precio minimo",                         "minimum price",                      "最低价")
+  add("muy costoso",                           "very expensive",                     "太贵了")
+  add("esta barato",                           "it's cheap",                         "很便宜")
+  add("está barato",                           "it's cheap",                         "很便宜")
+  add("oferta especial",                       "special offer",                      "特价优惠")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 108: Transporte Urbano          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("boleto de metro",                       "subway ticket",                      "地铁票")
+  add("estación de autobús",                   "bus station",                        "公交车站")
+  add("estacion de autobus",                   "bus station",                        "公交车站")
+  add("parada de taxis",                       "taxi stand",                         "出租车停靠点")
+  add("hacer transbordo",                      "to transfer lines",                  "换乘")
+  add("mapa de líneas",                        "transit map",                        "路线图")
+  add("mapa de lineas",                        "transit map",                        "路线图")
+  add("tarifa de viaje",                       "travel fare",                        "票价")
+  add("viaje sencillo",                        "single trip",                        "单程票")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 109: Vivienda y Alquileres      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("apartamento amueblado",                 "furnished apartment",                "精装公寓")
+  add("contrato de alquiler",                  "lease contract",                     "租赁合同")
+  add("depósito de fianza",                    "security deposit",                   "押金")
+  add("deposito de fianza",                    "security deposit",                   "押金")
+  add("camión de mudanza",                     "moving truck",                       "搬家卡车")
+  add("camion de mudanza",                     "moving truck",                       "搬家卡车")
+  add("casero",                                "landlord",                           "房东")
+  add("pago de renta",                         "rent payment",                       "房租")
+  add("inquilino",                             "tenant",                             "租客")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 110: Videojuegos e Hardware     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tarjeta gráfica",                       "graphics card",                      "显卡")
+  add("tarjeta grafica",                       "graphics card",                      "显卡")
+  add("latencia de red",                       "network latency",                    "网络延迟")
+  add("fotogramas por segundo",                "frames per second",                  "帧率")
+  add("resolución de pantalla",                "screen resolution",                  "屏幕分辨率")
+  add("resolucion de pantalla",                "screen resolution",                  "屏幕分辨率")
+  add("procesador central",                    "cpu",                                "处理器")
+  add("memoria de video",                      "video ram",                          "显存")
+  add("teclado mecánico",                      "mechanical keyboard",                "机械键盘")
+  add("teclado mecanico",                      "mechanical keyboard",                "机械键盘")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 111: Biología Marina y Océanos  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("arrecife de coral",                     "coral reef",                         "珊瑚礁")
+  add("delfín nariz de botella",               "bottlenose dolphin",                 "宽吻海豚")
+  add("delfin nariz de botella",               "bottlenose dolphin",                 "宽吻海豚")
+  add("tiburón blanco",                        "great white shark",                  "大白鲨")
+  add("tiburon blanco",                        "great white shark",                  "大白鲨")
+  add("marea alta",                            "high tide",                          "满潮")
+  add("oleaje fuerte",                         "rough seas",                         "风浪")
+  add("profundidades del mar",                 "deep sea",                           "深海")
+  add("corriente marina",                      "ocean current",                      "洋流")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 112: Servicios de Hotelería     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("habitación doble",                      "double room",                        "双人间")
+  add("habitacion doble",                      "double room",                        "双人间")
+  add("registro de entrada",                   "check-in",                           "办理入住")
+  add("registro de salida",                   "check-out",                          "办理退房")
+  add("contraseña del wifi",                   "wifi password",                      "无线密码")
+  add("contrasena del wifi",                   "wifi password",                      "无线密码")
+  add("servicio de habitaciones",              "room service",                       "客房服务")
+  add("recepción las veinticuatro horas",      "24-hour reception",                  "全天候前台")
+  add("recepcion las veinticuatro horas",      "24-hour reception",                  "全天候前台")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 113: Términos Legales           ║
+  -- ╚══════════════════════════════════════════════╝
+  add("abogado de oficio",                     "public defender",                    "公设辩护人")
+  add("firmar contrato",                       "sign contract",                      "签署合同")
+  add("demanda judicial",                      "lawsuit",                            "起诉")
+  add("multa de tránsito",                     "traffic ticket",                     "交通罚单")
+  add("multa de transito",                     "traffic ticket",                     "交通罚单")
+  add("presentar denuncia",                    "file a complaint",                   "报案")
+  add("juicio penal",                          "criminal trial",                     "刑事审判")
+  add("tribunal de justicia",                  "court of law",                       "法庭")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 114: Geografía Física           ║
+  -- ╚══════════════════════════════════════════════╝
+  add("cordillera montañosa",                  "mountain range",                     "山脉")
+  add("cordillera montanosa",                  "mountain range",                     "山脉")
+  add("desierto de arena",                     "sand desert",                        "沙质荒漠")
+  add("selva tropical",                        "tropical rainforest",                "热带雨林")
+  add("llanura verde",                         "green plain",                        "绿洲平原")
+  add("cañón profundo",                        "deep canyon",                        "深峡谷")
+  add("canon profundo",                        "deep canyon",                        "深峡谷")
+  add("cascada de agua",                       "waterfall",                          "瀑布")
+  add("lago de agua dulce",                    "freshwater lake",                    "淡水湖")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 115: Familia Política           ║
+  -- ╚══════════════════════════════════════════════╝
+  add("mi prometido",                          "my fiancé",                          "我的未婚夫")
+  add("mi prometida",                          "my fiancée",                         "我的未婚妻")
+  add("mi suegro",                             "my father-in-law",                   "我的公公/岳父")
+  add("mi cuñado",                             "my brother-in-law",                  "我的小叔子/大舅子")
+  add("mi cunado",                             "my brother-in-law",                  "我的小叔子/大舅子")
+  add("mi yerno",                              "my son-in-law",                      "我的女婿")
+  add("mi nuera",                              "my daughter-in-law",                 "我的儿媳")
+  add("noviazgo estable",                      "stable relationship",                "稳定的恋爱关系")
+  add("suegra",                                "mother-in-law",                      "婆婆/岳母")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 116: Inteligencia Artificial    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("modelo de lenguaje",                    "language model",                     "语言模型")
+  add("prompts de optimización",               "optimization prompts",               "优化提示词")
+  add("prompts de optimizacion",               "optimization prompts",               "优化提示词")
+  add("conjunto de datos",                     "dataset",                            "数据集")
+  add("algoritmo predictivo",                  "predictive algorithm",               "预测算法")
+  add("red neuronal",                          "neural network",                     "神经网络")
+  add("aprendizaje automático",                "machine learning",                   "机器学习")
+  add("aprendizaje automatico",                "machine learning",                   "机器学习")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 117: Júbilo y Celebración       ║
+  -- ╚══════════════════════════════════════════════╝
+  add("enhorabuena",                           "congratulations",                    "祝贺")
+  add("éxito rotundo",                         "resounding success",                 "巨大的成功")
+  add("exito rotundo",                         "resounding success",                 "巨大的成功")
+  add("celebración de victoria",               "victory celebration",                "胜利庆祝")
+  add("celebracion de victoria",               "victory celebration",                "胜利庆祝")
+  add("alegría inmensa",                       "immense joy",                        "极大的快乐")
+  add("alegria inmensa",                       "immense joy",                        "极大的快乐")
+  add("¡muchas felicidades!",                  "congratulations!",                   "衷心祝贺！")
+  add("muchas felicidades",                    "congratulations",                    "衷心祝贺")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 118: Vestimenta y Moda          ║
+  -- ╚══════════════════════════════════════════════╝
+  add("camisa de vestir",                      "dress shirt",                        "衬衫")
+  add("pantalones cortos",                     "shorts",                             "短裤")
+  add("zapatos de cuero",                      "leather shoes",                      "皮鞋")
+  add("chaqueta de invierno",                  "winter jacket",                      "防寒夹克")
+  add("lentes de sol",                         "sunglasses",                         "太阳镜")
+  add("vestido elegante",                      "elegant dress",                      "礼服裙")
+  add("sombrero de ala",                       "brimmed hat",                        "宽檐帽")
+  add("bufanda de lana",                       "wool scarf",                         "羊毛围巾")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 119: Hobbies y Manualidades     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("tejer lana",                            "knit wool",                          "织毛衣")
+  add("pintura al óleo",                       "oil painting",                       "油画")
+  add("pintura al oleo",                       "oil painting",                       "油画")
+  add("fotografía de naturaleza",               "nature photography",                 "自然摄影")
+  add("fotografia de naturaleza",               "nature photography",                 "自然摄影")
+  add("cocina gourmet",                        "gourmet cooking",                    "美食烹饪")
+  add("lectura de novelas",                    "novel reading",                      "小说阅读")
+  add("jardinería urbana",                     "urban gardening",                    "都市园艺")
+  add("jardineria urbana",                     "urban gardening",                    "都市园艺")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 120: Despedidas y Buenos Deseos ║
+  -- ╚══════════════════════════════════════════════╝
+  add("que te vaya excelente",                 "wish you all the best",              "祝你一切顺利")
+  add("cuídate mucho",                         "take care a lot",                    "多加保重")
+  add("cuidate mucho",                         "take care a lot",                    "多加保重")
+  add("que tengas un feliz viaje",             "have a safe trip",                   "祝你旅途愉快")
+  add("nos vemos pronto",                      "see you soon",                       "回头见")
+  add("hasta la próxima",                      "until next time",                    "下次见")
+  add("hasta la proxima",                      "until next time",                    "下次见")
+  add("éxito en todo",                         "success in everything",              "事事顺心")
+  add("exito en todo",                         "success in everything",              "事事顺心")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 121: WoW Reclutamiento de Guild  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("reclutando dps para raid",               "recruiting dps for raid",            "公会活动招输出")
+  add("busco hermandad activa",                 "looking for active guild",           "求活跃公会")
+  add("hacemos dkp",                            "we do dkp",                          "我们用dkp")
+  add("loot por dados",                         "roll for loot",                      "roll点分装备")
+  add("raid los fines de semana",               "weekend raid",                       "周末活动")
+  add("busco dps para raid de hermandad",       "looking for guild raid dps",         "公会活动招输出")
+  add("horario nocturno",                       "night schedule",                     "活动时间在晚上")
+  add("discord obligatorio",                    "discord mandatory",                  "必须进语音")
+  add("ambiente tranquilo",                     "chill environment",                  "氛围和谐")
+  add("progreso de banda",                      "raid progress",                      "开荒进度")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 122: WoW Jefes de Banda Núcleo    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("núcleo de magma",                        "molten core",                        "熔火之心")
+  add("nucleo de magma",                        "molten core",                        "熔火之心")
+  add("guarida de onyxia",                      "onyxia's lair",                      "奥妮克希亚的巢穴")
+  add("guarida de alanegra",                    "blackwing lair",                     "黑翼之巢")
+  add("lucifron",                               "lucifron",                           "鲁西弗隆")
+  add("magmadar",                               "magmadar",                           "玛格曼达")
+  add("gehennas",                               "gehennas",                           "基根纳斯")
+  add("garr",                                   "garr",                               "加尔")
+  add("barón geddon",                           "baron geddon",                       "迦顿男爵")
+  add("baron geddon",                           "baron geddon",                       "迦顿男爵")
+  add("shazzrah",                               "shazzrah",                           "沙斯拉尔")
+  add("sufuron",                                "sulfuron harbinger",                 "萨弗隆先驱者")
+  add("golemagg",                               "golemagg the incinerator",           "焚化者古莱曼格")
+  add("mayordomo executus",                     "majordomo executus",                 "管理者埃克索图斯")
+  add("ragnaros",                               "ragnaros",                           "拉格纳罗斯")
+  add("razorgore",                              "razorgore the untamed",              "狂野 de la 拉佐格尔")
+  add("vaelastrasz",                            "vaelastrasz the red",                "红龙瓦拉斯塔兹")
+  add("broodlord",                              "broodlord lashlayer",                "勒什雷尔")
+  add("firemaw",                                "firemaw",                            "费尔默")
+  add("ebonroc",                                "ebonroc",                            "埃博诺克")
+  add("flamegor",                               "flamegor",                           "弗莱格尔")
+  add("chromaggus",                             "chromaggus",                         "克洛玛古斯")
+  add("nefarian",                               "nefarian",                           "奈法利安")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 123: WoW Jefes de Banda ZG/AQ/NX ║
+  -- ╚══════════════════════════════════════════════╝
+  add("zul'gurub",                              "zul'gurub",                          "祖尔格拉布")
+  add("ruinas de ahn'qiraj",                    "ruins of ahn'qiraj",                 "安其拉废墟")
+  add("templo de ahn'qiraj",                    "templo de ahn'qiraj",                "安其拉神殿")
+  add("naxxramas",                              "naxxramas",                          "纳克萨玛斯")
+  add("hakkar el cazador de almas",             "hakkar the soulflayer",              "哈卡")
+  add("ossirian el sin configurar",             "ossirian the unscarred",             "无孔不入的奥斯里安")
+  add("sartura",                                "battleguard sartura",                "沙尔图拉")
+  add("fankriss",                               "fankriss the unyielding",            "范克瑞斯")
+  add("huhu",                                   "princess huhuran",                   "哈霍兰公主")
+  add("emperadores gemelos",                    "twin emperors",                      "双子皇帝")
+  add("c'thun",                                 "c'thun",                             "克苏恩")
+  add("kel'thuzad",                             "kel'thuzad",                         "克尔苏加德")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 124: WoW Consumibles de Alquimia║
+  -- ╚══════════════════════════════════════════════╝
+  add("frasco de poder supremo",                "flask of supreme power",             "至高能量合剂")
+  add("frasco de titanes",                      "flask of the titans",                "泰坦合剂")
+  add("elixir de mangosta",                     "elixir of the mongoose",             "猫鼬药剂")
+  add("poción de maná excelente",               "major mana potion",                  "大蓝药水")
+  add("pocion de mana excelente",               "major mana potion",                  "大蓝药水")
+  add("poción de vida excelente",               "major healing potion",               "大红药水")
+  add("pocion de vida excelente",               "major healing potion",               "大红药水")
+  add("ron de ríonegro",                        "rumsey rum black label",             "朗姆酒")
+  add("ron de rionegro",                        "rumsey rum black label",             "朗姆酒")
+  add("té de cardo",                            "thistle tea",                        "菊花茶")
+  add("te de cardo",                            "thistle tea",                        "菊花茶")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 125: WoW Materiales de Crafteo  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("paño de tejido de runas",                "runeweave cloth",                    "符文布")
+  add("pano de tejido de runas",                "runeweave cloth",                    "符文布")
+  add("barra de arcanita",                      "arcanite bar",                       "奥金锭")
+  add("cuero de pellejo de sombra",             "shadowcat hide",                     "暗影猫皮")
+  add("saronita",                               "saronite",                           "萨隆邪铁")
+  add("barra de torio",                         "thorium bar",                        "瑟银锭")
+  add("paño de linaje",                         "felcloth",                           "恶魔布")
+  add("pano de linaje",                         "felcloth",                           "恶魔布")
+  add("esencia de agua",                        "essence of water",                   "水之精华")
+  add("esencia de fuego",                       "essence of fire",                    "火之精华")
+  add("esencia de tierra",                      "essence of earth",                   "大地精华")
+  add("esencia de aire",                        "essence of air",                     "空气精华")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 126: Conversación Informal      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("todo marcha bien",                       "everything is going fine",           "一切都进行得很好")
+  add("tengo muchas ganas de jugar",            "i really want to play",              "我很想玩游戏")
+  add("¿qué estás haciendo hoy?",               "what are you doing today?",          "你今天在干嘛？")
+  add("que estas haciendo hoy",                 "what are you doing today?",          "你今天在干嘛？")
+  add("no me siento bien hoy",                  "i don't feel well today",            "我今天感觉不太舒服")
+  add("espero verte pronto",                    "hope to see you soon",               "希望很快见到你")
+  add("gracias por la información",             "thanks for the info",                "谢谢你提供的信息")
+  add("gracias por la informacion",             "thanks for the info",                "谢谢你提供的信息")
+  add("eso tiene mucho sentido",                "that makes a lot of sense",          "这很有道理")
+  add("estoy de acuerdo contigo",               "i agree with you",                   "我同意你的看法")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 127: Expresiones de Comercio    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("vendo por oro",                          "selling for gold",                   "金币出售")
+  add("compro materiales",                      "buying mats",                        "收材料")
+  add("hago descuento",                         "giving a discount",                  "打折优惠")
+  add("no me queda oro",                        "no gold left",                       "没有金币了")
+  add("precio negociable",                      "negotiable price",                   "价格可谈")
+  add("precio fijo",                            "fixed price",                        "固定价格")
+  add("¿haces rebaja?",                         "can you lower the price?",           "能便宜点吗？")
+  add("haces rebaja",                           "can you lower the price?",           "能便宜点吗？")
+  add("es demasiado caro",                      "it is too expensive",                "太贵了")
+  add("es una ganga",                           "it's a bargain",                     "真划算")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 128: Turtle WoW Misiones        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("misión personalizada",                   "custom quest",                       "自定义任务")
+  add("mision personalizada",                   "custom quest",                       "自定义任务")
+  add("tienda de donación",                     "donation shop",                      "商城")
+  add("tienda de donacion",                     "donation shop",                      "商城")
+  add("moneda de donación",                     "donation token",                     "商城币")
+  add("moneda de donacion",                     "donation token",                     "商城币")
+  add("isla de la disputa",                     "battleground island",                "战场岛")
+  add("evento de hermandad",                    "guild event",                        "公会活动")
+  add("recompensa de misión",                   "quest reward",                       "任务奖励")
+  add("recompensa de mision",                   "quest reward",                       "任务奖励")
+  add("reputación personalizada",               "custom reputation",                  "自定义声望")
+  add("reputacion personalizada",               "custom reputation",                  "自定义声望")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 129: Slang de Gaming / Frustrar ║
+  -- ╚══════════════════════════════════════════════╝
+  add("¡qué mala suerte!",                      "what bad luck!",                     "太倒霉了！")
+  add("que mala suerte",                        "what bad luck!",                     "太倒霉了！")
+  add("he muerto otra vez",                     "died again",                         "又死了")
+  add("¿por qué siempre yo?",                   "why always me?",                     "为什么总是我？")
+  add("por que siempre yo",                     "why always me?",                     "为什么总是我？")
+  add("este grupo es terrible",                 "this group is terrible",             "这队伍太烂了")
+  add("no saben jugar",                         "they don't know how to play",        "他们不会玩")
+  add("¡qué asco!",                             "how disgusting!",                    "太恶心了！")
+  add("que asco",                               "how disgusting!",                    "太恶心了！")
+  add("estoy harto",                            "i am fed up",                        "我受够了")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  [NUEVO] CAT 130: Felicitaciones y Ding      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("¡felicidades por el nivel!",             "grats on level up!",                 "恭喜升级！")
+  add("felicidades por el nivel",               "grats on level up!",                 "恭喜升级！")
+  add("¡felicidades!",                          "congratulations!",                   "恭喜恭喜！")
+  add("felicidades",                            "congratulations!",                   "恭喜恭喜！")
+  add("¡bien hecho!",                           "well done!",                         "干得漂亮！")
+  add("bien hecho",                             "well done!",                         "干得漂亮！")
+  add("sigue así",                              "keep it up",                         "继续保持")
+  add("sigue asi",                              "keep it up",                         "继续保持")
+  add("¡buen trabajo!",                         "good job!",                          "做得好！")
+  add("buen trabajo",                           "good job!",                          "做得好！")
+  add("orgulloso de ti",                        "proud of you",                       "为你骄傲")
+
+  -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
   -- ╚══════════════════════════════════════════════╝
   local p_keys = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
