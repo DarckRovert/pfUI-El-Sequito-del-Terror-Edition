@@ -122,7 +122,8 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       for _, key in ipairs(phraseKeys) do
         -- Dado que el diccionario y proc_text ya están en minúsculas, la búsqueda es directa e infalible
         if strfind(proc_text, key, 1, true) then
-          local safe_key = string.gsub(key, "(%W)", "%%%1")
+          -- ESCAPE SEGURO: Escapa únicamente caracteres especiales de control de Lua, sin alterar bytes multibyte UTF-8
+          local safe_key = string.gsub(key, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1")
           local res, count
           if srcLang == "zh" then
             -- Chino no tiene delimitadores alfanuméricos en UTF-8. Reemplazo directo.
@@ -376,7 +377,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
             local keys = pfUI.translator_dicts[prefix .. "_keys"]
             local trans = LocalTranslate(raw_msg, words, phrases, keys, src)
             if trans then
-              msg = string.gsub(msg, string.gsub(raw_msg, "(%W)", "%%%1"), trans .. GetTRTag())
+              msg = string.gsub(msg, string.gsub(raw_msg, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1"), trans .. GetTRTag())
               raw_msg = trans
             end
           end

@@ -24,7 +24,7 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
         if i ~= j and src_text and dest_text and src_text ~= "" and dest_text ~= "" then
           local isPhrase = strfind(src_text, " ") or strfind(dest_text, " ") or strlen(src_text) > 12 or src_lang == "zh"
           local prefix = src_lang .. "_" .. dest_lang
-          local key = strlower(src_text)
+          local key = string.lower(src_text)
           if isPhrase then
             if not pfUI.translator_dicts[prefix .. "_phrases"][key] then
               pfUI.translator_dicts[prefix .. "_phrases"][key] = dest_text
@@ -1564,6 +1564,11 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("necesito",                               "need",                               "需要")
   add("vengan",                                 "come",                               "来")
   add("hacer mazmorra",                         "do dungeon",                         "打本")
+  add("modo guerra",                            "war mode",                           "战争模式")
+  add("guerra",                                 "war",                                "战争")
+  add("tortuga",                                "turtle",                             "乌龟")
+  add("ok",                                     "ok",                                 "好的")
+  add("bastón",                                 "staff",                              "法杖")
 
   -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
