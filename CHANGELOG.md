@@ -1,5 +1,30 @@
 # CHANGELOG - Global Chat Translator
 
+## [4.2.1] - 2026-05-19 (Hotfix)
+### Corregido — Bugs Críticos de Runtime
+- **[CRÍTICO] Shadowing de `pairs()` en Lua 5.0**: La variable local `local pairs` en `translator.lua` sombrea el iterador global `pairs()` de Lua 5.0. Dentro de `GetTranslationRatio()`, el código `for w, count in pairs(orig_words)` intentaba llamar una *tabla* como función, causando un error silencioso de runtime para todos los mensajes EN/ES. El filtro CTR nunca funcionó para idiomas occidentales. **Fix**: Renombrado a `LANG_PAIRS` y la iteración se migró a `next()` (Lua 5.0 nativo, sin riesgo de shadowing).
+- **[CRÍTICO] Precedencia de operadores en WIM Bridge**: `isIncoming and C.translator.incoming == "1" or C.translator.outgoing == "1"` evaluaba incorrectamente. Cuando `outgoing=="1"`, `mode_check` era siempre `true` independientemente de la dirección del mensaje. **Fix**: Expresión reescrita con paréntesis explícitos.
+- **[CRÍTICO] Detección de reino usando parámetro incorrecto**: El sistema de votación automática usaba el parámetro `id` de `ChatFrame:AddMessage(text, r, g, b, id)`, que es un entero de grupo de color, no el nombre del canal. Los votos nunca se acumulaban y el modo auto-detección estaba permanentemente inactivo. **Fix**: El sistema ahora vota sobre todos los mensajes de jugador con idioma detectado, sin depender del tipo de canal.
+- **Escape inseguro en WIM Bridge**: `raw_msg` se usaba directamente en `string.gsub` sin escapar metacaracteres Lua (`. * - ? [ ] ( ) ^ $ %`). Podría crashear con mensajes que contengan dichos caracteres. **Fix**: Escape previo con `string.gsub(raw_msg, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1")`.
+
+### Añadido
+- **`pfUI.translator_version = "4.2.0"`**: Constante pública para verificación de compatibilidad por addons externos.
+- **`GetMyLang()` helper**: Función interna centralizada que elimina la duplicación de detección de locale entre `GetTranslationMode()` y `TranslatorAddMessage()`.
+- **`/tr reset`**: Nuevo comando para reiniciar la detección automática del idioma del reino si queda bloqueada en un valor incorrecto.
+- **`/tr debug`**: Toggle de modo debug instantáneo desde el chat sin necesidad de abrir la GUI de pfUI.
+- **`/tr stats` mejorado**: Ahora muestra porcentaje de hit rate de caché y el idioma de servidor detectado, además de los contadores de mensajes.
+- **Memoización de `GetTRTag()`**: El tag `[TR]` es estático por sesión; ahora se calcula una sola vez y se cachea, evitando recálculos en cada mensaje renderizado.
+- **True LRU en `CacheGet()`**: El acceso a un item ahora lo promueve al final de la cola de desalojo, implementando correctamente el algoritmo Least Recently Used.
+- **Cobertura de `|Hchannel:`**: El aislamiento sintáctico ahora maneja también mensajes con link de canal sin link de jugador (fallback robusto).
+
+### Cambiado
+- **`.gitignore`**: Añadidas exclusiones `fonts/*.ttf` y `fonts/*.TTF` para evitar errores de `Permission denied` durante `git add` cuando el cliente de WoW está en ejecución.
+- **`CONTRIBUTING.md`**: Corregida instrucción errónea que indicaba usar "la API de pfUI" para modificar el diccionario (dicha API de escritura no existe). Ahora documenta el flujo correcto: editar `translator_dict.lua` directamente con la función `add(es, en, zh)`.
+- **`translator_dict.lua`**: Header actualizado a `v4.2.0 Diamond-Tier`, 130 categorías y 3600+ entradas. Marcadores `[NUEVO]` de desarrollo eliminados de categorías 128-130.
+- **`wiki/Guia_API.md`, `Arquitectura.md`, `Manual_Usuario.md`**: Referencias residuales a "Omni-Tier" eliminadas y reemplazadas por "Diamond-Tier". Manual actualizado con los nuevos comandos `/tr reset` y `/tr debug`.
+
+---
+
 ## [4.2.0] - 2026-05-19
 ### Añadido
 - **Aislamiento Sintáctico de Mensajes**: Algoritmo de pre-procesamiento del chat que separa metadatos de Blizzard, nombres de jugador y nombres de canales del cuerpo del mensaje antes de la traducción, previniendo falsos positivos de traducción y protegiendo el comportamiento interactivo del chat (clics en nombres, links de ítems).

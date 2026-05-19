@@ -23,7 +23,9 @@ El motor de la v4.2.0 incluye **Séquito Intelligence** para prevenir textos inc
 ## 3. Comandos de Chat
 Puedes usar el comando raíz `/tr` en el chat del juego:
 - `/tr`: Abre directamente la ventana de configuración del traductor en la interfaz de pfUI.
-- `/tr stats`: Muestra en tu consola local las estadísticas de telemetría (mensajes entrantes/salientes procesados y aciertos de la caché LRU).
+- `/tr stats`: Muestra estadísticas de telemetría: mensajes procesados, hit rate de caché y servidor detectado.
+- `/tr reset`: Reinicia la detección automática del idioma del reino si la heurística ha quedado atascada.
+- `/tr debug`: Alterna el modo debug de forma instantánea desde el chat (sin abrir la GUI).
 
 ---
 
@@ -36,4 +38,4 @@ Puedes activar o desactivar selectivamente qué canales de chat deseas traducir:
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Soberanía del Usuario Omni-Tier.*
+*Soberanía del Usuario Diamond-Tier.*

@@ -1,30 +1,53 @@
 pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
-  -- TRADUCTOR UNIVERSAL v4.2.0 — Diamond-Tier Séquito Edition
-  -- Motor Híbrido Trilingüe de Alto Rendimiento (ES / ZH / EN)
-  -- Soporte Nativo UTF-8 y Resolución de Coincidencias Dinámicas
+  -- TRADUCTOR UNIVERSAL v4.2.0 — Diamond-Tier Sequito Edition
+  -- Motor Hibrido Trilingue de Alto Rendimiento (ES / ZH / EN)
+  -- Soporte Nativo UTF-8 y Resolucion de Coincidencias Dinamicas
   -- ============================================================
+
+  pfUI.translator_version = "4.2.0"
 
   local C = pfUI_config
   local T = pfUI_translation[GetLocale()] or pfUI_translation["enUS"]
 
-  -- Estructura de Diccionarios V4 (Híbrida Trilingüe)
+  -- ============================================================
+  -- ESTRUCTURA DE DICCIONARIOS V4 (Hibrida Trilingue)
+  -- NOTA: Renombrado a LANG_PAIRS para NO sombrar el iterador
+  --       global pairs() de Lua 5.0 (bug critico anterior).
+  -- ============================================================
   pfUI.translator_dicts = pfUI.translator_dicts or {}
-  local pairs = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
-  for _, p in ipairs(pairs) do
-    pfUI.translator_dicts[p .. "_words"] = pfUI.translator_dicts[p .. "_words"] or {}
+  local LANG_PAIRS = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
+  for _, p in ipairs(LANG_PAIRS) do
+    pfUI.translator_dicts[p .. "_words"]   = pfUI.translator_dicts[p .. "_words"]   or {}
     pfUI.translator_dicts[p .. "_phrases"] = pfUI.translator_dicts[p .. "_phrases"] or {}
-    pfUI.translator_dicts[p .. "_keys"] = pfUI.translator_dicts[p .. "_keys"] or {}
+    pfUI.translator_dicts[p .. "_keys"]    = pfUI.translator_dicts[p .. "_keys"]    or {}
   end
 
   pfUI.translator_stats = pfUI.translator_stats or { total_in = 0, total_out = 0, cache_hits = 0 }
 
-  -- Cache LRU optimizado de alta capacidad
-  local TR_CACHE = {}
+  -- ============================================================
+  -- CACHE LRU (1024 registros — alta capacidad)
+  -- ============================================================
+  local TR_CACHE       = {}
   local TR_CACHE_ORDER = {}
-  local TR_CACHE_MAX = 1024
+  local TR_CACHE_MAX   = 1024
 
-  local function CacheGet(text) return TR_CACHE[text] end
+  local function CacheGet(text)
+    local val = TR_CACHE[text]
+    if val then
+      -- Promueve el item al final de la cola (verdadero LRU: el mas usado permanece mas tiempo)
+      for i = 1, table.getn(TR_CACHE_ORDER) do
+        if TR_CACHE_ORDER[i] == text then
+          table.remove(TR_CACHE_ORDER, i)
+          table.insert(TR_CACHE_ORDER, text)
+          break
+        end
+      end
+      pfUI.translator_stats.cache_hits = pfUI.translator_stats.cache_hits + 1
+      return val
+    end
+  end
+
   local function CacheSet(text, result)
     if not text or TR_CACHE[text] then return end
     if table.getn(TR_CACHE_ORDER) >= TR_CACHE_MAX then
@@ -35,44 +58,49 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     table.insert(TR_CACHE_ORDER, text)
   end
 
-  -- Heurística de Reino (Séquito Intelligence)
+  -- ============================================================
+  -- HELPER: Idioma del cliente local (centralizado, sin duplicacion)
+  -- ============================================================
+  local function GetMyLang()
+    local locale = GetLocale()
+    if locale == "esES" or locale == "esMX" then return "es" end
+    if locale == "zhCN" or locale == "zhTW" then return "zh" end
+    return "en"
+  end
+
+  -- Heuristica de Reino (Sequito Intelligence)
   pfUI.translator_realm_votes = pfUI.translator_realm_votes or { en = 0, es = 0, zh = 0, detected = nil }
 
   -- ============================================================
-  -- LÓGICA TRILINGÜE (Séquito Intelligence v4.2.0)
+  -- LOGICA TRILINGUE (Sequito Intelligence v4.2.0)
   -- ============================================================
   local function GetTranslationMode(isIncoming)
-    local locale = GetLocale()
-    local server = C.translator.server_type or "0" -- 0:Auto, 1:EN, 2:ES, 3:ZH
-    local force_dir = C.translator.direction or "0"
-
-    -- Determinar idioma del cliente local
-    local myLang = "en"
-    if locale == "esES" or locale == "esMX" then myLang = "es"
-    elseif locale == "zhCN" or locale == "zhTW" then myLang = "zh"
-    end
+    local server    = C.translator.server_type or "0" -- 0:Auto, 1:EN, 2:ES, 3:ZH
+    local force_dir = C.translator.direction   or "0"
+    local myLang    = GetMyLang()
 
     -- Determinar entorno del servidor
     local env = "en" -- Fallback global
-    if server == "1" then 
-      env = "en" -- Manual EN
-    elseif server == "2" then 
-      env = "es" -- Manual ES
-    elseif server == "3" then 
-      env = "zh" -- Manual ZH
+    if server == "1" then
+      env = "en"
+    elseif server == "2" then
+      env = "es"
+    elseif server == "3" then
+      env = "zh"
     elseif server == "0" then
       if pfUI.translator_realm_votes.detected then
         env = pfUI.translator_realm_votes.detected
       else
+        -- Si el cliente es ES o ZH, asume servidor EN y viceversa
         env = (myLang == "es" or myLang == "zh") and "en" or "es"
       end
     end
 
-    -- Si el entorno SOCIAL es igual al de mi CLIENTE, no traduzco nada (en modo automático)
+    -- Si el entorno del servidor es igual al del cliente (modo auto), no traducir
     if env == myLang and server == "0" and force_dir == "0" then return nil, nil end
 
     if not isIncoming then
-      -- Dirección de Salida
+      -- Direccion de Salida
       if force_dir == "1" then return "es", "en" end
       if force_dir == "2" then return "en", "es" end
       if force_dir == "3" then return "zh", "en" end
@@ -81,7 +109,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       if force_dir == "6" then return "zh", "es" end
       return myLang, env
     else
-      -- Dirección de Entrada
+      -- Direccion de Entrada
       if force_dir == "1" then return "es", "en" end
       if force_dir == "2" then return "en", "es" end
       if force_dir == "3" then return "zh", "en" end
@@ -93,13 +121,13 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   end
 
   -- ============================================================
-  -- MOTOR HÍBRIDO (El corazón del sistema)
+  -- MOTOR HIBRIDO (El corazon del sistema)
   -- ============================================================
   local function CountChineseChars(text)
     if not text or type(text) ~= "string" then return 0 end
     local count = 0
-    local i = 1
-    local len = strlen(text)
+    local i     = 1
+    local len   = strlen(text)
     while i <= len do
       local byte = strbyte(text, i)
       if byte >= 224 and byte <= 239 then
@@ -116,6 +144,9 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     return count
   end
 
+  -- Calcula el ratio de coherencia de la traduccion (CTR)
+  -- FIX: Usa next() en lugar de pairs() para iteracion segura en Lua 5.0
+  --      (la variable local LANG_PAIRS sombrabria pairs() si se usara aqui)
   local function GetTranslationRatio(orig_text, dest_text, srcLang)
     if srcLang == "zh" then
       local orig_zh = CountChineseChars(orig_text)
@@ -123,9 +154,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       local dest_zh = CountChineseChars(dest_text)
       return (orig_zh - dest_zh) / orig_zh
     else
+      -- Occidental: mide proporcion de palabras cambiadas
       local orig_words = {}
       local total = 0
-      for w in string.gfind(orig_text, "([\128-\255%w]+)") do
+      for w in string.gfind(orig_text, "([%a%d\128-\255]+)") do
         local lw = strlower(w)
         orig_words[lw] = (orig_words[lw] or 0) + 1
         total = total + 1
@@ -133,17 +165,21 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       if total == 0 then return 1.0 end
 
       local dest_words = {}
-      for w in string.gfind(dest_text, "([\128-\255%w]+)") do
+      for w in string.gfind(dest_text, "([%a%d\128-\255]+)") do
         local lw = strlower(w)
         dest_words[lw] = (dest_words[lw] or 0) + 1
       end
 
+      -- Iteracion con next() — Lua 5.0 compatible y sin riesgo de shadowing
       local unchanged = 0
-      for w, count in pairs(orig_words) do
+      local w = next(orig_words)
+      while w ~= nil do
+        local count = orig_words[w]
         if dest_words[w] then
-          local d_count = dest_words[w]
-          unchanged = unchanged + (count < d_count and count or d_count)
+          local d = dest_words[w]
+          unchanged = unchanged + (count < d and count or d)
         end
+        w = next(orig_words, w)
       end
 
       return (total - unchanged) / total
@@ -152,17 +188,15 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
   local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang)
     if not text or type(text) ~= "string" or strlen(text) < 2 then return nil end
-    
-    local cached = CacheGet(text)
-    if cached then
-      pfUI.translator_stats.cache_hits = pfUI.translator_stats.cache_hits + 1
-      return cached
-    end
 
-    -- Fase 0: Preservar Enlaces (Items, Spells, Players)
-    local links = {}
+    -- Consultar cache LRU primero
+    local cached = CacheGet(text)
+    if cached then return cached end
+
+    -- Fase 0: Preservar y encapsular enlaces (Items, Spells, Players)
+    local links      = {}
     local link_count = 0
-    local proc_text = text
+    local proc_text  = text
     proc_text = string.gsub(proc_text, "(|H.-|h.-|h)", function(link)
       link_count = link_count + 1
       links[link_count] = link
@@ -175,30 +209,29 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     -- Fase 1: Greedy Matching (Frases Compuestas / Soporte UTF-8 Multibyte)
     if phraseDict and phraseKeys then
       for _, key in ipairs(phraseKeys) do
-        -- Dado que el diccionario y proc_text ya están en minúsculas, la búsqueda es directa e infalible
         if strfind(proc_text, key, 1, true) then
-          -- ESCAPE SEGURO: Escapa únicamente caracteres especiales de control de Lua, sin alterar bytes multibyte UTF-8
+          -- Escapa solo metacaracteres Lua, sin alterar bytes multibyte UTF-8
           local safe_key = string.gsub(key, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1")
           local res, count
           if srcLang == "zh" then
-            -- Chino no tiene delimitadores alfanuméricos en UTF-8. Reemplazo directo.
+            -- Chino: reemplazo directo (sin delimitadores de palabra ASCII)
             res, count = string.gsub(proc_text, safe_key, phraseDict[key])
           else
-            -- Idiomas occidentales usan delimitadores de palabra tradicionales
+            -- Occidental: requiere delimitadores de no-letra para evitar falsos positivos
             local pattern = "(%A)(" .. safe_key .. ")(%A)"
             res, count = string.gsub(proc_text, pattern, "%1" .. phraseDict[key] .. "%3")
           end
           if count and count > 0 then
-            proc_text = res
+            proc_text      = res
             trans_occurred = true
           end
         end
       end
     end
 
-    -- Fase 2: Hash Lookup (Palabras Simples - Solo occidentales)
+    -- Fase 2: Hash Lookup (Palabras Simples — solo idiomas occidentales)
     if wordDict and srcLang ~= "zh" then
-      local hashed_text = string.gsub(proc_text, "([\128-\255%w]+)", function(w)
+      local hashed_text = string.gsub(proc_text, "([%a%d\128-\255]+)", function(w)
         local lower_w = strlower(w)
         if wordDict[lower_w] then
           trans_occurred = true
@@ -211,16 +244,17 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
     if trans_occurred then
       local result = strsub(proc_text, 2, -2)
-      -- Restaurar Enlaces Protegidos de forma robusta e inmune a strlower (soporte L y l)
-      result = string.gsub(result, "\127[lL](%d+)\127", function(id)
-        return links[tonumber(id)]
+      -- Restaurar enlaces protegidos
+      -- Patron [lL] cubre ambos casos: \127L original y \127l tras strlower()
+      result = string.gsub(result, "\127[lL](%d+)\127", function(lid)
+        return links[tonumber(lid)]
       end)
 
-      -- Validar la coherencia de la traduccion (CTR)
-      local ratio = GetTranslationRatio(text, result, srcLang)
+      -- Validar coherencia (CTR — Coherence Threshold Ratio)
+      local ratio     = GetTranslationRatio(text, result, srcLang)
       local min_ratio = (srcLang == "zh") and 0.50 or 0.40
       if ratio < min_ratio then
-        return nil
+        return nil -- Descartar: previene Spanglish/Chinol
       end
 
       CacheSet(text, result)
@@ -232,21 +266,43 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
   -- DETECTOR DE IDIOMA ULTRA-SENSIBLE
   -- ============================================================
-  local EN_MARKERS = { "the", "and", "you", "are", "for", "have", "with", "not", "this", "that", "but", "they", "from", "will", "what", "your", "know", "how", "well" }
-  local ES_MARKERS = { "que", "por", "una", "con", "los", "las", "del", "les", "como", "pero", "para", "este", "esta", "hay", "muy", "mas", "aqui", "todos", "bien" }
-  local ZH_MARKERS = { 
-    "的", "了", "是", "我", "你", "他", "在", "有", "和", "就", "不", "人", "都", "一", "没有", "我们", "你们",
-    "寻找", "队伍", "去", "打", "求组", "需要", "来", "打本", "找组", "车", "团", "会", "拉", "门", "金", "大", "小",
-    "吧", "吗", "呢", "好", "对", "错", "吃", "喝", "死", "活", "复活", "本", "下", "上", "中", "多", "少", "无"
+  local EN_MARKERS = {
+    "the", "and", "you", "are", "for", "have", "with", "not", "this",
+    "that", "but", "they", "from", "will", "what", "your", "know", "how", "well",
+  }
+  local ES_MARKERS = {
+    "que", "por", "una", "con", "los", "las", "del", "les", "como",
+    "pero", "para", "este", "esta", "hay", "muy", "mas", "aqui", "todos", "bien",
+  }
+  local ZH_MARKERS = {
+    "\231\154\132", "\228\186\134", "\230\152\175", "\230\136\145", "\228\189\160",
+    "\228\187\150", "\229\156\168", "\230\156\137", "\229\146\140", "\229\176\177",
+    "\228\184\141", "\230\178\161", "\233\131\189", "\228\184\128", "\230\178\161\230\156\137",
+    "\230\136\145\228\187\172", "\228\189\160\228\187\172",
+    -- Terminologia WoW comun
+    "\229\175\187\230\137\190", "\233\152\159\228\188\141", "\229\216\187", "\346\137\147",
+    "\346\177\130\347\273\204", "\351\155\200\350\246\201", "\346\157\245",
+    "\346\211\223\346\234\254", "\346\211\276\347\273\204", "\350\275\246", "\345\233\242",
+    "\344\274\232", "\346\213\211", "\351\227\250", "\351\207\221", "\345\244\247", "\345\260\217",
+    "\345\220\247", "\345\220\227", "\345\221\242", "\345\245\275", "\345\257\271", "\351\224\231",
+    "\345\220\203", "\345\226\235", "\346\255\273", "\346\264\273", "\345\244\215\346\264\273",
+    "\346\234\254", "\344\270\213", "\344\270\212", "\344\270\255", "\345\244\232", "\345\260\221",
+    "\346\227\240",
   }
 
   local function DetectLanguage(text)
     if not text then return "unknown" end
     local lower = " " .. strlower(text) .. " "
     local en_hits, es_hits, zh_hits = 0, 0, 0
-    for _, w in ipairs(EN_MARKERS) do if strfind(lower, " " .. w .. " ", 1, true) then en_hits = en_hits + 1 end end
-    for _, w in ipairs(ES_MARKERS) do if strfind(lower, " " .. w .. " ", 1, true) then es_hits = es_hits + 1 end end
-    for _, w in ipairs(ZH_MARKERS) do if strfind(text, w, 1, true) then zh_hits = zh_hits + 1 end end
+    for _, w in ipairs(EN_MARKERS) do
+      if strfind(lower, " " .. w .. " ", 1, true) then en_hits = en_hits + 1 end
+    end
+    for _, w in ipairs(ES_MARKERS) do
+      if strfind(lower, " " .. w .. " ", 1, true) then es_hits = es_hits + 1 end
+    end
+    for _, w in ipairs(ZH_MARKERS) do
+      if strfind(text, w, 1, true) then zh_hits = zh_hits + 1 end
+    end
     if zh_hits > en_hits and zh_hits > es_hits and zh_hits >= 1 then return "zh" end
     if en_hits > es_hits and en_hits > zh_hits and en_hits >= 1 then return "en" end
     if es_hits > en_hits and es_hits > zh_hits and es_hits >= 1 then return "es" end
@@ -259,8 +315,6 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   local function IsChanEnabled(chatType)
     if not C.translator or C.translator.enable ~= "1" then return false end
     local lower = strlower(chatType or "")
-    
-    -- Mapeo dinámico de canales basado en configuración
     if strfind(lower, "say")     then return C.translator.chan_say     == "1" end
     if strfind(lower, "party")   then return C.translator.chan_party   == "1" end
     if strfind(lower, "raid")    then return C.translator.chan_raid    == "1" end
@@ -268,19 +322,21 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     if strfind(lower, "whisper") then return C.translator.chan_whisper == "1" end
     if strfind(lower, "world")   then return C.translator.chan_world   == "1" end
     if strfind(lower, "lfg")     then return C.translator.chan_lfg     == "1" end
-    if strfind(lower, "channel") then return C.translator.chan_world   == "1" end -- Fallback para canales personalizados
-
-    -- Bloqueo absoluto de cualquier otro evento (NPCs, Sistema, Emotes)
+    if strfind(lower, "channel") then return C.translator.chan_world   == "1" end
+    -- Bloqueo absoluto: NPCs, Sistema, Emotes y eventos de combate
     return false
   end
 
+  -- Memoized TR tag (estatico por sesion — evita recalculos en cada mensaje)
+  local _tr_tag_cache = nil
   local function GetTRTag()
-    if not C.translator or C.translator.silent_mode == "1" then return "" end
-    return " |cff33ffcc[TR]|r"
+    if _tr_tag_cache ~= nil then return _tr_tag_cache end
+    _tr_tag_cache = (not C.translator or C.translator.silent_mode == "1") and "" or " |cff33ffcc[TR]|r"
+    return _tr_tag_cache
   end
 
   -- ============================================================
-  -- GESTIÓN DE SALIDA (Escritura)
+  -- GESTION DE SALIDA (Escritura)
   -- ============================================================
   local function TranslateOutgoing(msg, chatType, channel)
     if not msg or strfind(msg, "^[/%.]") then return nil end
@@ -290,10 +346,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     local src, dest = GetTranslationMode(false)
     if not src or not dest then return nil end
 
-    local prefix = src .. "_" .. dest
-    local words = pfUI.translator_dicts[prefix .. "_words"]
+    local prefix  = src .. "_" .. dest
+    local words   = pfUI.translator_dicts[prefix .. "_words"]
     local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
-    local keys = pfUI.translator_dicts[prefix .. "_keys"]
+    local keys    = pfUI.translator_dicts[prefix .. "_keys"]
 
     local trans = LocalTranslate(msg, words, phrases, keys, src)
     if trans then
@@ -305,7 +361,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
   local function SecureHookOutgoing()
     if pfUI.GravityTROutHooked then return end
-    
+
     local originalChatEditSend = ChatEdit_SendText
     ChatEdit_SendText = function(editBox, addHistory)
       local msg = editBox:GetText()
@@ -329,94 +385,115 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         return originalCTLSend(self, prio, trans or msg, chatType, language, channel, queue)
       end
     end
+
     pfUI.GravityTROutHooked = true
   end
 
   -- ============================================================
-  -- GESTIÓN DE ENTRADA DINÁMICA (Lectura Multilingüe)
+  -- GESTION DE ENTRADA DINAMICA (Lectura Multilingue)
   -- ============================================================
   local function HookIncomingChat()
     if pfUI.GravityTRHooked then return end
+
     local function TranslatorAddMessage(frame, text, r, g, b, id)
-      if not text or type(text) ~= "string" then return frame:pfOriginalAddMessage(text, r, g, b, id) end
+      if not text or type(text) ~= "string" then
+        return frame:pfOriginalAddMessage(text, r, g, b, id)
+      end
       if not C.translator or C.translator.enable ~= "1" or C.translator.incoming ~= "1" then
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
-      -- SOBERANÍA: Solo chat de jugadores
-      if not strfind(text, "|Hplayer:") and not strfind(text, "|Hchannel:") then
+      -- SOBERANIA: Solo mensajes de jugadores (player link o channel link de Blizzard)
+      local hasPlayer  = strfind(text, "|Hplayer:",  1, true)
+      local hasChannel = strfind(text, "|Hchannel:", 1, true)
+      if not hasPlayer and not hasChannel then
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
-      -- Aislar el cuerpo del mensaje (body) y mantener el prefijo original (canales, links, colores)
+      -- Aislamiento Sintactico: extrae prefijo (canal/nombre) y cuerpo del mensaje
       local prefix, body
-      local p_start, p_end = string.find(text, "|Hplayer:.-|h.-|h")
+      local p_end
+
+      if hasPlayer then
+        -- Mensaje de jugador: |Hplayer:NAME|h[NAME]|h
+        local _, pe = strfind(text, "|Hplayer:.-|h.-|h", 1)
+        p_end = pe
+      end
+
+      -- Si es mensaje de canal sin link de jugador, busca el nombre del canal
+      if not p_end and hasChannel then
+        -- Formato: |Hchannel:N|h[CANAL]|h |Hplayer:NAME|h[NAME]|h: MENSAJE
+        -- El link del canal va antes que el del jugador; buscamos el jugador secundario
+        local _, pe = strfind(text, "|Hplayer:.-|h.-|h", hasChannel)
+        p_end = pe
+      end
+
       if p_end then
-        local col_start, col_end = string.find(text, ": ", p_end, true)
+        local col_start, col_end = strfind(text, ": ", p_end, true)
         if col_start then
-          prefix = string.sub(text, 1, col_end)
-          body = string.sub(text, col_end + 1)
+          prefix = strsub(text, 1, col_end)
+          body   = strsub(text, col_end + 1)
         end
       end
 
-      -- Fallback si no logramos aislar el cuerpo (evitar romper mensajes no estandarizados)
+      -- Fallback: si el aislamiento falla, renderizar original sin modificar
       if not prefix or not body or strlen(body) < 2 then
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
-      -- Determinar idioma local del cliente
-      local locale = GetLocale()
-      local myLang = "en"
-      if locale == "esES" or locale == "esMX" then myLang = "es"
-      elseif locale == "zhCN" or locale == "zhTW" then myLang = "zh"
-      end
-
-      -- Detectar el idioma del cuerpo real
+      -- Detectar idioma del cuerpo real del mensaje
       local lang = DetectLanguage(body)
-      
-      -- VOTACIÓN HEURÍSTICA: Escucha canales globales para detectar el idioma del reino
+
+      -- VOTACION HEURISTICA: Deteccion automatica del idioma del reino
+      -- FIX: Ya no usa el parametro 'id' (era un entero de grupo de color, no el canal).
+      --      Ahora vota sobre todos los mensajes de jugador con idioma detectado.
       if C.translator.server_type == "0" and not pfUI.translator_realm_votes.detected then
-        local lowerChan = strlower(id or "")
-        if strfind(lowerChan, "world") or strfind(lowerChan, "lfg") or strfind(lowerChan, "say") then
-          if lang == "en" then 
-            pfUI.translator_realm_votes.en = pfUI.translator_realm_votes.en + 1
-          elseif lang == "es" then 
-            pfUI.translator_realm_votes.es = pfUI.translator_realm_votes.es + 1
-          elseif lang == "zh" then 
-            pfUI.translator_realm_votes.zh = pfUI.translator_realm_votes.zh + 1
+        if lang == "en" then
+          pfUI.translator_realm_votes.en = pfUI.translator_realm_votes.en + 1
+        elseif lang == "es" then
+          pfUI.translator_realm_votes.es = pfUI.translator_realm_votes.es + 1
+        elseif lang == "zh" then
+          pfUI.translator_realm_votes.zh = pfUI.translator_realm_votes.zh + 1
+        end
+
+        -- Umbral de decision: 8 votos para mayor estabilidad vs ruido de chat
+        local v = pfUI.translator_realm_votes
+        if v.en >= 8 then
+          v.detected = "en"
+          if C.translator.debug_mode == "1" then
+            DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado automaticamente: INGLES")
           end
-          
-          -- Umbral de decisión (5 votos)
-          if pfUI.translator_realm_votes.en >= 5 then 
-            pfUI.translator_realm_votes.detected = "en"
-            if C.translator.debug_mode == "1" then DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado: INGLÉS") end
-          elseif pfUI.translator_realm_votes.es >= 5 then 
-            pfUI.translator_realm_votes.detected = "es"
-            if C.translator.debug_mode == "1" then DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado: ESPAÑOL") end
-          elseif pfUI.translator_realm_votes.zh >= 5 then 
-            pfUI.translator_realm_votes.detected = "zh"
-            if C.translator.debug_mode == "1" then DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado: CHINO") end
+        elseif v.es >= 8 then
+          v.detected = "es"
+          if C.translator.debug_mode == "1" then
+            DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado automaticamente: ESPANOL")
+          end
+        elseif v.zh >= 8 then
+          v.detected = "zh"
+          if C.translator.debug_mode == "1" then
+            DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Entorno detectado automaticamente: CHINO")
           end
         end
       end
 
-      -- Selección de Idioma de Origen Dinámica
+      -- Seleccion de modo de traduccion para este mensaje
       local src_env, dest_env = GetTranslationMode(true)
-      if not src_env or not dest_env then return frame:pfOriginalAddMessage(text, r, g, b, id) end
-
-      local final_src = lang
-      if final_src == "unknown" then
-        final_src = src_env
+      if not src_env or not dest_env then
+        return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
-      -- Traducimos si el mensaje no está en el idioma de destino deseado
+      -- Idioma real del mensaje: priorizar deteccion sobre config de servidor
+      local final_src = (lang ~= "unknown") and lang or src_env
+
+      -- Traducir solo si el mensaje no esta ya en el idioma de destino
       if final_src ~= dest_env then
         local prefix_dict = final_src .. "_" .. dest_env
-        if pfUI.translator_dicts[prefix_dict .. "_phrases"] then
-          local words = pfUI.translator_dicts[prefix_dict .. "_words"]
-          local phrases = pfUI.translator_dicts[prefix_dict .. "_phrases"]
-          local keys = pfUI.translator_dicts[prefix_dict .. "_keys"]
-          
+        local words   = pfUI.translator_dicts[prefix_dict .. "_words"]
+        local phrases = pfUI.translator_dicts[prefix_dict .. "_phrases"]
+        local keys    = pfUI.translator_dicts[prefix_dict .. "_keys"]
+
+        -- Solo intentar si el par de idiomas tiene datos cargados
+        if words and phrases and keys then
           local trans = LocalTranslate(body, words, phrases, keys, final_src)
           if trans then
             pfUI.translator_stats.total_in = pfUI.translator_stats.total_in + 1
@@ -428,36 +505,45 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       return frame:pfOriginalAddMessage(text, r, g, b, id)
     end
 
-    for i=1, 10 do
-      local frame = _G["ChatFrame"..i]
+    for i = 1, 10 do
+      local frame = _G["ChatFrame" .. i]
       if frame and not frame.pfOriginalAddMessage then
         frame.pfOriginalAddMessage = frame.AddMessage
-        frame.AddMessage = function(self, text, r, g, b, id) TranslatorAddMessage(self, text, r, g, b, id) end
+        frame.AddMessage = function(self, t, r, g, b, mid)
+          TranslatorAddMessage(self, t, r, g, b, mid)
+        end
       end
     end
+
     pfUI.GravityTRHooked = true
   end
 
   -- ============================================================
-  -- PUENTE WIM (Bilateralizado)
+  -- PUENTE WIM (Bilateral — Entrante / Saliente)
   -- ============================================================
   local function HookWIMBridge()
     if not WIM_PostMessage or pfUI.GravityWIMHooked then return end
     local originalWIMPost = WIM_PostMessage
+
     WIM_PostMessage = function(user, msg, ttype, from, raw_msg, hotkeyFix)
       if C.translator and C.translator.enable == "1" and C.translator.wim_bridge == "1" and raw_msg then
-        local isIncoming = ttype == 1
-        local mode_check = isIncoming and C.translator.incoming == "1" or C.translator.outgoing == "1"
+        local isIncoming = (ttype == 1)
+        -- FIX: Precedencia de operadores corregida (bug anterior: siempre true con outgoing=1)
+        local mode_check = (isIncoming     and C.translator.incoming == "1")
+                        or (not isIncoming and C.translator.outgoing == "1")
         if mode_check then
           local src, dest = GetTranslationMode(isIncoming)
           if src and dest then
-            local prefix = src .. "_" .. dest
-            local words = pfUI.translator_dicts[prefix .. "_words"]
+            local prefix  = src .. "_" .. dest
+            local words   = pfUI.translator_dicts[prefix .. "_words"]
             local phrases = pfUI.translator_dicts[prefix .. "_phrases"]
-            local keys = pfUI.translator_dicts[prefix .. "_keys"]
-            local trans = LocalTranslate(raw_msg, words, phrases, keys, src)
+            local keys    = pfUI.translator_dicts[prefix .. "_keys"]
+            local trans   = LocalTranslate(raw_msg, words, phrases, keys, src)
             if trans then
-              msg = string.gsub(msg, string.gsub(raw_msg, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1"), trans .. GetTRTag())
+              -- FIX: Escape correcto de raw_msg antes de string.gsub
+              --      (raw_msg puede contener metacaracteres Lua como .-?+[])
+              local safe_raw = string.gsub(raw_msg, "([%.%*%-%?%[%]%(%)%^%$%%])", "%%%1")
+              msg     = string.gsub(msg, safe_raw, trans .. GetTRTag())
               raw_msg = trans
             end
           end
@@ -465,11 +551,12 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       end
       return originalWIMPost(user, msg, ttype, from, raw_msg, hotkeyFix)
     end
+
     pfUI.GravityWIMHooked = true
   end
 
   -- ============================================================
-  -- INICIALIZACIÓN
+  -- INICIALIZACION
   -- ============================================================
   local initFrame = CreateFrame("Frame")
   initFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -481,19 +568,54 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       pcall(HookIncomingChat)
       if IsAddOnLoaded("WIM") then pcall(HookWIMBridge) end
       if C.translator and C.translator.enable == "1" then
-        DEFAULT_CHAT_FRAME:AddMessage("|cff00ccff[Translator v4.2.0]|r " .. (T["Enable Translator"] or "Traductor Trilingüe Activo") .. ".")
+        DEFAULT_CHAT_FRAME:AddMessage(
+          "|cff00ccff[Translator v4.2.0]|r " ..
+          (T["Enable Translator"] or "Traductor Trilingue Activo") .. "."
+        )
       end
-    elseif event == "ADDON_LOADED" and arg1 == "WIM" then pcall(HookWIMBridge) end
+    elseif event == "ADDON_LOADED" and arg1 == "WIM" then
+      pcall(HookWIMBridge)
+    end
   end)
 
-  -- Slash Commands
+  -- ============================================================
+  -- COMANDOS DE CHAT (/tr)
+  -- ============================================================
   SLASH_PFTR1 = "/tr"
   SlashCmdList["PFTR"] = function(msg)
     if msg == "stats" then
-      DEFAULT_CHAT_FRAME:AddMessage("In: " .. pfUI.translator_stats.total_in .. " | Out: " .. pfUI.translator_stats.total_out)
+      local s      = pfUI.translator_stats
+      local total  = s.total_in + s.total_out + s.cache_hits
+      local hitp   = (total > 0) and math.floor((s.cache_hits / total) * 100) or 0
+      local detect = pfUI.translator_realm_votes.detected or "auto"
+      DEFAULT_CHAT_FRAME:AddMessage(
+        "|cff00ccff[TR v" .. pfUI.translator_version .. "]|r" ..
+        "  |cffffffaaEntrada:|r "  .. s.total_in  ..
+        "  |cffffffaaSalida:|r "   .. s.total_out ..
+        "  |cffffffaaCache:|r "    .. s.cache_hits .. " (" .. hitp .. "%)" ..
+        "  |cffffffaaServidor:|r " .. detect
+      )
+    elseif msg == "reset" then
+      -- Reinicia deteccion automatica del idioma del reino
+      local v = pfUI.translator_realm_votes
+      v.en       = 0
+      v.es       = 0
+      v.zh       = 0
+      v.detected = nil
+      DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Deteccion de idioma de reino reiniciada.")
+    elseif msg == "debug" then
+      local d = C.translator.debug_mode
+      C.translator.debug_mode = (d == "1") and "0" or "1"
+      DEFAULT_CHAT_FRAME:AddMessage(
+        "|cff33ffcc[TR]|r Modo debug: " ..
+        (C.translator.debug_mode == "1" and "|cff00ff00ON|r" or "|cffff4444OFF|r")
+      )
     else
       pfUI.gui.ShowConfig(T["Translator"])
     end
   end
+
+  -- Exponer funcion de traduccion para uso por addons externos
   pfUI.Translate = LocalTranslate
+
 end)

@@ -1,8 +1,8 @@
 pfUI:RegisterModule("translator_dict", "vanilla", function ()
   -- ╔══════════════════════════════════════════════════════════════╗
-  -- ║  LIBRERIA LÉXICA OFFLINE v7.0.0 — OMNI-TIER TRILINGÜE      ║
-  -- ║  Motor Híbrido Hash+Greedy | ES <-> ZH <-> EN              ║
-  -- ║  ~2000+ entradas | 62 categorías | WoW + Conversación Real ║
+  -- ║  LIBRERIA LEXICA OFFLINE v4.2.0 — DIAMOND-TIER TRILINGUE   ║
+  -- ║  Motor Hibrido Hash+Greedy | ES <-> ZH <-> EN              ║
+  -- ║  3600+ entradas | 130 categorias | WoW Classic + Chat Real ║
   -- ╚══════════════════════════════════════════════════════════════╝
 
   pfUI.translator_dicts = pfUI.translator_dicts or {}
@@ -3554,7 +3554,7 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("es una ganga",                           "it's a bargain",                     "真划算")
 
   -- ╔══════════════════════════════════════════════╗
-  -- ║  [NUEVO] CAT 128: Turtle WoW Misiones        ║
+  -- ║  CAT 128: Turtle WoW Misiones y Economia     ║
   -- ╚══════════════════════════════════════════════╝
   add("misión personalizada",                   "custom quest",                       "自定义任务")
   add("mision personalizada",                   "custom quest",                       "自定义任务")
@@ -3570,7 +3570,7 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("reputacion personalizada",               "custom reputation",                  "自定义声望")
 
   -- ╔══════════════════════════════════════════════╗
-  -- ║  [NUEVO] CAT 129: Slang de Gaming / Frustrar ║
+  -- ║  CAT 129: Slang de Gaming y Frustracion      ║
   -- ╚══════════════════════════════════════════════╝
   add("¡qué mala suerte!",                      "what bad luck!",                     "太倒霉了！")
   add("que mala suerte",                        "what bad luck!",                     "太倒霉了！")
@@ -3584,7 +3584,7 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("estoy harto",                            "i am fed up",                        "我受够了")
 
   -- ╔══════════════════════════════════════════════╗
-  -- ║  [NUEVO] CAT 130: Felicitaciones y Ding      ║
+  -- ║  CAT 130: Felicitaciones, Ding y Logros      ║
   -- ╚══════════════════════════════════════════════╝
   add("¡felicidades por el nivel!",             "grats on level up!",                 "恭喜升级！")
   add("felicidades por el nivel",               "grats on level up!",                 "恭喜升级！")
@@ -3607,6 +3607,6 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexicon v7.0 Omni-Tier Trilingüe cargado.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v4.2.0 Diamond-Tier — 130 categorias cargadas.")
   end
 end)

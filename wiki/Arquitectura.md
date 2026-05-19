@@ -48,4 +48,4 @@ El motor Diamond Tier implementa un validador de calidad:
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Soberanía Técnica Omni-Tier Consolidada.*
+*Soberanía Técnica Diamond-Tier Consolidada.*
