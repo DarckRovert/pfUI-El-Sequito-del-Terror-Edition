@@ -699,6 +699,105 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "armadura|armor|护甲"
   }
 
+  -- ============================================================
+  -- LOTE G: PROFESIONES, MATERIALES Y COMERCIO (PROFESSIONS & TRADE)
+  -- ============================================================
+  local professions_batch = {
+    -- Profesiones Primarias
+    "alquimia|alchemy|炼金术",
+    "herboristería|herbalism|草药学",
+    "herboristeria|herbalism|草药学",
+    "minería|mining|采矿",
+    "mineria|mining|采矿",
+    "herrería|blacksmithing|锻造",
+    "herreria|blacksmithing|锻造",
+    "ingeniería|engineering|工程学",
+    "ingenieria|engineering|工程学",
+    "peletería|leatherworking|制皮",
+    "peleteria|leatherworking|制皮",
+    "desollar|skinning|剥皮",
+    "sastrería|tailoring|裁缝",
+    "sastreria|tailoring|裁缝",
+    "encantamiento|enchanting|附魔",
+    "encantamiento|enchanting|附魔",
+
+    -- Profesiones Secundarias y Custom
+    "supervivencia|survival|生存",
+    "cocina|cooking|烹饪",
+    "pesca|fishing|钓鱼",
+    "primeros auxilios|first aid|急救",
+
+    -- Especializaciones e interacciones
+    "ingenieria gnomica|gnomish engineering|侏儒工程学",
+    "ingeniería gnómica|gnomish engineering|侏儒工程学",
+    "ingenieria goblin|goblin engineering|地精工程学",
+    "ingeniería goblin|goblin engineering|地精工程学",
+    "alquimia de transmutacion|transmutation alchemy|转化大师",
+    "alquimia de transmutación|transmutation alchemy|转化大师",
+    "elixires|elixirs|药剂",
+    "pociones|potions|药水",
+
+    -- Comercio y Economía
+    "craftear|craft|制作",
+    "crafteo|craft|制作",
+    "materiales|mats|材料",
+    "receta|recipe|配方",
+    "patrón|pattern|图纸",
+    "patron|pattern|图纸",
+    "comerciar|trade|交易",
+    "ligado al equipar|bind on equip|装备后绑定",
+    "ligado al recoger|bind on pickup|拾取后绑定",
+    "boe|bind on equip|装绑",
+    "bop|bind on pickup|拾绑",
+    "banco de gremio|guild bank|公会仓库",
+    "subasta|auction house|拍卖行",
+    "ah|auction house|拍卖行",
+    "compro|buying|收购",
+    "vendo|selling|出售",
+    "cambio|trading|交换",
+    "gremio|guild|公会",
+    "hermandad|guild|公会",
+    "invitar al gremio|guild invite|公会邀请",
+    "inv al gremio|guild invite|公会邀请"
+  }
+
+  -- ============================================================
+  -- LOTE H: CONTENIDO, ZONAS, MAZMORRAS Y MODOS CUSTOM DE TURTLE WOW
+  -- ============================================================
+  local turtle_custom_batch = {
+    -- Mazmorras y Raids Custom
+    "arboleda creciente|crescent grove|新月林地",
+    "arboleda|crescent grove|新月林地",
+    "tumba de los siete|tomb of the seven|七贤之墓",
+    "tumba de los 7|tomb of the seven|七贤之墓",
+    "laboratorio de alah'thalas|alah'thalas laboratory|亚拉萨拉斯实验室",
+    "alah'thalas|alah'thalas|亚拉萨拉斯",
+
+    -- Geografía y Zonas Custom
+    "isla de gillijim|gillijim's isle|吉利吉姆岛",
+    "isla gillijim|gillijim's isle|吉利吉姆岛",
+    "isla de lapidis|lapidis isle|拉皮迪斯岛",
+    "isla lapidis|lapidis isle|拉皮迪斯岛",
+    "tierras altas destrozadas|shattered highlands|破碎高地",
+    "monte hyjal|mount hyjal|海加尔山",
+    "valle bosquenegro|blackwood glen|黑木谷",
+    "bosquenegro|blackwood glen|黑木谷",
+
+    -- Modos de Juego y Desafíos
+    "hardcore|hardcore|硬核/一命",
+    "hc|hardcore|硬核",
+    "modo hardcore|hardcore mode|一命模式/硬核模式",
+    "vagabundo|vagrant|流浪者",
+    "modo vagabundo|vagrant mode|流浪者模式",
+    "lento y constante|slow and steady|慢而稳",
+    "slow y steady|slow and steady|慢而稳",
+    "autodidacta|self-crafted|自制装备/孤狼",
+    "modo autodidacta|self-crafted mode|自制模式",
+    "glifo de la tortuga|glyph of the turtle|乌龟雕文",
+    "glifo de tortuga|glyph of the turtle|乌龟雕文",
+    "modo exhausto|exhausted mode|精疲力竭模式"
+  }
+
   -- Ejecutar la carga masiva en lotes comprimidos
   load_batch(spells_batch)
   load_batch(quests_batch)
@@ -706,6 +805,8 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   load_batch(slang_batch)
   load_batch(zones_batch)
   load_batch(mechanics_batch)
+  load_batch(professions_batch)
+  load_batch(turtle_custom_batch)
 
   -- ============================================================
   -- RE-INDEXACIÓN DE BUCKETS POST-CARGA DE BASE DE DATOS
@@ -741,6 +842,6 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Base de Datos v6.0.0 cargada. Spells, Quests, Items, Zones y Mechanics indexados.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Base de Datos v6.5.0 cargada. Spells, Quests, Items, Slang, Zones, Mechanics, Professions y Turtle Custom indexados.")
   end
 end)
