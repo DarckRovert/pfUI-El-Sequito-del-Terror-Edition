@@ -1,4 +1,4 @@
-# 🏰 Wiki: Arquitectura 'Diamond Tier' — pfUI [v5.1.4]
+# 🏰 Wiki: Arquitectura 'Diamond Tier' — pfUI [v5.1.4] (Translator v4.2.1)
 
 Estructura modular del ecosistema **El Séquito del Terror** mantenido por **DarckRovert**.
 
@@ -11,7 +11,7 @@ El AddOn inicia mediante `modules.xml` con los siguientes puntos críticos de in
 3.  **WIM Bridge**: Hook asíncrono sobre `WIM_PostMessage` para susurros de jugadores.
 4.  **GUI Integration (`gui.lua`)**: Registro del selector de idiomas, canales y depuración en las pestañas nativas de pfUI.
 
-## 📊 Diagrama de Flujo: Traductor Multilingüe v4.2.0
+## 📊 Diagrama de Flujo: Traductor Multilingüe v4.2.1
 
 ```mermaid
 graph TD

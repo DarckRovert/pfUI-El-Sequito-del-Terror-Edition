@@ -1,14 +1,17 @@
 pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
-  -- TRADUCTOR UNIVERSAL v4.2.0 — Diamond-Tier Sequito Edition
+  -- TRADUCTOR UNIVERSAL v4.2.1 — Diamond-Tier Sequito Edition
   -- Motor Hibrido Trilingue de Alto Rendimiento (ES / ZH / EN)
   -- Soporte Nativo UTF-8 y Resolucion de Coincidencias Dinamicas
   -- ============================================================
 
-  pfUI.translator_version = "4.2.0"
+  pfUI.translator_version = "4.2.1"
 
   local C = pfUI_config
   local T = pfUI_translation[GetLocale()] or pfUI_translation["enUS"]
+  if T ~= pfUI_translation["enUS"] then
+    T = setmetatable(T, { __index = pfUI_translation["enUS"] })
+  end
 
   -- ============================================================
   -- ESTRUCTURA DE DICCIONARIOS V4 (Hibrida Trilingue)
@@ -72,7 +75,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   pfUI.translator_realm_votes = pfUI.translator_realm_votes or { en = 0, es = 0, zh = 0, detected = nil }
 
   -- ============================================================
-  -- LOGICA TRILINGUE (Sequito Intelligence v4.2.0)
+  -- LOGICA TRILINGUE (Sequito Intelligence v4.2.1)
   -- ============================================================
   local function GetTranslationMode(isIncoming)
     local server    = C.translator.server_type or "0" -- 0:Auto, 1:EN, 2:ES, 3:ZH
@@ -569,7 +572,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       if IsAddOnLoaded("WIM") then pcall(HookWIMBridge) end
       if C.translator and C.translator.enable == "1" then
         DEFAULT_CHAT_FRAME:AddMessage(
-          "|cff00ccff[Translator v4.2.0]|r " ..
+          "|cff00ccff[Translator v4.2.1]|r " ..
           (T["Enable Translator"] or "Traductor Trilingue Activo") .. "."
         )
       end

@@ -12,7 +12,7 @@ Describe los cambios realizados y la justificación técnica detrás de ellos.
 **Pruebas Realizadas**
 - [ ] Probado en World Chat
 - [ ] Probado en WIM
-- [ ] Verificado sin errores de LUA
+- [ ] Verificado sin errores de LUA (usando `scratch/test_syntax.ps1` en Lua 5.0)
 
 **Checklist**
 - [ ] He actualizado el `CHANGELOG.md`.

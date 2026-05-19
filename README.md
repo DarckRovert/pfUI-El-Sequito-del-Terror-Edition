@@ -1,6 +1,6 @@
-# Global Chat Translator — El Séquito Edition (v4.2.0 [DIAMOND-TIER]) 🌌⚖️
+# Global Chat Translator — El Séquito Edition (v4.2.1 [DIAMOND-TIER]) 🌌⚖️
 
-![Version](https://img.shields.io/badge/version-v4.2.0--Diamond--Tier-00ccff?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v4.2.1--Diamond--Tier-00ccff?style=for-the-badge)
 ![Host](https://img.shields.io/badge/pfUI-v5.1.4--Diamond--Tier-blue?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Turtle_WoW-ff5555?style=for-the-badge)
 
@@ -27,7 +27,7 @@ El **Global Chat Translator** es una pieza nuclear de ingeniería para el ecosis
 
 ### ⚡ PERFORMANCE BENCHMARKS (DIAMOND-TIER)
 
-| Proceso | Latencia Séquito (v4.2.0) | Latencia Standard | Estado |
+| Proceso | Latencia Séquito (v4.2.1) | Latencia Standard | Estado |
 | :--- | :---: | :---: | :---: |
 | **Parsing & Isolation** | < 0.05ms | N/A | ✅ |
 | **Matching Loop** | < 0.08ms | N/A | ✅ |
@@ -45,6 +45,15 @@ Base de conocimientos para el despliegue técnico del motor de traducción:
 - ⚙️ **[Guía de API](file:///e:/Turtle%20Wow/Interface/AddOns/pfUI/wiki/Guia_API.md)**: Integración para desarrolladores y signatura de funciones de traducción.
 - ❓ **[FAQ](file:///e:/Turtle%20Wow/Interface/AddOns/pfUI/wiki/FAQ.md)**: Respuestas a dudas de rendimiento, mitigación de mezcla de idiomas y personalización.
 - 📖 **[Manual de Usuario](file:///e:/Turtle%20Wow/Interface/AddOns/pfUI/wiki/Manual_Usuario.md)**: Comandos de chat, configuración gráfica y selección de idioma.
+
+## 💬 Comandos de Chat (/tr)
+
+Controla el comportamiento del traductor directamente desde la ventana de chat del juego:
+
+- `/tr`: Abre directamente la interfaz gráfica de configuración nativa en pfUI.
+- `/tr stats`: Muestra estadísticas detalladas del rendimiento del traductor (Mensajes de Entrada, de Salida, hit-rate del Caché LRU en % y servidor de juego detectado).
+- `/tr debug`: Alterna dinámicamente el modo de depuración en chat para observar el proceso de matching y aislamientos.
+- `/tr reset`: Reinicia manualmente los contadores del reino y la detección automática del idioma del servidor.
 
 ## 🚀 Despliegue Rápido (Pro-Flow)
 
