@@ -2135,6 +2135,890 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   add("sin pagar",                  "free to play",              "不花钱")
   add("versión gratuita",           "free version",              "免费版本")
 
+
+  -- ============================================================
+  -- V8 EXPANSION: MASSIVE DICTIONARY — BOSSES, RAIDS, NPCS, EMOTES
+  -- ============================================================
+
+  local v8_bosses_raids = {
+    -- MC Bosses
+    "鲁西弗隆|lucifron|lucifron",
+    "玛格曼达|magmadar|magmadar",
+    "基赫纳斯|gehennas|gehennas",
+    "加尔|garr|garr",
+    "沙斯拉尔男爵|baron geddon|barón geddon",
+    "戈多斯男爵|baron geddon|barón geddon",
+    "迦顿男爵|baron geddon|barón geddon",
+    "沙斯拉尔|shazzrah|shazzrah",
+    "萨弗隆先驱者|sulfuron harbinger|sulfuron presagista",
+    "管理者埃克索图斯|majordomo executus|mayordomo ejecutus",
+    "拉格纳罗斯|ragnaros|ragnaros",
+
+    -- BWL Bosses
+    "狂野的拉佐格尔|razorgore|razorgore",
+    "堕落的瓦拉斯塔兹|vaelastrasz|vaelastrasz",
+    "勒什雷尔|broodlord lashlayer|señor de la prole",
+    "费尔默|firemaw|firemaw",
+    "埃博诺克|ebonroc|ebonroc",
+    "弗莱格尔|flamegor|flamegor",
+    "克洛玛古斯|chromaggus|chromaggus",
+    "奈法利安|nefarian|nefarian",
+
+    -- AQ20 / AQ40 Bosses
+    "库林纳克斯|kurinnaxx|kurinnaxx",
+    "拉贾克斯将军|general rajaxx|general rajaxx",
+    "莫阿姆|moam|moam",
+    "布鲁|buru|buru",
+    "无疤者奥斯里安|ossirian|ossirian",
+    "斯克里德|skeram|skeram",
+    "三虫|bug trio|trío de insectos",
+    "沙尔图拉|sartura|sartura",
+    "范克里斯|fankriss|fankriss",
+    "哈霍兰公主|princess huhuran|princesa huhuran",
+    "双子帝|twin emperors|emperadores gemelos",
+    "克苏恩|c'thun|c'thun",
+    "维希度斯|viscidus|viscidus",
+    "奥罗|ouro|ouro",
+
+    -- Naxx Bosses
+    "阿努布雷坎|anub'rekhan|anub'rekhan",
+    "寡妇|grand widow faerlina|gran viuda faerlina",
+    "迈克斯纳|maexxna|maexxna",
+    "瘟疫使者诺斯|noth the plaguebringer|noth el trae-plagas",
+    "肮脏的希尔盖|heigan the unclean|heigan el impuro",
+    "洛欧塞布|loatheb|loatheb",
+    "教官拉苏维奥斯|instructor razuvious|instructor razuvious",
+    "哥特里克|gothik the harvester|gothik el cosechador",
+    "四骑士|four horsemen|cuatro jinetes",
+    "帕奇维克|patchwerk|patchwerk",
+    "格罗布鲁斯|grobbulus|grobbulus",
+    "格拉斯|gluth|gluth",
+    "塔迪乌斯|thaddius|thaddius",
+    "萨菲隆|sapphiron|sapphiron",
+    "克尔苏加德|kel'thuzad|kel'thuzad",
+
+    -- ZG Bosses
+    "高级祭司耶克里克|high priestess jeklik|suma sacerdotisa jeklik",
+    "高级祭司温诺克西斯|venoxis|venoxis",
+    "高级祭司玛尔里|mar'li|mar'li",
+    "高级祭司赛卡尔|thekal|thekal",
+    "高级祭司阿洛克|arlokk|arlokk",
+    "哈卡|hakkar|hakkar",
+    "血领主曼多基尔|mandokir|mandokir",
+    "魔书者金度|jin'do|jin'do",
+
+    -- Onyxia
+    "奥妮克希亚|onyxia|onyxia",
+
+    -- World Bosses
+    "艾索雷葛斯|azuregos|azuregos",
+    "卡扎克|lord kazzak|lord kazzak",
+    "祖格大祭司|emerald dragons|dragones esmeralda",
+    "莱索恩|lethon|lethon",
+    "艾梦|emeriss|emeriss",
+    "泰拉尔|taerar|taerar",
+    "伊索德雷|ysondre|ysondre"
+  }
+
+  local v8_dungeon_bosses = {
+    -- Deadmines
+    "艾德温·范克里夫|edwin vancleef|edwin vancleef",
+    "饥饿的斯尼德|sneed|sneed",
+    "吉尔尼斯先生|mr. smite|sr. smite",
+
+    -- Scarlet Monastery
+    "审讯者费尔班克斯|interrogator vishas|interrogador vishas",
+    "血色指挥官莫格莱尼|mograine|mograine",
+    "大检察官怀特迈恩|whitemane|whitemane",
+    "猎犬统领洛克希|loksey|loksey",
+    "烈焰使者|herod|herodes",
+
+    -- BRD
+    "达格兰·索瑞森大帝|emperor dagran|emperador dagran",
+    "弗诺斯将军|general angerforge|general angerforge",
+    "审讯官格斯塔恩|high interrogator gerstahn|alto interrogador gerstahn",
+
+    -- Stratholme
+    "瑞文戴尔男爵|baron rivendare|barón rivendare",
+    "巴纳扎尔|balnazzar|balnazzar",
+    "奥蕾莉亚|aurius|aurius",
+
+    -- Scholomance
+    "加丁|gandling|gandling",
+    "拉丝琳|ras frostwhisper|ras sususrro de escarcha",
+    "詹德斯·巴罗夫|jandice barov|jandice barov",
+
+    -- UBRS/LBRS
+    "达基萨斯将军|general drakkisath|general drakkisath",
+    "统领洛克|warchief rend|jefe de guerra rend",
+    "皮匠|the beast|la bestia"
+  }
+
+  local v8_races_factions = {
+    -- Razas
+    "人类|human|humano",
+    "矮人|dwarf|enano",
+    "暗夜精灵|night elf|elfo de la noche",
+    "侏儒|gnome|gnomo",
+    "兽人|orc|orco",
+    "亡灵|undead|no-muerto",
+    "牛头人|tauren|tauren",
+    "巨魔|troll|trol",
+    "血精灵|blood elf|elfo de sangre",
+    "高等精灵|high elf|alto elfo",
+    "地精|goblin|goblin",
+
+    -- Facciones
+    "联盟|alliance|alianza",
+    "部落|horde|horda",
+    "银色黎明|argent dawn|alba argéntea",
+    "塞纳里奥议会|cenarion circle|círculo cenarion",
+    "木喉熊怪|timbermaw|fauces de madera",
+    "瑟银兄弟会|thorium brotherhood|hermandad del torio",
+    "冰冻之力|hydraxian waterlords|señores del agua de hydraxis",
+    "荆棘谷渔夫|stv fishing|pesca stv",
+    "赞达拉|zandalar|zandalar",
+    "血帆海盗|bloodsail|vela sangrienta",
+    "热砂港|steamwheedle|manivapor",
+    "藏宝海湾|booty bay|bahía del botín",
+    "加基森|gadgetzan|gadgetzan",
+    "棘齿城|ratchet|trinquete",
+    "永望镇|everlook|vistalegre"
+  }
+
+  local v8_verbs_grammar = {
+    -- Verbos compuestos chinos de alta frecuencia
+    "看看|look|mira",
+    "试试|try|intenta",
+    "说说|say|dime",
+    "问问|ask|pregunta",
+    "想想|think|piensa",
+    "走走|walk|camina",
+    "聊聊|chat|hablemos",
+    "做做|do|haz",
+    "讲讲|tell|cuéntame",
+    "听听|listen|escucha",
+
+    -- Negaciones y afirmaciones chinas
+    "不行|no way|no se puede",
+    "不要|don't|no",
+    "不用|no need|no hace falta",
+    "不是|not|no es",
+    "可以|ok/can|se puede",
+    "可能|maybe|quizás",
+    "当然|of course|por supuesto",
+    "一定|must|seguro",
+    "如果|if|si",
+    "但是|but|pero",
+    "因为|because|porque",
+    "所以|so/therefore|entonces",
+    "虽然|although|aunque",
+    "不过|however|sin embargo",
+    "而且|moreover|además",
+    "或者|or|o",
+    "还是|or/still|o/todavía",
+
+    -- Adverbios de tiempo
+    "刚刚|just now|recién",
+    "已经|already|ya",
+    "还没|not yet|aún no",
+    "快要|about to|a punto de",
+    "一直|always|siempre",
+    "从来|never|nunca",
+    "经常|often|seguido",
+    "偶尔|sometimes|a veces",
+    "每天|every day|todos los días",
+    "每次|every time|cada vez",
+    "马上|right away|ahora mismo",
+    "以后|after|después",
+    "以前|before|antes",
+    "最近|recently|últimamente",
+    "昨天|yesterday|ayer",
+    "前天|day before yesterday|antier",
+    "后天|day after tomorrow|pasado mañana",
+    "晚上|night|noche",
+    "早上|morning|mañana",
+    "下午|afternoon|tarde",
+    "中午|noon|mediodía",
+
+    -- Adjetivos de alta frecuencia
+    "大|big|grande",
+    "小|small|pequeño",
+    "多|many|muchos",
+    "少|few|pocos",
+    "快|fast|rápido",
+    "慢|slow|lento",
+    "新|new|nuevo",
+    "旧|old|viejo",
+    "长|long|largo",
+    "短|short|corto",
+    "高|high/tall|alto",
+    "低|low|bajo",
+    "难|hard|difícil",
+    "容易|easy|fácil",
+    "远|far|lejos",
+    "近|near|cerca",
+    "贵|expensive|caro",
+    "便宜|cheap|barato",
+    "有用|useful|útil",
+    "没用|useless|inútil",
+    "重要|important|importante",
+    "厉害|awesome|increíble",
+    "无聊|boring|aburrido",
+    "开心|happy|feliz",
+    "生气|angry|enojado",
+    "害怕|scared|asustado",
+    "着急|anxious|ansioso",
+    "安全|safe|seguro",
+    "危险|dangerous|peligroso"
+  }
+
+  local v8_emotes_social = {
+    -- Emotes y expresiones
+    "哈哈|haha|jaja",
+    "哈哈哈|hahaha|jajaja",
+    "呵呵|hehe|jeje",
+    "嘻嘻|hehe|jiji",
+    "加油|go go|ánimo",
+    "牛逼|awesome|increíble",
+    "卧槽|omg|ostia",
+    "我去|wow|guau",
+    "我靠|omg|madre mía",
+    "真的吗|really|en serio",
+    "真的|really|de verdad",
+    "假的|fake|falso",
+    "是的|yes|sí",
+    "不是|no|no",
+    "好的|ok|vale",
+    "算了|forget it|olvídalo",
+    "随便|whatever|lo que sea",
+    "没问题|no problem|sin problema",
+    "谢谢|thanks|gracias",
+    "不客气|you're welcome|de nada",
+    "对不起|sorry|perdón",
+    "没关系|it's ok|no pasa nada",
+    "拜拜|bye bye|adiós",
+    "再见|goodbye|adiós",
+    "晚安|good night|buenas noches",
+    "你好|hello|hola",
+    "老板|boss|jefe",
+    "同学|classmate|compañero",
+    "兄弟们|brothers|hermanos",
+    "大家|everyone|todos",
+    "各位|everyone|señores",
+    "帅哥|handsome guy|guapo",
+    "美女|pretty girl|guapa",
+    "小姐姐|miss/sis|señorita",
+    "老哥|bro|compa",
+    "老铁|buddy|compadre",
+    "哥们|bro|colega",
+    "伙计|dude|tío",
+    "亲|dear|querido",
+    "宝|babe|cariño",
+    "老大|boss|jefe",
+    "师傅|master|maestro"
+  }
+
+  local v8_numbers_misc = {
+    -- Números
+    "一|one|uno",
+    "二|two|dos",
+    "三|three|tres",
+    "四|four|cuatro",
+    "五|five|cinco",
+    "六|six|seis",
+    "七|seven|siete",
+    "八|eight|ocho",
+    "九|nine|nueve",
+    "十|ten|diez",
+    "百|hundred|cien",
+    "千|thousand|mil",
+    "万|ten thousand|diez mil",
+
+    -- Direcciones
+    "左|left|izquierda",
+    "右|right|derecha",
+    "前|front|adelante",
+    "后面|behind|atrás",
+    "上面|above|arriba",
+    "下面|below|abajo",
+    "这里|here|aquí",
+    "那里|there|allí",
+    "旁边|beside|al lado",
+    "对面|opposite|enfrente",
+    "中间|middle|en medio",
+    "外面|outside|afuera",
+    "里面|inside|adentro",
+
+    -- Medidas y cantidades
+    "一个|one|uno",
+    "两个|two|dos",
+    "三个|three|tres",
+    "几个|some|algunos",
+    "很多个|many|muchos",
+    "第一|first|primero",
+    "第二|second|segundo",
+    "第三|third|tercero",
+    "最后|last|último",
+    "下一个|next|siguiente",
+    "上一个|previous|anterior"
+  }
+
+  local v8_wow_specific = {
+    -- WoW Raid Loot
+    "分配|distribute|distribuir",
+    "金团|gdkp|gdkp",
+    "G团|gdkp|gdkp",
+    "需求|need|necesidad",
+    "贪婪|greed|codicia",
+    "放弃|pass|pasar",
+    "roll|roll|tirar",
+    "暗杀|ninja|ninja",
+    "毛|ninja|ninja loot",
+    "换装|respec|re-equip",
+    "专精|specialization|especialización",
+    "天赋|talents|talentos",
+    "重置|reset|reiniciar",
+    "洗天赋|respec|resetear talentos",
+    "洗点|respec|resetear talentos",
+    "节点|node|nodo",
+    "矿点|mining node|nodo de minería",
+    "草点|herb node|nodo de hierba",
+    "鱼点|fishing spot|spot de pesca",
+
+    -- WoW Gear specific
+    "装等|gear score|puntaje de equipo",
+    "装备等级|item level|nivel de objeto",
+    "最佳|best in slot|mejor en su slot",
+    "散件|off-set|fuera de set",
+    "附魔师|enchanter|encantador",
+    "珠宝|gems|gemas",
+    "附魔|enchant|encantamiento",
+    "耐久|durability|durabilidad",
+    "修理|repair|reparar",
+    "修理费|repair cost|costo de reparación",
+
+    -- Turtle WoW specific extras
+    "幻化|transmog|transfiguración",
+    "造型|appearance|apariencia",
+    "外观|look|aspecto",
+    "乌龟服|turtle server|server tortuga",
+    "乌龟WOW|turtle wow|turtle wow",
+    "自定义|custom|personalizado",
+    "龟速|turtle speed|velocidad tortuga",
+    "一命|hardcore|una vida",
+    "硬核|hardcore|hardcore",
+    "流浪模式|vagrant mode|modo vagabundo",
+    "帐篷|tent|tienda de campaña",
+    "生存|survival|supervivencia",
+    "跨阵营|cross faction|facciones cruzadas",
+    "双阵营|cross faction|cruzar facción",
+
+    -- Abbreviations used in LFG
+    "来T|need tank|falta tanque",
+    "来奶|need healer|falta healer",
+    "来DPS|need dps|falta dps",
+    "满了|full|lleno",
+    "缺人|need people|falta gente",
+    "开组|forming|formando grupo",
+    "组满|group full|grupo completo",
+    "散了|disbanded|se disolvió",
+    "上线|online|en línea",
+    "下线|offline|desconectado",
+    "挂机|afk|ausente",
+    "回来|back|de vuelta",
+    "出发|go|vamos",
+    "集合|gather|reunirse",
+    "门口|at entrance|en la entrada",
+    "门口等|waiting at entrance|esperando en la entrada",
+    "石头|meeting stone|piedra de encuentro",
+    "飞过去|fly there|volar allá",
+    "跑过去|run there|correr allá",
+    "传送|teleport|teletransporte",
+    "开门|open portal|abrir portal",
+    "点门|click portal|click portal"
+  }
+
+  load_batch(v8_bosses_raids)
+  load_batch(v8_dungeon_bosses)
+  load_batch(v8_races_factions)
+  load_batch(v8_verbs_grammar)
+  load_batch(v8_emotes_social)
+  load_batch(v8_numbers_misc)
+  load_batch(v8_wow_specific)
+
+  -- ============================================================
+  -- RESCUED FROM ORPHANED BATCHES (V4-V7) — NOW INSIDE MODULE SCOPE
+  -- These were previously outside end) and silently broken
+  -- ============================================================
+  add("guerrero", "warrior", "战")
+  add("guerrero", "warrior", "战士")
+  add("mago", "mage", "法")
+  add("mago", "mage", "法师")
+  add("sacerdote", "priest", "牧")
+  add("sacerdote", "priest", "牧师")
+  add("pícaro", "rogue", "贼")
+  add("pícaro", "rogue", "潜行者")
+  add("cazador", "hunter", "猎")
+  add("cazador", "hunter", "猎人")
+  add("druida", "druid", "德")
+  add("druida", "druid", "小德")
+  add("druida", "druid", "德鲁伊")
+  add("brujo", "warlock", "术")
+  add("brujo", "warlock", "术士")
+  add("chamán", "shaman", "萨")
+  add("chamán", "shaman", "萨满")
+  add("paladín", "paladin", "骑")
+  add("paladín", "paladin", "骑士")
+  add("protección", "prot", "防")
+  add("healer", "heal", "奶")
+  add("reprensión", "ret", "惩戒")
+  add("furia", "fury", "狂暴")
+  add("sombras", "shadow", "暗牧")
+  add("fuego", "fire", "火法")
+  add("escarcha", "frost", "冰法")
+  add("lamentos", "wc", "哀嚎")
+  add("minas", "dm", "死矿")
+  add("castillo oscuro", "sfk", "影牙")
+  add("profundidades", "brd", "深渊")
+  add("monasterio", "sm", "血色")
+  add("rajamanto", "rfk", "剃刀")
+  add("zarcas", "rfd", "高地")
+  add("maraudon", "mara", "玛拉顿")
+  add("templo", "st", "神庙")
+  add("cumbre", "brs", "黑石")
+  add("la masacre", "dm", "厄运")
+  add("scholomance", "scholo", "通灵")
+  add("stratholme", "strat", "斯坦索姆")
+  add("zul'gurub", "zg", "祖格")
+  add("ruinas", "aq20", "废墟")
+  add("guarida de alanegra", "bwl", "黑翼")
+  add("onyxia", "ony", "黑龙")
+  add("hacer/pegar", "do/hit", "打")
+  add("matar", "kill", "杀")
+  add("ir", "go", "去")
+  add("venir", "come", "来")
+  add("dar", "give", "给")
+  add("comprar", "buy", "买")
+  add("vender", "sell", "卖")
+  add("entrar", "enter", "进")
+  add("salir", "leave", "退")
+  add("esperar", "wait", "等")
+  add("invitar", "invite", "组")
+  add("comerciar", "trade", "交易")
+  add("ayudar", "help", "帮忙")
+  add("misión", "quest", "任务")
+  add("subir de nivel", "level up", "升级")
+  add("resucitar", "resurrect", "复活")
+  add("invocar", "summon", "拉")
+  add("correr", "run", "跑")
+  add("morir", "die", "死")
+  add("wipear", "wipe", "灭")
+  add("abrir/empezar", "open/start", "开")
+  add("yo", "i", "我")
+  add("tú", "you", "你")
+  add("él", "he", "他")
+  add("ella", "she", "她")
+  add("nosotros", "we", "我们")
+  add("ustedes", "you", "你们")
+  add("ellos", "they", "他们")
+  add("hermano", "brother", "兄弟")
+  add("pro", "pro", "大佬")
+  add("noob", "noob", "菜鸟")
+  add("chica", "girl", "妹子")
+  add("esposa", "wife", "老婆")
+  add("amigo", "friend", "朋友")
+  add("gente", "people", "人")
+  add("cómo", "how", "怎么")
+  add("dónde", "where", "哪里")
+  add("cuánto", "how much", "多少")
+  add("por qué", "why", "为什么")
+  add("qué", "what", "什么")
+  add("cuándo", "when", "什么时候")
+  add("quién", "who", "谁")
+  add("ahora", "now", "现在")
+  add("luego", "later", "等下")
+  add("hoy", "today", "今天")
+  add("mañana", "tomorrow", "明天")
+  add("mucho", "a lot", "很多")
+  add("un poco", "a little", "一点")
+  add("todo", "all", "全部")
+  add("nada", "none", "没有")
+  add("sí/correcto", "yes/right", "对")
+  add("equivocado", "wrong", "错")
+  add("bien/ok", "good/ok", "好")
+  add("mal/no", "bad/no", "不好")
+  add("tortuga", "turtle", "乌龟")
+  add("doble recolección", "double gathering", "双采")
+  add("caparazón", "turtle shell", "龟壳")
+  add("tienda", "tent", "帐篷")
+  add("cola", "queue", "排队")
+  add("facciones cruzadas", "crossfaction", "跨阵营")
+  add("alianza", "alliance", "联盟")
+  add("horda", "horde", "部落")
+  add("tanque", "tank", "坦克")
+  add("sanador", "healer", "治疗")
+  add("dps", "dps", "输出")
+  add("líder", "leader", "队长")
+  add("oro", "gold", "金币")
+  add("subasta", "ah", "拍卖行")
+  add("banco", "bank", "银行")
+  add("hermandad", "guild", "公会")
+  add("canal", "channel", "频道")
+  add("addon", "addon", "插件")
+  add("kalimdor", "kalimdor", "卡利姆多")
+  add("reinos del este", "eastern kingdoms", "东部王国")
+  add("azeroth", "azeroth", "艾泽拉斯")
+  add("ventormenta", "stormwind", "暴风城")
+  add("forjaz", "ironforge", "铁炉堡")
+  add("darnassus", "darnassus", "达纳苏斯")
+  add("orgrimmar", "orgrimmar", "奥格瑞玛")
+  add("cima del trueno", "thunder bluff", "雷霆崖")
+  add("entrañas", "undercity", "幽暗城")
+  add("bosque de elwynn", "elwynn forest", "艾尔文森林")
+  add("dun morogh", "dun morogh", "丹莫罗")
+  add("claros de tirisfal", "tirisfal glades", "提瑞斯法林地")
+  add("loch modan", "loch modan", "洛克莫丹")
+  add("bosque de argénteos", "silverpine forest", "银松森林")
+  add("páramos de poniente", "westfall", "西部荒野")
+  add("montañas crestagrana", "redridge mountains", "赤脊山")
+  add("bosque del ocaso", "duskwood", "暮色森林")
+  add("laderas de trabacolina", "hillsbrad foothills", "希尔斯布莱德丘陵")
+  add("los humedales", "wetlands", "湿地")
+  add("montañas de alterac", "alterac mountains", "奥特兰克山脉")
+  add("tierras altas de arathi", "arathi highlands", "阿拉希高地")
+  add("vega de tuercespina", "stranglethorn vale", "荆棘谷")
+  add("tierras inhóspitas", "badlands", "荒芜之地")
+  add("pantano de las penas", "swamp of sorrows", "悲伤沼泽")
+  add("tierras del interior", "the hinterlands", "辛特兰")
+  add("garganta de fuego", "searing gorge", "灼热峡谷")
+  add("las estepas ardientes", "burning steppes", "燃烧平原")
+  add("tierras de la peste del oeste", "western plaguelands", "西瘟疫之地")
+  add("tierras de la peste del este", "eastern plaguelands", "东瘟疫之地")
+  add("paso de la muerte", "deadwind pass", "逆风小径")
+  add("las tierras devastadas", "blasted lands", "诅咒之地")
+  add("durotar", "durotar", "杜隆塔尔")
+  add("mulgore", "mulgore", "莫高雷")
+  add("teldrassil", "teldrassil", "泰达希尔")
+  add("costa oscura", "darkshore", "黑海岸")
+  add("los baldíos", "the barrens", "贫瘠之地")
+  add("sierra espolón", "stonetalon mountains", "石爪山脉")
+  add("vallefresno", "ashenvale", "灰谷")
+  add("las mil agujas", "thousand needles", "千针石林")
+  add("desolace", "desolace", "凄凉之地")
+  add("marjal revolcafango", "dustwallow marsh", "尘泥沼泽")
+  add("feralas", "feralas", "菲拉斯")
+  add("tanaris", "tanaris", "塔纳利斯")
+  add("azshara", "azshara", "艾萨拉")
+  add("cráter de un'goro", "un'goro crater", "安戈洛环形山")
+  add("frondavil", "felwood", "费伍德森林")
+  add("cuna del invierno", "winterspring", "冬泉谷")
+  add("silithus", "silithus", "希利苏斯")
+  add("monte hyjal", "mount hyjal", "海加尔山")
+  add("claro de la luna", "moonglade", "月光林地")
+  add("alquimia", "alchemy", "炼金术")
+  add("alquimia", "alchemy", "炼金")
+  add("herrería", "blacksmithing", "锻造")
+  add("encantamiento", "enchanting", "附魔")
+  add("ingeniería", "engineering", "工程学")
+  add("ingeniería", "engineering", "工程")
+  add("herboristería", "herbalism", "草药学")
+  add("herboristería", "herbalism", "采药")
+  add("peletería", "leatherworking", "制皮")
+  add("minería", "mining", "采矿")
+  add("desuello", "skinning", "剥皮")
+  add("sastrería", "tailoring", "裁缝")
+  add("cocina", "cooking", "烹饪")
+  add("pesca", "fishing", "钓鱼")
+  add("primeros auxilios", "first aid", "急救")
+  add("equitación", "riding", "骑术")
+  add("loto negro", "black lotus", "黑莲花")
+  add("cristal arcano", "arcane crystal", "奥术水晶")
+  add("barra de arcanita", "arcanite bar", "奥金锭")
+  add("orbe de rectitud", "righteous orb", "正义宝珠")
+  add("paño rúnico", "runecloth", "符文布")
+  add("paño de tejido mágico", "mageweave cloth", "魔纹布")
+  add("paño de seda", "silk cloth", "丝绸")
+  add("paño de lana", "wool cloth", "毛料")
+  add("paño de lino", "linen cloth", "亚麻布")
+  add("mena de torio", "thorium ore", "瑟银矿石")
+  add("mena de mitril", "mithril ore", "秘银矿石")
+  add("mena de hierro", "iron ore", "铁矿石")
+  add("mena de cobre", "copper ore", "铜矿石")
+  add("mena de estaño", "tin ore", "锡矿石")
+  add("piedra burda", "rough stone", "粗糙的石头")
+  add("piedra pesada", "heavy stone", "沉重的石头")
+  add("piedra sólida", "solid stone", "坚固的石头")
+  add("piedra densa", "dense stone", "致密的石头")
+  add("cuero ligero", "light leather", "轻皮")
+  add("cuero medio", "medium leather", "中皮")
+  add("cuero pesado", "heavy leather", "重皮")
+  add("cuero grueso", "thick leather", "厚皮")
+  add("cuero basto", "rugged leather", "硬甲皮")
+  add("cuero de demosaurio", "devilsaur leather", "魔暴龙皮")
+  add("esencia de tierra", "essence of earth", "大地精华")
+  add("esencia de agua", "essence of water", "水之精华")
+  add("esencia de fuego", "essence of fire", "火焰精华")
+  add("esencia de aire", "essence of air", "空气精华")
+  add("esencia de no-muerto", "essence of undeath", "死灵精华")
+  add("esencia de vida", "essence of life", "生命精华")
+  add("fragmento luminoso grande", "large brilliant shard", "大块魔光碎片")
+  add("fragmento luminoso pequeño", "small brilliant shard", "小块魔光碎片")
+  add("esencia eterna superior", "greater eternal essence", "强效不灭精华")
+  add("esencia eterna inferior", "lesser eternal essence", "次级不灭精华")
+  add("polvo de ilusión", "illusion dust", "幻影之尘")
+  add("polvo de los sueños", "dream dust", "梦境之尘")
+  add("poción de sanación sublime", "major healing potion", "极效治疗药水")
+  add("poción de maná sublime", "major mana potion", "极效法力药水")
+  add("elixir de la mangosta", "elixir of the mongoose", "猫鼬药剂")
+  add("elixir arcano superior", "greater arcane elixir", "强效奥法药剂")
+  add("elixir de poder de fuego superior", "elixir of greater firepower", "强效火力药剂")
+  add("elixir de poder de las sombras", "elixir of shadow power", "暗影之力药剂")
+  add("elixir de entereza", "elixir of fortitude", "坚韧药剂")
+  add("elixir de gigantes", "elixir of giants", "巨人药剂")
+  add("elixir de agilidad superior", "elixir of greater agility", "强效敏捷药剂")
+  add("poción de sangre de mago", "mageblood potion", "魔血药剂")
+  add("poción de acción libre", "free action potion", "自由行动药水")
+  add("poción de acción viva", "living action potion", "活力行动药水")
+  add("poción de invulnerabilidad limitada", "limited invulnerability potion", "有限无敌药水")
+  add("frasco de petrificación", "flask of petrification", "化石药水")
+  add("frasco de los titanes", "flask of the titans", "泰坦合剂")
+  add("frasco de sabiduría destilada", "flask of distilled wisdom", "精炼智慧合剂")
+  add("frasco de poder supremo", "flask of supreme power", "超级能量合剂")
+  add("frasco de resistencia cromática", "flask of chromatic resistance", "多重抗性合剂")
+  add("bufos de mundo", "world buffs", "世界buff")
+  add("bufo de onyxia", "onyxia buff", "龙头")
+  add("bufo de hakkar", "hakkar buff", "哈卡")
+  add("flor cantarina", "songflower", "轻歌花")
+  add("bufos de la masacre", "dire maul buffs", "厄运buff")
+  add("feria de la luna negra", "darkmoon faire", "马戏团")
+  add("cenarion", "cenarion", "塞纳里奥")
+  add("alba argéntea", "argent dawn", "银色黎明")
+  add("bastión fauces de madera", "timbermaw hold", "木喉要塞")
+  add("zandalar", "zandalar", "赞达拉")
+  add("crítico", "crit", "暴击")
+  add("esquivar", "dodge", "躲闪")
+  add("parar", "parry", "招架")
+  add("bloquear", "block", "格挡")
+  add("fallo", "miss", "未击中")
+  add("resistir", "resist", "抵抗")
+  add("inmune", "immune", "免疫")
+  add("armadura", "armor", "护甲")
+  add("poder de ataque", "attack power", "攻击强度")
+  add("ap", "ap", "攻强")
+  add("poder de hechizos", "spell power", "法术强度")
+  add("sp", "sp", "法强")
+  add("sanación", "healing", "治疗量")
+  add("mp5", "mp5", "五回")
+  add("golpe", "hit", "命中")
+  add("amenaza/aggro", "threat/aggro", "仇恨")
+  add("oom/sin maná", "oom", "没蓝")
+  add("ausente", "afk", "暂离")
+  add("pullear", "pull", "拉怪")
+  add("add", "add", "ADD")
+  add("kitear", "kite", "风筝")
+  add("oveja", "sheep", "羊")
+  add("porrazo", "sap", "闷棍")
+  add("miedo", "fear", "恐惧")
+  add("nova", "nova", "冰环")
+  add("ceguera", "blind", "致盲")
+  add("cargar", "charge", "冲锋")
+  add("interceptar", "intercept", "拦截")
+  add("cubo de hielo", "ice block", "冰箱")
+  add("pompa", "bubble/immune", "无敌")
+  add("provocar", "taunt", "嘲讽")
+  add("interrumpir", "interrupt", "打断")
+  add("disipar", "dispel", "驱散")
+  add("curar veneno", "cure poison", "解毒")
+  add("quitar maldición", "remove curse", "解诅咒")
+  add("resucitar", "rez", "复活")
+  add("rez en combate", "combat rez", "战复")
+  add("piedra de alma", "soulstone", "灵魂石")
+  add("piedra de salud", "healthstone", "糖")
+  add("invocar", "summon", "拉人")
+  add("cabeza", "head", "头盔")
+  add("cuello", "neck", "项链")
+  add("hombros", "shoulder", "肩膀")
+  add("capa", "cloak", "披风")
+  add("pecho", "chest", "衣服")
+  add("pecho", "chest", "胸甲")
+  add("muñecas", "wrist", "护腕")
+  add("manos", "hands", "手套")
+  add("cintura", "waist", "腰带")
+  add("piernas", "legs", "裤子")
+  add("piernas", "legs", "腿甲")
+  add("pies", "feet", "鞋子")
+  add("pies", "feet", "靴子")
+  add("anillo", "ring", "戒指")
+  add("abalorio", "trinket", "饰品")
+  add("mano principal", "main hand", "主手")
+  add("mano izquierda", "off hand", "副手")
+  add("dos manos", "two hand", "双手")
+  add("a distancia", "ranged", "远程")
+  add("varita", "wand", "魔杖")
+  add("escudo", "shield", "盾牌")
+  add("arma", "weapon", "武器")
+  add("pobre", "poor", "灰色")
+  add("común", "common", "白色")
+  add("poco común", "uncommon", "绿色")
+  add("raro", "rare", "蓝色")
+  add("épico", "epic", "紫色")
+  add("legendario", "legendary", "橙色")
+  add("legendario", "legendary", "传说")
+  add("tier/set", "tier/set", "套装")
+  add("bis", "bis", "毕业")
+  add("bis", "bis", "极品")
+  add("necesidad", "need", "需求")
+  add("codicia", "greed", "贪婪")
+  add("pasar", "pass", "放弃")
+  add("ninja", "ninja", "全需")
+  add("mala suerte", "bad luck", "黑手")
+  add("buena suerte", "good luck", "红手")
+  add("cosas",          -- Evita que se traduzca como "este oeste", "things", "东西")
+  add("bot",             -- Evita que se traduzca como "máquina gente", "bot", "机器人")
+  add("beneficio", "benefit", "好处")
+  add("vagabundo", "vagrant", "流浪")
+  add("ilusión", "floating cloud", "浮云")
+  add("estafador", "scammer", "奸商")
+  add("niños", "children", "儿童")
+  add("devolver", "return", "退货")
+  add("volver a la ciudad", "hearth", "回城")
+  add("qué", "what", "啥")
+  add("el más", "most", "最")
+  add("demasiado", "too", "太")
+  add("además", "also", "又")
+  add("primero", "first", "先")
+  add("tiene que", "must", "得")
+  add("en", "in", "里")
+  add("terminado", "finish", "完")
+  add("originalmente", "original", "原")
+  add("seguro", "definitely", "肯定")
+  add("elegir", "choose", "选")
+  add("olvidar", "forget", "忘")
+  add("levelear", "level", "练")
+  add("subir", "rise", "涨")
+  add("hacer cola", "queue", "排")
+  add("conseguir", "get", "弄个")
+  add("fichas", "tokens", "代币")
+  add("recompensa", "reward", "奖励")
+  add("banco", "bank", "仓库")
+  add("sugerencia", "suggest", "建议")
+  add("momento", "time", "时候")
+  add("cuando", "when", "的时候")
+  add("qué hacer", "what to do", "怎么办")
+  add("personaje", "alt", "号")
+  add("se busca", "wanted", "通缉")
+  add("elfo", "elf", "精")
+  add("alto elfo", "high elf", "高等精灵")
+  add("jefe", "boss", "佬")
+  add("pro", "pro", "大佬")
+  add("sin censura", "uncensored", "高清无马")
+  add("hd", "hd", "高清")
+  add("joder", "wtf/damn", "尼玛")
+  add("maldición", "damn it", "TNND")
+  add("qué pasa", "what happened", "怎么回事")
+  add("significado", "meaning", "意思")
+  add("sombras y ruina", -- Spec de Brujo", "shadow-ruin", "暗毁")
+  add("intendente", "quartermaster", "军需官")
+  add("entregar", "turn in", "交")
+  add("casillas", "slots", "格")
+  add("materiales", "materials", "材料")
+  add("amani", "amani", "阿曼尼")
+  add("parche", "patch/version", "版本")
+  add("demonio", "demonology", "恶魔")
+  add("normal", "normal", "普通")
+  add("manual", "manual", "手册")
+  add("palabra clave", "keyword", "关键词")
+  add("la próxima vez", "next time", "下次")
+  add("mucho tiempo", "long time", "久")
+  add("después", "after/later", "后")
+  add("primera vez", "first time", "首次")
+  add("dónde", "where", "哪")
+  add("oportunidad", "chance", "机会")
+  add("básicamente", "basically", "基本")
+  add("juntar", "gather all", "凑齐")
+  add("solo", "solo", "单")
+  add("inicio", "start", "开局")
+  add("especial", "special", "特殊")
+  add("oh", "oh", "哦")
+  add("parece", "seems", "好像")
+  add("parece", "like", "像")
+  add("cambio", "change", "变化")
+  add("asunto", "matter", "回事")
+  add("sabe", "knows/can", "会")
+  add("nombrar", "name", "取名")
+  add("debería", "should", "应该")
+  add("no poder juntar", "cannot gather", "凑不齐")
+  add("fragmento brillante", "glowing shard", "发光碎片")
+  add("macro de invitar", "invite macro", "加人宏")
+  add("invitar gente", "invite people", "加人")
+  add("solo para probar", "just testing", "意思一下")
+  add("revantusk", "revantusk", "恶齿")
+  add("revantusk", -- Typo común de los chinos por "alitas de ganso", "revantusk", "鹅翅")
+  add("frustrado", "frustrated", "压抑")
+  add("volverse loco", "go crazy", "发疯")
+  add("volverse loco", -- Typo de 發瘋", "go crazy", "加疯")
+  add("mascota", "pet", "宝宝")
+  add("juntar", "gather", "凑")
+  add("fragmento", "shard", "碎片")
+  add("configuración", "settings", "设置")
+  add("sin cambiar", "unchanged", "没改")
+  add("cambiar", "change", "改")
+  add("El Castillo de la Tempestad", "tempest keep", "风暴要塞")
+  add("Valle Frostmane", "frostmane valley", "霜鬃谷")
+  add("Frostmane", "frostmane", "霜鬃")
+  add("anillo", "ring", "戒指")
+  add("anillo de", "ring of", "之戒")
+  add("cinturón", "belt", "腰带")
+  add("solo", "just", "只是")
+  add("usar", "use", "用")
+  add("abrir", "open", "打开")
+  add("juego", "game", "游戏")
+  add("acelerador de ping", "booster/vpn", "加速器")
+  add("diferente", "different", "不同")
+  add("no puede", "cannot", "不能")
+  add("paladín", "paladin", "骑士")
+  add("invocar", "summon", "召唤")
+  add("invocación grupal", "mass summon", "群召唤")
+  add("doble especialización", "dual spec", "双技能")
+  add("doble especialización", "dual spec", "双天赋")
+  add("doble", "double", "双")
+  add("habilidad", "skill", "技能")
+  add("sería mejor", "might as well", "还不如")
+  add("entonces", "then", "那")
+  add("herboristería", "herbalism", "采花")
+  add("desencantar", "disenchant", "分解")
+  add("Paladín Protección", "prot paladin", "防骑")
+  add("Paladín Sagrado", "holy paladin", "奶骑")
+  add("Paladín Reprensión", "ret paladin", "惩戒骑")
+  add("Guerrero Furia", "fury warrior", "狂暴战")
+  add("Guerrero Protección", "prot warrior", "防战")
+  add("Guerrero Armas", "arms warrior", "武器战")
+  add("Sacerdote Sombras", "shadow priest", "暗牧")
+  add("Sacerdote Sagrado", "holy priest", "神牧")
+  add("Sacerdote Disciplina", "disc priest", "戒律牧")
+  add("Druida Restauración", "resto druid", "奶德")
+  add("Druida Feral", "feral druid", "野德")
+  add("Druida Guardián", "guardian druid", "熊德")
+  add("Druida Equilibrio", "balance druid", "鸟德")
+  add("Lechúcico", "moonkin", "咕咕")
+  add("Cazador Bestias", "bm hunter", "兽王猎")
+  add("Cazador Puntería", "mm hunter", "射击猎")
+  add("Cazador Supervivencia", "survival hunter", "生存猎")
+  add("Pícaro Combate", "combat rogue", "战斗贼")
+  add("Pícaro Asesinato", "assassination rogue", "刺杀贼")
+  add("Pícaro Sutileza", "subtlety rogue", "敏锐贼")
+  add("Mago Escarcha", "frost mage", "冰法")
+  add("Mago Fuego", "fire mage", "火法")
+  add("Mago Arcano", "arcane mage", "奥法")
+  add("Brujo Aflicción", "affliction warlock", "痛苦术")
+  add("Brujo Destrucción", "destruction warlock", "毁灭术")
+  add("Brujo Demonología", "demonology warlock", "恶魔术")
+  add("Chamán Elemental", "ele shaman", "元素萨")
+  add("Chamán Mejora", "enh shaman", "增强萨")
+  add("Chamán Restauración", "resto shaman", "奶萨")
+  add("Chamán Restauración", "resto shaman", "恢复萨")
+
   -- ============================================================
   -- RE-INDEXACIÓN DE BUCKETS POST-CARGA DE BASE DE DATOS
   -- ============================================================
@@ -2173,630 +3057,3 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   end
 
 end)
-
-
-local preemptive_batch = {
-  -- Clases y Specs (Abreviaciones chinas)
-  "战|warrior|guerrero",
-  "战士|warrior|guerrero",
-  "法|mage|mago",
-  "法师|mage|mago",
-  "牧|priest|sacerdote",
-  "牧师|priest|sacerdote",
-  "贼|rogue|pícaro",
-  "潜行者|rogue|pícaro",
-  "猎|hunter|cazador",
-  "猎人|hunter|cazador",
-  "德|druid|druida",
-  "小德|druid|druida",
-  "德鲁伊|druid|druida",
-  "术|warlock|brujo",
-  "术士|warlock|brujo",
-  "萨|shaman|chamán",
-  "萨满|shaman|chamán",
-  "骑|paladin|paladín",
-  "骑士|paladin|paladín",
-  "防|prot|protección",
-  "奶|heal|healer",
-  "惩戒|ret|reprensión",
-  "狂暴|fury|furia",
-  "暗牧|shadow|sombras",
-  "火法|fire|fuego",
-  "冰法|frost|escarcha",
-
-  -- Mazmorras Clásicas (Abreviaciones)
-  "哀嚎|wc|lamentos",
-  "死矿|dm|minas",
-  "影牙|sfk|castillo oscuro",
-  "深渊|brd|profundidades",
-  "血色|sm|monasterio",
-  "剃刀|rfk|rajamanto",
-  "高地|rfd|zarcas",
-  "玛拉顿|mara|maraudon",
-  "神庙|st|templo",
-  "黑石|brs|cumbre",
-  "厄运|dm|la masacre",
-  "通灵|scholo|scholomance",
-  "斯坦索姆|strat|stratholme",
-  "祖格|zg|zul'gurub",
-  "废墟|aq20|ruinas",
-  "黑翼|bwl|guarida de alanegra",
-  "黑龙|ony|onyxia",
-
-  -- Acciones y Verbos Comunes
-  "打|do/hit|hacer/pegar",
-  "杀|kill|matar",
-  "去|go|ir",
-  "来|come|venir",
-  "给|give|dar",
-  "买|buy|comprar",
-  "卖|sell|vender",
-  "进|enter|entrar",
-  "退|leave|salir",
-  "等|wait|esperar",
-  "组|invite|invitar",
-  "交易|trade|comerciar",
-  "帮忙|help|ayudar",
-  "任务|quest|misión",
-  "升级|level up|subir de nivel",
-  "复活|resurrect|resucitar",
-  "拉|summon|invocar",
-  "跑|run|correr",
-  "死|die|morir",
-  "灭|wipe|wipear",
-  "开|open/start|abrir/empezar",
-
-  -- Pronombres y Jerga Social
-  "我|i|yo",
-  "你|you|tú",
-  "他|he|él",
-  "她|she|ella",
-  "我们|we|nosotros",
-  "你们|you|ustedes",
-  "他们|they|ellos",
-  "兄弟|brother|hermano",
-  "大佬|pro|pro",
-  "菜鸟|noob|noob",
-  "妹子|girl|chica",
-  "老婆|wife|esposa",
-  "朋友|friend|amigo",
-  "人|people|gente",
-
-  -- Preguntas y Gramática
-  "怎么|how|cómo",
-  "哪里|where|dónde",
-  "多少|how much|cuánto",
-  "为什么|why|por qué",
-  "什么|what|qué",
-  "什么时候|when|cuándo",
-  "谁|who|quién",
-
-  -- Modificadores, Tiempo y Cantidad
-  "现在|now|ahora",
-  "等下|later|luego",
-  "今天|today|hoy",
-  "明天|tomorrow|mañana",
-  "很多|a lot|mucho",
-  "一点|a little|un poco",
-  "全部|all|todo",
-  "没有|none|nada",
-  "对|yes/right|sí/correcto",
-  "错|wrong|equivocado",
-  "好|good/ok|bien/ok",
-  "不好|bad/no|mal/no",
-
-  -- Términos de Turtle WoW y MMORPG
-  "乌龟|turtle|tortuga",
-  "双采|double gathering|doble recolección",
-  "龟壳|turtle shell|caparazón",
-  "帐篷|tent|tienda",
-  "排队|queue|cola",
-  "跨阵营|crossfaction|facciones cruzadas",
-  "联盟|alliance|alianza",
-  "部落|horde|horda",
-  "坦克|tank|tanque",
-  "治疗|healer|sanador",
-  "输出|dps|dps",
-  "队长|leader|líder",
-  "金币|gold|oro",
-  "拍卖行|ah|subasta",
-  "银行|bank|banco",
-  "公会|guild|hermandad",
-  "频道|channel|canal",
-  "插件|addon|addon"
-}
-
-for _, line in ipairs(preemptive_batch) do
-  local p1 = strfind(line, "|", 1, true)
-  if p1 then
-    local zh = strsub(line, 1, p1 - 1)
-    local rest = strsub(line, p1 + 1)
-    local p2 = strfind(rest, "|", 1, true)
-    if p2 then
-      local en = strsub(rest, 1, p2 - 1)
-      local es = strsub(rest, p2 + 1)
-      add(es, en, zh)
-    end
-  end
-end
-
-
-local massive_wow_batch = {
-  -- Continents & Major Regions
-  "卡利姆多|kalimdor|kalimdor",
-  "东部王国|eastern kingdoms|reinos del este",
-  "艾泽拉斯|azeroth|azeroth",
-  
-  -- Capital Cities
-  "暴风城|stormwind|ventormenta",
-  "铁炉堡|ironforge|forjaz",
-  "达纳苏斯|darnassus|darnassus",
-  "奥格瑞玛|orgrimmar|orgrimmar",
-  "雷霆崖|thunder bluff|cima del trueno",
-  "幽暗城|undercity|entrañas",
-  
-  -- Eastern Kingdoms Zones
-  "艾尔文森林|elwynn forest|bosque de elwynn",
-  "丹莫罗|dun morogh|dun morogh",
-  "提瑞斯法林地|tirisfal glades|claros de tirisfal",
-  "洛克莫丹|loch modan|loch modan",
-  "银松森林|silverpine forest|bosque de argénteos",
-  "西部荒野|westfall|páramos de poniente",
-  "赤脊山|redridge mountains|montañas crestagrana",
-  "暮色森林|duskwood|bosque del ocaso",
-  "希尔斯布莱德丘陵|hillsbrad foothills|laderas de trabacolina",
-  "湿地|wetlands|los humedales",
-  "奥特兰克山脉|alterac mountains|montañas de alterac",
-  "阿拉希高地|arathi highlands|tierras altas de arathi",
-  "荆棘谷|stranglethorn vale|vega de tuercespina",
-  "荒芜之地|badlands|tierras inhóspitas",
-  "悲伤沼泽|swamp of sorrows|pantano de las penas",
-  "辛特兰|the hinterlands|tierras del interior",
-  "灼热峡谷|searing gorge|garganta de fuego",
-  "燃烧平原|burning steppes|las estepas ardientes",
-  "西瘟疫之地|western plaguelands|tierras de la peste del oeste",
-  "东瘟疫之地|eastern plaguelands|tierras de la peste del este",
-  "逆风小径|deadwind pass|paso de la muerte",
-  "诅咒之地|blasted lands|las tierras devastadas",
-  
-  -- Kalimdor Zones
-  "杜隆塔尔|durotar|durotar",
-  "莫高雷|mulgore|mulgore",
-  "泰达希尔|teldrassil|teldrassil",
-  "黑海岸|darkshore|costa oscura",
-  "贫瘠之地|the barrens|los baldíos",
-  "石爪山脉|stonetalon mountains|sierra espolón",
-  "灰谷|ashenvale|vallefresno",
-  "千针石林|thousand needles|las mil agujas",
-  "凄凉之地|desolace|desolace",
-  "尘泥沼泽|dustwallow marsh|marjal revolcafango",
-  "菲拉斯|feralas|feralas",
-  "塔纳利斯|tanaris|tanaris",
-  "艾萨拉|azshara|azshara",
-  "安戈洛环形山|un'goro crater|cráter de un'goro",
-  "费伍德森林|felwood|frondavil",
-  "冬泉谷|winterspring|cuna del invierno",
-  "希利苏斯|silithus|silithus",
-  "海加尔山|mount hyjal|monte hyjal",
-  "月光林地|moonglade|claro de la luna",
-  
-  -- Professions
-  "炼金术|alchemy|alquimia",
-  "炼金|alchemy|alquimia",
-  "锻造|blacksmithing|herrería",
-  "附魔|enchanting|encantamiento",
-  "工程学|engineering|ingeniería",
-  "工程|engineering|ingeniería",
-  "草药学|herbalism|herboristería",
-  "采药|herbalism|herboristería",
-  "制皮|leatherworking|peletería",
-  "采矿|mining|minería",
-  "剥皮|skinning|desuello",
-  "裁缝|tailoring|sastrería",
-  "烹饪|cooking|cocina",
-  "钓鱼|fishing|pesca",
-  "急救|first aid|primeros auxilios",
-  "骑术|riding|equitación",
-  
-  -- Common Vanilla WoW Items / Materials
-  "黑莲花|black lotus|loto negro",
-  "奥术水晶|arcane crystal|cristal arcano",
-  "奥金锭|arcanite bar|barra de arcanita",
-  "正义宝珠|righteous orb|orbe de rectitud",
-  "符文布|runecloth|paño rúnico",
-  "魔纹布|mageweave cloth|paño de tejido mágico",
-  "丝绸|silk cloth|paño de seda",
-  "毛料|wool cloth|paño de lana",
-  "亚麻布|linen cloth|paño de lino",
-  "瑟银矿石|thorium ore|mena de torio",
-  "秘银矿石|mithril ore|mena de mitril",
-  "铁矿石|iron ore|mena de hierro",
-  "铜矿石|copper ore|mena de cobre",
-  "锡矿石|tin ore|mena de estaño",
-  "粗糙的石头|rough stone|piedra burda",
-  "沉重的石头|heavy stone|piedra pesada",
-  "坚固的石头|solid stone|piedra sólida",
-  "致密的石头|dense stone|piedra densa",
-  "轻皮|light leather|cuero ligero",
-  "中皮|medium leather|cuero medio",
-  "重皮|heavy leather|cuero pesado",
-  "厚皮|thick leather|cuero grueso",
-  "硬甲皮|rugged leather|cuero basto",
-  "魔暴龙皮|devilsaur leather|cuero de demosaurio",
-  "大地精华|essence of earth|esencia de tierra",
-  "水之精华|essence of water|esencia de agua",
-  "火焰精华|essence of fire|esencia de fuego",
-  "空气精华|essence of air|esencia de aire",
-  "死灵精华|essence of undeath|esencia de no-muerto",
-  "生命精华|essence of life|esencia de vida",
-  "大块魔光碎片|large brilliant shard|fragmento luminoso grande",
-  "小块魔光碎片|small brilliant shard|fragmento luminoso pequeño",
-  "强效不灭精华|greater eternal essence|esencia eterna superior",
-  "次级不灭精华|lesser eternal essence|esencia eterna inferior",
-  "幻影之尘|illusion dust|polvo de ilusión",
-  "梦境之尘|dream dust|polvo de los sueños",
-  
-  -- Common Consumables
-  "极效治疗药水|major healing potion|poción de sanación sublime",
-  "极效法力药水|major mana potion|poción de maná sublime",
-  "猫鼬药剂|elixir of the mongoose|elixir de la mangosta",
-  "强效奥法药剂|greater arcane elixir|elixir arcano superior",
-  "强效火力药剂|elixir of greater firepower|elixir de poder de fuego superior",
-  "暗影之力药剂|elixir of shadow power|elixir de poder de las sombras",
-  "坚韧药剂|elixir of fortitude|elixir de entereza",
-  "巨人药剂|elixir of giants|elixir de gigantes",
-  "强效敏捷药剂|elixir of greater agility|elixir de agilidad superior",
-  "魔血药剂|mageblood potion|poción de sangre de mago",
-  "自由行动药水|free action potion|poción de acción libre",
-  "活力行动药水|living action potion|poción de acción viva",
-  "有限无敌药水|limited invulnerability potion|poción de invulnerabilidad limitada",
-  "化石药水|flask of petrification|frasco de petrificación",
-  "泰坦合剂|flask of the titans|frasco de los titanes",
-  "精炼智慧合剂|flask of distilled wisdom|frasco de sabiduría destilada",
-  "超级能量合剂|flask of supreme power|frasco de poder supremo",
-  "多重抗性合剂|flask of chromatic resistance|frasco de resistencia cromática",
-  
-  -- World Buffs & Auras
-  "世界buff|world buffs|bufos de mundo",
-  "龙头|onyxia buff|bufo de onyxia",
-  "哈卡|hakkar buff|bufo de hakkar",
-  "轻歌花|songflower|flor cantarina",
-  "厄运buff|dire maul buffs|bufos de la masacre",
-  "马戏团|darkmoon faire|feria de la luna negra",
-  "塞纳里奥|cenarion|cenarion",
-  "银色黎明|argent dawn|alba argéntea",
-  "木喉要塞|timbermaw hold|bastión fauces de madera",
-  "赞达拉|zandalar|zandalar",
-  
-  -- Combat Mechanics & Slang
-  "暴击|crit|crítico",
-  "躲闪|dodge|esquivar",
-  "招架|parry|parar",
-  "格挡|block|bloquear",
-  "未击中|miss|fallo",
-  "抵抗|resist|resistir",
-  "免疫|immune|inmune",
-  "护甲|armor|armadura",
-  "攻击强度|attack power|poder de ataque",
-  "攻强|ap|ap",
-  "法术强度|spell power|poder de hechizos",
-  "法强|sp|sp",
-  "治疗量|healing|sanación",
-  "五回|mp5|mp5",
-  "命中|hit|golpe",
-  "仇恨|threat/aggro|amenaza/aggro",
-  "没蓝|oom|oom/sin maná",
-  "暂离|afk|ausente",
-  "拉怪|pull|pullear",
-  "ADD|add|add",
-  "风筝|kite|kitear",
-  "羊|sheep|oveja",
-  "闷棍|sap|porrazo",
-  "恐惧|fear|miedo",
-  "冰环|nova|nova",
-  "致盲|blind|ceguera",
-  "冲锋|charge|cargar",
-  "拦截|intercept|interceptar",
-  "冰箱|ice block|cubo de hielo",
-  "无敌|bubble/immune|pompa",
-  "嘲讽|taunt|provocar",
-  "打断|interrupt|interrumpir",
-  "驱散|dispel|disipar",
-  "解毒|cure poison|curar veneno",
-  "解诅咒|remove curse|quitar maldición",
-  "复活|rez|resucitar",
-  "战复|combat rez|rez en combate",
-  "灵魂石|soulstone|piedra de alma",
-  "糖|healthstone|piedra de salud",
-  "拉人|summon|invocar",
-  
-  -- Gear Slots
-  "头盔|head|cabeza",
-  "项链|neck|cuello",
-  "肩膀|shoulder|hombros",
-  "披风|cloak|capa",
-  "衣服|chest|pecho",
-  "胸甲|chest|pecho",
-  "护腕|wrist|muñecas",
-  "手套|hands|manos",
-  "腰带|waist|cintura",
-  "裤子|legs|piernas",
-  "腿甲|legs|piernas",
-  "鞋子|feet|pies",
-  "靴子|feet|pies",
-  "戒指|ring|anillo",
-  "饰品|trinket|abalorio",
-  "主手|main hand|mano principal",
-  "副手|off hand|mano izquierda",
-  "双手|two hand|dos manos",
-  "远程|ranged|a distancia",
-  "魔杖|wand|varita",
-  "盾牌|shield|escudo",
-  "武器|weapon|arma",
-  
-  -- Quality / Tiers
-  "灰色|poor|pobre",
-  "白色|common|común",
-  "绿色|uncommon|poco común",
-  "蓝色|rare|raro",
-  "紫色|epic|épico",
-  "橙色|legendary|legendario",
-  "传说|legendary|legendario",
-  "套装|tier/set|tier/set",
-  "毕业|bis|bis",
-  "极品|bis|bis",
-  "需求|need|necesidad",
-  "贪婪|greed|codicia",
-  "放弃|pass|pasar",
-  "全需|ninja|ninja",
-  "黑手|bad luck|mala suerte",
-  "红手|good luck|buena suerte"
-}
-
-for _, line in ipairs(massive_wow_batch) do
-  local p1 = strfind(line, "|", 1, true)
-  if p1 then
-    local zh = strsub(line, 1, p1 - 1)
-    local rest = strsub(line, p1 + 1)
-    local p2 = strfind(rest, "|", 1, true)
-    if p2 then
-      local en = strsub(rest, 1, p2 - 1)
-      local es = strsub(rest, p2 + 1)
-      add(es, en, zh)
-    end
-  end
-end
-
-
-local v4_batch = {
-  -- Errores literales e Idiomatismos
-  "东西|things|cosas",          -- Evita que se traduzca como "este oeste"
-  "机器人|bot|bot",             -- Evita que se traduzca como "máquina gente"
-  "好处|benefit|beneficio",
-  "流浪|vagrant|vagabundo",
-  "浮云|floating cloud|ilusión",
-  "奸商|scammer|estafador",
-  "儿童|children|niños",
-  "退货|return|devolver",
-  "回城|hearth|volver a la ciudad",
-
-  -- Partículas gramaticales y adjetivos comunes
-  "啥|what|qué",
-  "最|most|el más",
-  "太|too|demasiado",
-  "又|also|además",
-  "先|first|primero",
-  "得|must|tiene que",
-  "里|in|en",
-  "完|finish|terminado",
-  "原|original|originalmente",
-  "肯定|definitely|seguro",
-
-  -- Verbos y acciones
-  "选|choose|elegir",
-  "忘|forget|olvidar",
-  "练|level|levelear",
-  "涨|rise|subir",
-  "排|queue|hacer cola",
-  "弄个|get|conseguir",
-  
-  -- Vocabulario de juego (Turtle WoW / WoW)
-  "代币|tokens|fichas",
-  "奖励|reward|recompensa",
-  "仓库|bank|banco",
-  "建议|suggest|sugerencia",
-  "时候|time|momento",
-  "的时候|when|cuando",
-  "怎么办|what to do|qué hacer",
-  "号|alt|personaje",
-  "通缉|wanted|se busca",
-  "精|elf|elfo",
-  "高等精灵|high elf|alto elfo",
-  "佬|boss|jefe",
-  "大佬|pro|pro"
-}
-
-for _, line in ipairs(v4_batch) do
-  local p1 = strfind(line, "|", 1, true)
-  if p1 then
-    local zh = strsub(line, 1, p1 - 1)
-    local rest = strsub(line, p1 + 1)
-    local p2 = strfind(rest, "|", 1, true)
-    if p2 then
-      local en = strsub(rest, 1, p2 - 1)
-      local es = strsub(rest, p2 + 1)
-      add(es, en, zh)
-    end
-  end
-end
-
-
-local v5_batch = {
-  -- Slang e Idiomatismos de Internet Chinos
-  "高清无马|uncensored|sin censura",
-  "高清|hd|hd",
-  "尼玛|wtf/damn|joder",
-  "TNND|damn it|maldición",
-  "怎么回事|what happened|qué pasa",
-  "意思|meaning|significado",
-  "暗毁|shadow-ruin|sombras y ruina", -- Spec de Brujo
-  
-  -- Vocabulario Específico de WoW
-  "军需官|quartermaster|intendente",
-  "交|turn in|entregar",
-  "格|slots|casillas",
-  "材料|materials|materiales",
-  "阿曼尼|amani|amani",
-  "版本|patch/version|parche",
-  "恶魔|demonology|demonio",
-  "普通|normal|normal",
-  "手册|manual|manual",
-  "关键词|keyword|palabra clave",
-
-  -- Adverbios, Tiempo y Modificadores
-  "下次|next time|la próxima vez",
-  "久|long time|mucho tiempo",
-  "后|after/later|después",
-  "首次|first time|primera vez",
-  "哪|where|dónde",
-
-  -- Verbos y Partículas Comunes
-  "机会|chance|oportunidad",
-  "基本|basically|básicamente",
-  "凑齐|gather all|juntar",
-  "单|solo|solo",
-  "开局|start|inicio",
-  "特殊|special|especial",
-  "哦|oh|oh",
-  "好像|seems|parece",
-  "像|like|parece",
-  "变化|change|cambio",
-  "回事|matter|asunto",
-  "会|knows/can|sabe",
-  "取名|name|nombrar",
-  "应该|should|debería"
-}
-
-for _, line in ipairs(v5_batch) do
-  local p1 = strfind(line, "|", 1, true)
-  if p1 then
-    local zh = strsub(line, 1, p1 - 1)
-    local rest = strsub(line, p1 + 1)
-    local p2 = strfind(rest, "|", 1, true)
-    if p2 then
-      local en = strsub(rest, 1, p2 - 1)
-      local es = strsub(rest, p2 + 1)
-      add(es, en, zh)
-    end
-  end
-end
-
-
-local v6_batch = {
-  -- Casos extremos absolutos y errores tipográficos de los jugadores
-  "凑不齐|cannot gather|no poder juntar",
-  "发光碎片|glowing shard|fragmento brillante",
-  "加人宏|invite macro|macro de invitar",
-  "加人|invite people|invitar gente",
-  "意思一下|just testing|solo para probar",
-  "恶齿|revantusk|revantusk",
-  "鹅翅|revantusk|revantusk", -- Typo común de los chinos por "alitas de ganso"
-  "压抑|frustrated|frustrado",
-  "发疯|go crazy|volverse loco",
-  "加疯|go crazy|volverse loco", -- Typo de 發瘋
-  "宝宝|pet|mascota",
-  "凑|gather|juntar",
-  "碎片|shard|fragmento"
-}
-
-for _, line in ipairs(v6_batch) do
-  local p1 = strfind(line, "|", 1, true)
-  if p1 then
-    local zh = strsub(line, 1, p1 - 1)
-    local rest = strsub(line, p1 + 1)
-    local p2 = strfind(rest, "|", 1, true)
-    if p2 then
-      local en = strsub(rest, 1, p2 - 1)
-      local es = strsub(rest, p2 + 1)
-      add(es, en, zh)
-    end
-  end
-end
-
-
-local v7_batch = {
-  -- Casos exactos del debug
-  "设置|settings|configuración",
-  "没改|unchanged|sin cambiar",
-  "改|change|cambiar",
-  "风暴要塞|tempest keep|El Castillo de la Tempestad",
-  "霜鬃谷|frostmane valley|Valle Frostmane",
-  "霜鬃|frostmane|Frostmane",
-  "戒指|ring|anillo",
-  "之戒|ring of|anillo de",
-  "腰带|belt|cinturón",
-  "只是|just|solo",
-  "用|use|usar",
-  "打开|open|abrir",
-  "游戏|game|juego",
-  "加速器|booster/vpn|acelerador de ping",
-  "不同|different|diferente",
-  "不能|cannot|no puede",
-  "骑士|paladin|paladín",
-  "召唤|summon|invocar",
-  "群召唤|mass summon|invocación grupal",
-  "双技能|dual spec|doble especialización",
-  "双天赋|dual spec|doble especialización",
-  "双|double|doble",
-  "技能|skill|habilidad",
-  "还不如|might as well|sería mejor",
-  "那|then|entonces",
-  "采花|herbalism|herboristería",
-  "分解|disenchant|desencantar",
-  
-  -- Especializaciones de WoW en Jerga China (vital para el LFG)
-  "防骑|prot paladin|Paladín Protección",
-  "奶骑|holy paladin|Paladín Sagrado",
-  "惩戒骑|ret paladin|Paladín Reprensión",
-  "狂暴战|fury warrior|Guerrero Furia",
-  "防战|prot warrior|Guerrero Protección",
-  "武器战|arms warrior|Guerrero Armas",
-  "暗牧|shadow priest|Sacerdote Sombras",
-  "神牧|holy priest|Sacerdote Sagrado",
-  "戒律牧|disc priest|Sacerdote Disciplina",
-  "奶德|resto druid|Druida Restauración",
-  "野德|feral druid|Druida Feral",
-  "熊德|guardian druid|Druida Guardián",
-  "鸟德|balance druid|Druida Equilibrio",
-  "咕咕|moonkin|Lechúcico",
-  "兽王猎|bm hunter|Cazador Bestias",
-  "射击猎|mm hunter|Cazador Puntería",
-  "生存猎|survival hunter|Cazador Supervivencia",
-  "战斗贼|combat rogue|Pícaro Combate",
-  "刺杀贼|assassination rogue|Pícaro Asesinato",
-  "敏锐贼|subtlety rogue|Pícaro Sutileza",
-  "冰法|frost mage|Mago Escarcha",
-  "火法|fire mage|Mago Fuego",
-  "奥法|arcane mage|Mago Arcano",
-  "痛苦术|affliction warlock|Brujo Aflicción",
-  "毁灭术|destruction warlock|Brujo Destrucción",
-  "恶魔术|demonology warlock|Brujo Demonología",
-  "元素萨|ele shaman|Chamán Elemental",
-  "增强萨|enh shaman|Chamán Mejora",
-  "奶萨|resto shaman|Chamán Restauración",
-  "恢复萨|resto shaman|Chamán Restauración"
-}
-
-for _, line in ipairs(v7_batch) do
-  local p1 = strfind(line, "|", 1, true)
-  if p1 then
-    local zh = strsub(line, 1, p1 - 1)
-    local rest = strsub(line, p1 + 1)
-    local p2 = strfind(rest, "|", 1, true)
-    if p2 then
-      local en = strsub(rest, 1, p2 - 1)
-      local es = strsub(rest, p2 + 1)
-      add(es, en, zh)
-    end
-  end
-end
