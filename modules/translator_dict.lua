@@ -4868,7 +4868,37 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("hermandad", "guild", "公会")
   add("jugador", "player", "玩家")
 
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 216: MACROS Y COMANDOS AVANZADOS        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("lanzar", "cast", "施放")
+  add("objetivo", "target", "目标")
+  add("foco", "focus", "焦点")
+  add("asistir", "assist", "协助")
+  add("mascota", "pet", "宠物")
+  add("cancelar aura", "cancelaura", "取消光环")
+  add("usar", "use", "使用")
+  add("equip", "equipar", "装备")
+  add("desmontar", "dismount", "下马")
+  add("ataque automatico", "startattack", "开始攻击")
+  add("detener ataque", "stopattack", "停止攻击")
+  add("macro de ráfaga", "burst macro", "爆发宏")
+  add("macro de curación", "healing macro", "治疗宏")
 
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 217: COMERCIO Y NEGOCIACIÓN AVANZADA    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("pago contra reembolso", "cod", "货到付款")
+  add("cuanto ofreces", "how much do you offer", "你出多少")
+  add("cuál es tu oferta", "what is your offer", "你的报价是多少")
+  add("no acepto menos de", "i won't accept less than", "最低价")
+  add("precio fijo, no negociable", "firm price, no haggling", "一口价，不还价")
+  add("descuento si compras por volumen", "discount for bulk", "量大从优")
+  add("compro en cantidad", "buying in bulk", "大量收")
+  add("busco encantador con mats", "lf enchanter with mats", "求附魔带材料")
+  add("tengo mis propios mats", "have my own mats", "自带材料")
+  add("te pongo propina", "will tip", "给小费")
+  add("cuanto de propina", "how much tip", "要多少小费")
 
   -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║

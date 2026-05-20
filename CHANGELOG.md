@@ -1,5 +1,21 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.1.0] - 2026-05-20
+### Añadido
+- **Mega-Expansión de Vocabulario (v11)**: Integrados más de 140 términos avanzados incluyendo ítems legendarios icónicos (Thunderfury, Atiesh, Sulfuras), consumibles de raid (Juju, Flasks), todos los jefes de mazmorras/raids (AQ, Naxx, ZG) y frases de economía y subasta.
+- **Macros y Comercio (Categorías 216/217)**: Soporte completo en el analizador léxico para términos técnicos de WoW (`cancelaura`, `burst macro`) y jerga de subastas (`cod`, "pago contra reembolso", "propinas").
+- **Translator Dashboard GUI**: Nuevo panel flotante estadístico y gráfico accesible mediante `/tr dashboard` o `/tr dash`.
+- **Blacklist en GUI**: Añadido un campo nativo en la configuración avanzada de pfUI para editar la Lista Negra de jugadores omitidos de manera visual.
+
+### Cambiado
+- **Motor de Detección Híbrido**: El fallback de detección ahora inspecciona el diccionario si el mensaje (≤30 caracteres) carece de marcadores morfológicos occidentales, solucionando la traducción de macros cortas.
+- **Sincronización de Caché Reactiva**: Cambiar el *Color de Etiqueta* o el *Modo Silencioso* desde la interfaz gráfica ahora invalida automáticamente el caché de tags (`_tr_tag_cache`), aplicando los cambios en tiempo real sin requerir `/reload`.
+
+### Corregido
+- **Corrupción Crítica de Base de Datos**: Corregidos 22 registros malformados (0 y 1 pipes) y 21 strings-comentario en `translator_dict_db.lua` que inutilizaban silenciosamente el cargador por lotes (`load_batch`), recuperando más de 200 traducciones de hechizos que estaban inaccesibles.
+- **Anidamiento Estructural de Callbacks**: Resueltos 3 cierres anómalos de las funciones del cargador léxico `load_batch_zh_en_es`.
+- **Valores Nulos en Inicialización**: Prevenidos errores lógicos que comparaban `chan_trade` y `mailbox` contra variables no definidas.
+
 ## [7.0.0] - 2026-05-20
 ### Añadido
 - **Suite Multilingüe v7.0.0 Legendary-Tier**: Rediseño integral del motor con 33 nuevas funcionalidades avanzadas y soporte offline de alto rendimiento (ES / ZH / EN).

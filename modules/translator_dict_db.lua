@@ -73,6 +73,9 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
           local zh = strsub(rest, p2 + 1)
           add(es, en, zh)
         end
+      end
+    end
+  end
 
   local function load_batch_zh_en_es(batch)
     for _, line in ipairs(batch) do
@@ -89,15 +92,13 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
       end
     end
   end
-      end
-    end
-  end
+
 
   -- ============================================================
   -- LOTE A: FACULTADES Y HECHIZOS DE CLASE (CLASS SPELLS)
   -- ============================================================
   local spells_batch = {
-    "-- Guerrero (Warrior)
+    -- Guerrero (Warrior)
     "cargar|charge|冲锋",
     "mortal strike|mortal strike|致死打击",
     "golpe mortal|mortal strike|致死打击",
@@ -123,7 +124,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "golpe heroico|heroic strike|英勇打击",
     "rajar|cleave|顺劈斩",
     "ola de choque|shockwave|震荡波",
-    "-- Mago (Mage)
+    -- Mago (Mage)
     "descarga de escarcha|frostbolt|寒冰箭",
     "descarga de frost|frostbolt|寒冰箭",
     "bola de fuego|fireball|火球术",
@@ -162,7 +163,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "crear comida|conjure food|造食术",
     "portal orgrimmar|portal: orgrimmar|传送门：奥格瑞玛",
     "portal ventormenta|portal: stormwind|传送门：暴风城",
-    "-- Sacerdote (Priest)
+    -- Sacerdote (Priest)
     "palabra de poder escudo|power word: shield|真言术：盾",
     "palabra de poder: escudo|power word: shield|真言术：盾",
     "sanacion relampago|flash heal|快速治疗",
@@ -198,7 +199,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "abrazo vampírico|vampiric embrace|吸血鬼的拥抱",
     "fuego interno|inner fire|心灵之火",
     "encadenar no-muerto|shackle undead|束缚亡灵",
-    "-- Pícaro (Rogue)
+    -- Pícaro (Rogue)
     "golpe siniestro|sinister strike|邪恶攻击",
     "sigilo|stealth|潜行",
     "eviscerar|eviscerate|剔骨",
@@ -228,7 +229,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "exponer armadura|expose armor|破甲",
     "golpe en los rinones|kidney shot|肾击",
     "golpe en los riñones|kidney shot|肾击",
-    "-- Brujo (Warlock)
+    -- Brujo (Warlock)
     "descarga de las sombras|shadow bolt|暗影箭",
     "corrupcion|corruption|腐蚀术",
     "corrupción|corruption|腐蚀术",
@@ -269,7 +270,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "ropero|closet|拉人门",
     "portal de invocacion|summoning portal|召唤传送门",
     "portal de invocación|summoning portal|召唤传送门",
-    "-- Druida (Druid)
+    -- Druida (Druid)
     "rejuvenecimiento|rejuvenation|回春术",
     "recrecimiento|regrowth|愈合",
     "toque de sanacion|healing touch|治疗之触",
@@ -298,7 +299,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "limpiar veneno|cure poison|驱毒术",
     "eliminar maldicion|remove curse|解除诅咒",
     "eliminar maldición|remove curse|解除诅咒",
-    "-- Paladín (Paladin)
+    -- Paladín (Paladin)
     "imposicion de manos|lay on hands|圣疗术",
     "imposición de manos|lay on hands|圣疗术",
     "bendicion de poder|blessing of might|力量祝福",
@@ -336,7 +337,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "martillo de colera|hammer of wrath|愤怒之锤",
     "martillo de cólera|hammer of wrath|愤怒之锤",
     "exorcismo|exorcism|驱邪术",
-    "-- Chamán (Shaman)
+    -- Chamán (Shaman)
     "descarga de relampagos|lightning bolt|闪电箭",
     "descarga de relámpagos|lightning bolt|闪电箭",
     "ola de sanacion|healing wave|治疗波",
@@ -372,7 +373,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "tótem de temblor|tremor totem|战栗图腾",
     "totem de garra de piedra|stoneclaw totem|石爪图腾",
     "tótem de garra de piedra|stoneclaw totem|石爪图腾",
-    "-- Cazador (Hunter)
+    -- Cazador (Hunter)
     "disparo arcano|arcane shot|奥术射击",
     "picadura de serpiente|serpent sting|毒蛇钉刺",
     "marca del cazador|hunter's mark|猎人印记",
@@ -401,7 +402,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "revivir mascota|revive pet|复活宠物",
     "curar mascota|mend pet|治疗宠物",
     "alimentar mascota|feed pet|喂养宠物",
-    "-- Buffs y utilidades de raid cruciales
+    -- Buffs y utilidades de raid cruciales
     "resguardo contra el miedo|fear ward|防恐结界",
     "fear ward|fear ward|防恐",
     "defensa contra miedo|fear ward|防恐",
@@ -428,7 +429,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "reyes|kings|王者",
     "sabiduria|wisdom|智慧",
     "viento furioso|windfury|风怒",
-    "-- Adiciones masivas de hechizos (Clásicos y Custom)
+    -- Adiciones masivas de hechizos (Clásicos y Custom)
     "estimulo|innervate|激活",
     "palabra de poder escudo|power word: shield|真言术：盾",
     "pw shield|power word: shield|真言术：盾",
@@ -612,14 +613,10 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   -- ============================================================
   local items_batch = {
     "trueno furioso|thunderfury|雷霆之怒",
-    "trueno furioso espada bendecida del hijo del viento|thunderfury",
-    "blessed blade of the windseeker|雷霆之怒，逐风者的祝福之剑",
-    "trueno furioso",
-    "espada bendecida del hijo del viento|thunderfury",
-    "sulfuras",
-    "mano de ragnaros|sulfuras",
-    "hand of ragnaros|萨弗拉斯，炎魔拉格纳罗斯之手",
-    "sulfuras mano de ragnaros|sulfuras",
+    "trueno furioso espada bendecida del hijo del viento|thunderfury blessed blade of the windseeker|雷霆之怒，逐风者的祝福之剑",
+    "espada bendecida del hijo del viento|thunderfury blessed blade|雷霆之怒祝福之剑",
+    "mano de ragnaros|hand of ragnaros|炎魔拉格纳罗斯之手",
+    "sulfuras mano de ragnaros|sulfuras hand of ragnaros|萨弗拉斯，炎魔拉格纳罗斯之手",
     "escama de tortuga|turtle scale|乌龟壳",
     "moneda turtle|turtle coin|乌龟币",
     "ficha de rol|roleplay token|角色扮演代币",
@@ -635,20 +632,16 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "agua destilada|sweet nectar|甜花蜜",
     "pan de centeno|crusty rye bread|黑面包",
     "hoja de truenos|thunderfury|雷霆之怒",
-    "ateish",
-    "gran báculo del guardián|atiesh",
-    "greatstaff of the guardian|埃提耶什，守护者的传说之杖",
-    "atiesh gran baculo del guardian|atiesh",
-    "atiesh",
-    "gran baculo del guardian|atiesh",
+    "gran baculo del guardian|atiesh greatstaff of the guardian|埃提耶什，守护者的传说之杖",
+    "gran báculo del guardián|atiesh greatstaff of the guardian|埃提耶什，守护者的传说之杖",
+    "atiesh gran baculo del guardian|atiesh greatstaff|埃提耶什",
     "atiesh|atiesh|埃提耶什",
     "crepusculo|twilight|暮光",
     "crepúsculo|twilight|暮光",
     "ashbringer corrupta|corrupted ashbringer|堕落的灰烬使者",
     "la ashbringer|ashbringer|灰烬使者",
     "cazador de hojas|leaf hunter|叶子弓",
-    "arco de hoja de cazador|rhok'delar",
-    "longbow of the ancient keepers|罗克迪拉，上古守护者的长弓",
+    "arco de hoja de cazador|rhok'delar longbow of the ancient keepers|罗克迪拉，上古守护者的长弓",
     "rhok'delar|rhok'delar|罗克迪拉",
     "lok'delar|lok'delar|洛克迪拉",
     "bastón de la bendicion|benediction|祈福",
@@ -683,7 +676,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "frasco de titán|flask of the titans|泰坦合剂",
     "frasco de sabiduria destilada|flask of distilled wisdom|精炼智慧合剂",
     "frasco de sabiduría destilada|flask of distilled wisdom|精炼智慧合剂",
-    "-- Ítems Turtle WoW e ítems emblemáticos de raid
+    -- Ítems Turtle WoW e ítems emblemáticos de raid
     "tienda de supervivencia|survival tent|生存帐篷",
     "tienda survival|survival tent|帐篷",
     "tabardo de gremio custom|custom guild tabard|定制公会战袍",
@@ -692,7 +685,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "bolsa de 24 casillas|24 slot bag|24格包",
     "ficha de rol|roleplay token|角色扮演币",
     "donacion de tienda|shop donation|商城赞助",
-    "-- Adiciones extras
+    -- Adiciones extras
     "lagrima de neltharion|neltharion's tear|奈萨里奥之泪",
     "lágrima de neltharion|neltharion's tear|奈萨里奥之泪",
     "nelth tear|neltharion's tear|奈萨里奥之泪/泪",
@@ -714,10 +707,9 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "dft|drake fang talisman|龙牙饰物",
     "talisman de colmillo de dragon|drake fang talisman|龙牙饰物",
     "talismán de colmillo de dragón|drake fang talisman|龙牙饰物",
-    "zhm|zin'rokh",
-    "destroyer of worlds|辛洛斯，诸界的毁灭者",
-    "zinrokh|zin'rokh",
-    "zin'rokh|zin'rokh",
+    "zhm|zin'rokh destroyer of worlds|辛洛斯，诸界的毁灭者",
+    "zinrokh|zin'rokh|辛洛斯",
+    "zin'rokh|zin'rokh|辛洛斯",
     "crusader enchant|enchant weapon - crusader|附魔武器 - 十字军",
     "encantamiento de cruzado|enchant weapon - crusader|附魔武器 - 十字军",
     "encantamiento cruzado|enchant weapon - crusader|附魔武器 - 十字军",
@@ -804,7 +796,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "tengo sueño me voy a dormir|tired going to sleep|困了，去睡觉了",
     "nos vemos manana|see you tomorrow|明天见",
     "nos vemos mañana|see you tomorrow|明天见",
-    "hola a todos",
+    "hola a todos|hi everyone|大家好",
     "como estan|hi all how are you|大家好，你们好吗",
     "cómo están|hi all how are you|大家好，你们好吗",
     "mucho exito|good luck|祝成功",
@@ -877,7 +869,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "gracias a todos|thanks all|谢谢大家",
     "gracias por el grupo|thanks for group|谢谢组队",
     "buen grupo|good group|优秀的队伍",
-    "-- Abreviaturas de chat y reclutamientos avanzados (LFG/LFM)
+    -- Abreviaturas de chat y reclutamientos avanzados (LFG/LFM)
     "necesito summon|need summon|求拉",
     "necesito invocacion|need summon|求拉",
     "need summon|need summon|求拉",
@@ -900,7 +892,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "sb|idiot|傻逼",
     "my bad|my bad|我的错",
     "wd|my bad|我的/抱歉",
-    "-- Adiciones extras
+    -- Adiciones extras
     "ayudame por favor|help me please|求帮/帮我",
     "ayudame pls|help pls|求帮",
     "ayuda en mision|quest help|任务求助",
@@ -1041,7 +1033,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "bahía del botín|booty bay|藏宝海湾",
     "bahia del botin|booty bay|藏宝海湾",
     "booty bay|booty bay|藏宝海湾",
-    "-- Adiciones extras de zonas y subzonas
+    -- Adiciones extras de zonas y subzonas
     "isla de lapidis|lapidis isle|拉皮迪斯岛",
     "isla lapidis|lapidis isle|拉皮迪斯岛",
     "isla de gillijim|gillijim's isle|吉利吉姆岛",
@@ -1364,14 +1356,14 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   -- LOTE H: CONTENIDO, ZONAS, MAZMORRAS Y MODOS CUSTOM DE TURTLE WOW
   -- ============================================================
   local turtle_custom_batch = {
-    "-- Mazmorras y Raids Custom
+    -- Mazmorras y Raids Custom
     "arboleda creciente|crescent grove|新月林地",
     "arboleda|crescent grove|新月林地",
     "tumba de los siete|tomb of the seven|七贤之墓",
     "tumba de los 7|tomb of the seven|七贤之墓",
     "laboratorio de alah'thalas|alah'thalas laboratory|亚拉萨拉斯实验室",
     "alah'thalas|alah'thalas|亚拉萨拉斯",
-    "-- Geografía y Zonas Custom
+    -- Geografía y Zonas Custom
     "isla de gillijim|gillijim's isle|吉利吉姆岛",
     "isla gillijim|gillijim's isle|吉利吉姆岛",
     "isla de lapidis|lapidis isle|拉皮迪斯岛",
@@ -1380,7 +1372,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "monte hyjal|mount hyjal|海加尔山",
     "valle bosquenegro|blackwood glen|黑木谷",
     "bosquenegro|blackwood glen|黑木谷",
-    "-- Modos de Juego y Desafíos
+    -- Modos de Juego y Desafíos
     "hardcore|hardcore|硬核/一命",
     "hc|hardcore|硬核",
     "modo hardcore|hardcore mode|一命模式/硬核模式",
@@ -1393,8 +1385,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "glifo de la tortuga|glyph of the turtle|乌龟雕文",
     "glifo de tortuga|glyph of the turtle|乌龟雕文",
     "modo exhausto|exhausted mode|精疲力竭模式",
-    "-- Modos",
-    "desafíos y social de Turtle WoW
+    -- Modos y desafios sociales de Turtle WoW
     "un solo intento|one life|一命",
     "modo un solo intento|hardcore mode|一命模式",
     "f en el chat|f in chat|发F/点赞",
@@ -1402,7 +1393,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "we go agane|we go again|再来一次",
     "self crafted|self crafted|自制装备",
     "vagrant|vagrant|流浪者",
-    "-- Adiciones extras de contenido custom
+    -- Adiciones extras de contenido custom
     "glifo de fatiga|glyph of fatigue|疲劳雕文",
     "glifo de superacion|glyph of progression|进度雕文",
     "glifo de superación|glyph of progression|进度雕文",
@@ -1615,6 +1606,77 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "aceite de mana|mana oil|法力之油"
   }
 
+  local v10_turtle_legendary_es_en_zh = {
+    -- Contenido Custom y Zonas de Turtle WoW
+    "sagrario esmeralda|emerald sanctum|翡翠圣地",
+    "santuario esmeralda|emerald sanctum|翡翠圣地",
+    "karazhan inferior|lower karazhan|卡拉赞下层",
+    "ruinas de bosquenegro|blackwood ruins|黑木废墟",
+    "claro del sol|sunnyglade|阳光林地",
+    "isla de lapidis|lapidis isle|拉皮迪斯岛",
+    "isla lapidis|lapidis isle|拉皮迪斯岛",
+    "isla de gillijim|gillijim's isle|吉利吉姆岛",
+    "isla gillijim|gillijim isle|吉利吉姆岛",
+    "islas de bruma|misty islands|迷雾群岛",
+    "valle de alanah|alanah valley|阿兰纳谷",
+    "tierras altas de thalassian|thalassian highlands|萨拉斯高地",
+
+    -- Retos y Modos Custom de Turtle WoW
+    "modo un solo intento|hardcore mode|硬核模式",
+    "modo hardcore|hardcore mode|硬核模式",
+    "lento y constante|slow and steady|慢而稳",
+    "esfuerzo de vagabundo|vagrant's endeavor|流浪者的努力",
+    "modo extremo|hardcore mode|硬核模式",
+    "transfiguración|transmog|幻化",
+    "transfigurar|transmog|幻化",
+    "tortuga de montar|riding turtle|骑乘乌龟",
+    "fuego de supervivencia|survival fire|生存营火",
+    "hacer fogata|survival fire|做营火",
+    "glifo de la tortuga|glyph of the turtle|乌龟雕文",
+    "glifo de la bestia|glyph of the beast|野兽雕文",
+
+    -- Habilidades de Clase e Icónicos de Raid
+    "golpe sagrado|holy strike|神圣打击",
+    "golpe de sangre|bloodstrike|鲜血打击",
+    "alivio presto|swiftmend|迅捷治愈",
+    "estimulo a mi|innervate me|给我激活",
+    "estimular al heal|innervate healer|给治疗激活",
+    "infusion de poder|power infusion|能量灌注",
+    "infusión de poder en mi|pi on me|给我灌注",
+    "tótem marea de maná|mana tide totem|法力潮汐图腾",
+    "totem marea de mana|mana tide totem|法力潮汐图腾",
+    "tótem viento furioso|windfury totem|风怒图腾",
+    "totem viento furioso|windfury totem|风怒图腾",
+    "resguardo contra el miedo|fear ward|防恐结界",
+
+    -- Chat Slang de Tiendas (Tents) y Utilidades de Turtle WoW
+    "buscando tienda|looking for tent|找帐篷",
+    "donde hay tienda|where is tent|帐篷在哪",
+    "tienda colocada|tent is up|起帐篷了",
+    "tienda en villadorada|tent in goldshire|闪金镇帐篷",
+    "tienda en el cruce|tent in crossroads|十字路口帐篷",
+    "tienda en camp taurajo|tent in camp taurajo|陶拉祖帐篷",
+    "busco grupo para tienda|lft|找帐篷组",
+    "modo de guerra|warmode|战争模式",
+    "cooldown de tienda|tent cd|帐篷冷却",
+    "banco de hermandad|guild bank|公会银行",
+    "tienda de donaciones|donation shop|商城",
+    "ficha de donación|donation token|捐赠代币",
+    "ficha de donacion|donation token|捐赠代币",
+
+    -- Mecánicas avanzadas de Raid
+    "morir todos|wipe|灭团",
+    "atraer monstruo|pull|拉怪",
+    "medidor de amenaza|threat meter|仇恨列表",
+    "saltar monstruos|skip|跳怪",
+    "prueba de dps|dps check|DPS检测",
+    "enfurecer|enrage|狂暴",
+    "quitar maldición|decurse|解诅咒",
+    "disipar magia|dispel|驱散",
+    "limpiar veneno|cleanse|清洁",
+    "quitar veneno|cure poison|祛毒"
+  }
+
   -- Ejecutar la carga masiva en lotes comprimidos
   load_batch(spells_batch)
   load_batch(quests_batch)
@@ -1626,6 +1688,175 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   load_batch(turtle_custom_batch)
   load_batch(stats_talents_batch)
   load_batch(pvp_consumables_batch)
+  load_batch(v10_turtle_legendary_es_en_zh)
+
+  -- ============================================================
+  -- LOTES v11 — EXPANSIÓN LEXICA ÉPICA
+  -- Ítems legendarios, consumibles avanzados, jefes 5-man, AH
+  -- ============================================================
+
+  local v11_items_legendary = {
+    -- Armas Legendarias y Emblemáticas
+    "martillo de los antiguos reyes|hammer of the ancient kings|古代君王之锤",
+    "sulfuras mano de ragnaros|sulfuras hand of ragnaros|硫磺之锤",
+    "sulfuras|sulfuras|硫磺之锤",
+    "thunderfury|thunderfury|雷怒",
+    "truenofuria filo de los vientos|thunderfury blessed blade|雷怒祝福风刃",
+    "atiesh|atiesh|阿迪斯",
+    "atiesh baston|atiesh greatstaff|阿迪斯法杖",
+    "espada de los mil años|corrupted ashbringer|腐化的安魂斩",
+    "ashbringer corrompido|corrupted ashbringer|腐化的安魂斩",
+    "ashbringer|ashbringer|安魂斩",
+    "bendicion de los reyes de los vientos|blessing of the wind kings|风王祝福",
+    "ojo de sulfuras|eye of sulfuras|苏拉玛之眼",
+    "esencia del devorador oscuro|essence of the pure flame|纯粹火焰之精华",
+    -- Ítems de Raid Icónicos Vanilla
+    "cabeza de onyxia|onyxia's head|奥妮克希亚的头",
+    "mano de justicia|hand of justice|正义之手",
+    "fetiche de los dioses|trinket of the gods|神灵护符",
+    "diente de sangre|bloodfang|血牙套装",
+    "armadura de demonoexpurgador|doomguard|末日使者",
+    "manto del arquero celestial|cloak of the shrouded mists|薄雾斗篷",
+    "corona de destruccion|crown of destruction|毁灭之冠",
+    "cetro de los señores de las mareas|scepter of the tide lords|潮汐领主权杖",
+    "furia de ragnaros|rage of ragnaros|拉格纳罗斯之怒",
+    "tejido de sombras del eterno|eternal shadowweave|永恒暗影织物",
+    -- Ítems Custom de Turtle WoW
+    "hacha de la tortuga|turtle axe|乌龟战斧",
+    "capa de la expedicion|expedition cloak|远征披风",
+    "anillo de la hermandad verde|emerald brotherhood ring|翡翠兄弟会戒指",
+    "bendicion del druida guardian|blessing of the guardian druid|守护德鲁伊祝福",
+    "baculo de raices ancestrales|staff of ancient roots|古老根茎法杖",
+    "escudo de la tortuga ancestral|ancient turtle shield|古老乌龟盾牌"
+  }
+
+  local v11_consumables_advanced = {
+    -- Consumibles de Raid Avanzados
+    "pocion de fuego mayor|greater fire protection potion|高级防火药水",
+    "pocion de hielo mayor|greater frost protection potion|高级防冰药水",
+    "pocion de arcano mayor|greater arcane protection potion|高级防奥药水",
+    "pocion de sombra mayor|greater shadow protection potion|高级防暗药水",
+    "pocion de naturaleza mayor|greater nature protection potion|高级防自然药水",
+    "proteccion de fuego mayor|greater fire protection|高级防火",
+    "elixir del mongoose|elixir of the mongoose|猫鼬精华",
+    "elixir de artes ocultas|elixir of shadow power|暗影力量精华",
+    "elixir de fuerza del gigante|elixir of giants|巨人力量精华",
+    "elixir de la sabiduria del brujo|elixir of the sages|贤者精华",
+    "matraces de molten core|flasks of mc|熔火之心魔瓶",
+    "frasco de poder supremo|flask of supreme power|至高力量魔瓶",
+    "frasco de la fortaleza de la titanes|flask of the titans|泰坦魔瓶",
+    "frasco de la fortaleza|flask of fortitude|坚韧魔瓶",
+    "frasco del cronometrista de la destilacion|flask of distilled wisdom|凝练智慧魔瓶",
+    -- Juju y Buffs Tribales
+    "juju de poder|juju of power|力量祭品",
+    "juju de flaqueza|juju of flurry|连击祭品",
+    "juju de curación|juju of healing|治疗祭品",
+    "juju de maldad|juju of offense|进攻祭品",
+    -- Comida de Buff
+    "carne asada de alturas|highlands game|高地烤肉",
+    "salmón escalfado|poached sunscale salmon|水波太阳鳞鲑鱼",
+    "pastel de queso|runn tum tuber surprise|菜肴惊喜",
+    "comida de stamina|stamina food|耐力食物",
+    "comida de fuerza|strength food|力量食物",
+    "comida de agilidad|agility food|敏捷食物",
+    "comida de intelecto|intellect food|智力食物",
+    "carne tostada emparedada de grim|grilled squid|烤鱿鱼",
+    "sopa de algas de playa|sagefish delight|鱼尾蛋糕"
+  }
+
+  local v11_dungeon_bosses = {
+    -- Jefes de Mazmorras 5-man Faltantes (BRD, ST, DM)
+    "general angerforge|general angerforge|愤怒锻造将军",
+    "golem señor de cuarzo|golem lord argelmach|铸铁魔像领主",
+    "senador flamelash|ambassador flamelash|炎鞭大使",
+    "presidente saltrock|boss saltrock|盐岩老板",
+    "moira thaurissan|moira thaurissan|莫伊拉·陶里桑",
+    "emperador dagran thaurissan|emperor dagran thaurissan|达格兰·陶里桑皇帝",
+    "bael gar|bael'gar|贝尔加",
+    "magmus|magmus|岩浆姆斯",
+    "arqueluuz|archaedas|考古达斯",
+    "nefarian|nefarian|奈法利安",
+    "onyxia|onyxia|奥妮克希亚",
+    "lord kazzak|lord kazzak|卡扎克领主",
+    "azuregos|azuregos|艾苏雷戈斯",
+    "hakkar el dios sanguinario|hakkar the soulflayer|吸血鬼神哈卡尔",
+    "hakkar|hakkar|哈卡尔",
+    "marli sacerdotisa|high priestess mar'li|大女祭司玛尔里",
+    "mandokir|bloodlord mandokir|血族领主曼多基尔",
+    "thekal señor tigre|thekal|西卡尔",
+    "jindo el cruel|jindo the hexxer|巫毒师金多",
+    "princesa huhuran|princess huhuran|胡胡兰公主",
+    "c'thun|c'thun|克苏恩",
+    "viscidus|viscidus|粘液怪",
+    "anub'rekhan|anub'rekhan|阿努布雷坎",
+    "faerlina|faerlina|法尔琳娜",
+    "maexxna|maexxna|玛克斯纳",
+    "gluth|gluth|葛鲁斯",
+    "thaddius|thaddius|萨迪斯",
+    "sapphiron|sapphiron|萨菲隆",
+    "kel'thuzad|kel'thuzad|克尔苏加德",
+    "patchwerk|patchwerk|拼缝怪",
+    "razuvious|instructor razuvious|拉苟维亚斯教官"
+  }
+
+  local v11_ah_economy = {
+    -- Economía y Subasta
+    "casa de subastas|auction house|拍卖行",
+    "precio de subasta|auction price|拍卖价格",
+    "precio de compra|buyout price|直购价",
+    "puja inicial|starting bid|起拍价",
+    "mejor oferta|best offer|最高报价",
+    "vender todo|sell all|全部出售",
+    "fijar precio|set price|设定价格",
+    "poner a la venta|put up for sale|上架出售",
+    "retirar oferta|cancel auction|取消拍卖",
+    "cuantas pilas|how many stacks|多少叠",
+    "pila de 20|stack of 20|20叠",
+    "pila de 5|stack of 5|5个一叠",
+    "precio unitario|unit price|单价",
+    "precio por unidad|price per unit|每个多少钱",
+    "en gremio|guild price|公会价格",
+    "vendo barato|selling cheap|便宜卖",
+    "busco mineral|lf ore|找矿石",
+    "busco hierbas|lf herbs|找草药",
+    "busco cueros|lf leather|找皮革",
+    "busco tela|lf cloth|找布料",
+    "vendo materiales|selling mats|卖材料",
+    "vendo receta|selling recipe|卖配方",
+    "negociable|negotiable|可议价",
+    "precio fijo|fixed price|固定价格"
+  }
+
+  local v11_hardcore_rp = {
+    -- Terminología Hardcore / Permadeath
+    "muerte permanente|permadeath|永久死亡",
+    "personaje hardcore|hardcore character|硬核角色",
+    "restriccion hardcore|hardcore restriction|硬核限制",
+    "gremio hardcore|hardcore guild|硬核公会",
+    "correr solo|solo run|单人通关",
+    "no usar piedra|no hearthstone|不用炉石",
+    "sin resurreccion|no res|不复活",
+    "nivel al morir|die to lose level|死亡掉级",
+    "reglas del desafio|challenge rules|挑战规则",
+    "primer muerto|first death|第一个死亡",
+    -- Roleplay básico
+    "interpretar personaje|roleplay|角色扮演",
+    "en personaje|in character|角色内",
+    "fuera de personaje|out of character|角色外",
+    "hablar en personaje|ic speech|角色内对话",
+    "escena de roleplay|rp scene|角色扮演场景",
+    "trasfondo del personaje|character backstory|角色背景",
+    "descripcion del personaje|character description|角色描述",
+    "emote de roleplay|rp emote|角色扮演动作",
+    "taberna para rp|rp tavern|角色扮演酒馆",
+    "zona de roleplay|rp zone|角色扮演区域"
+  }
+
+  load_batch(v11_items_legendary)
+  load_batch(v11_consumables_advanced)
+  load_batch(v11_dungeon_bosses)
+  load_batch(v11_ah_economy)
+  load_batch(v11_hardcore_rp)
 
   -- ============================================================
   -- EXPANSION LEXICA v7.1 — VOCABULARIO WoW CHINO AMPLIADO
@@ -3357,6 +3588,69 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
     "聊天框|chat box|caja de chat",
     "频道|channel|canal",
   }
+
+  local v10_turtle_legendary_zh_en_es = {
+    -- Traducción Inversa de Zonas Custom de Turtle WoW
+    "翡翠圣地|emerald sanctum|sagrario esmeralda",
+    "卡拉赞下层|lower karazhan|karazhan inferior",
+    "黑木废墟|blackwood ruins|ruinas de bosquenegro",
+    "阳光林地|sunnyglade|claro del sol",
+    "拉皮迪斯岛|lapidis isle|isla de lapidis",
+    "吉利吉姆岛|gillijim's isle|isla de gillijim",
+    "迷雾群岛|misty islands|islas de bruma",
+    "阿兰纳谷|alanah valley|valle de alanah",
+    "萨拉斯高地|thalassian highlands|tierras altas de thalassian",
+
+    -- Modos Custom y Gameplay
+    "硬核模式|hardcore mode|modo extremo",
+    "慢而稳|slow and steady|lento y constante",
+    "流浪者的努力|vagrant's endeavor|esfuerzo de vagabundo",
+    "骑乘乌龟|riding turtle|tortuga de montar",
+    "生存营火|survival fire|fuego de supervivencia",
+    "做营火|make survival fire|hacer fogata",
+    "乌龟雕文|glyph of the turtle|glifo de la tortuga",
+    "野兽雕文|glyph of the beast|glifo de la bestia",
+    "幻化|transmog|transfiguración",
+
+    -- Clases y Habilidades Icónicas
+    "神圣打击|holy strike|golpe sagrado",
+    "鲜血打击|bloodstrike|golpe de sangre",
+    "迅捷治愈|swiftmend|alivio presto",
+    "给我激活|innervate me|estimulo a mi",
+    "给治疗激活|innervate healer|estimular al heal",
+    "能量灌注|power infusion|infusion de poder",
+    "给我灌注|pi on me|infusión de poder en mi",
+    "法力潮汐图腾|mana tide totem|tótem marea de maná",
+    "风怒图腾|windfury totem|tótem viento furioso",
+    "防恐结界|fear ward|resguardo contra el miedo",
+
+    -- Tiendas, Tents y Donaciones (Economía Turtle)
+    "找帐篷|looking for tent|buscando tienda",
+    "帐篷在哪|where is tent|donde hay tienda",
+    "起帐篷了|tent is up|tienda colocada",
+    "闪金镇帐篷|tent in goldshire|tienda en villadorada",
+    "十字路口帐篷|tent in crossroads|tienda en el cruce",
+    "陶拉祖帐篷|tent in camp taurajo|tienda en camp taurajo",
+    "找帐篷组|lft (looking for tent)|busco grupo para tienda",
+    "战争模式|warmode|modo de guerra",
+    "帐篷冷却|tent cd|cooldown de tienda",
+    "公会银行|guild bank|banco de hermandad",
+    "商城|donation shop|tienda de donaciones",
+    "捐赠代币|donation token|ficha de donación",
+
+    -- Frases de Raid avanzadas y Tácticas
+    "灭团|wipe|morir todos",
+    "拉怪|pull|atraer monstruo",
+    "仇恨列表|threat meter|medidor de amenaza",
+    "跳怪|skip|saltar monstruos",
+    "dps检测|dps check|prueba de dps",
+    "狂暴|enrage|enfurecer",
+    "解诅咒|decurse|quitar maldición",
+    "驱散|dispel|disipar magia",
+    "清洁|cleanse|limpiar veneno",
+    "祛毒|cure poison|quitar veneno"
+  }
+  load_batch_zh_en_es(v10_turtle_legendary_zh_en_es)
 
 local v9_zones_tbc = {
     "地狱火半岛|hellfire peninsula|península del fuego devastador",

@@ -1,7 +1,7 @@
-# Global Chat Translator — El Séquito Edition (v7.0.0 [LEGENDARY-TIER]) 🌌⚖️
+# Global Chat Translator — El Séquito Edition (v7.1.0 [LEGENDARY-TIER]) 🌌⚖️
 
-![Version](https://img.shields.io/badge/version-v7.0.0--Legendary--Tier-ffb300?style=for-the-badge)
-![Host](https://img.shields.io/badge/pfUI-v7.0.0--Legendary--Tier-purple?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v7.1.0--Legendary--Tier-ffb300?style=for-the-badge)
+![Host](https://img.shields.io/badge/pfUI-v7.1.0--Legendary--Tier-purple?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Turtle_WoW-ff5555?style=for-the-badge)
 
 > **The ultimate multilingual communication bridge for World of Warcraft.** Este componente de grado corporativo integrado en **pfUI** erradica las barreras lingüísticas mediante un motor de traducción en tiempo real offline de alto rendimiento, con soporte nativo para **Español, Inglés, Ruso y Chino**, optimizado bajo el estándar de máxima fidelidad y rendimiento **Diamond-Tier** de DarckRovert.
@@ -27,7 +27,7 @@ El **Global Chat Translator** es una pieza nuclear de ingeniería para el ecosis
 
 ### ⚡ PERFORMANCE BENCHMARKS (DIAMOND-TIER)
 
-| Proceso | Latencia Séquito (v7.0.0) | Latencia Standard | Estado |
+| Proceso | Latencia Séquito (v7.1.0) | Latencia Standard | Estado |
 | :--- | :---: | :---: | :---: |
 | **Parsing & Isolation** | < 0.05ms | N/A | ✅ |
 | **Matching Loop** | < 0.08ms | N/A | ✅ |
@@ -52,8 +52,10 @@ Controla el comportamiento del traductor directamente desde la ventana de chat d
 
 - `/tr`: Abre directamente la interfaz gráfica de configuración nativa en pfUI.
 - `/tr stats`: Muestra estadísticas detalladas del rendimiento del traductor (Mensajes de Entrada, de Salida, hit-rate del Caché LRU en % y servidor de juego detectado).
+- `/tr dashboard` o `/tr dash`: Abre el **Translator Dashboard** interactivo con estadísticas en tiempo real y gráficos flotantes.
 - `/tr debug`: Alterna dinámicamente el modo de depuración en chat para observar el proceso de matching y aislamientos.
 - `/tr reset`: Reinicia manualmente los contadores del reino y la detección automática del idioma del servidor.
+- `/tr blacklist <nombre>`: Ignora a un jugador permanentemente (también disponible visualmente en la GUI de Opciones Avanzadas).
 
 ## 🚀 Despliegue Rápido (Pro-Flow)
 

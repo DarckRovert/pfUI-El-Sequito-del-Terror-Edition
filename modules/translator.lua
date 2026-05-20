@@ -39,6 +39,8 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   C.translator.chan_officer     = C.translator.chan_officer     or "1"
   C.translator.chan_raidwarning = C.translator.chan_raidwarning or "1"
   C.translator.chan_emote       = C.translator.chan_emote       or "0"
+  C.translator.chan_trade       = C.translator.chan_trade       or "0"
+  C.translator.mailbox          = C.translator.mailbox          or "0"
   -- NEW v7 Features
   C.translator.bilingual_mode  = C.translator.bilingual_mode  or "0"
   C.translator.lang_badge      = C.translator.lang_badge      or "0"
@@ -708,8 +710,18 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     end
     if en_hits > es_hits and en_hits >= 1 then return "en" end
     if es_hits > en_hits and es_hits >= 1 then return "es" end
+    -- Fallback: para mensajes muy cortos, inferir idioma desde el diccionario
+    -- Solo aplica si es una sola palabra o texto corto sin marcadores
+    if strlen(text) <= 30 then
+      local first_word = strlower(string.gsub(text, "^%s*([%a%d'-]+).*", "%1"))
+      if first_word and first_word ~= "" then
+        if pfUI.translator_dicts["es_en_words"][first_word] then return "es" end
+        if pfUI.translator_dicts["en_es_words"][first_word] then return "en" end
+      end
+    end
     return "unknown"
   end
+
 
   -- ============================================================
   -- #20 #27: SEGURIDAD Y CANALES (expandido)
@@ -1479,6 +1491,13 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         panelFrame:Show()
       end
 
+    elseif msg == "dashboard" or msg == "dash" then
+      if dashboardFrame:IsShown() then
+        dashboardFrame:Hide()
+      else
+        dashboardFrame:Show()
+      end
+
     elseif msg == "history" or msg == "hist" then
       DEFAULT_CHAT_FRAME:AddMessage("|cff00ccff[TR History]|r Ultimas traducciones:")
       local count = 0
@@ -1590,6 +1609,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       DEFAULT_CHAT_FRAME:AddMessage("  |cffffff00/tr debug|r — Toggle modo debug")
       DEFAULT_CHAT_FRAME:AddMessage("  |cffffff00/tr quick|r — Traductor rapido interactivo")
       DEFAULT_CHAT_FRAME:AddMessage("  |cffffff00/tr panel|r — Toggle indicador de panel")
+      DEFAULT_CHAT_FRAME:AddMessage("  |cffffff00/tr dashboard|r — Panel de estadisticas y frecuencias")
       DEFAULT_CHAT_FRAME:AddMessage("  |cffffff00/tr history|r — Ultimas 10 traducciones")
       DEFAULT_CHAT_FRAME:AddMessage("  |cffffff00/tr last|r — Ultima traduccion")
       DEFAULT_CHAT_FRAME:AddMessage("  |cffffff00/tr reset|r — Reiniciar deteccion de servidor")
