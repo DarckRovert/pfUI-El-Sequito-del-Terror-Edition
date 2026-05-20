@@ -2722,3 +2722,81 @@ for _, line in ipairs(v6_batch) do
     end
   end
 end
+
+
+local v7_batch = {
+  -- Casos exactos del debug
+  "设置|settings|configuración",
+  "没改|unchanged|sin cambiar",
+  "改|change|cambiar",
+  "风暴要塞|tempest keep|El Castillo de la Tempestad",
+  "霜鬃谷|frostmane valley|Valle Frostmane",
+  "霜鬃|frostmane|Frostmane",
+  "戒指|ring|anillo",
+  "之戒|ring of|anillo de",
+  "腰带|belt|cinturón",
+  "只是|just|solo",
+  "用|use|usar",
+  "打开|open|abrir",
+  "游戏|game|juego",
+  "加速器|booster/vpn|acelerador de ping",
+  "不同|different|diferente",
+  "不能|cannot|no puede",
+  "骑士|paladin|paladín",
+  "召唤|summon|invocar",
+  "群召唤|mass summon|invocación grupal",
+  "双技能|dual spec|doble especialización",
+  "双天赋|dual spec|doble especialización",
+  "双|double|doble",
+  "技能|skill|habilidad",
+  "还不如|might as well|sería mejor",
+  "那|then|entonces",
+  "采花|herbalism|herboristería",
+  "分解|disenchant|desencantar",
+  
+  -- Especializaciones de WoW en Jerga China (vital para el LFG)
+  "防骑|prot paladin|Paladín Protección",
+  "奶骑|holy paladin|Paladín Sagrado",
+  "惩戒骑|ret paladin|Paladín Reprensión",
+  "狂暴战|fury warrior|Guerrero Furia",
+  "防战|prot warrior|Guerrero Protección",
+  "武器战|arms warrior|Guerrero Armas",
+  "暗牧|shadow priest|Sacerdote Sombras",
+  "神牧|holy priest|Sacerdote Sagrado",
+  "戒律牧|disc priest|Sacerdote Disciplina",
+  "奶德|resto druid|Druida Restauración",
+  "野德|feral druid|Druida Feral",
+  "熊德|guardian druid|Druida Guardián",
+  "鸟德|balance druid|Druida Equilibrio",
+  "咕咕|moonkin|Lechúcico",
+  "兽王猎|bm hunter|Cazador Bestias",
+  "射击猎|mm hunter|Cazador Puntería",
+  "生存猎|survival hunter|Cazador Supervivencia",
+  "战斗贼|combat rogue|Pícaro Combate",
+  "刺杀贼|assassination rogue|Pícaro Asesinato",
+  "敏锐贼|subtlety rogue|Pícaro Sutileza",
+  "冰法|frost mage|Mago Escarcha",
+  "火法|fire mage|Mago Fuego",
+  "奥法|arcane mage|Mago Arcano",
+  "痛苦术|affliction warlock|Brujo Aflicción",
+  "毁灭术|destruction warlock|Brujo Destrucción",
+  "恶魔术|demonology warlock|Brujo Demonología",
+  "元素萨|ele shaman|Chamán Elemental",
+  "增强萨|enh shaman|Chamán Mejora",
+  "奶萨|resto shaman|Chamán Restauración",
+  "恢复萨|resto shaman|Chamán Restauración"
+}
+
+for _, line in ipairs(v7_batch) do
+  local p1 = strfind(line, "|", 1, true)
+  if p1 then
+    local zh = strsub(line, 1, p1 - 1)
+    local rest = strsub(line, p1 + 1)
+    local p2 = strfind(rest, "|", 1, true)
+    if p2 then
+      local en = strsub(rest, 1, p2 - 1)
+      local es = strsub(rest, p2 + 1)
+      add(es, en, zh)
+    end
+  end
+end
