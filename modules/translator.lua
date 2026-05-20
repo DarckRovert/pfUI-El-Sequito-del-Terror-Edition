@@ -308,7 +308,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
       -- Validar coherencia (CTR — Coherence Threshold Ratio)
       local ratio     = GetTranslationRatio(text, result, srcLang)
-      local min_ratio = (srcLang == "zh") and 0.50 or 0.40
+      local min_ratio = (srcLang == "zh") and 0.10 or 0.40
       if ratio < min_ratio then
         return nil -- Descartar: previene Spanglish/Chinol
       end
@@ -623,6 +623,22 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   initFrame:SetScript("OnEvent", function()
     if event == "PLAYER_ENTERING_WORLD" then
       initFrame:UnregisterEvent("PLAYER_ENTERING_WORLD")
+      
+      -- Migración única para forzar la activación de canales en perfiles existentes (v6.8.2)
+      if C.translator and not C.translator.force_channels_v682 then
+        C.translator.enable = "1"
+        C.translator.incoming = "1"
+        C.translator.outgoing = "1"
+        C.translator.chan_say = "1"
+        C.translator.chan_party = "1"
+        C.translator.chan_raid = "1"
+        C.translator.chan_guild = "1"
+        C.translator.chan_whisper = "1"
+        C.translator.chan_world = "1"
+        C.translator.chan_lfg = "1"
+        C.translator.force_channels_v682 = "1"
+      end
+
       pcall(SecureHookOutgoing)
       pcall(HookIncomingChat)
       if IsAddOnLoaded("WIM") then pcall(HookWIMBridge) end
