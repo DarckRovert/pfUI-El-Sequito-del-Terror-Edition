@@ -213,7 +213,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
     -- Fase 1: Greedy Matching (Frases Compuestas / Soporte UTF-8 Multibyte)
     if phraseDict and phraseKeys then
-      local candidateKeys = nil
+      local candidateKeys
       if buckets then
         candidateKeys = {}
         local unique_candidates = {}
@@ -240,22 +240,33 @@ pfUI:RegisterModule("translator", "vanilla", function ()
             end
           end
         else
-          string.gsub(proc_text, "([%a%d\128-\255]+)", function(w)
-            local bucket = buckets[w]
-            if bucket then
-              for _, k in ipairs(bucket) do
-                if not unique_candidates[k] then
-                  unique_candidates[k] = true
-                  table.insert(candidateKeys, k)
+          local wStart = 1
+          local len = strlen(proc_text)
+          while wStart <= len do
+            local s, e = strfind(proc_text, "[%w_'-]+", wStart)
+            if not s then break end
+            local word = strsub(proc_text, s, e)
+            if word and word ~= "" then
+              local ch = strsub(word, 1, 1)
+              local bucket = buckets[ch]
+              if bucket then
+                for _, k in ipairs(bucket) do
+                  if not unique_candidates[k] then
+                    unique_candidates[k] = true
+                    table.insert(candidateKeys, k)
+                  end
                 end
               end
             end
-            return w
-          end)
+            wStart = e + 1
+          end
         end
         table.sort(candidateKeys, function(a, b) return strlen(a) > strlen(b) end)
       else
-        candidateKeys = phraseKeys
+        -- FIX: Ordenar keys obligatoriamente si no hay buckets para asegurar Greedy Match en Chino
+        candidateKeys = {}
+        for _, k in ipairs(phraseKeys) do table.insert(candidateKeys, k) end
+        table.sort(candidateKeys, function(a, b) return strlen(a) > strlen(b) end)
       end
 
       for _, key in ipairs(candidateKeys) do
@@ -274,6 +285,9 @@ pfUI:RegisterModule("translator", "vanilla", function ()
           if count and count > 0 then
             proc_text      = res
             trans_occurred = true
+            if C.translator.debug_mode == "1" then
+              DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Key Hit: " .. key)
+            end
           end
         end
       end
@@ -336,16 +350,17 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     "\231\154\132", "\228\186\134", "\230\152\175", "\230\136\145", "\228\189\160",
     "\228\187\150", "\229\156\168", "\230\156\137", "\229\146\140", "\229\176\177",
     "\228\184\141", "\230\178\161", "\233\131\189", "\228\184\128", "\230\178\161\230\156\137",
-    "\230\136\145\228\187\172", "\228\189\160\228\187\172",
-    -- Terminologia WoW comun
-    "\229\175\187\230\137\190", "\233\152\159\228\188\141", "\229\216\187", "\346\137\147",
-    "\346\177\130\347\273\204", "\351\155\200\350\246\201", "\346\157\245",
-    "\346\211\223\346\234\254", "\346\211\276\347\273\204", "\350\275\246", "\345\233\242",
-    "\344\274\232", "\346\213\211", "\351\227\250", "\351\207\221", "\345\244\247", "\345\260\217",
-    "\345\220\247", "\345\220\227", "\345\221\242", "\345\245\275", "\345\257\271", "\351\224\231",
-    "\345\220\203", "\345\226\235", "\346\255\273", "\346\264\273", "\345\244\215\346\264\273",
-    "\346\234\254", "\344\270\213", "\344\270\212", "\344\270\255", "\345\244\232", "\345\260\221",
-    "\346\227\240",
+    "\230\136\145\228\187\172", "\228\189\160\228\187\172", "\228\184\170",
+    -- Fallback visual: caracteres Unicode comunes si el encoding string literal falla
+    "的", "是", "了", "我", "你", "有", "不", "一", "个", "来", "打", "组", "去", "要", "和",
+    "\229\175\187\230\137\190", "\233\152\159\228\188\141", "\229\216\187", "\230\137\147",
+    "\230\177\130\230\173\204", "\233\155\200\230\246\201", "\230\157\245",
+    "\230\137\223\230\134\254", "\230\137\276\230\173\204", "\230\175\246", "\230\155\242",
+    "\230\174\232", "\230\137\211", "\233\151\250", "\233\135\221", "\229\164\247", "\229\185\224",
+    "\229\144\247", "\229\144\227", "\229\145\242", "\229\165\275", "\229\173\271", "\233\140\231",
+    "\229\144\203", "\229\146\235", "\230\155\273", "\230\180\273", "\229\164\215\230\180\273",
+    "\230\134\254", "\230\180\133", "\230\180\172", "\230\180\173", "\229\164\154", "\229\185\226",
+    "\230\150\160",
   }
 
   local function DetectLanguage(text)
@@ -554,6 +569,12 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       -- Idioma real del mensaje: priorizar deteccion sobre config de servidor
       local final_src = (lang ~= "unknown") and lang or src_env
 
+      -- Debug Output
+      if C.translator.debug_mode == "1" then
+        DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR DEBUG]|r Msg: " .. body)
+        DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR DEBUG]|r Deteccion: " .. lang .. " -> final_src: " .. final_src .. " dest_env: " .. (dest_env or "nil"))
+      end
+
       -- Traducir solo si el mensaje no esta ya en el idioma de destino
       if final_src ~= dest_env then
         local prefix_dict = final_src .. "_" .. dest_env
@@ -562,9 +583,19 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         local keys    = pfUI.translator_dicts[prefix_dict .. "_keys"]
         local buckets = pfUI.translator_dicts[prefix_dict .. "_buckets"]
 
+        if C.translator.debug_mode == "1" then
+           local countKeys = keys and table.getn(keys) or 0
+           DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR DEBUG]|r Dict: " .. prefix_dict .. " Keys: " .. countKeys)
+        end
+
         -- Solo intentar si el par de idiomas tiene datos cargados
         if words and phrases and keys then
           local trans = LocalTranslate(body, words, phrases, keys, final_src, buckets)
+          
+          if C.translator.debug_mode == "1" then
+             DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR DEBUG]|r Translation Result: " .. (trans or "nil"))
+          end
+
           if trans then
             pfUI.translator_stats.total_in = pfUI.translator_stats.total_in + 1
             text = prefix .. trans .. GetTRTag()
