@@ -946,4 +946,19 @@ pfUI_translation["esES"] = {
   ["Fix Invisible Chinese Text"] = "Reparar Texto Chino Invisible",
   ["Translate Everything (0%)"] = "Traducir Todo (0%)",
   ["This will switch your default font to 'ZhunYuan.ttf' and disable Blizzard fonts to fix invisible Chinese/Unicode text in the chat.\n\nDo you want to apply this change and reload the UI now?"] = "Esto cambiará tu fuente predeterminada a 'ZhunYuan.ttf' y desactivará las fuentes de Blizzard para solucionar el texto chino/Unicode invisible en el chat.\n\n¿Quieres aplicar este cambio y recargar la interfaz ahora?",
+
+  -- Translator GUI Strings
+  ["Translator Engine"] = "Motor del Traductor",
+  ["Source Language"] = "Idioma Origen",
+  ["Target Language"] = "Idioma Destino",
+  ["Show Language Badge"] = "Mostrar Etiqueta de Idioma",
+  ["Translate Raid Warning"] = "Traducir Alertas de Banda",
+  ["Translate Emotes"] = "Traducir Emotes",
+  ["Translate Trade"] = "Traducir Comercio",
+  ["Mailbox Translation"] = "Traducción de Buzón",
+  ["Smart pre-filter"] = "Filtro Inteligente",
+  ["Tag Color"] = "Color de Etiqueta",
+  ["Enable translation caching"] = "Habilitar caché de traducción",
+  ["High Contrast"] = "Alto Contraste",
+  ["Muted"] = "Discreto",
 }

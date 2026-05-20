@@ -939,4 +939,19 @@ pfUI_translation["zhCN"] = {
   ["Type text to translate..."] = "输入要翻译的文字...",
   ["Configure direction first"] = "请先配置翻译方向",
   ["No matches found"] = "未找到匹配",
+
+  -- Translator GUI Strings
+  ["Translator Engine"] = "翻译引擎",
+  ["Source Language"] = "源语言",
+  ["Target Language"] = "目标语言",
+  ["Show Language Badge"] = "显示语言标签",
+  ["Translate Raid Warning"] = "翻译团队警告",
+  ["Translate Emotes"] = "翻译表情",
+  ["Translate Trade"] = "翻译交易频道",
+  ["Mailbox Translation"] = "邮箱翻译",
+  ["Smart pre-filter"] = "智能预过滤",
+  ["Tag Color"] = "标签颜色",
+  ["Enable translation caching"] = "启用翻译缓存",
+  ["High Contrast"] = "高对比度",
+  ["Muted"] = "柔和",
 }

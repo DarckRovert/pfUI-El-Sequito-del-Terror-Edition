@@ -919,4 +919,19 @@ pfUI_translation["deDE"] = {
   ["Target/Casting"] = "Ziel/Cast",
   ["Normal"] = "Normal",
   ["Mass"] = "Masse",
+
+  -- Translator GUI Strings
+  ["Translator Engine"] = "Translator Engine",
+  ["Source Language"] = "Source Language",
+  ["Target Language"] = "Target Language",
+  ["Show Language Badge"] = "Show Language Badge",
+  ["Translate Raid Warning"] = "Translate Raid Warning",
+  ["Translate Emotes"] = "Translate Emotes",
+  ["Translate Trade"] = "Translate Trade",
+  ["Mailbox Translation"] = "Mailbox Translation",
+  ["Smart pre-filter"] = "Smart pre-filter",
+  ["Tag Color"] = "Tag Color",
+  ["Enable translation caching"] = "Enable translation caching",
+  ["High Contrast"] = "High Contrast",
+  ["Muted"] = "Muted",
 }

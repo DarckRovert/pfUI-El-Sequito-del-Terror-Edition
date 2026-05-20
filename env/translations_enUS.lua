@@ -939,4 +939,19 @@ pfUI_translation["enUS"] = {
   ["Fix Invisible Chinese Text"] = nil,
   ["Translate Everything (0%)"] = nil,
   ["This will switch your default font to 'ZhunYuan.ttf' and disable Blizzard fonts to fix invisible Chinese/Unicode text in the chat.\n\nDo you want to apply this change and reload the UI now?"] = nil,
+
+  -- Translator GUI Strings
+  ["Translator Engine"] = "Translator Engine",
+  ["Source Language"] = "Source Language",
+  ["Target Language"] = "Target Language",
+  ["Show Language Badge"] = "Show Language Badge",
+  ["Translate Raid Warning"] = "Translate Raid Warning",
+  ["Translate Emotes"] = "Translate Emotes",
+  ["Translate Trade"] = "Translate Trade",
+  ["Mailbox Translation"] = "Mailbox Translation",
+  ["Smart pre-filter"] = "Smart pre-filter",
+  ["Tag Color"] = "Tag Color",
+  ["Enable translation caching"] = "Enable translation caching",
+  ["High Contrast"] = "High Contrast",
+  ["Muted"] = "Muted",
 }
