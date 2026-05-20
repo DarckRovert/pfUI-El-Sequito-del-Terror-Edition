@@ -33,9 +33,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
       local src_lang = item_i.lang
       local src_text = item_i.text
       if src_text and src_text ~= "" then
-        -- Chino como fuente: saltar entradas de 1 solo caracter.
-        local zh_skip = (src_lang == "zh") and (CountZhChars(src_text) < 2)
-        if not zh_skip then
+        if true then
           for j = 1, 3 do
             if i ~= j then
               local item_j = items[j]
