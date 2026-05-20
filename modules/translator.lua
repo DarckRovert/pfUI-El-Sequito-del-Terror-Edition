@@ -205,8 +205,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       links[link_count] = link
       return "\127L" .. link_count .. "\127"
     end)
-
-    proc_text = " " .. strlower(proc_text) .. " "
+    if srcLang ~= "zh" then
+      proc_text = strlower(proc_text)
+    end
+    proc_text = " " .. proc_text .. " "
     local trans_occurred = false
 
     -- Fase 1: Greedy Matching (Frases Compuestas / Soporte UTF-8 Multibyte)

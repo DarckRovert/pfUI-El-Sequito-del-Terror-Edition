@@ -36,7 +36,10 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
             if dest_text and dest_text ~= "" then
               local isPhrase = strfind(src_text, " ") or strfind(dest_text, " ") or strlen(src_text) > 12 or src_lang == "zh"
               local prefix = src_lang .. "_" .. dest_lang
-              local key = string.lower(src_text)
+              local key = src_text
+              if src_lang ~= "zh" then
+                key = string.lower(src_text)
+              end
               if isPhrase then
                 if not pfUI.translator_dicts[prefix .. "_phrases"][key] then
                   pfUI.translator_dicts[prefix .. "_phrases"][key] = dest_text
