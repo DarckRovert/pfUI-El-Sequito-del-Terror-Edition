@@ -2629,3 +2629,64 @@ for _, line in ipairs(v4_batch) do
     end
   end
 end
+
+
+local v5_batch = {
+  -- Slang e Idiomatismos de Internet Chinos
+  "高清无马|uncensored|sin censura",
+  "高清|hd|hd",
+  "尼玛|wtf/damn|joder",
+  "TNND|damn it|maldición",
+  "怎么回事|what happened|qué pasa",
+  "意思|meaning|significado",
+  "暗毁|shadow-ruin|sombras y ruina", -- Spec de Brujo
+  
+  -- Vocabulario Específico de WoW
+  "军需官|quartermaster|intendente",
+  "交|turn in|entregar",
+  "格|slots|casillas",
+  "材料|materials|materiales",
+  "阿曼尼|amani|amani",
+  "版本|patch/version|parche",
+  "恶魔|demonology|demonio",
+  "普通|normal|normal",
+  "手册|manual|manual",
+  "关键词|keyword|palabra clave",
+
+  -- Adverbios, Tiempo y Modificadores
+  "下次|next time|la próxima vez",
+  "久|long time|mucho tiempo",
+  "后|after/later|después",
+  "首次|first time|primera vez",
+  "哪|where|dónde",
+
+  -- Verbos y Partículas Comunes
+  "机会|chance|oportunidad",
+  "基本|basically|básicamente",
+  "凑齐|gather all|juntar",
+  "单|solo|solo",
+  "开局|start|inicio",
+  "特殊|special|especial",
+  "哦|oh|oh",
+  "好像|seems|parece",
+  "像|like|parece",
+  "变化|change|cambio",
+  "回事|matter|asunto",
+  "会|knows/can|sabe",
+  "取名|name|nombrar",
+  "应该|should|debería"
+}
+
+for _, line in ipairs(v5_batch) do
+  local p1 = strfind(line, "|", 1, true)
+  if p1 then
+    local zh = strsub(line, 1, p1 - 1)
+    local rest = strsub(line, p1 + 1)
+    local p2 = strfind(rest, "|", 1, true)
+    if p2 then
+      local en = strsub(rest, 1, p2 - 1)
+      local es = strsub(rest, p2 + 1)
+      add(es, en, zh)
+    end
+  end
+end
