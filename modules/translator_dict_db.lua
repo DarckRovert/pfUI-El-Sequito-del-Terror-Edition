@@ -2690,3 +2690,35 @@ for _, line in ipairs(v5_batch) do
     end
   end
 end
+
+
+local v6_batch = {
+  -- Casos extremos absolutos y errores tipográficos de los jugadores
+  "凑不齐|cannot gather|no poder juntar",
+  "发光碎片|glowing shard|fragmento brillante",
+  "加人宏|invite macro|macro de invitar",
+  "加人|invite people|invitar gente",
+  "意思一下|just testing|solo para probar",
+  "恶齿|revantusk|revantusk",
+  "鹅翅|revantusk|revantusk", -- Typo común de los chinos por "alitas de ganso"
+  "压抑|frustrated|frustrado",
+  "发疯|go crazy|volverse loco",
+  "加疯|go crazy|volverse loco", -- Typo de 發瘋
+  "宝宝|pet|mascota",
+  "凑|gather|juntar",
+  "碎片|shard|fragmento"
+}
+
+for _, line in ipairs(v6_batch) do
+  local p1 = strfind(line, "|", 1, true)
+  if p1 then
+    local zh = strsub(line, 1, p1 - 1)
+    local rest = strsub(line, p1 + 1)
+    local p2 = strfind(rest, "|", 1, true)
+    if p2 then
+      local en = strsub(rest, 1, p2 - 1)
+      local es = strsub(rest, p2 + 1)
+      add(es, en, zh)
+    end
+  end
+end
