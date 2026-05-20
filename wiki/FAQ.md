@@ -1,29 +1,30 @@
 # ❓ FAQ — Preguntas Frecuentes
 
 ## 1. ¿El traductor causa lag o tirones en el juego al tener tantos miles de palabras?
-**No.** El motor está optimizado bajo estándares **Ultimate-Tier (v6.8.0)**. A diferencia de las versiones anteriores que realizaban búsquedas lineales lentas, la v6.8.0 implementa el **Motor de Búsqueda Token-Bucket**. Este sistema filtra de forma instantánea las claves candidatas basándose únicamente en las palabras iniciales presentes en el mensaje recibido. Combinado con una caché LRU extendida de **1024 registros** y carga estática reutilizable (GC-Friendly), las traducciones toman microsegundos (<0.1ms) sin afectar los FPS ni causar tirones.
+**No.** El motor está altamente optimizado bajo estándares **Legendary-Tier (v7.0.0)**. Combina un **Motor de Búsqueda Token-Bucket** (que precarga buckets y reduce las búsquedas lineales) con una caché LRU de **1024 registros**, optimizaciones GC-friendly de memoria estática y carga asíncrona de base de datos. Las traducciones se completan en microsegundos (<0.05ms) sin causar caídas de FPS ni tirones en hilos principales de Lua 5.0.
 
-## 2. ¿Qué idiomas soporta la versión v6.8.0?
-Soporta de manera bidireccional y en tiempo real **Español, Inglés y Chino**. Cuenta con un motor de normalización automática de glifos CJK gracias a su base léxica de 200 categorías generales e inyección comprimida en lote de miles de misiones, ítems custom, talentos, PvP y habilidades de clase clásicos y de Turtle WoW.
+## 2. ¿Qué idiomas soporta la versión v7.0.0?
+Soporta de manera trilingüe bidireccional **Español, Inglés y Chino**. Además, incluye un Mega-Corpus ultra expansivo de 18 lotes con más de 8,000 entradas especializadas de World of Warcraft, TBC, HSK levels 1-5, jerga de juego, profesiones, consumibles y campos de batalla.
 
-## 3. ¿Por qué el traductor a veces no traduce frases de chat y muestra el original?
-Esto se debe al **Filtro de Ratio de Coherencia (CTR)**. Para idiomas occidentales, si una frase no se puede traducir en su mayoría (menos del 40%), se descarta. Sin embargo, para Chino, a partir de la v4.2.3, el umbral es del **10%**, lo que significa que el addon hará un esfuerzo heurístico agresivo y **SÍ** mostrará mezclas de idiomas si solo reconoce algunas palabras, priorizando siempre mostrar la mayor cantidad de información traducible posible.
+## 3. ¿Cómo funciona el Modo Bilingüe (Bilingual Mode)?
+El Modo Bilingüe permite mostrar simultáneamente en tu chat tanto el texto traducido como el mensaje original en un formato compacto y legible. Esto es de gran ayuda para aprender idiomas, depurar traducciones o entender frases coloquiales muy complejas.
 
-## 4. ¿Soporta la jerga táctica, profesiones y BGs?
-**Sí.** La v6.8.0 implementa cobertura absoluta para:
-*   **Campos de Batalla (BGs)**: Warsong Gulch (WSG), Arathi Basin (AB), Alterac Valley (AV), cementerios, banderas y objetivos de mapa.
-*   **Profesiones e interacciones**: Primarias, secundarias y la profesión custom de *Supervivencia (Survival)*, especialidades y recetas.
-*   **Talentos y Atributos**: Fuerza, agilidad, índice de golpe, crítico, poder con hechizos y especializaciones (*Furia, Combate Feral, Restauración, etc.*).
+## 4. ¿Qué es la pre-compilación de diccionarios (/tr compile)?
+Es una característica de optimización extrema en la que el traductor pre-compila y estructura toda su base de datos léxica directamente en `pfUI_cache`. De este modo, la próxima vez que inicies el juego, los diccionarios se cargan instantáneamente en memoria en microsegundos sin necesidad de realizar el parsing inicial de texto plano de la base de datos de strings planos, eliminando el micro-stutter de carga de interfaz.
 
-## 5. ¿El traductor puede corromper o traducir mi nombre de jugador o el canal?
-La v6.8.0 utiliza **Aislamiento Sintáctico**. Antes de enviar el texto al traductor, el motor extrae el canal, los colores de Blizzard y el nombre del jugador, aplicando la base léxica únicamente sobre el cuerpo real del mensaje. Tu nombre, colores e interactividad (hacer click en el nombre del jugador) se mantienen 100% protegidos.
+## 5. ¿Por qué el traductor a veces no traduce frases de chat y muestra el original?
+Esto se debe al **Filtro de Ratio de Coherencia (CTR)**. Puedes configurar el umbral CTR en el panel de pfUI o dejarlo en `0.00` (desactivado). Para idiomas occidentales, si una frase no se puede traducir en su mayoría (menos del 40%), se descarta. Sin embargo, para Chino, el motor opera en un modo *best effort* agresivo priorizando siempre mostrar la mayor cantidad de información traducible posible.
 
-## 6. ¿Por qué algunos mensajes aparecen con [TR]?
-El tag `[TR]` es un indicador visual de que el mensaje que estás viendo ha sido traducido localmente. Puedes desactivarlo activando el **Silent Mode** en la configuración de `/pfui` -> **Translator**.
+## 6. ¿Qué hacen el Micro-stemmer y el Fuzzy Matcher (Levenshtein)?
+*   **Micro-stemmer**: Reduce las palabras a su raíz morfológica básica (ej. quitando "-s", "-es", "-ing") para poder encontrar coincidencias en el diccionario aunque la palabra esté en plural o conjugada, reduciendo la redundancia de datos.
+*   **Fuzzy Matcher**: Si falla la búsqueda exacta, calcula la distancia Levenshtein (menor o igual a 2 cambios) para emparejar palabras que tengan errores tipográficos leves o pequeños typos, mejorando drásticamente el matching en chats de juego acelerados.
 
-## 7. ¿Funciona con WIM (Whisper IM)?
-**Sí.** Esta edición incluye un puente específico (`WIM Bridge`) que intercepta de forma bilateral los susurros tanto en el chat por defecto de WoW como en las ventanas emergentes de WIM de manera asíncrona y segura.
+## 7. ¿El buzón de correo también se traduce?
+**Sí.** La suite Legendary-Tier incluye interceptores para el buzón de correo. Traduce de forma transparente los títulos y el contenido de las cartas entrantes al visualizarlas. Puedes activarlo o desactivarlo directamente con el toggle "Translate Mailbox" en el panel gráfico.
+
+## 8. ¿Por qué algunos mensajes aparecen con [TR] o [ZH]/[EN]/[ES]?
+El tag `[TR]` indica que el mensaje ha sido traducido localmente. Con la opción de **Language Badge** activa, el tag cambiará dinámicamente mostrando el idioma de procedencia (ej. `[ZH]`, `[EN]`, `[ES]`). Puedes ocultar todos los tags activando el **Silent Mode** en `/pfui` -> **Translator**.
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Soporte Técnico Ultimate-Tier.*
+*Soporte Técnico Legendary-Tier.*

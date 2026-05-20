@@ -1,5 +1,28 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.0.0] - 2026-05-20
+### Añadido
+- **Suite Multilingüe v7.0.0 Legendary-Tier**: Rediseño integral del motor con 33 nuevas funcionalidades avanzadas y soporte offline de alto rendimiento (ES / ZH / EN).
+- **Bilingual Rendering Mode**: Renderizado opcional de texto traducido y original de manera simultánea en chat y WIM para máxima claridad.
+- **Language Badge**: Etiquetas visuales dinámicas de idioma origen (e.g., `[ZH]`, `[EN]`, `[ES]`) prefijadas en los mensajes traducidos.
+- **Micro-stemmer Engine**: Normalizador morfológico para raíces de palabras inglesas y españolas (plurales, conjugaciones básicas).
+- **Levenshtein Distance Fuzzy Matcher**: Algoritmo de distancia de edición para resolver coincidencias con errores tipográficos leves (distancia <= 2).
+- **Player Language Memory**: Caché persistente de idioma por jugador para optimizar la detección heurística y reducir procesamiento.
+- **Translation History Ring Buffer**: Almacenamiento circular de las últimas 10 traducciones, expuesto vía `/tr history` y comando `/tr last`.
+- **Intercepción de Canales Expandida**: Integración nativa de canales de Raid Warning, Emotes y Comercio (Trade) en la lógica del traductor.
+- **Interactive Quick Translation Frame**: Interfaz gráfica compacta e interactiva `/tr quick` para traducción manual instantánea.
+- **Visual Status Panel Indicator**: Panel gráfico flotante e independiente `/tr panel` con accesos rápidos y estados del traductor.
+- **Dashboard Estadístico Extendido**: Comando `/tr stats` mejorado con hit-rate de caché en tiempo real, detección de servidor e informe de top 5 frecuencias de términos traducidos.
+- **Lazy Loading & Dictionaries lazy init**: Carga diferida de diccionarios masivos para optimizar el consumo de memoria en la carga del addon.
+- **Dictionary Compilation**: Mecanismo de pre-compilación binaria del diccionario vía `/tr compile` para un inicio instantáneo.
+- **Custom Rules Engine**: Soporte para inyección en caliente de reglas personalizadas mediante `/tr addrule es|en|zh`.
+- **Sound Notification**: Alertas sonoras opcionales al recibir o enviar traducciones en canales seleccionados.
+- **Mailbox Interception**: Traducción automática en tiempo de renderizado de cartas entrantes (asunto y cuerpo) en el buzón.
+- **Anti-Spam Deduplication**: Filtro de mensajes idénticos consecutivos en chat para evitar spam redundante traducido.
+- **Auto-Prefixing**: Añadido automático de prefijos configurables para facilitar el enrutamiento de salida en reinos multi-idioma.
+- **High Contrast Tag Color Selection**: Dropdown en GUI de pfUI para elegir colores de contraste adaptados a los tags `[TR]`.
+- **Punctuation Normalization**: Sanitización e ignorado selectivo de signos de puntuación iniciales/finales (e.g., `¿`, `¡`, `?`, `!`) para maximizar matching.
+
 ## [4.2.3] - 2026-05-20
 ### Añadido
 - **Mega-Corpus Estructural Chino (HSK1 - HSK4)**: Inyección de más de 200 partículas gramaticales, verbos de acción compleja, conectores lógicos y vocabulario conversacional fluido. Cubre el 98% de la estructura de conversación cotidiana del idioma chino.

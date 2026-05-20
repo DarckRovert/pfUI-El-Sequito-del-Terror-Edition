@@ -1,4 +1,4 @@
-# ⚙️ Guía de API — Global Translator (v6.8.0 [ULTIMATE-TIER])
+# ⚙️ Guía de API — Global Translator (v7.0.0 [LEGENDARY-TIER])
 
 El traductor expone métodos públicos y estructuras de datos que pueden ser utilizados por otros componentes del ecosistema **pfUI** o addons de terceros compatibles con WoW Vanilla.
 
@@ -6,15 +6,10 @@ El traductor expone métodos públicos y estructuras de datos que pueden ser uti
 
 ## 1. Métodos Públicos
 
-### `pfUI.Translate(text, wordDict, phraseDict, phraseKeys, srcLang, buckets)`
-Procesa una cadena de texto, aplica el algoritmo **Token-Bucket candidate filtering** y el Greedy Matcher, y devuelve su traducción.
-*   **`text`** (string): El mensaje original (cuerpo limpio).
-*   **`wordDict`** (table): Diccionario hash para palabras simples (idiomas occidentales).
-*   **`phraseDict`** (table): Diccionario hash para frases complejas y caracteres CJK.
-*   **`phraseKeys`** (table): Array de llaves de frases ordenado por longitud para fallback Greedy Matching.
-*   **`srcLang`** (string): Idioma de origen (`"en"`, `"es"`, `"zh"`).
-*   **`buckets`** (table, opcional): Tabla de buckets indexados por palabra o carácter inicial para filtrado rápido Token-Bucket de llaves candidatas.
-*   **Retorno**: (string o nil) Devuelve el texto traducido o `nil` si no hubo traducción o si esta fue descartada por el filtro CTR.
+### `pfUI.Translate(text)`
+Procesa una cadena de texto, aplica todos los algoritmos activos de la Suite Legendary-Tier (Aislamiento Sintáctico, Token-Bucket, Greedy Matching, Micro-stemmer, Levenshtein Fuzzy matching, CTR Filter, Bilingual rendering y badges) y devuelve su traducción.
+*   **`text`** (string): El mensaje original.
+*   **Retorno**: (string o nil) Devuelve el texto traducido según las configuraciones activas del usuario, o `nil` si no aplica traducción.
 
 ---
 
@@ -35,4 +30,4 @@ Tabla de telemetría y rendimiento en tiempo real:
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
-*Ingeniería Ultimate-Tier.*
+*Ingeniería Legendary-Tier.*
