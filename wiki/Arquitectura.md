@@ -31,7 +31,7 @@ graph TD
     H --> I["Token-Bucket Engine (Filtrar por palabra inicial)"]
     I --> J["Motor Greedy Matcher (Solo llaves candidatas)"]
     J --> K{Validación de Coherencia CTR}
-    K -- Ratio >= Umbral 50% ZH / 40% EN --> L[Actualizar Caché LRU]
+    K -- Ratio >= Umbral 10% ZH / 40% EN --> L[Actualizar Caché LRU]
     K -- Ratio < Umbral --> M[Descartar y Mantener Original]
     L --> G
     M --> G
@@ -57,7 +57,7 @@ El motor utiliza un sistema doble:
 
 ### 4. Filtro de Ratio de Coherencia de Traducción (CTR)
 El motor Ultimate-Tier implementa un validador de calidad:
-*   **Chino (ZH)**: Analiza el conteo de bytes CJK multibyte. Si la traducción no abarca al menos el **50%** de los caracteres chinos, se descarta para evitar híbridos ("Chinol").
+*   **Chino (ZH)**: Analiza el conteo de bytes CJK multibyte. A partir de la v4.2.3 el CTR se relajó al **10%**, operando en un modo *best effort* agresivo que entrega traducciones híbridas para maximizar la cantidad de texto decodificado.
 *   **Occidental (EN/ES)**: Analiza la proporción de cambio en palabras alfanuméricas. Si no cubre al menos el **40%**, se descarta para evitar "Spanglish".
 
 ---

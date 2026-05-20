@@ -7,7 +7,7 @@
 Soporta de manera bidireccional y en tiempo real **Español, Inglés y Chino**. Cuenta con un motor de normalización automática de glifos CJK gracias a su base léxica de 200 categorías generales e inyección comprimida en lote de miles de misiones, ítems custom, talentos, PvP y habilidades de clase clásicos y de Turtle WoW.
 
 ## 3. ¿Por qué el traductor a veces no traduce frases de chat y muestra el original?
-Esto se debe al **Filtro de Ratio de Coherencia (CTR)**. Si una frase no se puede traducir en su mayoría (menos del 50% en chino o 40% en inglés), el motor descarta el cambio parcial para evitar que veas una mezcla incomprensible de idiomas ("Spanglish" o "Chinol", como `那tú又sidónde...`). El original siempre se mostrará antes que una traducción híbrida inútil.
+Esto se debe al **Filtro de Ratio de Coherencia (CTR)**. Para idiomas occidentales, si una frase no se puede traducir en su mayoría (menos del 40%), se descarta. Sin embargo, para Chino, a partir de la v4.2.3, el umbral es del **10%**, lo que significa que el addon hará un esfuerzo heurístico agresivo y **SÍ** mostrará mezclas de idiomas si solo reconoce algunas palabras, priorizando siempre mostrar la mayor cantidad de información traducible posible.
 
 ## 4. ¿Soporta la jerga táctica, profesiones y BGs?
 **Sí.** La v6.8.0 implementa cobertura absoluta para:

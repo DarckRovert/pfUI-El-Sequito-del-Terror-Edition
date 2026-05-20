@@ -28,7 +28,7 @@ La versión **v6.8.0 (Ultimate Absolute-Tier)** integra de forma nativa la tradu
 ---
 
 ## 3. Prevención Activa contra la Mezcla de Idiomas (CTR)
-El motor de la v6.8.0 incluye **Séquito Intelligence** para prevenir textos incomprensibles. Si el diccionario offline no logra traducir la mayor parte de un mensaje (ej: menos del 50% de caracteres chinos en una frase, o menos del 40% de palabras en inglés), la traducción parcial se descarta automáticamente.
+El motor incluye **Séquito Intelligence** para el ratio CTR. Si el diccionario offline no logra traducir la mayor parte de un mensaje occidental (menos del 40%), se descarta. Para el idioma chino, el motor usa un umbral agresivo del **10%**, intentando traducir absolutamente todo lo que conozca, incluso a riesgo de mostrar oraciones mezcladas (Chinol/Spanglish) para asegurar que entiendas el contexto del chat.
 *   **Resultado**: Verás el texto original limpio en lugar de una mezcla molesta ("Spanglish" o "Chinol" rota, como `那tú又sidónde...`).
 
 ---
