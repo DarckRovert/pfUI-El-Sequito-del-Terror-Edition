@@ -651,6 +651,7 @@ function pfUI:LoadConfig()
   pfUI:UpdateConfig("translator", nil,           "chan_world",       "1")
   pfUI:UpdateConfig("translator", nil,           "chan_lfg",         "1")
   pfUI:UpdateConfig("translator", nil,           "chan_whisper",     "1")
+  pfUI:UpdateConfig("translator", nil,           "ctr_threshold",    "0.00")
 
   pfUI:UpdateConfig("bars",       nil,           "font",             "Interface\\AddOns\\pfUI\\fonts\\BigNoodleTitling.ttf")
   pfUI:UpdateConfig("bars",       nil,           "font_offset",      "0")
@@ -1401,6 +1402,7 @@ function pfUI:MigrateConfig()
   pfUI:UpdateConfig("translator", nil, "chan_whisper", "1") -- Whispers usually wanted
   pfUI:UpdateConfig("translator", nil, "chan_world", "1")
   pfUI:UpdateConfig("translator", nil, "chan_lfg", "1")
+  pfUI:UpdateConfig("translator", nil, "ctr_threshold", "0.00")
 
   pfUI_config.version = pfUI.version.string
 end

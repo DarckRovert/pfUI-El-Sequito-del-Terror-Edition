@@ -1256,6 +1256,20 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
         "1:" .. (T["English Server"] or "Servidor Inglés"),
         "2:" .. (T["Spanish Server"] or "Servidor Español"),
         "3:" .. (T["Chinese Server"] or "Servidor Chino"),
+      },
+      ["translator_ctr"] = {
+        "0.00:" .. (T["Translate Everything (0%)"] or "Traducir Todo (0%)"),
+        "0.05:5%",
+        "0.10:10%",
+        "0.20:20%",
+        "0.30:30%",
+        "0.40:40%",
+        "0.50:50%",
+      },
+      ["translator_tag_color"] = {
+        "0:" .. (T["Normal (Teal)"] or "Normal (Verde Azulado)"),
+        "1:" .. (T["High Contrast (Yellow)"] or "Alto Contraste (Amarillo)"),
+        "2:" .. (T["Discrete (Gray)"] or "Discreto (Gris)"),
       }
     }
 
@@ -2986,13 +3000,41 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
       CreateConfig(nil, T["Silent Mode (No [TR])"] or "Modo Silencioso (Sin [TR])", C.translator, "silent_mode", "checkbox")
       CreateConfig(nil, T["WIM Integration"] or "Integración WIM", C.translator, "wim_bridge", "checkbox")
       CreateConfig(nil, T["Debug Mode"] or "Modo Debug", C.translator, "debug_mode", "checkbox")
+      CreateConfig(nil, T["Coherence Threshold (CTR)"] or "Umbral de Coherencia (CTR)", C.translator, "ctr_threshold", "dropdown", pfUI.gui.dropdowns.translator_ctr)
+      CreateConfig(nil, T["Tag Color"] or "Color de Etiqueta [TR]", C.translator, "tag_color", "dropdown", pfUI.gui.dropdowns.translator_tag_color)
+      CreateConfig(nil, T["Fix Invisible Chinese Text"] or "Reparar Texto Chino Invisible", C.translator, "fix_fonts", "button", function()
+        CreateQuestionDialog(T["This will switch your default font to 'ZhunYuan.ttf' and disable Blizzard fonts to fix invisible Chinese/Unicode text in the chat.\n\nDo you want to apply this change and reload the UI now?"] or "¿Deseas cambiar la fuente predeterminada a 'ZhunYuan.ttf' y desactivar las fuentes de Blizzard para solucionar el texto chino/Unicode invisible en el chat?\n\n¿Quieres aplicar este cambio y recargar la interfaz ahora?", function()
+          pfUI_config.global.font_blizzard = "0"
+          pfUI_config.global.font_default = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf"
+          pfUI_config.global.font_unit_name = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf"
+          ReloadUI()
+        end)
+      end)
+
+      CreateConfig(nil, T["Advanced Features"] or "Funciones Avanzadas", nil, nil, "header")
+      CreateConfig(nil, T["Bilingual Mode (Show Both)"] or "Modo Bilingue (Mostrar Ambos)", C.translator, "bilingual_mode", "checkbox")
+      CreateConfig(nil, T["Language Badge [ES][EN][ZH]"] or "Indicador de Idioma [ES][EN][ZH]", C.translator, "lang_badge", "checkbox")
+      CreateConfig(nil, T["Smart Pre-Filter"] or "Filtro Inteligente Pre-Traduccion", C.translator, "smart_filter", "checkbox")
+      CreateConfig(nil, T["Morphological Stemming"] or "Stemming Morfologico", C.translator, "stemming", "checkbox")
+      CreateConfig(nil, T["Player Language Memory"] or "Memoria de Idioma por Jugador", C.translator, "player_memory", "checkbox")
+      CreateConfig(nil, T["Sound Notification"] or "Notificacion Sonora", C.translator, "sound_notify", "checkbox")
+      CreateConfig(nil, T["Auto-Prefix [ES][EN]"] or "Auto-Prefijo [ES][EN] en Salida", C.translator, "auto_prefix", "checkbox")
+      CreateConfig(nil, T["Anti-Spam Deduplication"] or "Anti-Spam (Deduplicacion)", C.translator, "anti_spam", "checkbox")
+      CreateConfig(nil, T["Translation History"] or "Historial de Traducciones", C.translator, "history_enabled", "checkbox")
+      CreateConfig(nil, T["Frequency Tracking"] or "Seguimiento de Frecuencia", C.translator, "freq_tracking", "checkbox")
+      CreateConfig(nil, T["Mailbox Translation"] or "Traduccion de Buzon de Correo", C.translator, "mailbox", "checkbox")
 
       CreateConfig(nil, T["Channels"] or "Canales", nil, nil, "header")
       CreateConfig(nil, T["Say"] or "Say", C.translator, "chan_say", "checkbox")
       CreateConfig(nil, T["Party"] or "Grupo", C.translator, "chan_party", "checkbox")
       CreateConfig(nil, T["Raid"] or "Banda", C.translator, "chan_raid", "checkbox")
       CreateConfig(nil, T["Guild"] or "Hermandad", C.translator, "chan_guild", "checkbox")
+      CreateConfig(nil, T["Officer"] or "Oficiales", C.translator, "chan_officer", "checkbox")
       CreateConfig(nil, T["Whisper"] or "Susurros", C.translator, "chan_whisper", "checkbox")
+      CreateConfig(nil, T["Battleground"] or "Campos de Batalla", C.translator, "chan_bg", "checkbox")
+      CreateConfig(nil, T["Raid Warning"] or "Alerta de Banda", C.translator, "chan_raidwarning", "checkbox")
+      CreateConfig(nil, T["Emotes (RP)"] or "Emotes (RP)", C.translator, "chan_emote", "checkbox")
+      CreateConfig(nil, T["Trade"] or "Comercio", C.translator, "chan_trade", "checkbox")
       CreateConfig(nil, T["World (Global)"] or "Mundo (Global)", C.translator, "chan_world", "checkbox")
       CreateConfig(nil, T["LFG"] or "LFG", C.translator, "chan_lfg", "checkbox")
     end)

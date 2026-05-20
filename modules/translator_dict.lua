@@ -6,8 +6,8 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   -- ╚══════════════════════════════════════════════════════════════╝
 
   pfUI.translator_dicts = pfUI.translator_dicts or {}
-  local pairs = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
-  for _, p in ipairs(pairs) do
+  local DICT_PAIRS = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
+  for _, p in ipairs(DICT_PAIRS) do
     pfUI.translator_dicts[p .. "_words"]   = pfUI.translator_dicts[p .. "_words"] or {}
     pfUI.translator_dicts[p .. "_phrases"] = pfUI.translator_dicts[p .. "_phrases"] or {}
     pfUI.translator_dicts[p .. "_keys"]    = pfUI.translator_dicts[p .. "_keys"] or {}
@@ -19,6 +19,20 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
     {lang="zh", text=""}
   }
 
+  -- Cuenta caracteres chinos (bytes UTF-8 de 3 bytes en rango 224-239)
+  local function CountZhChars(s)
+    if not s then return 0 end
+    local n, i = 0, 1
+    local len = strlen(s)
+    while i <= len do
+      local b = strbyte(s, i)
+      if b and b >= 224 and b <= 239 then n = n + 1; i = i + 3
+      elseif b and b >= 192 and b <= 223 then i = i + 2
+      else i = i + 1 end
+    end
+    return n
+  end
+
   local function add(es, en, zh)
     items[1].text = es
     items[2].text = en
@@ -28,25 +42,31 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
       local src_lang = item_i.lang
       local src_text = item_i.text
       if src_text and src_text ~= "" then
-        for j = 1, 3 do
-          if i ~= j then
-            local item_j = items[j]
-            local dest_lang = item_j.lang
-            local dest_text = item_j.text
-            if dest_text and dest_text ~= "" then
-              local isPhrase = strfind(src_text, " ") or strfind(dest_text, " ") or strlen(src_text) > 12 or src_lang == "zh"
-              local prefix = src_lang .. "_" .. dest_lang
-              local key = src_text
-              if src_lang ~= "zh" then
-                key = string.lower(src_text)
-              end
-              if isPhrase then
-                if not pfUI.translator_dicts[prefix .. "_phrases"][key] then
-                  pfUI.translator_dicts[prefix .. "_phrases"][key] = dest_text
-                  table.insert(pfUI.translator_dicts[prefix .. "_keys"], key)
+        -- Chino como fuente: saltar entradas de 1 solo caracter.
+        -- Los caracteres individuales causan Chinol al matchear de forma aislada.
+        -- Solo se registran frases de 2+ caracteres chinos como fuente.
+        local zh_skip = (src_lang == "zh") and (CountZhChars(src_text) < 2)
+        if not zh_skip then
+          for j = 1, 3 do
+            if i ~= j then
+              local item_j = items[j]
+              local dest_lang = item_j.lang
+              local dest_text = item_j.text
+              if dest_text and dest_text ~= "" then
+                local isPhrase = strfind(src_text, " ") or strfind(dest_text, " ") or strlen(src_text) > 12 or src_lang == "zh"
+                local prefix = src_lang .. "_" .. dest_lang
+                local key = src_text
+                if src_lang ~= "zh" then
+                  key = string.lower(src_text)
                 end
-              else
-                pfUI.translator_dicts[prefix .. "_words"][key] = dest_text
+                if isPhrase then
+                  if not pfUI.translator_dicts[prefix .. "_phrases"][key] then
+                    pfUI.translator_dicts[prefix .. "_phrases"][key] = dest_text
+                    table.insert(pfUI.translator_dicts[prefix .. "_keys"], key)
+                  end
+                else
+                  pfUI.translator_dicts[prefix .. "_words"][key] = dest_text
+                end
               end
             end
           end
@@ -4513,6 +4533,196 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("hasta pronto",                           "see you soon",                       "后会有期")
 
   -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 201: Mazmorras y Raids Abreviaciones      ║
+  -- ╚══════════════════════════════════════════════╝
+  add("rfc",                                    "ragefire chasm",                     "怒焰")
+  add("wc",                                     "wailing caverns",                    "哀嚎")
+  add("sfk",                                    "shadowfang keep",                    "影牙")
+  add("bfd",                                    "blackfathom deeps",                  "黑暗深渊")
+  add("gnomer",                                 "gnomeregan",                         "诺莫")
+  add("rfk",                                    "razorfen kraul",                     "剃刀沼泽")
+  add("rfd",                                    "razorfen downs",                     "剃刀高地")
+  add("sm lib",                                 "scarlet monastery library",          "图书馆")
+  add("sm arm",                                 "scarlet monastery armory",           "武器库")
+  add("sm cath",                                "scarlet monastery cathedral",        "教堂")
+  add("sm gy",                                  "scarlet monastery graveyard",        "墓地")
+  add("zf",                                     "zul'farrak",                         "祖尔")
+  add("mara",                                   "maraudon",                           "玛拉顿")
+  add("st",                                     "sunken temple",                      "神庙")
+  add("brd",                                    "blackrock depths",                   "深渊")
+  add("lbrs",                                   "lower blackrock spire",              "黑下")
+  add("ubrs",                                   "upper blackrock spire",              "黑上")
+  add("mc",                                     "molten core",                        "MC")
+  add("bwl",                                    "blackwing lair",                     "BWL")
+  add("zg",                                     "zul'gurub",                          "ZG")
+  add("aq20",                                   "ruins of ahn'qiraj",                 "废墟")
+  add("aq40",                                   "temple of ahn'qiraj",                "神殿")
+  add("naxx",                                   "naxxramas",                          "纳克萨玛斯")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 202: Jerga de Combate y Roles de Grupo    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("t",                                      "tank",                               "坦/T")
+  add("nai",                                    "healer",                             "奶妈/治疗")
+  add("dd",                                     "dps",                                "输出/打手")
+  add("main tank",                              "main tank",                          "主T")
+  add("mt",                                     "main tank",                          "主T")
+  add("off tank",                               "off tank",                           "副T")
+  add("ot",                                     "off tank",                           "副T")
+  add("oom",                                    "out of mana",                        "空蓝了")
+  add("looteando",                              "looting",                            "摸尸体")
+  add("ninja",                                  "ninja looter",                       "毛人/毛装备")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 203: Jerga Social MMO Trilingüe        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("666",                                    "awesome",                            "溜溜溜")
+  add("nb",                                     "pro",                                "牛逼")
+  add("sb",                                     "idiot",                              "傻逼")
+  add("1",                                      "invite me / ready",                  "111/组/好")
+  add("123",                                    "click portal please",                "123点门")
+  add("点门",                                   "click portal",                       "click portal")
+  add("拉人",                                   "summon please",                      "summon me")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 204: Modismos Conversacionales Locales  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("chale",                                  "that's bad",                         "惨了")
+  add("wey",                                    "dude",                               "老兄")
+  add("chingon",                                "cool",                               "给力")
+  add("boludo",                                 "idiot",                              "笨蛋")
+  add("weon",                                   "dude / idiot",                       "家伙")
+  add("culiao",                                 "bastard",                            "混蛋")
+  add("xd",                                     "laughing",                           "哈哈")
+  add("cagaste",                                "you messed up",                      "你完蛋了")
+  add("pinche",                                 "damn",                               "该死的")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 205: Instrucciones Rápidas de Mazmorra   ║
+  -- ╚══════════════════════════════════════════════╝
+  add("pull extra",                             "extra pull",                         "引到怪了")
+  add("no combat",                              "no combat",                          "别打/脱战")
+  add("run",                                    "run",                                "跑")
+  add("dont attack",                            "dont attack",                        "别打")
+  add("wait tank",                              "wait for tank",                      "等坦拉住")
+  add("stop dps",                               "stop dps",                           "停手")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 206: Diálogos de Misiones Frecuentes    ║
+  -- ╚══════════════════════════════════════════════╝
+  add("donde entrego",                          "where do I hand in",                 "在哪里交任务")
+  add("donde se entrega",                       "where to hand in",                   "哪里交")
+  add("donde agarro",                           "where to take",                      "哪里接")
+  add("donde se agarra",                        "where do I accept",                  "哪里接任务")
+  add("mision compartida",                      "shared quest",                       "共享任务")
+  add("comparte mision",                        "share quest please",                 "共享任务谢谢")
+  add("no puedo entregar",                      "cannot hand in",                     "交不了任务")
+  add("misión bugeada",                         "bugged quest",                       "任务卡住了/bug")
+  add("mision bug",                             "bugged quest",                       "任务bug")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 207: Trade Channel y Negociación        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("cuanto pides",                           "how much do you want",               "你要多少金")
+  add("cuanto cuesta",                          "how much does it cost",              "多少钱")
+  add("muy caro",                               "too expensive",                      "太贵了")
+  add("puedes bajar",                           "can you lower",                      "便宜点行吗")
+  add("precio fijo",                            "fixed price",                        "最低价")
+  add("oferta",                                 "offer",                              "带价")
+  add("ofrece",                                 "offer me",                           "带价私聊")
+  add("cod por favor",                          "cod please",                         "邮寄谢谢/COD")
+  add("mandame cod",                            "cod me please",                      "邮寄给我")
+  add("envio cod",                              "send cod",                           "发邮寄")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 208: Guild Management y Convivencia     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("hola guild",                             "hello guild",                        "公会好")
+  add("hola g",                                 "hello guild",                        "公会好")
+  add("buenas guild",                           "hello guild",                        "公会的大家好")
+  add("buenas g",                               "hello guild",                        "公会的大家好")
+  add("gracias g",                              "thanks guild",                       "谢公会")
+  add("gracias guild",                          "thanks guild",                       "谢公会大家")
+  add("alguien me ayuda",                       "anyone can help me",                 "有大佬帮我吗")
+  add("alguien ayuda",                          "anyone helps",                       "有人帮一下吗")
+  add("ayuda por favor",                        "help please",                        "请帮帮我")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 209: Hardcore Death y Reacciones        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("f por el hermano",                       "f for the brother",                  "为兄弟点F")
+  add("f hermano",                              "f brother",                          "兄弟走好")
+  add("f en chat",                              "f in chat",                          "发F/点赞")
+  add("lo siento mucho",                        "so sorry",                           "真遗憾")
+  add("que lastima",                            "what a pity",                        "太可惜了")
+  add("nivel alto",                             "high level",                         "高级号")
+  add("murio a nivel",                          "died at level",                      "死在了几级")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 210: PvP y Battlegrounds                ║
+  -- ╚══════════════════════════════════════════════╝
+  add("defiendan base",                         "defend base",                        "守家/防守")
+  add("ataquen base",                           "attack base",                        "攻打")
+  add("defiendan lm",                           "defend lm",                          "守伐木")
+  add("defiendan gy",                           "defend gy",                          "守墓地")
+  add("vienen dos",                             "two coming",                         "来两个")
+  add("vienen tres",                            "three coming",                       "来三个")
+  add("vienen muchos",                          "many coming",                        "来一堆")
+  add("ayuda aqui",                             "help here",                          "求支援")
+  add("ayuda aca",                              "help here",                          "支援")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 211: Slang Avanzado en Chino (100% Gamer)║
+  -- ╚══════════════════════════════════════════════╝
+  add("woc",                                    "wtf",                                "卧槽")
+  add("taola",                                  "boosted / carried",                  "躺好了")
+  add("zhao ren",                               "lfm",                                "招人")
+  add("qiu zu",                                 "lfg",                                "求组")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 212: Orientación y Rutas de Viaje       ║
+  -- ╚══════════════════════════════════════════════╝
+  add("como llego a",                           "how to get to",                      "怎么去")
+  add("dónde queda",                            "where is",                           "在哪里")
+  add("como voy a",                             "how to go to",                       "怎么到")
+  add("vuelo a",                                "flight to",                          "飞往")
+  add("ruta de vuelo",                          "flight path",                        "飞行点")
+  add("toma el vuelo",                          "take flight",                        "坐飞机/坐飞兽")
+  add("camina",                                 "walk",                               "走路")
+  add("corre",                                  "run",                                "快跑")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 213: Emotes e Interacción Corta         ║
+  -- ╚══════════════════════════════════════════════╝
+  add("hola wey",                               "hi dude",                            "你好老兄")
+  add("que onda",                               "what's up",                          "怎么了")
+  add("todo bien",                              "all good",                           "一切顺利")
+  add("de acuerdo",                             "agreed",                             "没问题")
+  add("denada",                                 "welcome",                            "不客气")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 214: Comandos de Liderazgo en Mazmorra  ║
+  -- ╚══════════════════════════════════════════════╝
+  add("marca calavera",                         "mark skull",                         "打大饼/骷髅")
+  add("foco calavera",                          "focus skull",                        "打骷髅")
+  add("mata calavera",                          "kill skull",                         "击杀骷髅")
+  add("focus x",                                "focus cross",                        "打十字/叉叉")
+  add("cc estrella",                            "cc star",                            "控星星")
+  add("oveja luna",                             "sheep moon",                         "羊月亮")
+  add("duerme triangulo",                       "sleep triangle",                     "睡三角")
+
+  -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 215: Hardcore y Chat de Frustración     ║
+  -- ╚══════════════════════════════════════════════╝
+  add("morir",                                  "die",                                "死")
+  add("morí",                                   "I died",                             "我死了")
+  add("casi muero",                             "almost died",                        "差点死了")
+  add("cuidado",                                "watch out",                          "小心")
+  add("corran",                                 "run away",                           "快跑")
+  add("no peleen",                              "dont fight",                         "别打")
+  add("peligro",                                "danger",                             "危险")
+
+  -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
   -- ╚══════════════════════════════════════════════╝
   local p_keys = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
@@ -4545,6 +4755,6 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v6.0.0 Ultimate-Tier — 200 categorias y buckets de coincidencia inicializados.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v7.0.0 Ultimate-Tier — 215 categorias y buckets de coincidencia inicializados.")
   end
 end)

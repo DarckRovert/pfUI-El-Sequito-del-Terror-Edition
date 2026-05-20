@@ -1,7 +1,7 @@
-# Global Chat Translator — El Séquito Edition (v4.2.1 [DIAMOND-TIER]) 🌌⚖️
+# Global Chat Translator — El Séquito Edition (v7.0.0 [LEGENDARY-TIER]) 🌌⚖️
 
-![Version](https://img.shields.io/badge/version-v4.2.1--Diamond--Tier-00ccff?style=for-the-badge)
-![Host](https://img.shields.io/badge/pfUI-v5.1.4--Diamond--Tier-blue?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v7.0.0--Legendary--Tier-ffb300?style=for-the-badge)
+![Host](https://img.shields.io/badge/pfUI-v7.0.0--Legendary--Tier-purple?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Turtle_WoW-ff5555?style=for-the-badge)
 
 > **The ultimate multilingual communication bridge for World of Warcraft.** Este componente de grado corporativo integrado en **pfUI** erradica las barreras lingüísticas mediante un motor de traducción en tiempo real offline de alto rendimiento, con soporte nativo para **Español, Inglés, Ruso y Chino**, optimizado bajo el estándar de máxima fidelidad y rendimiento **Diamond-Tier** de DarckRovert.
@@ -27,7 +27,7 @@ El **Global Chat Translator** es una pieza nuclear de ingeniería para el ecosis
 
 ### ⚡ PERFORMANCE BENCHMARKS (DIAMOND-TIER)
 
-| Proceso | Latencia Séquito (v4.2.1) | Latencia Standard | Estado |
+| Proceso | Latencia Séquito (v7.0.0) | Latencia Standard | Estado |
 | :--- | :---: | :---: | :---: |
 | **Parsing & Isolation** | < 0.05ms | N/A | ✅ |
 | **Matching Loop** | < 0.08ms | N/A | ✅ |
