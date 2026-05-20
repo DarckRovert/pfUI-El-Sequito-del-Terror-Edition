@@ -3802,7 +3802,7 @@ local v9_zones_tbc = {
     "一起|together|juntos",
     "已经|already|ya",
     "意思|meaning|significado",
-    "because|porque|因为",
+    "因为|because|porque",
     "阴|cloudy|nublado",
     "右边|right side|lado derecho",
     "鱼|fish|pescado/pez",
