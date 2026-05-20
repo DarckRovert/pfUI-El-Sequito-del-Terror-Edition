@@ -2566,3 +2566,66 @@ for _, line in ipairs(massive_wow_batch) do
     end
   end
 end
+
+
+local v4_batch = {
+  -- Errores literales e Idiomatismos
+  "东西|things|cosas",          -- Evita que se traduzca como "este oeste"
+  "机器人|bot|bot",             -- Evita que se traduzca como "máquina gente"
+  "好处|benefit|beneficio",
+  "流浪|vagrant|vagabundo",
+  "浮云|floating cloud|ilusión",
+  "奸商|scammer|estafador",
+  "儿童|children|niños",
+  "退货|return|devolver",
+  "回城|hearth|volver a la ciudad",
+
+  -- Partículas gramaticales y adjetivos comunes
+  "啥|what|qué",
+  "最|most|el más",
+  "太|too|demasiado",
+  "又|also|además",
+  "先|first|primero",
+  "得|must|tiene que",
+  "里|in|en",
+  "完|finish|terminado",
+  "原|original|originalmente",
+  "肯定|definitely|seguro",
+
+  -- Verbos y acciones
+  "选|choose|elegir",
+  "忘|forget|olvidar",
+  "练|level|levelear",
+  "涨|rise|subir",
+  "排|queue|hacer cola",
+  "弄个|get|conseguir",
+  
+  -- Vocabulario de juego (Turtle WoW / WoW)
+  "代币|tokens|fichas",
+  "奖励|reward|recompensa",
+  "仓库|bank|banco",
+  "建议|suggest|sugerencia",
+  "时候|time|momento",
+  "的时候|when|cuando",
+  "怎么办|what to do|qué hacer",
+  "号|alt|personaje",
+  "通缉|wanted|se busca",
+  "精|elf|elfo",
+  "高等精灵|high elf|alto elfo",
+  "佬|boss|jefe",
+  "大佬|pro|pro"
+}
+
+for _, line in ipairs(v4_batch) do
+  local p1 = strfind(line, "|", 1, true)
+  if p1 then
+    local zh = strsub(line, 1, p1 - 1)
+    local rest = strsub(line, p1 + 1)
+    local p2 = strfind(rest, "|", 1, true)
+    if p2 then
+      local en = strsub(rest, 1, p2 - 1)
+      local es = strsub(rest, p2 + 1)
+      add(es, en, zh)
+    end
+  end
+end
