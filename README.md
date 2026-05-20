@@ -16,10 +16,10 @@ El **Global Chat Translator** es una pieza nuclear de ingeniería para el ecosis
 
 | Módulo | Tipo de Datos | Funcionalidad | Descripción |
 | :--- | :--- | :--- | :--- |
-| **Multilingual Engine** | Lexical Map | Soporte Global | Traducción entre Español (`esES`), Inglés (`enUS`), Ruso (`ruRU`) y Chino (`zhCN`). |
+| **Multilingual Engine** | Lexical Map | Soporte Global | Traducción entre Español (`esES`), Inglés (`enUS`), Ruso (`ruRU`) y Chino (`zhCN`). Incluye Mega-Corpus HSK1-4. |
 | **Greedy Matcher** | Lexicographical | Traducción Precisa | Prioriza frases complejas sobre palabras aisladas mediante indexación descendente por longitud. |
 | **Syntactic Isolation** | Message Parser | Integridad del Chat | Separa metadatos de Blizzard y nombres de jugador del cuerpo del mensaje antes de la traducción, protegiendo links e interactividad. |
-| **CTR Filter** | Mathematical Ratio | Coherencia de Texto | Filtro de Ratio de Coherencia (*Coherence Threshold Ratio*): descarta traducciones híbridas de bajo porcentaje de éxito (ZH < 50%, EN/ES < 40%) previniendo el "Spanglish/Chinol". |
+| **CTR Filter** | Mathematical Ratio | Coherencia de Texto | Filtro de Ratio de Coherencia (*Coherence Threshold Ratio*): Modo Heurístico Agresivo para Chino (ZH < 10%) priorizando visibilidad, y estándar (EN/ES < 40%). |
 | **Silent Mode** | UI Suppression | Incógnito | Opera de manera transparente sin prefijos invasivos en la ventana de chat. |
 | **WIM Bridge** | Frame Sync | Puente de Susurros | Traducción nativa y aislada dentro de las ventanas emergentes del addon WIM. |
 | **Channel Filter** | Comm Control | Gestión Granular | Selección bajo demanda de canales a traducir (World, LFG, Guild, Say, Party). |

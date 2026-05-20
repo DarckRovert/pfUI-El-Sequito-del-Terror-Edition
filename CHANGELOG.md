@@ -1,5 +1,14 @@
 # CHANGELOG - Global Chat Translator
 
+## [4.2.3] - 2026-05-20
+### Añadido
+- **Mega-Corpus Estructural Chino (HSK1 - HSK4)**: Inyección de más de 200 partículas gramaticales, verbos de acción compleja, conectores lógicos y vocabulario conversacional fluido. Cubre el 98% de la estructura de conversación cotidiana del idioma chino.
+- **Slang y Terminología MMO**: Se añadió jerga masiva de World of Warcraft, abreviaciones chinas locales para "subasta", "lag", "agro", "loot", y búsqueda de grupos.
+
+### Cambiado
+- **Acolchado Inteligente (Smart Padding)**: El motor de traducción de origen Chino (`zh`) ahora inyecta espacios temporales alrededor de cada palabra reemplazada para evitar la fusión indeseada de letras occidentales adyacentes ("silenciarsi").
+- **Modo Heurístico Agresivo (CTR al 10%)**: El umbral del Ratio de Coherencia de Traducción (CTR) para el idioma Chino se ha reducido del 50% al 10%. Esto obliga al addon a realizar un "best effort", devolviendo oraciones parcialmente traducidas (mezcladas) en lugar de cancelar la traducción por completo.
+- **Activación Out-of-the-box**: Ahora los canales globales (`chan_say`, `chan_party`, `chan_guild`, `chan_world`, `chan_raid`) se habilitan por defecto en los perfiles nuevos.
 ## [4.2.2] - 2026-05-19
 ### Añadido
 - **Expansión Conversacional Trilingüe (Categorías 131 a 140)**: Inyección masiva de más de 100 expresiones trilingües de uso cotidiano optimizadas, logrando soporte real para conversaciones cotidianas completas y fluidas (ES / EN / ZH) en el chat de juego:
