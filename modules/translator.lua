@@ -486,10 +486,20 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       end
 
       if p_end then
-        local col_start, col_end = strfind(text, ": ", p_end, true)
+        local col_start, col_end = strfind(text, "[:：]%s*", p_end)
         if col_start then
           prefix = strsub(text, 1, col_end)
           body   = strsub(text, col_end + 1)
+        else
+          -- Fallback drástico si el addon de chat muta los "dos puntos" a otra cosa
+          local space_start, space_end = strfind(text, "]%s*", p_end)
+          if space_start then
+            prefix = strsub(text, 1, space_end)
+            body   = strsub(text, space_end + 1)
+          else
+            prefix = strsub(text, 1, p_end)
+            body   = strsub(text, p_end + 1)
+          end
         end
       end
 
