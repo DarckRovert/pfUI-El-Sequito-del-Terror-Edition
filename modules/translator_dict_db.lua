@@ -2173,3 +2173,149 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   end
 
 end)
+
+
+local preemptive_batch = {
+  -- Clases y Specs (Abreviaciones chinas)
+  "战|warrior|guerrero",
+  "战士|warrior|guerrero",
+  "法|mage|mago",
+  "法师|mage|mago",
+  "牧|priest|sacerdote",
+  "牧师|priest|sacerdote",
+  "贼|rogue|pícaro",
+  "潜行者|rogue|pícaro",
+  "猎|hunter|cazador",
+  "猎人|hunter|cazador",
+  "德|druid|druida",
+  "小德|druid|druida",
+  "德鲁伊|druid|druida",
+  "术|warlock|brujo",
+  "术士|warlock|brujo",
+  "萨|shaman|chamán",
+  "萨满|shaman|chamán",
+  "骑|paladin|paladín",
+  "骑士|paladin|paladín",
+  "防|prot|protección",
+  "奶|heal|healer",
+  "惩戒|ret|reprensión",
+  "狂暴|fury|furia",
+  "暗牧|shadow|sombras",
+  "火法|fire|fuego",
+  "冰法|frost|escarcha",
+
+  -- Mazmorras Clásicas (Abreviaciones)
+  "哀嚎|wc|lamentos",
+  "死矿|dm|minas",
+  "影牙|sfk|castillo oscuro",
+  "深渊|brd|profundidades",
+  "血色|sm|monasterio",
+  "剃刀|rfk|rajamanto",
+  "高地|rfd|zarcas",
+  "玛拉顿|mara|maraudon",
+  "神庙|st|templo",
+  "黑石|brs|cumbre",
+  "厄运|dm|la masacre",
+  "通灵|scholo|scholomance",
+  "斯坦索姆|strat|stratholme",
+  "祖格|zg|zul'gurub",
+  "废墟|aq20|ruinas",
+  "黑翼|bwl|guarida de alanegra",
+  "黑龙|ony|onyxia",
+
+  -- Acciones y Verbos Comunes
+  "打|do/hit|hacer/pegar",
+  "杀|kill|matar",
+  "去|go|ir",
+  "来|come|venir",
+  "给|give|dar",
+  "买|buy|comprar",
+  "卖|sell|vender",
+  "进|enter|entrar",
+  "退|leave|salir",
+  "等|wait|esperar",
+  "组|invite|invitar",
+  "交易|trade|comerciar",
+  "帮忙|help|ayudar",
+  "任务|quest|misión",
+  "升级|level up|subir de nivel",
+  "复活|resurrect|resucitar",
+  "拉|summon|invocar",
+  "跑|run|correr",
+  "死|die|morir",
+  "灭|wipe|wipear",
+  "开|open/start|abrir/empezar",
+
+  -- Pronombres y Jerga Social
+  "我|i|yo",
+  "你|you|tú",
+  "他|he|él",
+  "她|she|ella",
+  "我们|we|nosotros",
+  "你们|you|ustedes",
+  "他们|they|ellos",
+  "兄弟|brother|hermano",
+  "大佬|pro|pro",
+  "菜鸟|noob|noob",
+  "妹子|girl|chica",
+  "老婆|wife|esposa",
+  "朋友|friend|amigo",
+  "人|people|gente",
+
+  -- Preguntas y Gramática
+  "怎么|how|cómo",
+  "哪里|where|dónde",
+  "多少|how much|cuánto",
+  "为什么|why|por qué",
+  "什么|what|qué",
+  "什么时候|when|cuándo",
+  "谁|who|quién",
+
+  -- Modificadores, Tiempo y Cantidad
+  "现在|now|ahora",
+  "等下|later|luego",
+  "今天|today|hoy",
+  "明天|tomorrow|mañana",
+  "很多|a lot|mucho",
+  "一点|a little|un poco",
+  "全部|all|todo",
+  "没有|none|nada",
+  "对|yes/right|sí/correcto",
+  "错|wrong|equivocado",
+  "好|good/ok|bien/ok",
+  "不好|bad/no|mal/no",
+
+  -- Términos de Turtle WoW y MMORPG
+  "乌龟|turtle|tortuga",
+  "双采|double gathering|doble recolección",
+  "龟壳|turtle shell|caparazón",
+  "帐篷|tent|tienda",
+  "排队|queue|cola",
+  "跨阵营|crossfaction|facciones cruzadas",
+  "联盟|alliance|alianza",
+  "部落|horde|horda",
+  "坦克|tank|tanque",
+  "治疗|healer|sanador",
+  "输出|dps|dps",
+  "队长|leader|líder",
+  "金币|gold|oro",
+  "拍卖行|ah|subasta",
+  "银行|bank|banco",
+  "公会|guild|hermandad",
+  "频道|channel|canal",
+  "插件|addon|addon"
+}
+
+for _, line in ipairs(preemptive_batch) do
+  local p1 = strfind(line, "|", 1, true)
+  if p1 then
+    local zh = strsub(line, 1, p1 - 1)
+    local rest = strsub(line, p1 + 1)
+    local p2 = strfind(rest, "|", 1, true)
+    if p2 then
+      local en = strsub(rest, 1, p2 - 1)
+      local es = strsub(rest, p2 + 1)
+      add(es, en, zh)
+    end
+  end
+end
