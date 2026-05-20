@@ -1858,6 +1858,65 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   load_batch(v11_ah_economy)
   load_batch(v11_hardcore_rp)
 
+  local v12_slang_screenshots = {
+    -- Slang, modismos y correcciones directas de reportes de usuario
+    "preparar|prepare|准备",
+    "conseguir|get|弄",
+    "casillas|slots|格",
+    "bolsa|bag|包包",
+    "bolsa|bag|包",
+    "grom|grom|格罗姆",
+    "personaje normal|normal character|普通角色",
+    "dejar|let|让",
+    "cerrar servidor|server shutdown|关服",
+    "cerrar|close|关",
+    "monedas|tokens|代币",
+    "original|original|原",
+    "como|like|像",
+    "lotería|lottery|抽奖",
+    "debería|should|应该把",
+    "reembolsar|refund|退",
+    "color|color|色",
+    "en|at|于",
+    "recompensa|reward|奖励",
+    "si|if|的话",
+    "vida|life|命",
+    "un|a|个",
+    "título|title|称号",
+    "apariencia|appearance|外貌",
+    "malo|bad|差",
+    "suerte|lucky|欧",
+    "hacer|do|搞",
+    "grupo|stack|组",
+    "correo|mail|邮寄",
+    "invita cordialmente a todos|cordially invites all|诚邀各界",
+    "guerreros|warriors|士",
+    "básicamente equipado|already brought|基本已携",
+    "buen ambiente|good environment|环境适宜",
+    "manteniendo|upholding|秉承",
+    "diversión ante todo|fun first|娱乐至上",
+    "todos son bienvenidos|all are welcome|者皆缘",
+    "divertirse|have fun|嗨",
+    "completar|clear|通",
+    "todo tipo|all kinds|各种",
+    "joder|wtf|尼玛",
+    "por qué|why|为毛",
+    "no poder|unable to|无法",
+    "coger|take|拿",
+    "cosa|thing|东西",
+    "veterano|pro|大佬",
+    "tipo|guy|佬",
+    "arathi|arathi|阿拉希",
+    "jugar|play|打",
+    "crasheo|crash|闪退",
+    "último|last|最后",
+    "paso|step|步",
+    "terminar|finish|完",
+    "despegar|take off|起飞",
+    "ayuda|help|帮忙"
+  }
+  load_batch(v12_slang_screenshots)
+
   -- ============================================================
   -- EXPANSION LEXICA v7.1 — VOCABULARIO WoW CHINO AMPLIADO
   -- Clases, roles, zonas, slang gaming, chat conversacional
