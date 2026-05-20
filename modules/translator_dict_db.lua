@@ -1917,6 +1917,56 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   }
   load_batch(v12_slang_screenshots)
 
+  local v13_slang_screenshots = {
+    -- Slang, términos de las capturas del usuario y vocabulario bidireccional
+    "modo vagabundo|vagrant mode|流浪",
+    "vagabundo|vagrant|流浪",
+    "banco móvil|mobile bank|移动仓库",
+    "almacén móvil|mobile warehouse|移动仓库",
+    "banco móvil|mobile bank|移动 banco",
+    "volver a subir|reroll|重练",
+    "volver a levear|relevel|重练",
+    "recrear|reroll|重练",
+    "subir otro personaje|level again|重练",
+    "bot|bot|机器",
+    "máquina|machine|机器",
+    "burro|donkey|驴",
+    "mula|mule|驴",
+    "molesto|annoying|烦",
+    "pesado|annoying|烦",
+    "fastidioso|annoying|烦",
+    "elegir|choose|选",
+    "seleccionar|select|选",
+    "tonterías|bullshit|毛线",
+    "nada|nothing|毛线",
+    "mierda|nonsense|毛线",
+    "solo|only|只",
+    "solamente|only|只",
+    "generalmente|generally|般",
+    "normalmente|normally|般",
+    "tipos locos|sick cvnts|狂野小伙",
+    "enfermos|sick cvnts|狂野小伙",
+    "expatriados|expats|移民玩家",
+    "extranjeros|expats|移民玩家",
+    "soporte CJK|cjk support|CJK支持",
+    "soporte de fuentes chinas|cjk support|CJK支持",
+    "permitiendo|allowing|允许",
+    "que presenta|featuring|包括",
+    "con|featuring|包括",
+    "configuración|setup|配置",
+    "ajustes|setup|配置",
+    "rendimiento|performance|性能",
+    "guías|guides|指南",
+    "guias|guides|指南",
+    "veterano|veteran|老玩家",
+    "comunidad|community|社区",
+    "susurrar|whisper|私聊",
+    "susurro|whisper|私聊",
+    "todavía|yet|还",
+    "aún|yet|还"
+  }
+  load_batch(v13_slang_screenshots)
+
   -- ============================================================
   -- EXPANSION LEXICA v7.1 — VOCABULARIO WoW CHINO AMPLIADO
   -- Clases, roles, zonas, slang gaming, chat conversacional

@@ -802,8 +802,47 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     if not C.translator or C.translator.enable ~= "1" or C.translator.outgoing ~= "1" then return nil end
     if not IsChanEnabled(chatType) then return nil end
 
-    local src, dest = GetTranslationMode(false)
-    if not src or not dest then return nil end
+    local myLang = GetMyLang()
+    local src = myLang
+    local dest = nil
+
+    -- 1. Intentar autodetectar idioma del destinatario si es un susurro o mensaje dirigido
+    local target_lang = nil
+    local addressed_player = nil
+    local msg_body = msg
+
+    if strlower(chatType or "") == "whisper" and channel and channel ~= "" then
+      target_lang = RecallPlayerLang(channel)
+    else
+      -- Buscar si empieza con "Nombre: " o "Nombre, "
+      local _, _, possible_target, rest = strfind(msg, "^([%a%d\128-\255]+)%s*[:%,]%s*(.*)$")
+      if possible_target and rest and rest ~= "" then
+        local lang_check = RecallPlayerLang(possible_target)
+        if lang_check then
+          target_lang = lang_check
+          addressed_player = possible_target
+          msg_body = rest
+        end
+      end
+    end
+
+    if target_lang and target_lang ~= "unknown" then
+      if target_lang == myLang then
+        -- Mismo idioma que el cliente local, no es necesario traducir
+        return nil
+      else
+        dest = target_lang
+      end
+    else
+      -- Fallback al comportamiento original (entorno/servidor)
+      local mode_src, mode_dest = GetTranslationMode(false)
+      if mode_src and mode_dest then
+        src = mode_src
+        dest = mode_dest
+      end
+    end
+
+    if not dest or src == dest then return nil end
 
     local prefix  = src .. "_" .. dest
     local words   = pfUI.translator_dicts[prefix .. "_words"]
@@ -811,12 +850,19 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     local keys    = pfUI.translator_dicts[prefix .. "_keys"]
     local bkts    = pfUI.translator_dicts[prefix .. "_buckets"]
 
-    local trans = LocalTranslate(msg, words, phrases, keys, src, bkts)
+    if not words or not phrases then return nil end
+
+    local trans = LocalTranslate(msg_body, words, phrases, keys, src, bkts)
     if trans then
       pfUI.translator_stats.total_out = pfUI.translator_stats.total_out + 1
+
+      -- Si fue un mensaje dirigido a un jugador en canal público/grupal, reconstruir con el nombre
+      if addressed_player then
+        trans = addressed_player .. ": " .. trans
+      end
+
       -- #26: Auto-prefix
       if C.translator.auto_prefix == "1" then
-        local myLang = GetMyLang()
         local prefix_tag = "[" .. strupper(myLang) .. "] "
         trans = prefix_tag .. trans
       end
