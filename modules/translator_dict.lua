@@ -4721,6 +4721,27 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("corran",                                 "run away",                           "快跑")
   add("no peleen",                              "dont fight",                         "别打")
   add("peligro",                                "danger",                             "危险")
+  -- Injected from screenshot feedback
+  add("el circo", "circus", "马戏团")
+  add("villadorada", "goldshire", "闪金")
+  add("villadorada", "goldshire", "闪金镇")
+  add("apoyo", "agreed", "附议")
+  add("invitame", "invite me", "组我")
+  add("invitame", "invite me", "组我一个")
+  add("listo", "done", "OK了")
+  add("listo", "done", "ok了")
+  add("mierda", "fuck", "靠")
+  add("muerto por la horda", "killed by horde", "被BL杀了")
+  add("la feria está cerrada hoy", "dmf is closed today", "今天马戏团休息")
+  add("yo", "i", "我")
+  add("soy", "am", "是")
+  add("mago low", "low mage", "小法")
+  add("busco", "lf", "来")
+  add("o mas", "or higher", "以上的")
+  add("dónde está", "where is", "在哪里")
+  add("un", "one", "一个")
+  add("un", "one", "一")
+
 
   -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
