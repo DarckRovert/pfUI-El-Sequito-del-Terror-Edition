@@ -1,4 +1,4 @@
-# 🏰 Wiki: Arquitectura 'Legendary Tier' — pfUI [v7.0.0] (Translator v7.0.0)
+# 🏰 Wiki: Arquitectura 'Legendary Tier' — pfUI [v7.1.0] (Translator v7.1.0)
 
 Estructura modular del ecosistema **El Séquito del Terror** mantenido por **DarckRovert**.
 
@@ -9,8 +9,9 @@ Estructura modular del ecosistema **El Séquito del Terror** mantenido por **Dar
 El AddOn inicia mediante `init/modules.xml` con los siguientes puntos críticos de inyección:
 
 1.  **Lexical Engine (`translator_dict.lua`)**: Carga inicial y estructuración en memoria de las categorías base. Utiliza carga diferida (Lazy Loading) para evitar picos de uso de CPU durante el inicio de la sesión del juego.
-2.  **Colosal Database (`translator_dict_db.lua`)**: Inyecta una base de datos trilingüe masiva estructurada en 18 lotes temáticos (gaming terms, HSK 1-5, expansiones, zonas, stats) comprimida por delimitadores `"|"`. Soporta pre-compilación binaria guardada en caché para omitir el parsing del texto plano y cargar instantáneamente.
+2.  **Colosal Database (`translator_dict_db.lua`)**: Inyecta una base de datos trilingüe masiva estructurada en 19 lotes temáticos (añadiendo los lotes de expansión v16 Giga Dictionary y v17 Adiciones de la Comunidad) comprimida por delimitadores `"|"`. Soporta pre-compilación binaria guardada en caché para omitir el parsing del texto plano y cargar instantáneamente.
 3.  **Core Translator (`translator.lua`)**: Intercepta de forma asíncrona la entrada y salida de chat. Implementa:
+    *   **Detección de Idioma Dinámica por Votación**: Tokeniza el mensaje en tiempo real para contar votos de coincidencia directa en los diccionarios (`es_en_words` y `en_es_words`) para palabras de longitud >= 3, erradicando el estado `unknown` para frases y modismos comunes cortos de WoW.
     *   **Motor Token-Bucket** para filtrado Greedy de complejidad $O(K)$.
     *   **Aislamiento Sintáctico y de Enlaces** para proteger la interactividad nativa de WoW.
     *   **Micro-stemmer** y **Levenshtein Fuzzy Matcher** para resolver variaciones y errores ortográficos.

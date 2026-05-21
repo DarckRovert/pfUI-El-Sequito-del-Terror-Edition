@@ -1967,6 +1967,126 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   }
   load_batch(v13_slang_screenshots)
 
+  local v14_slang_refinements = {
+    -- 1. Correcciones específicas de capturas de pantalla de chat
+    "wc|wc|哀嚎",
+    "cueva de los lamentos|wailing caverns|哀嚎洞穴",
+    "cuevas de los lamentos|wailing caverns|哀嚎洞穴",
+    "lamentos|wailing caverns|哀嚎",
+
+    "trinquete|ratchet|棘齿城",
+    "trinquete|ratchet|棘齿",
+    "base trinquete|ratchet base|棘齿城基地",
+    "base trinquete|ratchet base|棘齿基地",
+
+    "maestros|pros|大佬们",
+    "maestro|pro|大佬",
+    "veteranos|veterans|大佬们",
+    "veterano|veteran|大佬",
+    "grande佬们|veterans|大佬们",
+    "grande佬|veteran|大佬",
+    "grande 佬们|veterans|大佬们",
+    "grande 佬|veteran|大佬",
+
+    "incompatibles|mutually exclusive|互斥",
+    "no se acumulan|don't stack|互斥",
+    "no se acumula|doesn't stack|互斥",
+
+    "cazador|hunter|LR",
+    "cazadores|hunters|LRs",
+
+    "mascota|pet|宝爹",
+    "mascotas|pets|宝爹们",
+
+    "hay que subir|must level|得练",
+    "tienes que subir|must level|得练",
+    "hay que levear|must level|得练",
+    "tienes que levear|must level|得练",
+
+    "crear un personaje|make an alt|建个号",
+    "hacerse un personaje|make an alt|建个号",
+    "crearse un alter|make an alt|建个号",
+    "crear un alter|make an alt|建个号",
+    "crear personaje|create character|建号",
+    "hacerse un personaje|create character|建号",
+
+    "materiales|mats|物资",
+    "suministros|supplies|物资",
+    "recursos|resources|物资",
+
+    "pedido de suministros de alquimia|order for alchemical goods|炼金货物的订单",
+    "pedido de mercancías de alquimia|order for alchemical goods|炼金货物的订单",
+    "[pedido de suministros de alquimia]|[order for alchemical goods]|[炼金货物的订单]",
+
+    -- 2. Vocabulario de apoyo y abreviaciones comunes de inglés a español/chino (slang WoW)
+    "busco grupo|looking for group|lfg",
+    "busco mas|looking for more|lfm",
+    "compro|want to buy|wtb",
+    "vendo|want to sell|wts",
+    "cambio|want to trade|wtt",
+    "busco|looking for|lf",
+    "necesito|need|need",
+    "invita|invite|inv",
+    "invitar|invite|invite",
+    "susurrar|whisper|whisper",
+    "susurrame|whisper me|whisper me",
+    "susurrame por favor|whisper me please|whisper me please",
+    "susurro|whisper|pst",
+    "mazmorra|dungeon|dungeon",
+    "banda|raid|raid",
+    "grupo|party|party",
+    "grupo|group|group",
+    "tanque|tank|tank",
+    "curador|healer|healer",
+    "dps|dps|dps",
+    "oro|gold|gold",
+    "materiales|mats|mats",
+    "suministros|supplies|supplies",
+    "mula|mule|mule",
+    "alter|alt|alt",
+    "personaje|character|char",
+    "personaje|character|character",
+    "gente|people|people",
+    "venir|come|come",
+    "recibir|receive|receive",
+    "hermandad|guild|hermandad",
+    "quien|who|who",
+    "usar|use|use",
+    "entender|understand|understand",
+    "jugador|player|player",
+    "jugadores|players|players",
+    "idioma|language|language",
+    "hablar|speak|speak",
+    "hablando|speaking|speaking",
+    "hacer|do|do",
+    "hacer|make|make",
+    "saber|know|know",
+    "ver|see|see",
+    "para|for|for",
+    "con|with|with",
+    "pero|but|but",
+    "porque|because|because",
+    "cuando|when|when",
+    "donde|where|where",
+    "como|how|how",
+    "que|what|what",
+    "quien|who|who",
+    "por que|why|why",
+    "si|yes|yes",
+    "no|no|no",
+    "hola|hello|hello",
+    "adios|goodbye|goodbye",
+    "gracias|thanks|thanks",
+    "gracias|thank you|thank you",
+    "por favor|please|please",
+    "por favor|pls|pls",
+    "por favor|plz|plz",
+    "lo siento|sorry|sorry",
+    "bueno|good|good",
+    "malo|bad|bad"
+  }
+  load_batch(v14_slang_refinements)
+
   -- ============================================================
   -- EXPANSION LEXICA v7.1 — VOCABULARIO WoW CHINO AMPLIADO
   -- Clases, roles, zonas, slang gaming, chat conversacional
@@ -2903,28 +3023,6 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   load_batch_zh_en_es(v8_numbers_misc)
   load_batch_zh_en_es(v8_wow_specific)
 
-  -- V9 Load Calls
-  load_batch_zh_en_es(v9_zones_tbc)
-  load_batch_zh_en_es(v9_dungeons_tbc)
-  load_batch_zh_en_es(v9_quest_phrases)
-  load_batch_zh_en_es(v9_stats_combat)
-  load_batch_zh_en_es(v9_consumables_mats)
-  load_batch_zh_en_es(v9_emotes_social)
-  load_batch_zh_en_es(v9_hsk_basic_1)
-  load_batch_zh_en_es(v9_hsk_basic_2)
-  load_batch_zh_en_es(v9_hsk_basic_3)
-  load_batch_zh_en_es(v9_hsk_intermediate_1)
-  load_batch_zh_en_es(v9_hsk_intermediate_2)
-  load_batch_zh_en_es(v9_hsk_intermediate_3)
-  load_batch_zh_en_es(v9_hsk_intermediate_4)
-  load_batch_zh_en_es(v9_hsk_intermediate_5)
-  load_batch_zh_en_es(v9_hsk_advanced_1)
-  load_batch_zh_en_es(v9_hsk_advanced_2)
-  load_batch_zh_en_es(v9_wow_factions_cities)
-  load_batch_zh_en_es(v9_wow_expansions_continents)
-  load_batch_zh_en_es(v9_additional_gaming)
-
-
 
   -- ============================================================
   -- RESCUED FROM ORPHANED BATCHES (V4-V7) — NOW INSIDE MODULE SCOPE
@@ -3253,8 +3351,8 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   add("ninja", "ninja", "全需")
   add("mala suerte", "bad luck", "黑手")
   add("buena suerte", "good luck", "红手")
-  add("cosas",          -- Evita que se traduzca como "este oeste", "things", "东西")
-  add("bot",             -- Evita que se traduzca como "máquina gente", "bot", "机器人")
+  add("cosas", "things", "东西") -- Evita que se traduzca como "este oeste"
+  add("bot", "bot", "机器人") -- Evita que se traduzca como "máquina gente"
   add("beneficio", "benefit", "好处")
   add("vagabundo", "vagrant", "流浪")
   add("ilusión", "floating cloud", "浮云")
@@ -3297,7 +3395,7 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   add("maldición", "damn it", "TNND")
   add("qué pasa", "what happened", "怎么回事")
   add("significado", "meaning", "意思")
-  add("sombras y ruina", -- Spec de Brujo", "shadow-ruin", "暗毁")
+  add("sombras y ruina", "shadow-ruin", "暗毁") -- Spec de Brujo
   add("intendente", "quartermaster", "军需官")
   add("entregar", "turn in", "交")
   add("casillas", "slots", "格")
@@ -3333,10 +3431,10 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   add("invitar gente", "invite people", "加人")
   add("solo para probar", "just testing", "意思一下")
   add("revantusk", "revantusk", "恶齿")
-  add("revantusk", -- Typo común de los chinos por "alitas de ganso", "revantusk", "鹅翅")
+  add("revantusk", "revantusk", "鹅翅") -- Typo común de los chinos por "alitas de ganso"
   add("frustrado", "frustrated", "压抑")
   add("volverse loco", "go crazy", "发疯")
-  add("volverse loco", -- Typo de 發瘋", "go crazy", "加疯")
+  add("volverse loco", "go crazy", "加疯") -- Typo de 發瘋
   add("mascota", "pet", "宝宝")
   add("juntar", "gather", "凑")
   add("fragmento", "shard", "碎片")
@@ -4228,6 +4326,470 @@ local v9_zones_tbc = {
     "最|most|el más",
     "左边|left side|lado izquierdo",
   }
+
+  -- V9 Load Calls
+  load_batch_zh_en_es(v9_zones_tbc)
+  load_batch_zh_en_es(v9_dungeons_tbc)
+  load_batch_zh_en_es(v9_quest_phrases)
+  load_batch_zh_en_es(v9_stats_combat)
+  load_batch_zh_en_es(v9_consumables_mats)
+  load_batch_zh_en_es(v9_emotes_social)
+  load_batch_zh_en_es(v9_hsk_basic_1)
+  load_batch_zh_en_es(v9_hsk_basic_2)
+  load_batch_zh_en_es(v9_hsk_basic_3)
+  load_batch_zh_en_es(v9_hsk_intermediate_1)
+  load_batch_zh_en_es(v9_hsk_intermediate_2)
+  load_batch_zh_en_es(v9_hsk_intermediate_3)
+  load_batch_zh_en_es(v9_hsk_intermediate_4)
+  load_batch_zh_en_es(v9_hsk_intermediate_5)
+  load_batch_zh_en_es(v9_hsk_advanced_1)
+  load_batch_zh_en_es(v9_hsk_advanced_2)
+  load_batch_zh_en_es(v9_wow_factions_cities)
+  load_batch_zh_en_es(v9_wow_expansions_continents)
+  load_batch_zh_en_es(v9_additional_gaming)
+
+  local v15_colossal_expansion = {
+    -- Caso del screenshot ("oce base hermandad featuring expats de dos y epoch...")
+    "oce base hermandad featuring expats de dos y epoch|oce guild base featuring expats from dos and epoch|oce基地公会，由来自dos和epoch的流亡成员组成",
+    
+    -- Expresiones de reclutamiento y hermandad fluidas (ES -> EN -> ZH)
+    "busco hermandad que haga raids|looking for guild that raids|找打本的公会",
+    "hermandad latina recluta dps y heal|latin guild recruiting dps and healers|拉美公会招收输出和治疗",
+    "hermandad hispana activa recluta|active spanish guild recruiting|活跃的西语公会招人",
+    "reclutamos de cara a classic tbc|recruiting for classic tbc|为TBC怀旧服招人",
+    "busco hermandad hispana|looking for spanish guild|寻找西语公会",
+    "gremio hispanohablante recluta|spanish speaking guild recruiting|西语公会招募",
+    "hermandad de habla hispana|spanish speaking guild|西班牙语公会",
+    "tenemos core activo y discord|we have active core and discord|我们有活跃的开荒群 and 语音",
+    "hacemos raids los fines de semana|we raid on weekends|我们周末打团本",
+    "busco gremio social y casual|looking for social and casual guild|找休闲社交公会",
+    "busco clan activo|looking for active clan|寻找活跃公会",
+    "gremio pvp y pve activo|active pvp and pve guild|活跃的PVP和PVE公会",
+    "buscamos jugadores activos|looking for active players|招募活跃玩家",
+    "hermandad amigable recluta novatos|friendly guild recruiting newbies|友好公会招收萌新",
+    "ayudamos a levear y hacer misiones|we help leveling and questing|我们提供升级和任务帮助",
+    "sistema de botin dkp|dkp loot system|DKP分配系统",
+    "sistema de botin gdkp|gdkp loot system|金团分配系统",
+    "loot por prioridad de rol|loot by roll priority|按天赋优先分装",
+    "reclutamiento abierto para todos|recruitment open for all|面向所有人招募",
+    "busco hermandad de habla hispana para levear|looking for spanish guild to level|找个西语公会一起升级",
+    
+    -- Expresiones cotidianas y slang de WoW (ES -> EN -> ZH)
+    "alguien me ayuda con esta mision|anyone help me with this quest|有人帮我做这个任务吗",
+    "quien vende tienda de campaña|who sells survival tent|谁卖生存帐篷",
+    "quien vende tienda de campana|who sells survival tent|谁卖生存帐篷",
+    "compro tienda de campaña|buy survival tent|买生存帐篷",
+    "compro tienda de campana|buy survival tent|买生存帐篷",
+    "tengo materiales para la tienda|i have mats for tent|我有帐篷的材料",
+    "donde se planta la tienda|where is the tent planted|帐篷在哪里放",
+    "planta la tienda por favor|plant the tent please|请放个帐篷",
+    "tienda de campamento lista|tent ready|帐篷好了",
+    "tira la carpa por favor|put the tent please|放个帐篷谢谢",
+    "necesito curas por favor|need heals please|需要治疗谢谢",
+    "el tanque no tiene agro|tank has no aggro|坦没有仇恨",
+    "cuidado con el agro|careful with aggro|注意仇恨",
+    "no peguen antes que el tanque|don't hit before tank|坦拉稳再打",
+    "dejen que el tanque jale|let tank pull|让坦拉怪",
+    "limpien los mobs de atras|clear the back mobs|清掉后面的怪",
+    "pull accidental lo siento|accidental pull sorry|不小心引到怪了抱歉",
+    "add accidental|accidental add|引到怪了",
+    "cuidado con los patrulleros|watch out for patrols|小心巡逻怪",
+    "patrulla viniendo cuidado|patrol coming watch out|巡逻来了小心",
+    "esperen que pase la patrulla|wait for patrol to pass|等巡逻过去",
+    "necesito comprar agua y comida|need to buy water and food|我去买点水和食物",
+    "mi equipamiento esta roto|my gear is broken|我装备红了",
+    "tengo que ir a reparar|need to go repair|我要去修理",
+    "alguien tiene robot de reparacion|anyone has repair bot|有人放修理机器人吗",
+    "tienen piedra de hogar lista|is your hearthstone ready|炉石好了吗",
+    "mi piedra de hogar esta en cd|my hearthstone is on cd|炉石冷却中",
+    "nos vemos en la taberna|see you in the tavern|旅馆见",
+    "tengo la mochila llena|my bag is full|我包满了",
+    "necesito ir al banco a guardar cosas|need to go to bank|我要去银行存东西",
+    "alguien que me haga port a orgrimmar|anyone port to orgrimmar|求开奥格瑞玛的门",
+    "alguien que me haga port a ventormenta|anyone port to stormwind|求开暴风城的门",
+    
+    -- MMO general y ayuda (ES -> EN -> ZH)
+    "como llego a esa zona|how do i get to that zone|怎么去那个地图",
+    "esta bloqueada la entrada|the entrance is blocked|入口被堵住了",
+    "el servidor se cayo|server crashed|服务器崩了",
+    "tengo problemas de conexion|connection issues|我连接有问题",
+    "me sacó del servidor|disconnected me from server|掉线了",
+    "hay mucho lag de mundo|high world lag|世界延迟太高了",
+    "mi ping es aceptable|my ping is ok|我延迟还行",
+    "juego a sesenta fps|playing at 60 fps|帧率60帧",
+    "este addon es increible|this addon is amazing|这个插件太好用了",
+    "gracias por la traduccion|thanks for the translation|谢谢翻译",
+    "la traduccion funciona muy bien|translation works very well|翻译功能运行良好",
+    "no entiendo ingles pero con esto si|i don't know english but with this i do|我不懂英语但用这个懂了",
+    "gracias creadores del addon|thanks addon creators|谢谢插件作者",
+    "el chat es trilingue ahora|chat is trilingual now|聊天频道现在是三语的了",
+    "puedo hablar en mi idioma|i can speak in my language|我可以用我的母语说话了",
+    "los demas me entienden|others understand me|别人能听懂我的话",
+    "puedo entender a los chinos|i can understand chinese players|我能看懂中文玩家的话",
+    "puedo entender a los ingleses|i can understand english players|我能看懂英语玩家的话",
+    "que gran comunidad tenemos|what a great community we have|多么棒的的社区",
+    "viva turtle wow|long live turtle wow|乌龟服万岁",
+    
+    -- Slang inglés MMO expandido (EN -> ES -> ZH)
+    "i do not know|no lo se|我不知道",
+    "i cannot go|no puedo ir|我不能去",
+    "i am ready|estoy listo|我好了",
+    "it is fine|esta bien|没事",
+    "it is ok|no pasa nada|没关系",
+    "i will go|yo ire|我去",
+    "you are welcome|de nada|不客气",
+    "they are coming|ya vienen|他们来了",
+    "we are ready|estamos listos|我们准备好了",
+    "he is coming|ya viene|他来了",
+    "she is coming|ya viene|她来了",
+    "will not wipe|no moriremos|不会灭",
+    "did not hit|no golpee|没打中",
+    "is not ready|no esta listo|没准备好",
+    "was not me|no fui yo|不是我",
+    "were not there|no estabamos ahi|没在那",
+    "are not here|no estan aqui|不在那",
+    "have not seen|no he visto|没见过",
+    "has not dropped|no ha caido|没掉落",
+    "had not started|no habia empezado|还没开始",
+    "would not believe|no lo creeria|不相信",
+    "could not do|no pude hacerlo|做不到",
+    "should not pull|no deberias jalar|不该拉怪",
+    "let us go|vamos|走吧",
+    "do not pull|no jales|别拉怪",
+    "do not hit|no pegues|别打",
+    "do not run|no corras|别跑",
+    "do not die|no mueras|别死",
+    
+    -- Frases y expresiones de Turtle WoW adicionales
+    "busco grupo para mazmorra de nivel bajo|lfg for low level dungeon|求组低级副本",
+    "hacemos mazmorras clasicas|we run classic dungeons|我们打经典地下城",
+    "quien quiere hacer grupo para misiones|who wants to party for quests|谁想组队做任务",
+    "grupo para matar elites|party to kill elites|精英任务求组",
+    "necesito ayuda con boss elite|need help with elite boss|求助精英BOSS",
+    "estoy haciendo misiones en bosque oscuro|questing in duskwood|在暮色森林做任务",
+    "alguien por paramos de poniente|anyone in westfall|西部荒野有人吗",
+    "alguien por bosque de elwynn|anyone in elwynn forest|艾尔文森林有人吗",
+    "busco healer para curar en mazmorra|looking for healer for dungeon|副本求奶妈",
+    "busco tanque para aguantar los golpes|looking for tank to hold aggro|副本求坦",
+    "dps listo para pegar duro|dps ready to hit hard|输出准备就绪",
+    "dame invi por favor|give me invite please|请组我谢谢",
+    "me uno al grupo con gusto|gladly joining the group|很高兴加入队伍",
+    "saludos cordiales a todos|warm regards to everyone|大家好",
+    "que tengan un excelente dia de juego|have a great gaming day|祝大家游戏愉快",
+    "buena suerte con el loot de hoy|good luck with today's loot|祝今天掉落好运",
+    "felicidades por tu nueva pieza de equipo|grats on your new gear|恭喜拿新装备",
+    "gracias por la ayuda de verdad|thanks for the help really|非常感谢你的帮助",
+    "eres un gran jugador|you are a great player|你是个优秀的玩家",
+    "excelente grupo muy limpio|excellent group very clean|打得非常干净的队伍",
+    "es un placer jugar con ustedes|pleasure playing with you|和你们一起玩很开心",
+    "hasta la proxima amigos|until next time friends|下次见朋友们",
+    "suerte en sus aventuras por azeroth|luck in your adventures in azeroth|祝你在艾泽拉斯冒险顺利",
+  }
+  load_batch(v15_colossal_expansion)
+
+  local v16_giga_dictionary_expansion = {
+    -- 1. Abreviaturas de chat de WoW (ES -> EN -> ZH)
+    "busco grupo|lfg|求组",
+    "busco mas|lfm|求人/来人",
+    "busco más|lfm|求人/来人",
+    "lfg|lfg|求组",
+    "lfm|lfm|求人/来人",
+    "susurrar|pst|请私聊",
+    "pst|pst|请私聊",
+    "compro|wtb|求购",
+    "wtb|wtb|求购",
+    "vendo|wts|出售",
+    "wts|wts|出售",
+    "cambio|wtt|交换",
+    "wtt|wtt|交换",
+    "invitame|inv|组我/邀请",
+    "invítame|inv|组我/邀请",
+    "inv|inv|组我/邀请",
+    "invitar|invite|邀请",
+    "invite|invite|邀请",
+    "en camino|omw|在路上",
+    "omw|omw|在路上",
+    "ya vuelvo|brb|马上回来",
+    "brb|brb|马上回来",
+    "ausente|afk|暂离",
+    "afk|afk|暂离",
+    "buena partida|gg|好游戏",
+    "gg|gg|好游戏",
+    "gracias|thanks|谢谢",
+    "thanks|thanks|谢谢",
+    "ty|thanks|谢谢",
+    "thx|thanks|谢谢",
+    "de nada|no problem|不用谢/不客气",
+    "no pasa nada|no problem|没关系/没事",
+    "np|no problem|没关系/没事",
+    "jajaja|lol|哈哈",
+    "lol|lol|哈哈",
+    "por favor|please|请",
+    "porfa|please|请",
+    "please|please|请",
+    "plz|please|请",
+    "pls|please|请",
+
+    -- 2. Comandos y Tácticas de Mazmorras (ES -> EN -> ZH)
+    "tanque|tank|坦/坦克",
+    "tank|tank|坦/坦克",
+    "curador|healer|治疗/奶妈",
+    "sanador|healer|治疗/奶妈",
+    "healer|healer|治疗/奶妈",
+    "dps|dps|输出/伤害",
+    "jalar|pull|拉怪",
+    "atraer|pull|拉怪",
+    "pull|pull|拉怪",
+    "pulling|pulling|拉怪中",
+    "agro|aggro|仇恨",
+    "aggro|aggro|仇恨",
+    "amenaza|aggro|仇恨",
+    "adds|adds|小怪",
+    "patrulla|patrol|巡逻",
+    "patrullero|patrol|巡逻怪",
+    "patrol|patrol|巡逻",
+    "wipe|wipe|灭团",
+    "morir todos|wipe|灭团",
+    "resucitar|resurrect|复活",
+    "revivir|resurrect|复活",
+    "res|res|拉人/复活",
+    "beber|drink|喝水",
+    "drink|drink|喝水",
+    "comer|eat|吃面包",
+    "eat|eat|吃/食物",
+    "oom|oom|没蓝了",
+    "sin mana|oom|没蓝了",
+    "sin maná|oom|没蓝了",
+    "buffs|buffs|增益/状态",
+    "foco|focus|焦点",
+    "focus|focus|焦点/集火",
+    "enfocar|focus|集火",
+    "marcar|mark|标记",
+    "mark|mark|标记",
+
+    -- 3. Vocabulario conversacional y pronombres comunes (ES -> EN -> ZH)
+    "yo|i|我",
+    "i|i|我",
+    "tu|you|你",
+    "tú|you|你",
+    "you|you|你",
+    "nosotros|we|我们",
+    "we|we|我们",
+    "ellos|they|他们",
+    "they|they|他们",
+    "el|he|他",
+    "él|he|他",
+    "he|he|他",
+    "ella|she|她",
+    "she|she|她",
+    "mi|my|我的",
+    "my|my|我的",
+    "tu|your|你的",
+    "your|your|你的",
+    "nuestro|our|我们的",
+    "our|our|我们的",
+    "esto|this|这个",
+    "this|this|这个",
+    "eso|that|那个",
+    "that|that|那个",
+    "aqui|here|这里",
+    "aquí|here|这里",
+    "here|here|这里",
+    "alla|there|那里",
+    "allá|there|那里",
+    "there|there|那里",
+    "quien|who|谁",
+    "quién|who|谁",
+    "who|who|谁",
+    "que|what|什么",
+    "qué|what|什么",
+    "what|what|什么",
+    "donde|where|哪里",
+    "dónde|where|哪里",
+    "where|where|哪里",
+    "cuando|when|什么时候",
+    "cuándo|when|什么时候",
+    "when|when|什么时候",
+    "porque|because|因为",
+    "because|because|因为",
+    "por qué|why|为什么",
+    "why|why|为什么",
+    "como|how|怎么",
+    "cómo|how|怎么/如何",
+    "how|how|怎么/如何",
+
+    -- 4. Verbos comunes del juego (ES -> EN -> ZH)
+    "ir|go|去",
+    "go|go|去",
+    "vamos|let's go|出发/走吧",
+    "venir|come|来",
+    "come|come|来",
+    "correr|run|跑",
+    "run|run|跑",
+    "ayudar|help|帮助",
+    "help|help|帮助/救命",
+    "matar|kill|杀",
+    "kill|kill|杀/击杀",
+    "hacer|do|做",
+    "do|do|做",
+    "necesitar|need|需要",
+    "need|need|需要",
+    "querer|want|想要",
+    "want|want|想要",
+    "tener|have|有",
+    "have|have|有",
+    "poder|can|能/可以",
+    "can|can|能/可以",
+    "saber|know|知道",
+    "know|know|知道",
+    "ver|see|看",
+    "see|see|看",
+    "mirar|look|看",
+    "look|look|看",
+    "dar|give|给",
+    "give|give|给",
+    "tomar|take|拿",
+    "take|take|拿",
+    "abrir|open|开",
+    "open|open|开",
+    "cerrar|close|关",
+    "close|close|关",
+    "comprar|buy|买",
+    "buy|buy|买",
+    "vender|sell|卖",
+    "sell|sell|卖",
+    "esperar|wait|等",
+    "wait|wait|等",
+    "parar|stop|停",
+    "stop|stop|停",
+    "morir|die|死",
+    "die|die|死",
+
+    -- 5. Adjetivos y adverbios comunes (ES -> EN -> ZH)
+    "si|yes|是的",
+    "yes|yes|是的",
+    "no|no|不",
+    "bien|well/good|好/不错",
+    "good|good|好/不错",
+    "well|well|好/不错",
+    "mal|bad|坏/差",
+    "bad|bad|坏/差",
+    "listo|ready|准备好了",
+    "ready|ready|准备好了",
+    "nuevo|new|新",
+    "new|new|新",
+    "viejo|old|老",
+    "old|old|老",
+    "rapido|fast|快",
+    "rápido|fast|快",
+    "fast|fast|快",
+    "lento|slow|慢",
+    "slow|slow|慢",
+    "grande|big|大",
+    "big|big|大",
+    "pequeño|small|小",
+    "pequeno|small|小",
+    "small|small|小",
+    "mucho|much|多",
+    "much|much|多",
+    "many|many|多",
+    "poco|little|少",
+    "little|little|少",
+    "few|few|少",
+    "muy|very|非常/很",
+    "very|very|非常/很",
+    "mas|more|更多",
+    "más|more|更多",
+    "more|more|更多",
+    "menos|less|更少",
+    "less|less|更少",
+
+    -- 6. Frases cortas cotidianas (ES -> EN -> ZH)
+    "ayuda por favor|help please|请帮忙",
+    "invitame al grupo|inv me|组我",
+    "invítame al grupo|inv me|组我",
+    "necesito tanque|need tank|需要坦克",
+    "necesito healer|need healer|需要治疗/奶妈",
+    "necesito dps|need dps|需要输出",
+    "mazmorra lista|dungeon ready|副本就绪",
+    "vamos a empezar|let's start|我们开始吧",
+    "un momento por favor|one moment please|请等一下",
+    "buen intento chicos|nice try guys|大家尽力了",
+    "felicidades|congrats|恭喜",
+    "congrats|congrats|恭喜",
+    "de nada amigo|you are welcome friend|不客气朋友",
+    "gracias por el grupo|thanks for the group|谢谢队伍",
+    "nos vemos luego|see you later|回见",
+    "cuidado con los adds|watch out for adds|小心引怪",
+    "no tengo mana|no mana|没蓝了",
+    "no tengo maná|no mana|没蓝了",
+    "espera que recupere mana|wait for mana|等回蓝",
+    "espera que recupere maná|wait for mana|等回蓝",
+    "abre el cofre|open chest|开宝箱",
+    "puedes revivirme|can you res me|能复活我吗",
+    "donde esta la entrada|where is the entrance|入口在哪里",
+    "dónde está la entrada|where is the entrance|入口在哪里",
+  }
+  load_batch(v16_giga_dictionary_expansion)
+
+  -- ============================================================
+  -- LOTE V17: ADICIONES DE LA COMUNIDAD (ZH -> EN -> ES)
+  -- ============================================================
+  local v17_community_additions_zh_en_es = {
+    "木柴|firewood|leña",
+    "墓碑|gravestone|lápida",
+    "屁|nothing/crap|nada/mierda",
+    "挖槽|holy crap|joder/mierda",
+    "卧槽|holy crap|joder/mierda",
+    "旅馆|inn|taberna/posada",
+    "弹窗|popup|ventana emergente",
+    "告知|inform|avise/dígame",
+    "恶心|disgusting|asco/repugnante",
+    "皮甲|leather|cuero",
+    "地方|place|lugar",
+    "调|adjust/change|configurar/ajustar",
+    "调整|adjust/change|configurar/ajustar",
+    "土匪|bandit|bandido",
+    "私信|private message|mensaje privado/susurro",
+    "私聊|private message|mensaje privado/susurro",
+    "哈|haha|jaja",
+    "唤起魔友|Recall a Friend|Llamar a un amigo/Recluta a un amigo",
+    "现已|already/now|ya/ahora",
+    "区建|built in zone|creado en zona/canal",
+    "主|main/leader|principal/líder",
+    "已|already|ya",
+    "放|put/drop|poner/colocar",
+    "荆齿城|Ratchet|Trinquete",
+    "棘齿城|Ratchet|Trinquete",
+    "句|sentence/phrase|frase/palabra",
+    "神|god/insane|dios/increíble",
+    "咱们|we/us|nosotros",
+    "浅|shallow/a bit|ligero/un poco",
+    "圈|circle/lap|círculo/vuelta",
+    "刚|just now|acabo de",
+    "刚刚|just now|acabo de",
+    "非|must|tiene que/debe",
+    "非得|must|tiene que/debe",
+    "仪祭|ritual/rite|ritual/rito",
+    "阿兰起亚|Aran'thya|Aran'thya",
+    "大地母亲仪祭|Rites of the Earthmother|Ritual de la Tierra Madre",
+    "大地母亲的仪祭|Rites of the Earthmother|Ritual de la Tierra Madre",
+    "原神|Genshin|Genshin",
+    "布甲|cloth|tela",
+    "锁甲|mail|malla",
+    "板甲|plate|placas",
+    "营火|campfire|hoguera/fuego",
+    "野外|outdoor/world|mundo/afueras",
+    "升级|level up|subir de nivel",
+    "经验|experience/xp|experiencia",
+    "日常|daily|diario",
+    "周常|weekly|semanal",
+    "排队|queue|cola",
+    "延迟|latency/ping|latencia",
+    "掉线|disconnect|desconectar"
+  }
+  load_batch_zh_en_es(v17_community_additions_zh_en_es)
+
 
   -- ============================================================
   -- RE-INDEXACIÓN DE BUCKETS POST-CARGA DE BASE DE DATOS

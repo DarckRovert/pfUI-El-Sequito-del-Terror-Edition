@@ -504,7 +504,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
   -- MOTOR: LocalTranslate (#2 puntuacion, #17 stemming)
   -- ============================================================
-  local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang, buckets)
+  local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang, buckets, noBrackets)
     if not text or type(text) ~= "string" or strlen(text) < 2 then return nil end
 
     local cached = CacheGet(text)
@@ -532,8 +532,72 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       proc_text = string.gsub(proc_text, "\194\161", " ") -- ¡
       proc_text = strlower(proc_text)
     end
+
+    -- Fase 0.7: English Contraction Normalizer
+    if srcLang == "en" then
+      proc_text = string.gsub(proc_text, "can't", "cannot")
+      proc_text = string.gsub(proc_text, "cant", "cannot")
+      proc_text = string.gsub(proc_text, "don't", "do not")
+      proc_text = string.gsub(proc_text, "dont", "do not")
+      proc_text = string.gsub(proc_text, "i'm", "i am")
+      proc_text = string.gsub(proc_text, "im", "i am")
+      proc_text = string.gsub(proc_text, "it's", "it is")
+      proc_text = string.gsub(proc_text, "i'll", "i will")
+      proc_text = string.gsub(proc_text, "you're", "you are")
+      proc_text = string.gsub(proc_text, "they're", "they are")
+      proc_text = string.gsub(proc_text, "we're", "we are")
+      proc_text = string.gsub(proc_text, "he's", "he is")
+      proc_text = string.gsub(proc_text, "she's", "she is")
+      proc_text = string.gsub(proc_text, "won't", "will not")
+      proc_text = string.gsub(proc_text, "wont", "will not")
+      proc_text = string.gsub(proc_text, "didn't", "did not")
+      proc_text = string.gsub(proc_text, "didnt", "did not")
+      proc_text = string.gsub(proc_text, "isn't", "is not")
+      proc_text = string.gsub(proc_text, "isnt", "is not")
+      proc_text = string.gsub(proc_text, "wasn't", "was not")
+      proc_text = string.gsub(proc_text, "wasnt", "was not")
+      proc_text = string.gsub(proc_text, "weren't", "were not")
+      proc_text = string.gsub(proc_text, "werent", "were not")
+      proc_text = string.gsub(proc_text, "aren't", "are not")
+      proc_text = string.gsub(proc_text, "arent", "are not")
+      proc_text = string.gsub(proc_text, "haven't", "have not")
+      proc_text = string.gsub(proc_text, "havent", "have not")
+      proc_text = string.gsub(proc_text, "hasn't", "has not")
+      proc_text = string.gsub(proc_text, "hasnt", "has not")
+      proc_text = string.gsub(proc_text, "hadn't", "had not")
+      proc_text = string.gsub(proc_text, "hadnt", "had not")
+      proc_text = string.gsub(proc_text, "wouldn't", "would not")
+      proc_text = string.gsub(proc_text, "wouldnt", "would not")
+      proc_text = string.gsub(proc_text, "couldn't", "could not")
+      proc_text = string.gsub(proc_text, "couldnt", "could not")
+      proc_text = string.gsub(proc_text, "shouldn't", "should not")
+      proc_text = string.gsub(proc_text, "shouldnt", "should not")
+      proc_text = string.gsub(proc_text, "let's", "let us")
+    end
+
     proc_text = " " .. proc_text .. " "
     local trans_occurred = false
+
+    -- Fase 0.5: Atomic Bracket Translation Shield (%b[])
+    if not noBrackets then
+      proc_text = string.gsub(proc_text, "(%b[])", function(bracketed_str)
+        local inner = strsub(bracketed_str, 2, -2)
+        if inner and strlen(inner) >= 2 then
+          local translated_inner = LocalTranslate(inner, wordDict, phraseDict, phraseKeys, srcLang, buckets, true)
+          local replaced
+          if translated_inner and translated_inner ~= inner then
+            replaced = "[" .. translated_inner .. "]"
+            trans_occurred = true
+          else
+            replaced = bracketed_str
+          end
+          link_count = link_count + 1
+          links[link_count] = replaced
+          return "\127L" .. link_count .. "\127"
+        end
+        return bracketed_str
+      end)
+    end
 
     -- Fase 1: Greedy Matching (Frases Compuestas / UTF-8 Multibyte)
     if phraseDict and phraseKeys then
@@ -667,7 +731,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   end
 
   -- ============================================================
-  -- #4: DETECTOR DE IDIOMA EXPANDIDO (Marcadores + Bigramas)
+  -- #4: DETECTOR DE IDIOMA EXPANDIDO (Marcadores + Bigramas + Diccionario)
   -- ============================================================
   local EN_MARKERS = {
     "the", "and", "you", "are", "for", "have", "with", "not", "this",
@@ -675,6 +739,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     "well", "just", "about", "would", "could", "should", "been", "were",
     "don't", "can't", "won't", "didn't", "isn't", "wasn't",
     "there", "their", "which", "where", "when", "than", "then",
+    "me", "go", "do", "help", "run", "kill", "tank", "heal", "dps", "guild",
+    "camp", "tent", "inv", "invite", "group", "party", "raid", "wipe", "lag",
+    "bad", "sorry", "good", "need", "want", "love", "like", "come", "get",
+    "yes", "ok", "please", "plz", "pls"
   }
   local ES_MARKERS = {
     "que", "por", "una", "con", "los", "las", "del", "les", "como",
@@ -682,6 +750,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     "bien", "donde", "porque", "cuando", "entre", "puede", "desde",
     "sobre", "tiene", "mejor", "otro", "otra", "mismo", "mucho",
     "tambien", "despues", "antes", "ahora", "siempre", "nunca",
+    "el", "la", "un", "mi", "tu", "su", "me", "te", "nos", "se", "si", "no",
+    "yo", "ya", "es", "son", "hola", "gracias", "porfa", "ayuda", "grupo",
+    "tienda", "mazmo", "raids", "clan", "tengo", "quiero", "puedo", "hacer",
+    "vamos", "ir", "quien", "por favor"
   }
   -- Bigramas de alta exclusividad
   local EN_BIGRAMS = { "th", "sh", "wh", "ck", "gh", "ph" }
@@ -708,15 +780,32 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     for _, bg in ipairs(ES_BIGRAMS) do
       if strfind(lower_raw, bg, 1, true) then es_hits = es_hits + 0.3 end
     end
+
+    -- Motor de votos por diccionario de palabras (es_en_words / en_es_words)
+    local en_dict_hits, es_dict_hits = 0, 0
+    for w in string.gfind(lower, "([%a%d'-]+)") do
+      if strlen(w) >= 3 then
+        if pfUI.translator_dicts["es_en_words"] and pfUI.translator_dicts["es_en_words"][w] then
+          es_dict_hits = es_dict_hits + 1
+        end
+        if pfUI.translator_dicts["en_es_words"] and pfUI.translator_dicts["en_es_words"][w] then
+          en_dict_hits = en_dict_hits + 1
+        end
+      end
+    end
+    en_hits = en_hits + en_dict_hits * 1.5
+    es_hits = es_hits + es_dict_hits * 1.5
+
     if en_hits > es_hits and en_hits >= 1 then return "en" end
     if es_hits > en_hits and es_hits >= 1 then return "es" end
+
     -- Fallback: para mensajes muy cortos, inferir idioma desde el diccionario
     -- Solo aplica si es una sola palabra o texto corto sin marcadores
     if strlen(text) <= 30 then
       local first_word = strlower(string.gsub(text, "^%s*([%a%d'-]+).*", "%1"))
       if first_word and first_word ~= "" then
-        if pfUI.translator_dicts["es_en_words"][first_word] then return "es" end
-        if pfUI.translator_dicts["en_es_words"][first_word] then return "en" end
+        if pfUI.translator_dicts["es_en_words"] and pfUI.translator_dicts["es_en_words"][first_word] then return "es" end
+        if pfUI.translator_dicts["en_es_words"] and pfUI.translator_dicts["en_es_words"][first_word] then return "en" end
       end
     end
     return "unknown"

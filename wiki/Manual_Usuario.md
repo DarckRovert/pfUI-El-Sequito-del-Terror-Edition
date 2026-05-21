@@ -1,4 +1,4 @@
-# 📖 Manual de Usuario (v7.0.0 [LEGENDARY-TIER])
+# 📖 Manual de Usuario (v7.1.0 [LEGENDARY-TIER])
 
 Guía oficial para dominar el sistema de comunicación multilingüe de **El Séquito Edition**.
 
@@ -25,7 +25,7 @@ Accede al panel de control escribiendo `/pfui` y navegando a la pestaña **Trans
 ---
 
 ## 2. Traducción Integral en el Juego
-La versión **v7.0.0 (Legendary-Tier)** integra de forma nativa la traducción en tiempo real de:
+La versión **v7.1.0 (Legendary-Tier)** integra de forma nativa la traducción en tiempo real de:
 1.  **Facultades de Clase (Spells)**: Hechizos y habilidades principales de WoW y TBC.
 2.  **Misiones (Quests)**: Nombres de misiones de Azeroth clásicos y personalizados de Turtle WoW.
 3.  **Ítems y Equipamiento**: Armas, armaduras, consumibles de raid y materiales.
@@ -34,6 +34,7 @@ La versión **v7.0.0 (Legendary-Tier)** integra de forma nativa la traducción e
 6.  **Profesiones e Interacciones**: Primarias, secundarias (incluyendo Supervivencia/Survival) y recetas.
 7.  **Emotes de Chat**: Traducción contextual de acciones y emotes del juego.
 8.  **Buzón de Correo (Mailbox)**: Traducción interactiva al leer tus correos en el juego.
+9.  **Detección Dinámica de Idioma por Tokens**: Motor heurístico híbrido que tokeniza mensajes cortos en tiempo real y realiza un sistema de votación contra diccionarios para resolver la ambigüedad lingüística y la traducción de frases coloquiales cortas.
 
 ---
 
