@@ -4,7 +4,7 @@
 **No.** El motor está altamente optimizado bajo estándares **Legendary-Tier (v7.1.0)**. Combina un **Motor de Búsqueda Token-Bucket** (que precarga buckets y reduce las búsquedas lineales) con una caché LRU de **1024 registros**, optimizaciones GC-friendly de memoria estática y carga asíncrona de base de datos. Las traducciones se completan en microsegundos (<0.05ms) sin causar caídas de FPS ni tirones en hilos principales de Lua 5.0.
 
 ## 2. ¿Qué idiomas soporta la versión v7.1.0?
-**Soporta de manera trilingüe bidireccional Español, Inglés y Chino.** Además, incluye un Mega-Corpus ultra expansivo de 19 lotes temáticos con más de 8,200 entradas especializadas de World of Warcraft, TBC, HSK levels 1-5, jerga de juego, profesiones, consumibles, campos de batalla, expansiones de vocabulario y el lote v17 de adiciones de la comunidad.
+**Soporta de manera trilingüe bidireccional Español, Inglés y Chino.** Además, incluye un Mega-Corpus ultra expansivo de 20 lotes temáticos con más de 8,300 entradas especializadas de World of Warcraft, TBC, HSK levels 1-5, jerga de juego, profesiones, consumibles, campos de batalla, expansiones de vocabulario, el lote v17 de adiciones de la comunidad y el lote v18 de mitigación de estilo Tarzán.
 
 ## 3. ¿Cómo funciona el Modo Bilingüe (Bilingual Mode)?
 El Modo Bilingüe permite mostrar simultáneamente en tu chat tanto el texto traducido como el mensaje original en un formato compacto y legible. Esto es de gran ayuda para aprender idiomas, depurar traducciones o entender frases coloquiales muy complejas.

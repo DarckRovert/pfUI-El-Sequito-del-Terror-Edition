@@ -4790,6 +4790,78 @@ local v9_zones_tbc = {
   }
   load_batch_zh_en_es(v17_community_additions_zh_en_es)
 
+  -- ============================================================
+  -- LOTE V18: MITIGACIÓN DE ESTILO TARZÁN Y LÉXICO COMUNITARIO (ZH -> EN -> ES)
+  -- ============================================================
+  local v18_tarzan_mitigation_community = {
+    -- 1. WoW Lugares y Zonas Clásicas
+    "雷霆崖有飞艇吗|Zeppelin to Thunder Bluff?|¿hay zepelín en Thunder Bluff?",
+    "雷霆崖有飞艇|Zeppelin to Thunder Bluff|hay zepelín en Thunder Bluff",
+    "雷霆崖|Thunder Bluff|Thunder Bluff",
+    "奥格瑞玛|Orgrimmar|Orgrimmar",
+    "奥格|Orgrimmar|Orgrimmar",
+    "去奥格吗|going to Orgrimmar?|¿vas a Orgrimmar?",
+    "去奥格|going to Orgrimmar|ir a Orgrimmar",
+    "去奥格瑞玛|going to Orgrimmar|ir a Orgrimmar",
+    "暴风城监狱|Stormwind Stockade|Cárcel de Ventormenta",
+    "暴风城|Stormwind|Ventormenta",
+    "暴风|Stormwind|Ventormenta",
+    "监狱|Stockade/Prison|Cárcel/Mazmorras",
+    "血精灵主城|Silvermoon City|Ciudad de Lunargenta",
+    "主城|Capital City|capital/ciudad principal",
+    "阿尔萨斯|Arthas|Arthas",
+    "阿尔萨斯在哪|Where is Arthas?|¿dónde está Arthas?",
+
+    -- 2. Mitigación de Expresiones Literales (Tarzán) y Jerga
+    "飞艇|zeppelin|zepelín",
+    "有飞艇|is there a zeppelin|¿hay zepelín?",
+    "有啊|yes/of course|sí/claro que sí/sí hay",
+    "看球不懂|does not understand a thing|no entiende un carajo/no entiende nada",
+    "看不懂|cannot understand/illegible|no entender nada/no entiendo",
+    "看懂|understand|entender",
+    "哎呦我去|holy crap/oh my|¡joder!/¡madre mía!",
+    "哎呦|oh my/ouch|¡madre mía!/¡ay!",
+    "跑着去奥格|running to Orgrimmar|ir corriendo a Orgrimmar/caminando a Orgrimmar",
+    "跑着去|running to/walking to|yendo a pie a/corriendo a",
+    "跑着|running/walking|corriendo/a pie",
+    "我还跑着|I am still running|todavía voy a pie/sigo corriendo",
+    "我还跑着去奥格|I am still running to Orgrimmar|aún voy a pie a Orgrimmar/sigo corriendo a Orgrimmar",
+    "代工|crafting/crafting service|crafteo/fabricación por encargo/hago gratis",
+    "丝线自备|bring your own threads|traer hilos/traer hilos propios",
+    "自备|bring your own|traer propios/traer materiales",
+    "M人|whisper me/pst|susurrar/mandar pm/susúrrame",
+    "交任务|handing in quests|entregar misión/entregar misiones",
+    "挺好的|pretty good/quite nice|bastante bien/está muy bien",
+    "什么鬼|what the hell|¡qué demonios!/¿qué cojones?",
+    "有人需要吗|anyone needs this?|¿alguien lo necesita?",
+    "小伙|buddy/mate|compañero/amigo",
+    "小伙伴|buddies/friends|compañeros/amigos",
+    "毛料|wool cloth|paño de lana/lana",
+    "包邮|shipping included|envío incluido/envío gratis",
+    "3G包邮|3G shipping included|3G con envío incluido/3 de oro envío gratis",
+    "包邮吗|is shipping included?|¿es con envío incluido?",
+    "全属性|all stats|todos los atributos/todas las estadísticas",
+    "快速升级|fast leveling|subir de nivel rápido/levear rápido/leveo veloz",
+    "要的MM|whisper if you want|interesados susurrar/susurrar si lo quieres",
+    "要的M|whisper if you want|interesados susurrar/susurrar si lo quieres",
+    "来奶|LF healer|busco healer/se busca sanador",
+    "来dps|LF dps|busco dps/se busca dps",
+    "来奶 and dps|LF healer and dps|busco healer y dps/se busca sanador y dps",
+    "来奶和dps|LF healer and dps|busco healer y dps/se busca sanador y dps",
+    "有拉|have summon|tenemos invocación/hay invocador",
+    "接任务|accepting quest|tomar misión/coger la misión",
+    "在哪接|where to accept|¿dónde se toma?/¿dónde se acepta?",
+    "在哪里接|where to accept|¿dónde se acepta?/¿dónde se toma?",
+    "跑吐了|running till exhaustion|correr hasta el cansancio",
+    "要跑吐了|will run till exhaustion|me voy a cansar de tanto correr",
+    "蘑菇孢子|mushroom spore|espora de champiñón/esporas de hongo",
+    "只能NPC买吗|can only buy from NPC?|¿solo se puede comprar en NPC?/¿solo lo vende el NPC?",
+    "魔友|summoned friend/companion|compañero/amigo/invocación",
+
+    -- 3. Hechizos e Items Clave
+    "强效魔法杖|Greater Magic Wand|Varita mágica superior",
+  }
+  load_batch_zh_en_es(v18_tarzan_mitigation_community)
 
   -- ============================================================
   -- RE-INDEXACIÓN DE BUCKETS POST-CARGA DE BASE DE DATOS
