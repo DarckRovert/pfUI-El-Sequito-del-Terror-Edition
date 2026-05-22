@@ -9,7 +9,7 @@ Estructura modular del ecosistema **El Séquito del Terror** mantenido por **Dar
 El AddOn inicia mediante `init/modules.xml` con los siguientes puntos críticos de inyección:
 
 1.  **Lexical Engine (`translator_dict.lua`)**: Carga inicial y estructuración en memoria de las categorías base. Utiliza carga diferida (Lazy Loading) para evitar picos de uso de CPU durante el inicio de la sesión del juego.
-2.  **Colosal Database (`translator_dict_db.lua`)**: Inyecta una base de datos trilingüe masiva estructurada en 20 lotes temáticos (añadiendo los lotes de expansión v16 Giga Dictionary, v17 Adiciones de la Comunidad y v18 Mitigación de estilo Tarzán) comprimida por delimitadores `"|"`. Soporta pre-compilación binaria guardada en caché para omitir el parsing del texto plano y cargar instantáneamente.
+2.  **Colosal Database (`translator_dict_db.lua`)**: Inyecta una base de datos trilingüe masiva estructurada en 21 lotes temáticos (añadiendo los lotes de expansión v16 Giga Dictionary, v17 Adiciones de la Comunidad, v18 Mitigación de estilo Tarzán y v19 Mitigación Tarzán Avanzada y Modismos de Chat) comprimida por delimitadores `"|"`. Soporta pre-compilación binaria guardada en caché para omitir el parsing del texto plano y cargar instantáneamente.
 3.  **Core Translator (`translator.lua`)**: Intercepta de forma asíncrona la entrada y salida de chat. Implementa:
     *   **Detección de Idioma Dinámica por Votación**: Tokeniza el mensaje en tiempo real para contar votos de coincidencia directa en los diccionarios (`es_en_words` y `en_es_words`) para palabras de longitud >= 3, erradicando el estado `unknown` para frases y modismos comunes cortos de WoW.
     *   **Motor Token-Bucket** para filtrado Greedy de complejidad $O(K)$.

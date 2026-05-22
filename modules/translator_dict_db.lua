@@ -3223,10 +3223,28 @@ pfUI:RegisterModule("translator_dict_db", "vanilla", function ()
   add("mena de hierro", "iron ore", "铁矿石")
   add("mena de cobre", "copper ore", "铜矿石")
   add("mena de estaño", "tin ore", "锡矿石")
-  add("piedra burda", "rough stone", "粗糙的石头")
+  add("piedra burda", "rough stone", "劣质的石头")
+  add("piedra burda", "rough stone", "劣质石头")
+  add("piedra basta", "coarse stone", "粗糙的石头")
+  add("piedra basta", "coarse stone", "粗糙石头")
   add("piedra pesada", "heavy stone", "沉重的石头")
+  add("piedra pesada", "heavy stone", "沉重石头")
   add("piedra sólida", "solid stone", "坚固的石头")
+  add("piedra sólida", "solid stone", "坚固石头")
   add("piedra densa", "dense stone", "致密的石头")
+  add("piedra densa", "dense stone", "致密石头")
+  add("ojo de tigre", "tigerseye", "虎眼石")
+  add("malaquita", "malachite", "孔雀石")
+  add("pellejo ligero", "light hide", "轻型毛皮")
+  add("pellejo ligero", "light hide", "轻毛皮")
+  add("pellejo medio", "medium hide", "中型毛皮")
+  add("pellejo medio", "medium hide", "中毛皮")
+  add("pellejo pesado", "heavy hide", "重型毛皮")
+  add("pellejo pesado", "heavy hide", "重毛皮")
+  add("pellejo grueso", "thick hide", "厚重毛皮")
+  add("pellejo basto", "rugged hide", "粗糙毛皮")
+  add("pellejo", "hide", "毛皮")
+  add("cuero", "leather", "皮")
   add("cuero ligero", "light leather", "轻皮")
   add("cuero medio", "medium leather", "中皮")
   add("cuero pesado", "heavy leather", "重皮")
@@ -4862,6 +4880,87 @@ local v9_zones_tbc = {
     "强效魔法杖|Greater Magic Wand|Varita mágica superior",
   }
   load_batch_zh_en_es(v18_tarzan_mitigation_community)
+
+  -- ============================================================
+  -- LOTE V19: MITIGACIÓN TARZÁN AVANZADA Y MODISMOS DE CHAT (ZH -> EN -> ES)
+  -- ============================================================
+  local v19_tarzan_mitigation_advanced = {
+    -- 1. Expresiones de Lag y Congelamientos (Evitar "sabe lag vivir" que viene de 会卡住)
+    "会卡住|will freeze/lags|se congela/da lag/va con lag",
+    "经常卡住|often freezes/often lags|se congela a menudo/da lag seguido",
+    "卡皮|Light's Hope Chapel/Capi|Capilla de la Esperanza de la Luz/Capi",
+    "卡了|lagged/frozen|con lag/congelado/se trabó",
+    "太卡了|too laggy/freezing too much|demasiado lag/va súper trabado",
+
+    -- 2. Modismos de Leveo y Generaciones Hardcore
+    "一世|first generation/Gen 1|primera generación/Generación 1/I generación",
+    "二世|second generation/Gen 2|segunda generación/Generación 2/II generación",
+    "三世|third generation/Gen 3|tercera generación/Generación 3/III generación",
+    "噶了|died/ripped|murió/la palmó/falleció",
+    "噶了呀|died already/ripped already|ya la palmó/ya murió",
+    "怂了|chickened out/scared|se acobardó/le dio miedo/se cagó",
+    "怂了呀|chickened out already|ya se acobardó/le dio miedo",
+    "乌龟服|Turtle WoW/Turtle server|servidor Turtle WoW/servidor tortuga",
+    "35级|level 35|nivel 35",
+    "35q|level 35|nivel 35",
+    "18级|level 18|nivel 18",
+    "19级|level 19|nivel 19",
+    "18级就可以去接了|can go accept at level 18|a nivel 18 ya se puede ir a tomar",
+    "去哪里升级啊|where to level up?|¿a dónde ir a subir de nivel?/¿dónde leveo?",
+    "去接|go accept/go take|ir a aceptar/ir a tomar misión",
+    "去接了|went to accept/already accepted|ir a aceptarla/ir a cogerla",
+    "出蛋|egg drop/drops the egg|cae el huevo/suelta el huevo",
+    "打娜迦出蛋|kill nagas to drop the egg|matar nagas para que caiga el huevo",
+    "打娜迦|kill nagas/farming nagas|matar nagas/farmear nagas",
+
+    -- 3. Zonas de Juego Traducidas
+    "月溪镇|Moonbrook|Moonbrook/Arroyo de la Luna",
+    "月溪镇怪物多吗|are there many mobs in Moonbrook?|¿hay muchos monstruos en Moonbrook?",
+    "灰谷|Ashenvale|Valle de Fresno/Ashenvale",
+    "灰谷最东边|extreme east Ashenvale/far east Ashenvale|el extremo este de Ashenvale/zona este de Valle de Fresno",
+    "闪金镇|Goldshire|Villadorada/Goldshire",
+    "闪金镇马戏团|Goldshire circus|circo de Villadorada/circo de Goldshire",
+    "剃刀沼泽|Razorfen Kraul|Razorfen Kraul/Zul'Kraul",
+    "剃刀高地|Razorfen Downs|Razorfen Downs/Zul'Farrak",
+    "剃刀沼泽缺dps|Razorfen Kraul needs dps|Razorfen Kraul busca dps/falta dps en RFK",
+    "藏宝海湾|Booty Bay|Bahía del Botín/Booty Bay",
+
+    -- 4. Expresiones de Reclutamiento de Mazmorras y Canales
+    "4等1|4 looking for 1/4L1|4 busca 1/somos 4 y falta 1",
+    "4Q1|4 looking for 1/4L1|4 busca 1/somos 4 y falta 1",
+    "4q1|4 looking for 1/4L1|4 busca 1/somos 4 y falta 1",
+    "监狱来个奶|Stockade needs healer|Cárcel busca healer/Cárcel busca sanador",
+    "有来的没|anyone coming?|¿alguien se une?/¿alguien viene?",
+    "35q去哪里升级啊|where to level up at 35?|¿a dónde ir a subir de nivel a nivel 35?",
+    "有没有哪种|is there a kind of/does anyone have a|¿alguien tiene algún tipo de/saben de algún",
+    "有没有哪种addon|does anyone know of a bag/quest addon?|¿alguien tiene algún addon de ese tipo?",
+    "新地图任务指引|new map quest guide|guía de misiones del nuevo mapa",
+    "任务指引|quest guide/quest directions|guía de misiones/indicación de misiones",
+
+    -- 5. Monturas y Hechizos
+    "乌龟坐骑|turtle mount|montura de tortuga",
+    "乌龟坐骑任务|turtle mount quest|misión de la montura de tortuga",
+    "马戏团|circus|circo/Feria de la Luna Negra",
+    "是不是只能在马戏团接|is it only acceptable at the circus?|¿solo se puede aceptar en el circo?/¿solo se toma en el circo?",
+
+    -- 6. WoW Términos Conversacionales
+    "这家伙|this guy/this mob|este chaval/este bicho/este mob",
+    "这个家伙|this guy/this mob|este chaval/este bicho/este mob",
+    "召唤|summon/invocar|invocar/invocación",
+    "刷了|spawned/dropped|apareció/reapareció/salió/dropeó",
+    "给我包|give me bags|dame bolsas/dame mochilas",
+    "给你包|give you bags|darte bolsas/darte mochilas",
+    "他说需要给你包|he says he needs to give you bags|dice que hay que darte bolsas",
+    "九街|Nine Street|Calle Nueve/Nine Street",
+    "老玩家|veteran player/old school player|jugador veterano/veterano/viejo jugador",
+    "携手闯|venture together/explore together|aventurarse juntos/explorar juntos",
+    "怀旧|nostalgia/retro/classic|nostalgia/retro/recuerdo classic/recordar viejos tiempos",
+    "有缘人|destined people/kindred spirits|almas afines/gente con afinidad/destinados a encontrarse",
+    "吉米8.0|Jimi 8.0|Jimi 8.0",
+    "背包插件|bag addon|addon de bolsas",
+    "反而觉得|feel instead/actually feel|por el contrario siento/más bien siento"
+  }
+  load_batch_zh_en_es(v19_tarzan_mitigation_advanced)
 
   -- ============================================================
   -- RE-INDEXACIÓN DE BUCKETS POST-CARGA DE BASE DE DATOS
