@@ -1,5 +1,19 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.2.0] - 2026-05-23
+### Añadido
+- **Mega-Expansión de Vocabulario (Categoría 218)**: Integrados términos y mecánicas de Turtle WoW y Hardcore en el diccionario `translator_dict.lua` (`crescent grove`, `deathlog`, `death appeal`, `warmode`, `turtle token`, `pre-raid bis`, `hateforge quarry`).
+- **Control de Menú Inteligente en Opciones**: Añadidos botones rápidos "Abrir Panel de Estadísticas (Dashboard)" y "Abrir Traductor Rápido (Quick)" en la pestaña de configuración de pfUI para acceso visual inmediato.
+
+### Cambiado
+- **Estabilidad Completa en Asistente (`modules/firstrun.lua`)**: Se inyectó estáticamente el identificador de cada paso al crear la página (`CreateFirstRunPage(name)`), aislando la lógica de finalización de paso del motor volátil de recolección de basura de proxies Lua de WoW Vanilla.
+- **Chequeo de Nampower Estático en Escáner de Marcas (`modules/marktracking.lua`)**: Se sustituyó el sondeo inestable con `UnitExists("mark1")` por una comprobación limpia y directa de `GetNampowerVersion`, silenciando el error en clientes sin Nampower de forma definitiva.
+- **Restauración de Enlaces de Chat Recursiva (`modules/translator.lua`)**: Incrementada la robustez al restaurar enlaces protegidos (`\127L`) a un bucle recursivo de hasta 5 niveles en `LocalTranslate` para garantizar la resolución correcta de objetos vinculados anidados sin dejar texto corrupto visible.
+
+### Corregido
+- **[CRÍTICO] Fallo en Entorno de Traducciones de pfUI (`pfUI.lua`)**: Corregido el crash de arranque `Usage: <unnamed>:SetText("text")` que bloqueaba el asistente en instalaciones limpias. `pfUI:GetEnvironment()` ahora inicializa la metatabla con el fallback de `T` de forma incondicional en lugar de exigir la configuración explícita de idioma, previniendo también crashes en otros menús de traducción.
+- **[CRÍTICO] Crash por Objeto Nulo en Throttling (`modules/gui.lua`)**: Protegida la manipulación del contador de objetos de la sección de Throttling con una validación condicional preventiva (`if header then`) eliminando la fragilidad al intentar restar valores de cabeceras no creadas.
+
 ## [7.1.0] - 2026-05-20
 ### Añadido
 - **Mega-Expansión de Vocabulario (v11)**: Integrados más de 140 términos avanzados incluyendo ítems legendarios icónicos (Thunderfury, Atiesh, Sulfuras), consumibles de raid (Juju, Flasks), todos los jefes de mazmorras/raids (AQ, Naxx, ZG) y frases de economía y subasta.

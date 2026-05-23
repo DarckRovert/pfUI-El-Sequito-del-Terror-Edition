@@ -4901,6 +4901,27 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("cuanto de propina", "how much tip", "要多少小费")
 
   -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 218: TURTLE WOW & HARDCORE SLANG        ║
+  -- ╚══════════════════════════════════════════════╝
+  add("cantera de forja de odio", "hateforge quarry", "怨火采石场")
+  add("arboleda de la media luna", "crescent grove", "新月林地")
+  add("modo hardcore", "hardcore mode", "硬核模式")
+  add("personaje hardcore", "hardcore character", "硬核角色")
+  add("registro de muerte", "deathlog", "死亡日志")
+  add("modo de guerra", "warmode", "战争模式")
+  add("apelar muerte", "death appeal", "死亡申诉")
+  add("banco de hermandad", "guild bank", "公会银行")
+  add("mejor en ranura", "bis", "毕业装备")
+  add("mejor antes de banda", "pre-raid bis", "团本前毕业")
+  add("cola de entrada", "queue", "排队")
+  add("tortugas", "turtles", "乌龟")
+  add("moneda turtle", "turtle token", "乌龟币")
+  add("servidor privado", "private server", "私服")
+  add("transfiguración de armas", "weapon transmog", "武器幻化")
+  add("tienda turtle", "turtle shop", "乌龟商城")
+  add("tienda de donaciones", "donation shop", "赞助商城")
+
+  -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
   -- ╚══════════════════════════════════════════════╝
   local p_keys = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }

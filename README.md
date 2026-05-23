@@ -1,10 +1,10 @@
-# Global Chat Translator — El Séquito Edition (v7.1.0 [LEGENDARY-TIER]) 🌌⚖️
+# Global Chat Translator — El Séquito Edition (v7.2.0 [ULTIMATE-TIER]) 🌌⚖️
 
-![Version](https://img.shields.io/badge/version-v7.1.0--Legendary--Tier-ffb300?style=for-the-badge)
-![Host](https://img.shields.io/badge/pfUI-v7.1.0--Legendary--Tier-purple?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v7.2.0--Ultimate--Tier-ff55ff?style=for-the-badge)
+![Host](https://img.shields.io/badge/pfUI-v7.2.0--Ultimate--Tier-purple?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Turtle_WoW-ff5555?style=for-the-badge)
 
-> **The ultimate multilingual communication bridge for World of Warcraft.** Este componente de grado corporativo integrado en **pfUI** erradica las barreras lingüísticas mediante un motor de traducción en tiempo real offline de alto rendimiento, con soporte nativo para **Español, Inglés, Ruso y Chino**, optimizado bajo el estándar de máxima fidelidad y rendimiento **Diamond-Tier** de DarckRovert.
+> **The ultimate multilingual communication bridge for World of Warcraft.** Este componente de grado corporativo integrado en **pfUI** erradica las barreras lingüísticas mediante un motor de traducción en tiempo real offline de alto rendimiento, con soporte nativo para **Español, Inglés, Ruso y Chino**, optimizado bajo el estándar de máxima fidelidad y rendimiento **Ultimate-Tier** de DarckRovert, ahora con inmunidad garantizada contra crashes de inicialización y soporte extendido para Turtle WoW.
 
 ---
 

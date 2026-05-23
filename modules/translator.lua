@@ -581,6 +581,9 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     -- Fase 0.5: Atomic Bracket Translation Shield (%b[])
     if not noBrackets then
       proc_text = string.gsub(proc_text, "(%b[])", function(bracketed_str)
+        if strfind(bracketed_str, "\127[lL]%d+\127") then
+          return bracketed_str
+        end
         local inner = strsub(bracketed_str, 2, -2)
         if inner and strlen(inner) >= 2 then
           local translated_inner = LocalTranslate(inner, wordDict, phraseDict, phraseKeys, srcLang, buckets, true)
@@ -712,10 +715,20 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         result = string.gsub(result, "^%s*(.-)%s*$", "%1")
       end
 
-      -- Restaurar enlaces protegidos
-      result = string.gsub(result, "\127[lL](%d+)\127", function(lid)
-        return links[tonumber(lid)]
-      end)
+      -- Restaurar enlaces protegidos de forma recursiva (hasta 5 niveles de anidamiento)
+      local passes = 0
+      while passes < 5 and strfind(result, "\127[lL]%d+\127") do
+        passes = passes + 1
+        local replaced = false
+        result = string.gsub(result, "\127[lL](%d+)\127", function(lid)
+          local id = tonumber(lid)
+          if links[id] then
+            replaced = true
+            return links[id]
+          end
+        end)
+        if not replaced then break end
+      end
 
       -- Validar coherencia (CTR)
       local ratio     = GetTranslationRatio(text, result, srcLang)

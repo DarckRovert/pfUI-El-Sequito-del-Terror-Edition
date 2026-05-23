@@ -49,8 +49,9 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
   end
 
   -- main function to create wizard windows
-  local function CreateFirstRunPage()
+  local function CreateFirstRunPage(name)
     local f = CreateFrame("Frame", nil, UIParent)
+    f.name = name
     f:SetPoint("CENTER", 0, 0)
     f:SetFrameStrata("TOOLTIP")
     f:SetMovable(true)
@@ -99,7 +100,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
     f.next:SetText(T["Next"])
     f.next:SetScript("OnClick", function()
       if f.NextScript then f.NextScript() end
-      pfUI_init[f.name] = true
+      pfUI_init[name] = true
       f:Hide()
       pfUI.firstrun:NextStep()
     end)
@@ -121,14 +122,14 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
 
   -- welcome dialog
   pfUI.firstrun:AddStep("init", function()
-    local f = CreateFirstRunPage()
+    local f = CreateFirstRunPage("init")
     f.text:SetText(T["Welcome to |cff33ffccpf|cffffffffUI|r!\n\nI'm the first run wizard that will guide you through some basic configuration. If you're lazy, feel free to hit the \"Defaults\" button. If you wish to run this dialog again, go to the settings and hit the \"Reset Firstrun\" button.\n\nVisit |cff33ffcchttps://sequitodelterror.netlify.app/"])
     return f
   end)
 
   -- choose profile
   pfUI.firstrun:AddStep("profile", function()
-    local f = CreateFirstRunPage()
+    local f = CreateFirstRunPage("profile")
     f.text:SetText(T["A new installation of |cff33ffccpf|rUI ships with 4 prebuilt design profiles. Click below if you wish to load one of these profiles."])
 
     f.Apex = CreateFrame("Button", nil, f, "UIPanelButtonTemplate")
@@ -238,7 +239,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
 
   -- optimized cvars dialog
   pfUI.firstrun:AddStep("cvars", function()
-    local f = CreateFirstRunPage()
+    local f = CreateFirstRunPage("cvars")
     f.text:SetText(T["|cff33ffccBlizzard: \"Interface Options\"|r\n\nDo you want me to set up the recommended Blizzard UI settings? This will enable settings that can be found in the Interface section of your client. Options like Buff Durations, Instant Quest Text, Auto Selfcast and others will be set."])
 
     f.checkbox = CreateFrame("CheckButton", "pfCheckBoxCVAR", f, "UICheckButtonTemplate")
@@ -260,7 +261,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
 
   -- right chat dialog
   pfUI.firstrun:AddStep("chat_right", function()
-    local f = CreateFirstRunPage()
+    local f = CreateFirstRunPage("chat_right")
     f.text:SetText(T["|cff33ffccChat: \"Loot & Spam\"|r\n\nDo you want me to create and manage a specific Chatframe called \"Loot & Spam\"? This chat will display world channels, loot information and miscellaneous messages, that would otherwise clutter your main chatframe."])
 
     f.checkbox = CreateFrame("CheckButton", "pfCheckBoxChatRight", f, "UICheckButtonTemplate")
@@ -281,7 +282,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
 
   -- chat position dialog
   pfUI.firstrun:AddStep("chat_position", function()
-    local f = CreateFirstRunPage()
+    local f = CreateFirstRunPage("chat_position")
     f.text:SetText(T["|cff33ffccChat: \"Layout\"|r\n\nDo you want me to adjust the layout of your chatframes? This would make sure, that every window is placed on its dedicated position."])
     f.checkbox = CreateFrame("CheckButton", "pfCheckBoxChatPosition", f, "UICheckButtonTemplate")
     f.checkbox:SetChecked(true)
@@ -303,7 +304,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
 
   -- chat channels dialog
   pfUI.firstrun:AddStep("chat_channels", function()
-    local f = CreateFirstRunPage()
+    local f = CreateFirstRunPage("chat_channels")
     f.text:SetText(T["|cff33ffccChat: \"Channels\"|r\n\nDo you want me to setup the chat channels of your chatframes? This would set important or personal messages to the left chat and world channels and lootinformation to the right chat."])
     f.checkbox = CreateFrame("CheckButton", "pfCheckBoxChatChannels", f, "UICheckButtonTemplate")
     f.checkbox:SetChecked(true)
@@ -345,7 +346,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
       SetDefaultPosition(frameName, pos.anchor, pos.xpos, pos.ypos)
     end
 
-    local f = CreateFirstRunPage()
+    local f = CreateFirstRunPage("finalize")
     f.text:SetText(T["Your interface is now set up.\n\nFor advanced configuration, just open the |cff33ffccpf|rUI settings via the escape menu or type \"|cffffffaa/pfui|r\" into the chat.\n\n Have a nice trip!\n\n|cffaaaaaa- Shagu"])
     return f
   end)

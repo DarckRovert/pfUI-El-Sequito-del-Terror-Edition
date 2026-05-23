@@ -235,8 +235,9 @@ function pfUI:GetEnvironment()
     pfUI.env[m] = func
   end
 
-  if pfUI_config and pfUI_config.global and pfUI_config.global.language and not translations then
-    local lang = pfUI_config and pfUI_config.global and pfUI_config.global.language and pfUI_translation[pfUI_config.global.language] and pfUI_config.global.language or GetLocale()
+  if not translations then
+    local lang = pfUI_config and pfUI_config.global and pfUI_config.global.language
+    lang = lang and pfUI_translation[lang] and lang or GetLocale()
     pfUI.env.T = setmetatable(pfUI_translation[lang] or {}, { __index = function(tab,key)
       local value = tostring(key)
       rawset(tab,key,value)

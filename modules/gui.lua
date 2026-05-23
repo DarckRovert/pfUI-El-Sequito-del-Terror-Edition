@@ -568,6 +568,15 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
     pfUI.gui:SetPoint("CENTER", 0, 0)
     pfUI.gui:Hide()
 
+    pfUI.gui.ShowConfig = function(tabName)
+      if not pfUI.gui:IsShown() then
+        pfUI.gui:Show()
+      end
+      if pfUI.gui.frames and pfUI.gui.frames[tabName] then
+        pfUI.gui.frames[tabName]:Click()
+      end
+    end
+
     pfUI.gui:SetScript("OnShow",function()
       pfUI.gui.settingChanged = pfUI.gui.delaySettingChanged
       pfUI.gui.delaySettingChanged = nil
@@ -1683,8 +1692,10 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
     -- Throttling Menu
     CreateGUIEntry(T["Throttling"], T["Nameplates"], function()
       local header = CreateConfig(nil, T["Nameplate Update Rate"], nil, nil, "header")
-      header:GetParent().objectCount = header:GetParent().objectCount - 1
-      header:SetHeight(20)
+      if header then
+        header:GetParent().objectCount = header:GetParent().objectCount - 1
+        header:SetHeight(20)
+      end
       
       local targetCustom  -- declare first so callback can use it
       
@@ -2988,6 +2999,7 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
 
     -- [[ Translator ]]
     CreateGUIEntry(T["Translator"] or "Traductor", nil, function()
+      C.translator = C.translator or {}
       CreateConfig(nil, T["Enable Translator"] or "Activar Traductor", C.translator, "enable", "checkbox")
       CreateConfig(nil, T["Translate Incoming Messages"] or "Traducir Entrante", C.translator, "incoming", "checkbox")
       CreateConfig(nil, T["Translate Outgoing Messages"] or "Traducir Saliente", C.translator, "outgoing", "checkbox")
@@ -3009,6 +3021,27 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
           pfUI_config.global.font_unit_name = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf"
           ReloadUI()
         end)
+      end)
+      CreateConfig(nil, T["Open Dashboard"] or "Abrir Panel de Estadísticas (Dashboard)", nil, nil, "button", function()
+        if pfUITranslatorDashboard then
+          if pfUITranslatorDashboard:IsShown() then
+            pfUITranslatorDashboard:Hide()
+          else
+            pfUITranslatorDashboard:Show()
+          end
+        end
+      end)
+      CreateConfig(nil, T["Open Quick Translate"] or "Abrir Traductor Rápido (Quick)", nil, nil, "button", function()
+        if pfUITranslatorQuick then
+          if pfUITranslatorQuick:IsShown() then
+            pfUITranslatorQuick:Hide()
+          else
+            pfUITranslatorQuick:Show()
+            if pfUITranslatorQuickInput then
+              pfUITranslatorQuickInput:SetFocus()
+            end
+          end
+        end
       end)
       CreateConfig(nil, T["Blacklist (comma-separated names)"] or "Lista Negra (nombres separados por coma)", C.translator, "blacklist", "text")
 
