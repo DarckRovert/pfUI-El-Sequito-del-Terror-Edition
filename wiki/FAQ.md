@@ -1,10 +1,10 @@
 # ❓ FAQ — Preguntas Frecuentes
 
 ## 1. ¿El traductor causa lag o tirones en el juego al tener tantos miles de palabras?
-**No.** El motor está altamente optimizado bajo estándares **Ultimate-Tier (v7.2.0)**. Combina un **Motor de Búsqueda Token-Bucket** (que precarga buckets y reduce las búsquedas lineales) con una caché LRU de **1024 registros**, optimizaciones GC-friendly de memoria estática y carga asíncrona de base de datos. Las traducciones se completan en microsegundos (<0.05ms) sin causar caídas de FPS ni tirones en hilos principales de Lua 5.0, ahora con inmunidad completa ante fallos de inicio.
+**No.** El motor está altamente optimizado bajo estándares **Ultimate-Tier (v7.3.0)**. Combina un **Motor de Búsqueda Token-Bucket** (que precarga buckets y reduce las búsquedas lineales) con una caché LRU de **1024 registros**, optimizaciones GC-friendly de memoria estática y carga asíncrona de base de datos. Las traducciones se completan en microsegundos (<0.05ms) sin causar caídas de FPS ni tirones en hilos principales de Lua 5.0, ahora con inmunidad completa ante fallos de inicio.
 
-## 2. ¿Qué idiomas soporta la versión v7.2.0?
-**Soporta de manera trilingüe bidireccional Español, Inglés y Chino.** Además, incluye un Mega-Corpus ultra expansivo de 22 lotes temáticos con más de 8,600 entradas especializadas de World of Warcraft, TBC, HSK levels 1-5, jerga de juego, profesiones, consumibles, campos de batalla, expansiones de vocabulario, soporte de Turtle WoW, mecánicas Hardcore y modismos de chat.
+## 2. ¿Qué idiomas soporta la versión v7.3.0?
+**Soporta de manera trilingüe bidireccional Español, Inglés y Chino.** Además, incluye un Mega-Corpus ultra expansivo de 23 lotes temáticos con más de 8,700 entradas especializadas de World of Warcraft, TBC, HSK levels 1-5, jerga de juego, profesiones, consumibles, campos de batalla, expansiones de vocabulario, soporte de Turtle WoW, mecánicas Hardcore, mitigación de estilo Tarzán y modismos de chat.
 
 ## 3. ¿Cómo funciona el Modo Bilingüe (Bilingual Mode)?
 El Modo Bilingüe permite mostrar simultáneamente en tu chat tanto el texto traducido como el mensaje original en un formato compacto y legible. Esto es de gran ayuda para aprender idiomas, depurar traducciones o entender frases coloquiales muy complejas.

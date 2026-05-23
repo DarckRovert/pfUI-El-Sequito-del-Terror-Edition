@@ -1,5 +1,9 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.3.0] - 2026-05-23
+### Añadido
+- **Mitigación Avanzada de Estilo Tarzán (Categoría 219)**: Inyección masiva de patrones de frases y modismos conversacionales de chat comunes (`anyone knows`, `anyone lend me`, `lf borrow 3g`, `need gold for riding`, etc.). El Greedy Matcher prioriza estos bloques más largos para renderizar traducciones en español 100% fluidas, naturales y humanas en vez de literales término por término.
+
 ## [7.2.0] - 2026-05-23
 ### Añadido
 - **Mega-Expansión de Vocabulario (Categoría 218)**: Integrados términos y mecánicas de Turtle WoW y Hardcore en el diccionario `translator_dict.lua` (`crescent grove`, `deathlog`, `death appeal`, `warmode`, `turtle token`, `pre-raid bis`, `hateforge quarry`).

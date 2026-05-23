@@ -4922,6 +4922,23 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   add("tienda de donaciones", "donation shop", "赞助商城")
 
   -- ╔══════════════════════════════════════════════╗
+  -- ║  CAT 219: MITIGACIÓN DE ESTILO TARZÁN EN CHAT║
+  -- ╚══════════════════════════════════════════════╝
+  add("alguien sabe si", "anyone knows if", "有人知道是否")
+  add("¿alguien sabe?", "anyone knows", "有人知道吗")
+  add("¿alguien sabe?", "anyone know", "有人知道")
+  add("¿alguien me presta 3g?", "anyone lend me 3g?", "有人借我3金吗")
+  add("¿alguien me presta", "anyone lend me", "有人能借我")
+  add("busco prestado 3g", "lf borrow 3g", "求借3金")
+  add("busco prestado", "lf borrow", "求借")
+  add("necesito 3g para montar", "need 3g for riding", "需要3金学骑术")
+  add("me falta 3g para montar", "short 3g for riding", "差3金学骑术")
+  add("necesito oro para montar", "need gold for riding", "需要骑术金币")
+  add("necesito para montar", "need for riding", "需要骑术")
+  add("¿alguien sabe si", "anyone knows if", "有人知道是否")
+  add("¿alguien sabe si", "anyone know if", "有人知道是否")
+
+  -- ╔══════════════════════════════════════════════╗
   -- ║  LÓGICA DE ORDENAMIENTO (Greedy Matching)    ║
   -- ╚══════════════════════════════════════════════╝
   local p_keys = { "es_en", "en_es", "zh_en", "en_zh", "zh_es", "es_zh" }
@@ -4954,6 +4971,6 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v7.2.0 Ultimate-Tier — 218 categorias y buckets de coincidencia inicializados.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v7.3.0 Ultimate-Tier — 219 categorias y buckets de coincidencia inicializados.")
   end
 end)

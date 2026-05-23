@@ -1,6 +1,6 @@
-# 📖 Manual de Usuario (v7.2.0 [ULTIMATE-TIER])
+# 📖 Manual de Usuario (v7.3.0 [ULTIMATE-TIER])
 
-Guía oficial para dominar el sistema de comunicación multilingüe de **El Séquito Edition**, ahora con inmunidad garantizada contra fallos de ejecución.
+Guía oficial para dominar el sistema de comunicación multilingüe de **El Séquito Edition**, ahora con inmunidad garantizada contra fallos de ejecución y traducción fluida humana.
 
 ---
 
@@ -25,7 +25,7 @@ Accede al panel de control escribiendo `/pfui` y navegando a la pestaña **Trans
 ---
 
 ## 2. Traducción Integral en el Juego
-La versión **v7.2.0 (Ultimate-Tier)** integra de forma nativa la traducción en tiempo real de:
+La versión **v7.3.0 (Ultimate-Tier)** integra de forma nativa la traducción en tiempo real de:
 1.  **Facultades de Clase (Spells)**: Hechizos y habilidades principales de WoW y TBC.
 2.  **Misiones (Quests)**: Nombres de misiones de Azeroth clásicos y personalizados de Turtle WoW.
 3.  **Ítems y Equipamiento**: Armas, armaduras, consumibles de raid y materiales.
