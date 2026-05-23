@@ -37,7 +37,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
         end
 
         if cur == max then
-          f.next:SetText(T["Finish"])
+          f.next:SetText(T["Finish"] or "Finish")
           autoconfig = false
           cur = 0
           max = 0
@@ -97,7 +97,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
     f.next:SetWidth(80)
     f.next:SetHeight(20)
     f.next:SetPoint("BOTTOMLEFT", f.progress.backdrop, "BOTTOMRIGHT", 8, 0)
-    f.next:SetText(T["Next"])
+    f.next:SetText(T["Next"] or "Next")
     f.next:SetScript("OnClick", function()
       if f.NextScript then f.NextScript() end
       pfUI_init[name] = true
@@ -110,7 +110,7 @@ pfUI:RegisterModule("firstrun", "vanilla:tbc", function ()
     f.abort:SetWidth(80)
     f.abort:SetHeight(20)
     f.abort:SetPoint("BOTTOMRIGHT", f.progress.backdrop, "BOTTOMLEFT", -8, 0)
-    f.abort:SetText(T["Cancel"])
+    f.abort:SetText(T["Cancel"] or "Cancel")
     f.abort:SetScript("OnClick", function()
       f:Hide()
     end)
