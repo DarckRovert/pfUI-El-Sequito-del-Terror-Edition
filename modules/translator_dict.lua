@@ -4954,6 +4954,6 @@ pfUI:RegisterModule("translator_dict", "vanilla", function ()
   end
 
   if pfUI_config.translator and pfUI_config.translator.debug_mode == "1" then
-    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v7.0.0 Ultimate-Tier — 215 categorias y buckets de coincidencia inicializados.")
+    DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Lexico v7.2.0 Ultimate-Tier — 218 categorias y buckets de coincidencia inicializados.")
   end
 end)
