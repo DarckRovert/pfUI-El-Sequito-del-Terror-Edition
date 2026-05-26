@@ -1,5 +1,9 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.3.2] - 2026-05-26
+### Arreglado
+- **Detección de Idioma Nativo (Locale)**: El addon pfUI ahora respeta estrictamente el idioma configurado por el usuario, evitando forzar el idioma por defecto del cliente binario del juego (inglés). La interfaz general y la fuente se traducirán correctamente sin importar el ejecutable.
+
 ## [7.3.1] - 2026-05-25
 ### Añadido
 - **Integración Asíncrona con DLL (Google Translate)**: Implementado un puente de comunicación de cero latencia (`translate_async` y `poll`) utilizando intercepciones del API nativa `UnitXP`. Permite delegar traducciones complejas (como el idioma Chino) a servidores externos de Google sin congelar el cliente de WoW Vanilla.

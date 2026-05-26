@@ -257,7 +257,8 @@ function pfUI:GetEnvironment()
   pfUI.env._G = getfenv(0)
   pfUI.env.C = pfUI_config
   pfUI.env.pfUI_throttle = _G.pfUI_throttle
-  pfUI.env.L = (pfUI_locale[GetLocale()] or pfUI_locale["enUS"])
+  local _locale = (pfUI_config and pfUI_config.global and pfUI_config.global.language) or GetLocale()
+  pfUI.env.L = (pfUI_locale[_locale] or pfUI_locale[GetLocale()] or pfUI_locale["enUS"])
 
   return pfUI.env
 end
