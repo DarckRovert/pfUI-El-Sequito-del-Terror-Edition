@@ -1,5 +1,15 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.3.1] - 2026-05-25
+### Añadido
+- **Integración Asíncrona con DLL (Google Translate)**: Implementado un puente de comunicación de cero latencia (`translate_async` y `poll`) utilizando intercepciones del API nativa `UnitXP`. Permite delegar traducciones complejas (como el idioma Chino) a servidores externos de Google sin congelar el cliente de WoW Vanilla.
+- **Detección Dinámica de DLL Robusta**: El sistema de detección ahora sondea un comando específico (`poll`) en lugar de depender de argumentos vacíos que provocaban errores de uso en la función nativa C++ de WoW.
+- **Reporte de Errores de DLL en Debug**: Si la conexión con Google falla (timeout, bloqueo de IP, error 400), el addon reporta el error exacto directamente en el chat cuando el Modo Debug está activo (`[TR] DLL Error: ...`).
+
+### Cambiado
+- **Escalamiento Estricto (Strict Escalation) para Chino**: Modificada la heurística para el idioma Chino (`zh`). Si la DLL está presente, el traductor *siempre* descartará la traducción "Tarzán" del diccionario local y exigirá una traducción completa de contexto desde Google, logrando oraciones perfectas y fluidas.
+- **Purga Inteligente de Caché Persistente**: Al cargar la memoria (`pfUI_cache`), el addon ahora detecta y purga automáticamente traducciones antiguas tipo "Tarzán" (llaves que aún contenían caracteres chinos) para forzar su re-traducción correcta a través de la DLL.
+
 ## [7.3.0] - 2026-05-23
 ### Añadido
 - **Mitigación Avanzada de Estilo Tarzán (Categoría 219)**: Inyección masiva de patrones de frases y modismos conversacionales de chat comunes (`anyone knows`, `anyone lend me`, `lf borrow 3g`, `need gold for riding`, etc.). El Greedy Matcher prioriza estos bloques más largos para renderizar traducciones en español 100% fluidas, naturales y humanas en vez de literales término por término.

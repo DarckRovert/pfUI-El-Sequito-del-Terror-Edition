@@ -1,4 +1,4 @@
-# 📖 Manual de Usuario (v7.3.0 [ULTIMATE-TIER])
+# 📖 Manual de Usuario (v7.3.1 [ULTIMATE-TIER])
 
 Guía oficial para dominar el sistema de comunicación multilingüe de **El Séquito Edition**, ahora con inmunidad garantizada contra fallos de ejecución y traducción fluida humana.
 
@@ -25,7 +25,7 @@ Accede al panel de control escribiendo `/pfui` y navegando a la pestaña **Trans
 ---
 
 ## 2. Traducción Integral en el Juego
-La versión **v7.3.0 (Ultimate-Tier)** integra de forma nativa la traducción en tiempo real de:
+La versión **v7.3.1 (Ultimate-Tier)** integra de forma nativa la traducción en tiempo real de:
 1.  **Facultades de Clase (Spells)**: Hechizos y habilidades principales de WoW y TBC.
 2.  **Misiones (Quests)**: Nombres de misiones de Azeroth clásicos y personalizados de Turtle WoW.
 3.  **Ítems y Equipamiento**: Armas, armaduras, consumibles de raid y materiales.
@@ -43,7 +43,7 @@ Controla el comportamiento del traductor directamente desde la ventana de chat d
 
 *   `/tr`: Abre directamente la pestaña de configuración del traductor en la interfaz gráfica de pfUI.
 *   `/tr stats`: Muestra estadísticas detalladas del rendimiento (Mensajes procesados, hit-rate del Caché LRU en %, servidor detectado y top de palabras frecuentes).
-*   `/tr debug`: Alterna dinámicamente el modo de depuración en chat para observar el proceso de matching y aislamientos.
+*   `/tr debug`: Alterna dinámicamente el modo de depuración en chat para observar el proceso de matching y aislamientos. *Nota: Si la DLL de Google Translate (WoWTranslate) está inyectada y la conexión falla, este modo imprimirá el motivo exacto del error en el chat.*
 *   `/tr quick`: Abre/cierra una práctica ventana interactiva flotante de traducción rápida manual.
 *   `/tr panel`: Alterna la visibilidad de una pequeña barra indicadora de estado en tu pantalla.
 *   `/tr history` (o `/tr hist`): Muestra el historial de las últimas 10 traducciones realizadas en tu sesión.

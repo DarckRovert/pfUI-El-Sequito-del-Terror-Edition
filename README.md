@@ -1,7 +1,7 @@
-# Global Chat Translator — El Séquito Edition (v7.3.0 [ULTIMATE-TIER]) 🌌⚖️
+# Global Chat Translator — El Séquito Edition (v7.3.1 [ULTIMATE-TIER]) 🌌⚖️
 
-![Version](https://img.shields.io/badge/version-v7.3.0--Ultimate--Tier-ff55ff?style=for-the-badge)
-![Host](https://img.shields.io/badge/pfUI-v7.3.0--Ultimate--Tier-purple?style=for-the-badge)
+![Version](https://img.shields.io/badge/version-v7.3.1--Ultimate--Tier-ff55ff?style=for-the-badge)
+![Host](https://img.shields.io/badge/pfUI-v7.3.1--Ultimate--Tier-purple?style=for-the-badge)
 ![Platform](https://img.shields.io/badge/Platform-Turtle_WoW-ff5555?style=for-the-badge)
 
 > **The ultimate multilingual communication bridge for World of Warcraft.** Este componente de grado corporativo integrado en **pfUI** erradica las barreras lingüísticas mediante un motor de traducción en tiempo real offline de alto rendimiento, con soporte nativo para **Español, Inglés, Ruso y Chino**, optimizado bajo el estándar de máxima fidelidad y rendimiento **Ultimate-Tier** de DarckRovert, ahora con inmunidad garantizada contra crashes de inicialización y soporte extendido para Turtle WoW.
@@ -17,6 +17,7 @@ El **Global Chat Translator** es una pieza nuclear de ingeniería para el ecosis
 | Módulo | Tipo de Datos | Funcionalidad | Descripción |
 | :--- | :--- | :--- | :--- |
 | **Multilingual Engine** | Lexical Map | Soporte Global | Traducción entre Español (`esES`), Inglés (`enUS`), Ruso (`ruRU`) y Chino (`zhCN`). Incluye Mega-Corpus HSK1-4. |
+| **Async DLL Bridge** | C++ API Proxy | Google Translate | Puente asíncrono vía `UnitXP` con `WoWTranslate.dll` para offload de traducción de cero lag en chino, con fallback dinámico. |
 | **Greedy Matcher** | Lexicographical | Traducción Precisa | Prioriza frases complejas sobre palabras aisladas mediante indexación descendente por longitud. |
 | **Syntactic Isolation** | Message Parser | Integridad del Chat | Separa metadatos de Blizzard y nombres de jugador del cuerpo del mensaje antes de la traducción, protegiendo links e interactividad. |
 | **CTR Filter** | Mathematical Ratio | Coherencia de Texto | Filtro de Ratio de Coherencia (*Coherence Threshold Ratio*): Modo Heurístico Agresivo para Chino (ZH < 10%) priorizando visibilidad, y estándar (EN/ES < 40%). |

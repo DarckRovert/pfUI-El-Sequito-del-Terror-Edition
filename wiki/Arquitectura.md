@@ -1,4 +1,4 @@
-# 🏰 Wiki: Arquitectura 'Legendary Tier' — pfUI [v7.1.0] (Translator v7.1.0)
+# 🏰 Wiki: Arquitectura 'Legendary Tier' — pfUI [v7.3.1] (Translator v7.3.1)
 
 Estructura modular del ecosistema **El Séquito del Terror** mantenido por **DarckRovert**.
 
@@ -16,12 +16,13 @@ El AddOn inicia mediante `init/modules.xml` con los siguientes puntos críticos 
     *   **Aislamiento Sintáctico y de Enlaces** para proteger la interactividad nativa de WoW.
     *   **Micro-stemmer** y **Levenshtein Fuzzy Matcher** para resolver variaciones y errores ortográficos.
     *   **Bilingual Rendering** y **Language Badges** para formatear el renderizado final.
-4.  **Mailbox & WIM Bridge**: Interceptores especializados sobre el buzón de correo (Mail Frame) y las ventanas de mensajería instantánea WIM para inyectar traducciones sin latencia.
-5.  **GUI Integration (`gui.lua`)**: Panel integrado en las opciones de pfUI con 13 nuevos controles gráficos interactivos.
+4.  **Async DLL Bridge (Google Translate)**: Intercepción asíncrona de `UnitXP` que escala el procesamiento del idioma Chino (`zh`) a un componente en C++ (`WoWTranslate.dll`), obteniendo contexto completo de oraciones vía red sin congelar el cliente (Zero-Lag).
+5.  **Mailbox & WIM Bridge**: Interceptores especializados sobre el buzón de correo (Mail Frame) y las ventanas de mensajería instantánea WIM para inyectar traducciones sin latencia.
+6.  **GUI Integration (`gui.lua`)**: Panel integrado en las opciones de pfUI con 13 nuevos controles gráficos interactivos.
 
 ---
 
-## 📊 Diagrama de Flujo: Traductor Multilingüe v7.0.0
+## 📊 Diagrama de Flujo: Traductor Multilingüe v7.3.1
 
 ```mermaid
 graph TD
@@ -45,6 +46,11 @@ graph TD
     N -- Miss --> P[Mantener Texto Original]
     O -- Aprobado --> Q[Actualizar LRU + Guardar en Memoria de Jugador]
     O -- Rechazado --> P
+    O -- Aprobado --> DLL{¿Es Chino y hay DLL?}
+    DLL -- Sí --> DLLQuery[Consulta Asíncrona a Google Translate]
+    DLLQuery -- Timeout/Error --> P
+    DLLQuery -- Éxito --> Q
+    DLL -- No --> Q
     Q --> H
     P --> H
     H --> R{¿Modo Bilingüe Activo?}
@@ -75,6 +81,9 @@ Para idiomas occidentales (ES/EN), el micro-stemmer reduce las palabras a su ra�
 
 ### 4. Fuzzy Matcher de Distancia de Edición (Levenshtein)
 Si el matching exacto falla, el sistema aplica una evaluación de distancia Levenshtein de coste acotado sobre las llaves del token-bucket activo. Permite tolerar errores tipográficos leves (distancia de edición menor o igual a 2) en palabras de longitud mayor a 4 caracteres, mejorando drásticamente el ratio de éxito en chats dinámicos.
+
+### 5. Async DLL Bridge (Google Translate Proxy)
+Para sortear las limitaciones del cliente Vanilla (1.12.1), el addon intercepta la función nativa de C++ `UnitXP()` sobrecargándola como un puente de mensajería IPC. Si el idioma detectado es chino y la DLL `WoWTranslate.dll` se encuentra inyectada, el motor descarta su resultado interno de estilo "Tarzán" y delega el mensaje a la DLL. La DLL realiza una petición HTTP asíncrona a los servidores de Google y, mediante un sistema de polling de alta frecuencia, devuelve el resultado al chat sin provocar microcortes en el juego. Adicionalmente, cuenta con purga inteligente en tiempo de inicialización de caché para re-procesar traducciones locales estancadas.
 
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.

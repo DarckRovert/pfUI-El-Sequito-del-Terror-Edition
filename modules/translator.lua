@@ -8,10 +8,6 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   pfUI.translator_version = "7.0.0"
 
   local C = pfUI_config
-  local T = pfUI_translation[GetLocale()] or pfUI_translation["enUS"]
-  if T ~= pfUI_translation["enUS"] then
-    T = setmetatable(T, { __index = pfUI_translation["enUS"] })
-  end
 
   -- ============================================================
   -- CONFIGURACION POR DEFECTO (EXPANDIDA v7)
@@ -26,7 +22,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   C.translator.silent_mode   = C.translator.silent_mode   or "0"
   C.translator.wim_bridge    = C.translator.wim_bridge    or "1"
   C.translator.debug_mode    = C.translator.debug_mode    or "0"
-  C.translator.ctr_threshold = C.translator.ctr_threshold or "0.00"
+  C.translator.ctr_threshold = C.translator.ctr_threshold or "1.00"
   -- Channels
   C.translator.chan_say         = C.translator.chan_say         or "1"
   C.translator.chan_party       = C.translator.chan_party       or "1"
@@ -76,8 +72,72 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
   local TR_CACHE       = {}
   local TR_CACHE_ORDER = {}
-  local TR_CACHE_MAX   = 1024
+  local TR_CACHE_MAX   = 5000
   local TR_CACHE_CFG   = nil
+
+  -- ============================================================
+  -- COLA ASINCRONA PARA CACHE DE ITEMS (#2 Mejora WoWTranslate)
+  -- Y COLA DLL UnitXP (#4 Fallback Asincrono)
+  -- ============================================================
+  local ITEM_CACHE_QUEUE = {}
+  local DLL_PENDING = {}
+  local DLL_REQUEST_COUNTER = 0
+  local hasWoWTranslateDLL = false  -- se verifica en PLAYER_ENTERING_WORLD
+  local LAST_DLL_POLL = 0
+  
+  local pfUIItemCacheTooltip = CreateFrame("GameTooltip", "pfUIItemCacheTooltip", nil, "GameTooltipTemplate")
+  pfUIItemCacheTooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
+
+  local pfUIQueueFrame = CreateFrame("Frame")
+  pfUIQueueFrame:SetScript("OnUpdate", function()
+    local now = GetTime()
+    for i = table.getn(ITEM_CACHE_QUEUE), 1, -1 do
+      local q = ITEM_CACHE_QUEUE[i]
+      if now - q.time > 0.2 then
+        table.remove(ITEM_CACHE_QUEUE, i)
+        if q.callback then q.callback() end
+      end
+    end
+    
+    -- #4 UnitXP/WoWTranslate Polling (solo si DLL confirmada)
+    if hasWoWTranslateDLL and (now - LAST_DLL_POLL > 0.1) then
+      LAST_DLL_POLL = now
+      local success, result = pcall(UnitXP, "WoWTranslate", "poll")
+      if success and result and result ~= "" then
+        local firstPipe = strfind(result, "|", 1, true)
+        if firstPipe then
+           local reqId = strsub(result, 1, firstPipe - 1)
+           local remainder = strsub(result, firstPipe + 1)
+           local secondPipe = strfind(remainder, "|", 1, true)
+           local translation, err
+           if secondPipe then
+              translation = strsub(remainder, 1, secondPipe - 1)
+              err = strsub(remainder, secondPipe + 1)
+           else
+              translation = remainder
+           end
+           
+           if reqId and DLL_PENDING[reqId] then
+              local req = DLL_PENDING[reqId]
+              DLL_PENDING[reqId] = nil
+              if not err or err == "" then
+                 if req.callback then req.callback(translation, false, nil) end
+              else
+                 if req.callback then req.callback(nil, true, err) end
+              end
+           end
+        end
+      end
+      
+      -- Cleanup timeouts (10s para chat)
+      for id, req in pairs(DLL_PENDING) do
+         if now - req.time > 10 then
+            DLL_PENDING[id] = nil
+            if req.callback then req.callback(nil, true, "TIMEOUT") end
+         end
+      end
+    end
+  end)
 
   local function CacheConfigHash()
     return (C.translator.direction or "0") .. ":" ..
@@ -90,6 +150,11 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     if TR_CACHE_CFG and TR_CACHE_CFG ~= h then
       TR_CACHE = {}
       TR_CACHE_ORDER = {}
+      if pfUI_cache then
+        pfUI_cache.translator_cache = nil
+        pfUI_cache.translator_cache_order = nil
+        pfUI_cache.translator_cache_cfg = nil
+      end
       if C.translator.debug_mode == "1" then
         DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Cache invalidada por cambio de config.")
       end
@@ -121,6 +186,11 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     end
     TR_CACHE[text] = result
     table.insert(TR_CACHE_ORDER, text)
+    if pfUI_cache then
+       pfUI_cache.translator_cache = TR_CACHE
+       pfUI_cache.translator_cache_order = TR_CACHE_ORDER
+       pfUI_cache.translator_cache_cfg = TR_CACHE_CFG
+    end
   end
 
   -- ============================================================
@@ -469,6 +539,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       local orig_zh = CountChineseChars(orig_text)
       if orig_zh == 0 then return 1.0 end
       local dest_zh = CountChineseChars(dest_text)
+      if dest_zh > 0 then return 0.0 end
       return (orig_zh - dest_zh) / orig_zh
     else
       local orig_words = {}
@@ -504,26 +575,71 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
   -- MOTOR: LocalTranslate (#2 puntuacion, #17 stemming)
   -- ============================================================
-  local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang, buckets, noBrackets)
+  local function LocalTranslate(text, wordDict, phraseDict, phraseKeys, srcLang, buckets, noBrackets, ignore_missing_cache)
     if not text or type(text) ~= "string" or strlen(text) < 2 then return nil end
 
     local cached = CacheGet(text)
     if cached then return cached end
 
-    -- Fase 0: Preservar enlaces (Items, Spells, Players)
+    -- Fase 0: Preservar y Traducir enlaces nativamente (Items, Spells, Players)
     local links      = {}
     local link_count = 0
     local proc_text  = text
-    proc_text = string.gsub(proc_text, "(|H.-|h.-|h)", function(link)
+    local missing_cache = false
+
+    proc_text = string.gsub(proc_text, "(|c%x%x%x%x%x%x%x%x|H(.-)|h.-|h|r)", function(full_link, h_data)
+      local _, _, itemID = strfind(h_data, "^item:(%d+)")
+      if itemID then
+        local itemName = GetItemInfo(tonumber(itemID))
+        if itemName then
+          local colorCode = strsub(full_link, 1, 10)
+          full_link = colorCode .. "|H" .. h_data .. "|h[" .. itemName .. "]|h|r"
+        elseif not ignore_missing_cache then
+          missing_cache = true
+          pfUIItemCacheTooltip:SetHyperlink("item:"..itemID..":0:0:0")
+        end
+      end
+      
+      local _, _, questID = strfind(h_data, "^quest:(%d+)")
+      if questID and pfDB and pfDB["quests"] and pfDB["quests"]["enUS"] then
+         local qEntry = pfDB["quests"]["enUS"][tonumber(questID)]
+         if qEntry and type(qEntry) == "table" and qEntry.T then
+            local colorCode = strsub(full_link, 1, 10)
+            full_link = colorCode .. "|H" .. h_data .. "|h[" .. qEntry.T .. "]|h|r"
+         end
+      end
+
       link_count = link_count + 1
-      links[link_count] = link
-      return "\127L" .. link_count .. "\127"
+      links[link_count] = full_link
+      return " http://ph.wt/" .. link_count .. " "
     end)
+    
+    -- Also handle links without colors
+    proc_text = string.gsub(proc_text, "(|H(.-)|h.-|h)", function(full_link, h_data)
+      if strfind(full_link, "http://ph%.wt/%d+") then return full_link end
+      local _, _, itemID = strfind(h_data, "^item:(%d+)")
+      if itemID then
+        local itemName = GetItemInfo(tonumber(itemID))
+        if itemName then
+          full_link = "|H" .. h_data .. "|h[" .. itemName .. "]|h"
+        elseif not ignore_missing_cache then
+          missing_cache = true
+          pfUIItemCacheTooltip:SetHyperlink("item:"..itemID..":0:0:0")
+        end
+      end
+      link_count = link_count + 1
+      links[link_count] = full_link
+      return " http://ph.wt/" .. link_count .. " "
+    end)
+
+    if missing_cache then
+       return nil, true
+    end
     -- Preservar color codes sueltos
     proc_text = string.gsub(proc_text, "(|c%x%x%x%x%x%x%x%x.-|r)", function(cc)
       link_count = link_count + 1
       links[link_count] = cc
-      return "\127L" .. link_count .. "\127"
+      return " http://ph.wt/" .. link_count .. " "
     end)
 
     -- #2: Normalizar puntuacion invertida espanola
@@ -581,7 +697,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
     -- Fase 0.5: Atomic Bracket Translation Shield (%b[])
     if not noBrackets then
       proc_text = string.gsub(proc_text, "(%b[])", function(bracketed_str)
-        if strfind(bracketed_str, "\127[lL]%d+\127") then
+        if strfind(bracketed_str, "http://ph%.wt/%d+") then
           return bracketed_str
         end
         local inner = strsub(bracketed_str, 2, -2)
@@ -596,11 +712,13 @@ pfUI:RegisterModule("translator", "vanilla", function ()
           end
           link_count = link_count + 1
           links[link_count] = replaced
-          return "\127L" .. link_count .. "\127"
+          return " http://ph.wt/" .. link_count .. " "
         end
         return bracketed_str
       end)
     end
+
+    local dll_payload = strsub(proc_text, 2, -2)
 
     -- Fase 1: Greedy Matching (Frases Compuestas / UTF-8 Multibyte)
     if phraseDict and phraseKeys then
@@ -715,32 +833,43 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         result = string.gsub(result, "^%s*(.-)%s*$", "%1")
       end
 
-      -- Restaurar enlaces protegidos de forma recursiva (hasta 5 niveles de anidamiento)
-      local passes = 0
-      while passes < 5 and strfind(result, "\127[lL]%d+\127") do
-        passes = passes + 1
-        local replaced = false
-        result = string.gsub(result, "\127[lL](%d+)\127", function(lid)
-          local id = tonumber(lid)
-          if links[id] then
-            replaced = true
-            return links[id]
-          end
-        end)
-        if not replaced then break end
-      end
-
       -- Validar coherencia (CTR)
       local ratio     = GetTranslationRatio(text, result, srcLang)
-      local min_ratio = tonumber(C.translator.ctr_threshold or "0.00")
+      local min_ratio = tonumber(C.translator.ctr_threshold or "1.00")
+      if min_ratio == 0 then min_ratio = 1.00 end -- Fix para variables guardadas en 0.00
+      if srcLang ~= "zh" and min_ratio == 1.00 then
+         min_ratio = 0.50 -- Evita que un numero o nombre en occidente anule toda la traduccion local
+      end
+
       if ratio < min_ratio then
-        return nil
+        -- Siempre retorna proc_text/links para que el caller pueda usar DLL
+        return nil, false, dll_payload, links
+      end
+
+      -- Restaurar enlaces protegidos de forma recursiva (hasta 5 niveles de anidamiento)
+      if link_count > 0 then
+         local passes = 0
+         while passes < 5 and strfind(result, "http://ph%.wt/%d+") do
+           passes = passes + 1
+           local replaced = false
+           result = string.gsub(result, "%s*http://ph%.wt/(%d+)%s*", function(lid)
+             local id = tonumber(lid)
+             if links[id] then
+               replaced = true
+               return links[id]
+             end
+           end)
+           if not replaced then break end
+         end
       end
 
       CacheSet(text, result)
-      return result
+      -- FIX: Siempre retorna proc_text+links para permitir escalado a DLL por el caller
+      return result, false, dll_payload, links
     end
-    return nil
+    -- No se pudo traducir nada. Solo retornamos proc_text/links si
+    -- el texto tiene contenido extranjero detectable (para DLL fallback).
+    return nil, false, dll_payload, links
   end
 
   -- ============================================================
@@ -1020,10 +1149,13 @@ pfUI:RegisterModule("translator", "vanilla", function ()
   -- ============================================================
   -- GESTION DE ENTRADA DINAMICA (EXPANDIDA: #10 #11 #14 #19 #22 #24 #31)
   -- ============================================================
+  local DEDUP_CACHE = {}
+  local DEDUP_TIME = 0
+
   local function HookIncomingChat()
     if pfUI.GravityTRHooked then return end
 
-    local function TranslatorAddMessage(frame, text, r, g, b, id)
+    local function TranslatorAddMessage(frame, text, r, g, b, id, queue_retries)
       if not text or type(text) ~= "string" then
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
@@ -1031,12 +1163,29 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
+      local now = GetTime()
+      if now > DEDUP_TIME then
+        DEDUP_CACHE = {}
+        DEDUP_TIME = now
+      end
+
+      if DEDUP_CACHE[text] then
+        local entry = DEDUP_CACHE[text]
+        if entry.bilingual then
+          frame:pfOriginalAddMessage(entry.dim_text, entry.dim_r, entry.dim_g, entry.dim_b, id)
+        end
+        return frame:pfOriginalAddMessage(entry.text, r, g, b, id)
+      end
+
+      local original_text = text
+
       -- Rapida salida: solo mensajes con jugadores, canales, o emotes
       local hasPlayer  = strfind(text, "|Hplayer:",  1, true)
       local hasChannel = strfind(text, "|Hchannel:", 1, true)
       local hasEmote   = (C.translator.chan_emote == "1") and strfind(text, "emote", 1, true)
       local hasTrade   = (C.translator.chan_trade == "1") and strfind(strlower(text), "trade", 1, true)
       if not hasPlayer and not hasChannel and not hasEmote then
+        DEDUP_CACHE[original_text] = { text = text }
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
       
@@ -1062,6 +1211,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
       -- #24: Check blacklist
       if IsBlacklisted(sender_name) then
+        DEDUP_CACHE[original_text] = { text = text }
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
@@ -1105,6 +1255,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
       if not body or strlen(body) < 2 then
         if CountChineseChars(text) < 1 then
+          DEDUP_CACHE[original_text] = { text = text }
           return frame:pfOriginalAddMessage(text, r, g, b, id)
         end
         prefix_text = ""
@@ -1153,6 +1304,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       -- Seleccion de modo
       local src_env, dest_env = GetTranslationMode(true)
       if not src_env or not dest_env then
+        DEDUP_CACHE[original_text] = { text = text }
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
@@ -1163,6 +1315,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         -- Agregar badge sin traducir
         local badge = GetLangBadge(lang)
         if badge ~= "" then text = badge .. text end
+        DEDUP_CACHE[original_text] = { text = text }
         return frame:pfOriginalAddMessage(text, r, g, b, id)
       end
 
@@ -1188,21 +1341,115 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         if words and phrases and keys then
           -- #31: Anti-spam check
           local is_spam = IsSpamDuplicate(sender_name, body)
+          
+          local ignore_cache = (queue_retries and queue_retries >= 3)
+          local trans, missing, proc_text, links = LocalTranslate(body, words, phrases, keys, final_src, bkts, false, ignore_cache)
 
-          local trans = LocalTranslate(body, words, phrases, keys, final_src, bkts)
+          -- Si faltaba caché de items, encolar procesamiento y abortar impresión
+          if missing then
+             local current_retries = queue_retries or 0
+             table.insert(ITEM_CACHE_QUEUE, {
+                time = GetTime(),
+                callback = function()
+                   DEDUP_CACHE[original_text] = nil
+                   TranslatorAddMessage(frame, original_text, r, g, b, id, current_retries + 1)
+                end
+             })
+             return
+          end
+
+          -- FIX CRITICO: Para chino con DLL disponible, NUNCA aceptar traduccion local.
+          -- El diccionario local produce frases tipo Tarzan (palabra por palabra).
+          -- Google traduce oraciones completas con contexto. Siempre preferir DLL para zh.
+          if final_src == "zh" and hasWoWTranslateDLL and proc_text and links then
+             trans = nil  -- Descartar resultado local y escalar a DLL
+          end
+
+          -- #4: Si falla el traductor local y tenemos DLL, usar DLL
+          if not trans and hasWoWTranslateDLL and proc_text and links then
+             DLL_REQUEST_COUNTER = DLL_REQUEST_COUNTER + 1
+             local reqId = tostring(DLL_REQUEST_COUNTER)
+             DLL_PENDING[reqId] = {
+                 time = GetTime(),
+                 callback = function(dll_trans, is_error, err_msg)
+                     if is_error or not dll_trans then
+                         if C.translator.debug_mode == "1" then
+                            DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r DLL Error: " .. tostring(err_msg))
+                         end
+                         if pfUI.translator_dicts and pfUI.translator_dicts[final_src .. "_" .. dest_env .. "_words"] then
+                            -- Hubo error, mostrar fallback Tarzan
+                            local tarzan = string.gsub(proc_text, " http://ph%.wt/(%d+) ", function(lid)
+                               local idx = tonumber(lid)
+                               return links[idx] or ""
+                            end)
+                            tarzan = strsub(tarzan, 2, -2)
+                            
+                            if final_src == "zh" then
+                              tarzan = string.gsub(tarzan, "%s+", " ")
+                              tarzan = string.gsub(tarzan, "^%s*(.-)%s*$", "%1")
+                            end
+                            
+                            local badge = GetLangBadge(lang)
+                            tarzan = badge .. prefix_text .. tarzan .. GetTRTag()
+                            DEDUP_CACHE[original_text] = { text = tarzan }
+                            frame:pfOriginalAddMessage(tarzan, r, g, b, id)
+                         else
+                            DEDUP_CACHE[original_text] = { text = text }
+                            frame:pfOriginalAddMessage(text, r, g, b, id)
+                         end
+                         return
+                     end
+
+                    -- Reconstruir links
+                    local passes = 0
+                    while passes < 5 and strfind(dll_trans, "http://ph%.wt/%d+") do
+                      passes = passes + 1
+                      local replaced = false
+                      dll_trans = string.gsub(dll_trans, "%s*http://ph%.wt/(%d+)%s*", function(lid)
+                        local lid_num = tonumber(lid)
+                        if links[lid_num] then replaced = true; return links[lid_num] end
+                      end)
+                      if not replaced then break end
+                    end
+                    
+                    CacheSet(body, dll_trans)
+                    
+                    local badge = GetLangBadge(lang)
+                    local final_text = badge .. prefix_text .. dll_trans .. GetTRTag()
+                    
+                    if C.translator.bilingual_mode == "1" then
+                       local dim_r = (r or 1) * 0.45
+                       local dim_g = (g or 1) * 0.45
+                       local dim_b = (b or 1) * 0.45
+                       frame:pfOriginalAddMessage(badge .. original_text, dim_r, dim_g, dim_b, id)
+                       DEDUP_CACHE[original_text] = { text = final_text, bilingual = true, dim_text = badge .. original_text, dim_r = dim_r, dim_g = dim_g, dim_b = dim_b }
+                    else
+                       DEDUP_CACHE[original_text] = { text = final_text }
+                    end
+                    frame:pfOriginalAddMessage(final_text, r, g, b, id)
+                 end
+             }
+             local ok = pcall(UnitXP, "WoWTranslate", "translate_async", reqId, proc_text, final_src, dest_env)
+             if not ok then
+                DLL_PENDING[reqId] = nil
+                DEDUP_CACHE[original_text] = { text = original_text }
+                frame:pfOriginalAddMessage(original_text, r, g, b, id)
+             end
+             return
+          end
 
           if C.translator.debug_mode == "1" then
             DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR DBG]|r result=" .. (trans or "nil") .. (is_spam and " [SPAM]" or ""))
           end
 
-          if trans and not is_spam then
-            pfUI.translator_stats.total_in = pfUI.translator_stats.total_in + 1
-
-            -- #9: History
-            AddToHistory(sender_name, body, trans, "in")
-
-            -- #22: Sound
-            PlayTranslateSound()
+          if trans then
+            if not is_spam then
+              pfUI.translator_stats.total_in = pfUI.translator_stats.total_in + 1
+              -- #9: History
+              AddToHistory(sender_name, body, trans, "in")
+              -- #22: Sound
+              PlayTranslateSound()
+            end
 
             -- #11: Language badge
             local badge = GetLangBadge(lang)
@@ -1213,9 +1460,10 @@ pfUI:RegisterModule("translator", "vanilla", function ()
               local dim_r = (r or 1) * 0.45
               local dim_g = (g or 1) * 0.45
               local dim_b = (b or 1) * 0.45
-              frame:pfOriginalAddMessage(badge .. text, dim_r, dim_g, dim_b, id)
-              -- Mostrar traduccion con colores normales
+              
               text = badge .. prefix_text .. trans .. GetTRTag()
+              DEDUP_CACHE[original_text] = { text = text, bilingual = true, dim_text = badge .. original_text, dim_r = dim_r, dim_g = dim_g, dim_b = dim_b }
+              frame:pfOriginalAddMessage(DEDUP_CACHE[original_text].dim_text, dim_r, dim_g, dim_b, id)
               return frame:pfOriginalAddMessage(text, r, g, b, id)
             end
 
@@ -1232,6 +1480,7 @@ pfUI:RegisterModule("translator", "vanilla", function ()
         if badge ~= "" then text = badge .. text end
       end
 
+      DEDUP_CACHE[original_text] = { text = text }
       return frame:pfOriginalAddMessage(text, r, g, b, id)
     end
 
@@ -1551,10 +1800,51 @@ pfUI:RegisterModule("translator", "vanilla", function ()
 
       -- #3: Cargar reglas personalizadas
       -- #28 & #29: Cargar diccionarios pre-compilados si existen
-      if pfUI_cache and pfUI_cache.translator_compiled then
-         pfUI.translator_dicts = pfUI_cache.translator_compiled
-         if C.translator.debug_mode == "1" then
-            DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Diccionarios cargados desde binario compilado.")
+      if pfUI_cache then
+         if pfUI_cache.translator_compiled then
+            pfUI.translator_dicts = pfUI_cache.translator_compiled
+            if C.translator.debug_mode == "1" then
+               DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Diccionarios cargados desde binario compilado.")
+            end
+         end
+         -- Cargar cache de memoria de Google Translate (Aprendizaje Persistente)
+         if pfUI_cache.translator_cache and pfUI_cache.translator_cache_order then
+            TR_CACHE = pfUI_cache.translator_cache
+            TR_CACHE_ORDER = pfUI_cache.translator_cache_order
+            TR_CACHE_CFG = pfUI_cache.translator_cache_cfg
+            
+            -- Invalidar si la configuracion cambio estando offline
+            local current_h = CacheConfigHash()
+            if TR_CACHE_CFG and TR_CACHE_CFG ~= current_h then
+               TR_CACHE = {}
+               TR_CACHE_ORDER = {}
+               TR_CACHE_CFG = current_h
+               pfUI_cache.translator_cache = nil
+               pfUI_cache.translator_cache_order = nil
+               pfUI_cache.translator_cache_cfg = nil
+               if C.translator.debug_mode == "1" then
+                  DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Cache offline invalidada por cambio de config.")
+               end
+            else
+               -- Purgar entradas con texto chino en la clave (traducciones Tarzan del dict local).
+               -- Las traducciones de Google NO tienen chars chinos en la CLAVE (el original).
+               -- Esto fuerza que las frases chinas sean re-traducidas por Google.
+               local purged = 0
+               local new_order = {}
+               for i = 1, table.getn(TR_CACHE_ORDER) do
+                  local k = TR_CACHE_ORDER[i]
+                  if CountChineseChars(k) > 0 then
+                     TR_CACHE[k] = nil
+                     purged = purged + 1
+                  else
+                     table.insert(new_order, k)
+                  end
+               end
+               TR_CACHE_ORDER = new_order
+               if C.translator.debug_mode == "1" then
+                  DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r Memoria cargada: " .. table.getn(TR_CACHE_ORDER) .. " traducciones (" .. purged .. " Tarzan purgadas).")
+               end
+            end
          end
       end
       pcall(HookMailbox)
@@ -1563,6 +1853,16 @@ pfUI:RegisterModule("translator", "vanilla", function ()
       pcall(SecureHookOutgoing)
       pcall(HookIncomingChat)
       if IsAddOnLoaded("WIM") then pcall(HookWIMBridge) end
+
+      -- #4: Verificar DLL WoWTranslate (distinto de UnitXP_SP3)
+      -- Check specifically for WoWTranslate commands, otherwise the DLL passes it to native UnitXP which throws a Usage error.
+      local dllOk = pcall(UnitXP, "WoWTranslate", "poll")
+      if dllOk then
+        hasWoWTranslateDLL = true
+        if C.translator.debug_mode == "1" then
+          DEFAULT_CHAT_FRAME:AddMessage("|cff33ffcc[TR]|r UnitXP detectado. Fallback DLL activo.")
+        end
+      end
       if C.translator and C.translator.enable == "1" and C.translator.mailbox == "1" then
         DEFAULT_CHAT_FRAME:AddMessage(
           "|cff00ccff[Translator v" .. pfUI.translator_version .. "]|r " ..
