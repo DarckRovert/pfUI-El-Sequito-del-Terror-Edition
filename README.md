@@ -12,6 +12,8 @@
 
 El **Global Chat Translator** es una pieza nuclear de ingeniería para el ecosistema **Séquito**. Utiliza transformaciones léxicas deterministas en memoria para traducir diálogos en tiempo real (Say, World, Whispers) sin latencia perceptible, asegurando una comunicación trilingüe fluida y libre de contaminación lingüística.
 
+**NOVEDAD (Integración con Launcher)**: El addon ahora incluye un sofisticado bypass del motor de WoW (para clientes chinos como *twmoa_1181_cn*), permitiendo inyectar dinámicamente forzados de configuración regional (Locale Override) directamente desde el Launcher hacia la configuración base de pfUI (`pfUI_config.global.language`), ignorando el falso positivo de `GetLocale() == "enUS"` devuelto por el binario asiático del juego.
+
 ### 🧩 TRANSLATOR FEATURE MATRIX (CAPACIDADES)
 
 | Módulo | Tipo de Datos | Funcionalidad | Descripción |
