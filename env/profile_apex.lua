@@ -67,8 +67,8 @@ apex_loader:SetScript("OnEvent", function()
   apex.unitframes.energycolor    = "1.00,0.85,0.10,1"
   apex.unitframes.focuscolor     = "1.00,0.50,0.15,1"
   apex.unitframes.customcolor    = "0.08,0.08,0.08,1"
-  apex.unitframes.custombgcolor  = "0.15,0.05,0.05,1"
-  apex.unitframes.custompbgcolor = "0.05,0.05,0.20,1"
+  apex.unitframes.custombgcolor  = "0.15,0.05,0.05,0.4"
+  apex.unitframes.custompbgcolor = "0.05,0.05,0.20,0.4"
 
   -- Combo points
   apex.unitframes.combowidth  = "12"
@@ -82,7 +82,7 @@ apex_loader:SetScript("OnEvent", function()
   apex.unitframes.player.pspace        = "1"
   apex.unitframes.player.panchor       = "TOPRIGHT"
   apex.unitframes.player.portrait      = "bar"
-  apex.unitframes.player.portraitalpha = "0.15"
+  apex.unitframes.player.portraitalpha = "0.35"
   apex.unitframes.player.txthpright    = "curmax"
   apex.unitframes.player.txthpcenter   = "none"
   apex.unitframes.player.txthpleft     = "none"
@@ -102,7 +102,7 @@ apex_loader:SetScript("OnEvent", function()
   apex.unitframes.target.pspace        = "1"
   apex.unitframes.target.panchor       = "TOPLEFT"
   apex.unitframes.target.portrait      = "bar"
-  apex.unitframes.target.portraitalpha = "0.15"
+  apex.unitframes.target.portraitalpha = "0.35"
   apex.unitframes.target.txthpleft     = "curmax"
   apex.unitframes.target.txthpcenter   = "none"
   apex.unitframes.target.txthpright    = "unitrev"
