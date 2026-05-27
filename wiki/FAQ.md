@@ -25,6 +25,9 @@ Esto se debe al **Filtro de Ratio de Coherencia (CTR)**. Puedes configurar el um
 ## 8. ¿Por qué algunos mensajes aparecen con [TR] o [ZH]/[EN]/[ES]?
 El tag `[TR]` indica que el mensaje ha sido traducido localmente. Con la opción de **Language Badge** activa, el tag cambiará dinámicamente mostrando el idioma de procedencia (ej. `[ZH]`, `[EN]`, `[ES]`). Puedes ocultar todos los tags activando el **Silent Mode** en `/pfui` -> **Translator**.
 
+## 9. ¿Por qué desaparecen las flechas o textos de misiones en AddOns externos como QuestVoice?
+Con la introducción de soporte dinámico de fuentes asiáticas (`ZYHei`) vía `WoWTranslate.dll` (v7.3.1+), los AddOns externos que capturan la fuente por defecto (`pfUI.font_default`) *antes* de que pfUI complete su ciclo de carga pueden desincronizarse y colapsar al intentar renderizar texto chino. Para solucionar esto, actualiza tus AddOns externos (como **QuestVoice v1.0.1+**) que ya incorporan recargas dinámicas de fuentes y protecciones anti-nil.
+
 ---
 © 2026 **DarckRovert** — El Séquito del Terror.
 *Soporte Técnico Ultimate-Tier.*

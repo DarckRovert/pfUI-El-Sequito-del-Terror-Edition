@@ -1,5 +1,9 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.3.3] - 2026-05-27
+### Corregido
+- **[COMPATIBILIDAD] Desincronización de Fuentes Externas**: Mejorada la interoperabilidad y documentación con AddOns de terceros (`QuestVoice`, `pfQuest`). La inyección asíncrona de fuentes asiáticas (`ZYHei`) introducidas por las traducciones de Turtle WoW mediante `WoWTranslate.dll` no rompe complementos externos que dependen de `pfUI_config` en su fase de inicialización prematura.
+
 ## [7.3.2] - 2026-05-26
 ### Arreglado
 - **Detección de Idioma Nativo (Locale)**: El addon pfUI ahora respeta estrictamente el idioma configurado por el usuario, evitando forzar el idioma por defecto del cliente binario del juego (inglés). La interfaz general y la fuente se traducirán correctamente sin importar el ejecutable.
