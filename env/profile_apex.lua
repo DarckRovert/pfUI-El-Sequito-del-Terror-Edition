@@ -54,21 +54,21 @@ apex_loader:SetScript("OnEvent", function()
 
   -- Globales de unitframes
   apex.unitframes.disable         = "0"
-  apex.unitframes.pastel          = "1"
-  apex.unitframes.animation_speed = "5"
+  apex.unitframes.pastel          = "0"
+  apex.unitframes.animation_speed = "3"
   apex.unitframes.customfade      = "1"
   apex.unitframes.customfullhp    = "1"
   apex.unitframes.custom          = "2"
   apex.unitframes.custombg        = "1"
 
-  -- Paleta de colores de recurso (curada, oscura-saturada)
-  apex.unitframes.manacolor      = "0.22,0.32,0.68,1"
-  apex.unitframes.ragecolor      = "0.68,0.12,0.12,1"
-  apex.unitframes.energycolor    = "0.78,0.60,0.08,1"
-  apex.unitframes.focuscolor     = "0.50,0.30,0.70,1"
-  apex.unitframes.customcolor    = "0.06,0.06,0.06,1"
-  apex.unitframes.custombgcolor  = "0.14,0.04,0.04,1"
-  apex.unitframes.custompbgcolor = "0.04,0.04,0.18,1"
+  -- Paleta de colores de recurso (vibrantes y premium, Ultimate-Tier)
+  apex.unitframes.manacolor      = "0.05,0.65,1.00,1"
+  apex.unitframes.ragecolor      = "1.00,0.15,0.15,1"
+  apex.unitframes.energycolor    = "1.00,0.85,0.10,1"
+  apex.unitframes.focuscolor     = "1.00,0.50,0.15,1"
+  apex.unitframes.customcolor    = "0.08,0.08,0.08,1"
+  apex.unitframes.custombgcolor  = "0.15,0.05,0.05,1"
+  apex.unitframes.custompbgcolor = "0.05,0.05,0.20,1"
 
   -- Combo points
   apex.unitframes.combowidth  = "12"
@@ -76,13 +76,13 @@ apex_loader:SetScript("OnEvent", function()
 
   -- PLAYER ---------------------------------------------------
   apex.unitframes["player"] = apex.unitframes["player"] or {}
-  apex.unitframes.player.width         = "240"
-  apex.unitframes.player.height        = "56"
-  apex.unitframes.player.pheight       = "10"
+  apex.unitframes.player.width         = "250"
+  apex.unitframes.player.height        = "58"
+  apex.unitframes.player.pheight       = "8"
   apex.unitframes.player.pspace        = "1"
   apex.unitframes.player.panchor       = "TOPRIGHT"
   apex.unitframes.player.portrait      = "bar"
-  apex.unitframes.player.portraitalpha = "0.16"
+  apex.unitframes.player.portraitalpha = "0.25"
   apex.unitframes.player.txthpright    = "curmax"
   apex.unitframes.player.txthpcenter   = "none"
   apex.unitframes.player.txthpleft     = "none"
@@ -91,19 +91,18 @@ apex_loader:SetScript("OnEvent", function()
   apex.unitframes.player.buffperrow    = "8"
   apex.unitframes.player.debuffs       = "TOPRIGHT"
   apex.unitframes.player.showPVP       = "1"
-  apex.unitframes.player.pspace        = "1"
   apex.unitframes.player.bartexture    = "Interface\\AddOns\\pfUI\\img\\bar_gradient"
   apex.unitframes.player.pbartexture   = "Interface\\AddOns\\pfUI\\img\\bar_gradient"
 
   -- TARGET ---------------------------------------------------
   apex.unitframes["target"] = apex.unitframes["target"] or {}
-  apex.unitframes.target.width         = "240"
-  apex.unitframes.target.height        = "56"
-  apex.unitframes.target.pheight       = "10"
+  apex.unitframes.target.width         = "250"
+  apex.unitframes.target.height        = "58"
+  apex.unitframes.target.pheight       = "8"
   apex.unitframes.target.pspace        = "1"
   apex.unitframes.target.panchor       = "TOPLEFT"
   apex.unitframes.target.portrait      = "bar"
-  apex.unitframes.target.portraitalpha = "0.16"
+  apex.unitframes.target.portraitalpha = "0.25"
   apex.unitframes.target.txthpleft     = "curmax"
   apex.unitframes.target.txthpcenter   = "none"
   apex.unitframes.target.txthpright    = "unitrev"
@@ -245,13 +244,13 @@ apex_loader:SetScript("OnEvent", function()
   apex["castbar"] = apex["castbar"] or {}
 
   apex.castbar["player"] = apex.castbar["player"] or {}
-  apex.castbar.player.height   = "18"
+  apex.castbar.player.height   = "22"
   apex.castbar.player.showrank = "1"
   apex.castbar.player.showlag  = "1"
   apex.castbar.player.showicon = "1"
 
   apex.castbar["target"] = apex.castbar["target"] or {}
-  apex.castbar.target.height   = "12"
+  apex.castbar.target.height   = "16"
   apex.castbar.target.showicon = "1"
 
   -------------------------------------------------------------

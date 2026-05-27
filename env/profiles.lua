@@ -908,6 +908,7 @@ pfUI_profiles["Nostalgia"] = nostalgia
 pfUI_profiles["Legacy"] = legacy
 pfUI_profiles["Adapta"] = adapta
 pfUI_profiles["Slim"] = slim
+pfUI_profiles["Light"] = light
 
 -- Default positions for new modules per profile.
 -- These are applied during firstrun so frames don't spawn in the center of screen.
@@ -932,6 +933,7 @@ pfUI_profiles["Slim"].new_module_positions = {
   pfMarkTracking       = { anchor = "LEFT",   parent = "UIParent", xpos = 2,    ypos = -82 },
 }
 pfUI_profiles["Adapta"].new_module_positions = pfUI_profiles["Modern"].new_module_positions
+pfUI_profiles["Light"].new_module_positions = pfUI_profiles["Modern"].new_module_positions
 
 
 -- overwrite core profiles in userdata
