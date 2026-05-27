@@ -30,8 +30,8 @@ apex_loader:SetScript("OnEvent", function()
   apex.position["pfActionBarMain"]        = { anchor = "BOTTOM",      parent = "UIParent",            xpos = 0,  ypos = 45 }
   apex.position["pfActionBarBottomLeft"]  = { anchor = "BOTTOM",      parent = "pfActionBarMain",     xpos = 0,  ypos = 42 }
   apex.position["pfActionBarBottomRight"] = { anchor = "BOTTOM",      parent = "pfActionBarBottomLeft", xpos = 0, ypos = 42 }
-  apex.position["pfActionBarLeft"]        = { anchor = "BOTTOMLEFT",  parent = "UIParent",            xpos =  3, ypos = 45 }
-  apex.position["pfActionBarRight"]       = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -3, ypos = 45 }
+  apex.position["pfActionBarLeft"]        = { anchor = "BOTTOMLEFT",  parent = "UIParent",            xpos =  3, ypos = 190 }
+  apex.position["pfActionBarRight"]       = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -3, ypos = 190 }
 
   -- Microbar y Bags (esquina inferior derecha)
   apex.position["pfMicroBar"] = { anchor = "BOTTOMRIGHT", parent = "UIParent",   xpos = -10, ypos = 45 }
