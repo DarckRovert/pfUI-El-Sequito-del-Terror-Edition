@@ -15,23 +15,23 @@ apex_loader:SetScript("OnEvent", function()
   -------------------------------------------------------------
   apex["position"] = apex["position"] or {}
 
-  -- UnitFrames: simétricos, centrados tácticos
-  apex.position["pfPlayer"]       = { anchor = "BOTTOM",      parent = "UIParent",            xpos = -205, ypos = 275 }
-  apex.position["pfTarget"]       = { anchor = "BOTTOM",      parent = "UIParent",            xpos =  205, ypos = 275 }
-  apex.position["pfTargetTarget"] = { anchor = "BOTTOM",      parent = "UIParent",            xpos =  415, ypos = 250 }
-  apex.position["pfPet"]          = { anchor = "BOTTOM",      parent = "UIParent",            xpos = -380, ypos = 250 }
+  -- UnitFrames: simétricos, centrados tácticos, posicionados más abajo
+  apex.position["pfPlayer"]       = { anchor = "BOTTOM",      parent = "UIParent",            xpos = -190, ypos = 200 }
+  apex.position["pfTarget"]       = { anchor = "BOTTOM",      parent = "UIParent",            xpos =  190, ypos = 200 }
+  apex.position["pfTargetTarget"] = { anchor = "BOTTOM",      parent = "UIParent",            xpos =  380, ypos = 175 }
+  apex.position["pfPet"]          = { anchor = "BOTTOM",      parent = "UIParent",            xpos = -350, ypos = 175 }
   apex.position["pfFocus"]        = { anchor = "TOPLEFT",     parent = "UIParent",            xpos =  14,  ypos = -230 }
 
   -- Castbars: player centrado, target anclado sobre el frame
-  apex.position["pfPlayerCastbar"] = { anchor = "BOTTOM",    parent = "UIParent",             xpos = 0, ypos = 218 }
-  apex.position["pfTargetCastbar"] = { anchor = "BOTTOM",    parent = "pfTarget",             xpos = 0, ypos = 66 }
+  apex.position["pfPlayerCastbar"] = { anchor = "BOTTOM",    parent = "UIParent",             xpos = 0, ypos = 150 }
+  apex.position["pfTargetCastbar"] = { anchor = "BOTTOM",    parent = "pfTarget",             xpos = 0, ypos = 55 }
 
   -- ActionBars: flotantes en el fondo, apiladas
-  apex.position["pfActionBarMain"]        = { anchor = "BOTTOM",      parent = "UIParent",            xpos = 0,  ypos = 45 }
+  apex.position["pfActionBarMain"]        = { anchor = "BOTTOM",      parent = "UIParent",            xpos = 0,  ypos = 35 }
   apex.position["pfActionBarBottomLeft"]  = { anchor = "BOTTOM",      parent = "pfActionBarMain",     xpos = 0,  ypos = 42 }
   apex.position["pfActionBarBottomRight"] = { anchor = "BOTTOM",      parent = "pfActionBarBottomLeft", xpos = 0, ypos = 42 }
-  apex.position["pfActionBarLeft"]        = { anchor = "BOTTOMLEFT",  parent = "UIParent",            xpos =  3, ypos = 45 }
-  apex.position["pfActionBarRight"]       = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -3, ypos = 45 }
+  apex.position["pfActionBarLeft"]        = { anchor = "BOTTOMLEFT",  parent = "UIParent",            xpos =  3, ypos = 35 }
+  apex.position["pfActionBarRight"]       = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -3, ypos = 35 }
 
   -- Microbar y Bags (esquina inferior derecha)
   apex.position["pfMicroBar"] = { anchor = "BOTTOMRIGHT", parent = "UIParent",   xpos = -10, ypos = 45 }
@@ -41,8 +41,8 @@ apex_loader:SetScript("OnEvent", function()
   apex.position["pfMinimap"] = { anchor = "TOPRIGHT", parent = "UIParent", xpos = -22, ypos = -22 }
 
   -- Swing Timer: debajo del castbar del jugador
-  apex.position["pfSwingTimerMainhand"] = { anchor = "BOTTOM", parent = "UIParent", xpos = -205, ypos = 212 }
-  apex.position["pfSwingTimerRanged"]   = { anchor = "BOTTOM", parent = "UIParent", xpos = -205, ypos = 192 }
+  apex.position["pfSwingTimerMainhand"] = { anchor = "BOTTOM", parent = "UIParent", xpos = -190, ypos = 144 }
+  apex.position["pfSwingTimerRanged"]   = { anchor = "BOTTOM", parent = "UIParent", xpos = -190, ypos = 124 }
 
   -- Mark Tracking: borde izquierdo, a media pantalla
   apex.position["pfMarkTracking"] = { anchor = "LEFT", parent = "UIParent", xpos = 4, ypos = 17 }
@@ -76,13 +76,13 @@ apex_loader:SetScript("OnEvent", function()
 
   -- PLAYER ---------------------------------------------------
   apex.unitframes["player"] = apex.unitframes["player"] or {}
-  apex.unitframes.player.width         = "250"
-  apex.unitframes.player.height        = "58"
-  apex.unitframes.player.pheight       = "8"
+  apex.unitframes.player.width         = "220"
+  apex.unitframes.player.height        = "46"
+  apex.unitframes.player.pheight       = "6"
   apex.unitframes.player.pspace        = "1"
   apex.unitframes.player.panchor       = "TOPRIGHT"
   apex.unitframes.player.portrait      = "bar"
-  apex.unitframes.player.portraitalpha = "0.25"
+  apex.unitframes.player.portraitalpha = "0.08"
   apex.unitframes.player.txthpright    = "curmax"
   apex.unitframes.player.txthpcenter   = "none"
   apex.unitframes.player.txthpleft     = "none"
@@ -96,13 +96,13 @@ apex_loader:SetScript("OnEvent", function()
 
   -- TARGET ---------------------------------------------------
   apex.unitframes["target"] = apex.unitframes["target"] or {}
-  apex.unitframes.target.width         = "250"
-  apex.unitframes.target.height        = "58"
-  apex.unitframes.target.pheight       = "8"
+  apex.unitframes.target.width         = "220"
+  apex.unitframes.target.height        = "46"
+  apex.unitframes.target.pheight       = "6"
   apex.unitframes.target.pspace        = "1"
   apex.unitframes.target.panchor       = "TOPLEFT"
   apex.unitframes.target.portrait      = "bar"
-  apex.unitframes.target.portraitalpha = "0.25"
+  apex.unitframes.target.portraitalpha = "0.08"
   apex.unitframes.target.txthpleft     = "curmax"
   apex.unitframes.target.txthpcenter   = "none"
   apex.unitframes.target.txthpright    = "unitrev"
@@ -374,9 +374,17 @@ apex_loader:SetScript("OnEvent", function()
   apex.bars.gryphons.texture = "none"
 
   -------------------------------------------------------------
-  -- 7. PANEL XP / REP                                       --
+  -- 7. PANEL XP / REP / DOCK                                --
   -------------------------------------------------------------
   apex["panel"] = apex["panel"] or {}
+
+  -- Ocultamos los paneles inferiores de chat por completo
+  apex.panel.use_left  = "0"
+  apex.panel.use_right = "0"
+  apex.panel.hide_leftpanel  = "1"
+  apex.panel.hide_rightpanel = "1"
+  apex.panel.hide_minimappanel = "1"
+  apex.panel.hide_microbar   = "1"
 
   apex.panel["left"] = apex.panel["left"] or {}
   apex.panel.left.left = "exp"
