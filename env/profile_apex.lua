@@ -26,12 +26,12 @@ apex_loader:SetScript("OnEvent", function()
   apex.position["pfPlayerCastbar"] = { anchor = "BOTTOM",    parent = "UIParent",             xpos = 0, ypos = 90 }
   apex.position["pfTargetCastbar"] = { anchor = "BOTTOM",    parent = "pfTarget",             xpos = 0, ypos = 55 }
 
-  -- ActionBars: flotantes en el fondo, apiladas
-  apex.position["pfActionBarMain"]        = { anchor = "BOTTOM",      parent = "UIParent",            xpos = 0,  ypos = 35 }
-  apex.position["pfActionBarBottomLeft"]  = { anchor = "BOTTOM",      parent = "pfActionBarMain",     xpos = 0,  ypos = 42 }
-  apex.position["pfActionBarBottomRight"] = { anchor = "BOTTOM",      parent = "pfActionBarBottomLeft", xpos = 0, ypos = 42 }
-  apex.position["pfActionBarLeft"]        = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -42, ypos = 280 }
-  apex.position["pfActionBarRight"]       = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -3, ypos = 280 }
+  -- ActionBars: flotantes en el fondo, apiladas centralmente y verticalmente a la derecha
+  apex.position["pfActionBarMain"]     = { anchor = "BOTTOM",      parent = "UIParent",            xpos = 0,   ypos = 35 }
+  apex.position["pfActionBarLeft"]     = { anchor = "BOTTOM",      parent = "pfActionBarMain",     xpos = 0,   ypos = 42 }
+  apex.position["pfActionBarTop"]      = { anchor = "BOTTOM",      parent = "pfActionBarLeft",     xpos = 0,   ypos = 42 }
+  apex.position["pfActionBarRight"]    = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -3,  ypos = 280 }
+  apex.position["pfActionBarVertical"] = { anchor = "BOTTOMRIGHT", parent = "UIParent",            xpos = -42, ypos = 280 }
 
   -- Microbar y Bags (esquina inferior derecha)
   apex.position["pfMicroBar"] = { anchor = "BOTTOMRIGHT", parent = "UIParent",   xpos = -10, ypos = 45 }
@@ -338,24 +338,27 @@ apex_loader:SetScript("OnEvent", function()
   apex.bars.bar1.background  = "0"
 
   apex.bars["bar3"] = apex.bars["bar3"] or {}
-  apex.bars.bar3.formfactor = "12 x 1"
-  apex.bars.bar3.buttons    = "6"
+  apex.bars.bar3.enable     = "1"
+  apex.bars.bar3.formfactor = "1 x 12"
   apex.bars.bar3.icon_size  = "36"
   apex.bars.bar3.background = "0"
 
   apex.bars["bar4"] = apex.bars["bar4"] or {}
-  apex.bars.bar4.enable = "1"
+  apex.bars.bar4.enable     = "1"
   apex.bars.bar4.formfactor = "1 x 12"
+  apex.bars.bar4.icon_size  = "36"
+  apex.bars.bar4.background = "0"
 
   apex.bars["bar5"] = apex.bars["bar5"] or {}
+  apex.bars.bar5.enable     = "1"
   apex.bars.bar5.formfactor = "12 x 1"
-  apex.bars.bar5.buttons    = "6"
   apex.bars.bar5.icon_size  = "36"
   apex.bars.bar5.background = "0"
 
   apex.bars["bar6"] = apex.bars["bar6"] or {}
-  apex.bars.bar6.formfactor = "1 x 12"
-  apex.bars.bar6.icon_size  = "24"
+  apex.bars.bar6.enable     = "1"
+  apex.bars.bar6.formfactor = "12 x 1"
+  apex.bars.bar6.icon_size  = "36"
   apex.bars.bar6.background = "0"
 
   apex.bars["bar11"] = apex.bars["bar11"] or {}
@@ -493,7 +496,9 @@ apex_loader:SetScript("OnEvent", function()
     pfTargetCastbar      = apex.position["pfTargetCastbar"],
     pfActionBarMain      = apex.position["pfActionBarMain"],
     pfActionBarLeft      = apex.position["pfActionBarLeft"],
+    pfActionBarTop       = apex.position["pfActionBarTop"],
     pfActionBarRight     = apex.position["pfActionBarRight"],
+    pfActionBarVertical  = apex.position["pfActionBarVertical"],
     pfMinimap            = apex.position["pfMinimap"],
     pfSwingTimerMainhand = apex.position["pfSwingTimerMainhand"],
     pfSwingTimerRanged   = apex.position["pfSwingTimerRanged"],
