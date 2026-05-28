@@ -36,13 +36,13 @@ function pfUI:LoadConfig()
   pfUI:UpdateConfig("global",     nil,           "offscreen",        "0")
 
   pfUI:UpdateConfig("global",     nil,           "font_blizzard",    "0")
-  pfUI:UpdateConfig("global",     nil,           "font_default",     "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf")
+  pfUI:UpdateConfig("global",     nil,           "font_default",     "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
   pfUI:UpdateConfig("global",     nil,           "font_size",        "12")
-  pfUI:UpdateConfig("global",     nil,           "font_unit",        "Interface\\AddOns\\pfUI\\fonts\\BigNoodleTitling.ttf")
+  pfUI:UpdateConfig("global",     nil,           "font_unit",        "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
   pfUI:UpdateConfig("global",     nil,           "font_unit_size",   "12")
   pfUI:UpdateConfig("global",     nil,           "font_unit_style",  "OUTLINE")
-  pfUI:UpdateConfig("global",     nil,           "font_unit_name",   "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf")
-  pfUI:UpdateConfig("global",     nil,           "font_combat",      "Interface\\AddOns\\pfUI\\fonts\\Continuum.ttf")
+  pfUI:UpdateConfig("global",     nil,           "font_unit_name",   "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
+  pfUI:UpdateConfig("global",     nil,           "font_combat",      "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
 
   pfUI:UpdateConfig("global",     nil,           "force_region",     "1")
   pfUI:UpdateConfig("global",     nil,           "errors",           "1")
@@ -152,7 +152,7 @@ function pfUI:LoadConfig()
   pfUI:UpdateConfig("appearance", "cd",          "foreign",          "0")
   pfUI:UpdateConfig("appearance", "cd",          "milliseconds",     "1")
   pfUI:UpdateConfig("appearance", "cd",          "hideanim",         "0")
-  pfUI:UpdateConfig("appearance", "cd",          "font",             "Interface\\AddOns\\pfUI\\fonts\\BigNoodleTitling.ttf")
+  pfUI:UpdateConfig("appearance", "cd",          "font",             "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
   pfUI:UpdateConfig("appearance", "cd",          "dynamicsize",      "1")
   pfUI:UpdateConfig("appearance", "castbar",     "castbarcolor",     ".7,.7,.9,.8")
   pfUI:UpdateConfig("appearance", "castbar",     "channelcolor",     ".9,.9,.7,.8")
@@ -551,7 +551,7 @@ function pfUI:LoadConfig()
     pfUI:UpdateConfig("unitframes", unit,      "txtpowerrightoffy",    "0")
     pfUI:UpdateConfig("unitframes", unit,      "hitindicator",     "0")
     pfUI:UpdateConfig("unitframes", unit,      "hitindicatorsize", "15")
-    pfUI:UpdateConfig("unitframes", unit,      "hitindicatorfont", "Interface\\AddOns\\pfUI\\fonts\\Continuum.ttf")
+    pfUI:UpdateConfig("unitframes", unit,      "hitindicatorfont", "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
     pfUI:UpdateConfig("unitframes", unit,      "defcolor",         "1")
     pfUI:UpdateConfig("unitframes", unit,      "custom",           "0")
     pfUI:UpdateConfig("unitframes", unit,      "customfullhp",     "0")
@@ -568,7 +568,7 @@ function pfUI:LoadConfig()
     pfUI:UpdateConfig("unitframes", unit,      "healcolor",        "0,1,0,0.6")
     pfUI:UpdateConfig("unitframes", unit,      "overhealperc",     "20")
     pfUI:UpdateConfig("unitframes", unit,      "customfont",       "0")
-    pfUI:UpdateConfig("unitframes", unit,      "customfont_name",  "Interface\\AddOns\\pfUI\\fonts\\BigNoodleTitling.ttf")
+    pfUI:UpdateConfig("unitframes", unit,      "customfont_name",  "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
     pfUI:UpdateConfig("unitframes", unit,      "customfont_size",  "12")
     pfUI:UpdateConfig("unitframes", unit,      "customfont_style", "OUTLINE")
   end
@@ -653,7 +653,7 @@ function pfUI:LoadConfig()
   pfUI:UpdateConfig("translator", nil,           "chan_whisper",     "1")
   pfUI:UpdateConfig("translator", nil,           "ctr_threshold",    "0.00")
 
-  pfUI:UpdateConfig("bars",       nil,           "font",             "Interface\\AddOns\\pfUI\\fonts\\BigNoodleTitling.ttf")
+  pfUI:UpdateConfig("bars",       nil,           "font",             "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
   pfUI:UpdateConfig("bars",       nil,           "font_offset",      "0")
   pfUI:UpdateConfig("bars",       nil,           "macro_size",       "9")
   pfUI:UpdateConfig("bars",       nil,           "macro_color",      "1,1,1,1")
@@ -773,7 +773,7 @@ function pfUI:LoadConfig()
   pfUI:UpdateConfig("tooltip",    "questitem",   "showquest",        "1")
   pfUI:UpdateConfig("tooltip",    "questitem",   "showcount",        "0")
   pfUI:UpdateConfig("tooltip",    "statusbar",   "texture",          "Interface\\AddOns\\pfUI\\img\\bar")
-  pfUI:UpdateConfig("tooltip",     nil,          "font_tooltip",     "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf")
+  pfUI:UpdateConfig("tooltip",     nil,          "font_tooltip",     "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
   pfUI:UpdateConfig("tooltip",     nil,          "font_tooltip_size", "12")
 
   -- Throttle Settings
@@ -924,7 +924,7 @@ function pfUI:LoadConfig()
   pfUI:UpdateConfig("screenshot", nil,           "loot",             "0")
   pfUI:UpdateConfig("screenshot", nil,           "hideui",           "0")
   pfUI:UpdateConfig("screenshot", nil,           "caption",          "0")
-  pfUI:UpdateConfig("screenshot", nil,           "caption_font",     "Interface\\AddOns\\pfUI\\fonts\\BigNoodleTitling.ttf")
+  pfUI:UpdateConfig("screenshot", nil,           "caption_font",     "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf")
   pfUI:UpdateConfig("screenshot", nil,           "caption_size",     "22")
 
   pfUI:UpdateConfig("gm",         nil,           "disable",          "1")
@@ -978,7 +978,7 @@ function pfUI:MigrateConfig()
   if checkversion(1, 6, 0) then
     -- migrate font_default
     if pfUI_config.global.font_default == "arial" then
-      pfUI_config.global.font_default = "Myriad-Pro"
+      pfUI_config.global.font_default = "ZhunYuan"
     elseif pfUI_config.global.font_default == "homespun" then
       pfUI_config.global.font_default = "Homespun"
     elseif pfUI_config.global.font_default == "diediedie" then
@@ -987,7 +987,7 @@ function pfUI:MigrateConfig()
 
     -- migrate font_square
     if pfUI_config.global.font_square == "arial" then
-      pfUI_config.global.font_square = "Myriad-Pro"
+      pfUI_config.global.font_square = "ZhunYuan"
     elseif pfUI_config.global.font_square == "homespun" then
       pfUI_config.global.font_square = "Homespun"
     elseif pfUI_config.global.font_square == "diediedie" then
@@ -996,7 +996,7 @@ function pfUI:MigrateConfig()
 
     -- migrate font_combat
     if pfUI_config.global.font_combat == "arial" then
-      pfUI_config.global.font_combat = "Myriad-Pro"
+      pfUI_config.global.font_combat = "ZhunYuan"
     elseif pfUI_config.global.font_combat == "homespun" then
       pfUI_config.global.font_combat = "Homespun"
     elseif pfUI_config.global.font_combat == "diediedie" then

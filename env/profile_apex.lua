@@ -287,7 +287,7 @@ apex_loader:SetScript("OnEvent", function()
 
   -- Cooldown countdown font
   apex.appearance["cd"] = apex.appearance["cd"] or {}
-  apex.appearance.cd.font = "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf"
+  apex.appearance.cd.font = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf"
 
   -- Bag borders sin límite artificial
   apex.appearance["bags"] = apex.appearance["bags"] or {}
@@ -331,7 +331,7 @@ apex_loader:SetScript("OnEvent", function()
   apex.bars.background = "0"
   apex.bars.macro_size = "8"
   apex.bars.count_size = "9"
-  apex.bars.font       = "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf"
+  apex.bars.font       = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf"
 
   apex.bars["bar1"] = apex.bars["bar1"] or {}
   apex.bars.bar1.icon_size   = "36"
@@ -439,7 +439,7 @@ apex_loader:SetScript("OnEvent", function()
   -- 10. TIPOGRAFÍA Y GLOBALS                                --
   -------------------------------------------------------------
   apex["global"] = apex["global"] or {}
-  apex.global.font_unit      = "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf"
+  apex.global.font_unit      = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf"
   apex.global.font_size      = "12"
   apex.global.font_unit_size = "13"
   apex.global.pixelperfect   = "1"

@@ -626,14 +626,14 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
     pfUI.gui.title:SetFontObject(GameFontWhite)
     pfUI.gui.title:SetPoint("TOPLEFT", pfUI.gui, "TOPLEFT", 8, -8)
     pfUI.gui.title:SetJustifyH("LEFT")
-    pfUI.gui.title:SetFont(pfUI.media["font:Hooge.ttf"], 10)
+    pfUI.gui.title:SetFont(pfUI.media["font:ZhunYuan.ttf"], 10)
     pfUI.gui.title:SetText("|cff33ffccpf|rUI")
 
     pfUI.gui.version = pfUI.gui:CreateFontString("Status", "LOW", "GameFontNormal")
     pfUI.gui.version:SetFontObject(GameFontWhite)
     pfUI.gui.version:SetPoint("LEFT", pfUI.gui.title, "RIGHT", 0, 0)
     pfUI.gui.version:SetJustifyH("LEFT")
-    pfUI.gui.version:SetFont(pfUI.media["font:Myriad-Pro.ttf"], 10)
+    pfUI.gui.version:SetFont(pfUI.media["font:ZhunYuan.ttf"], 10)
     pfUI.gui.version:SetText("|cff555555[|r" .. pfUI.version.string.. "|cff555555]|r")
 
     pfUI.gui.close = CreateFrame("Button", "pfQuestionDialogClose", pfUI.gui)
@@ -869,7 +869,7 @@ pfUI:RegisterModule("gui", "vanilla:tbc", function ()
         "Interface\\AddOns\\pfUI\\fonts\\Expressway.ttf:Expressway",
         "Interface\\AddOns\\pfUI\\fonts\\Homespun.ttf:Homespun",
         "Interface\\AddOns\\pfUI\\fonts\\Hooge.ttf:Hooge",
-        "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf:Myriad-Pro",
+        "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf:ZhunYuan",
         "Interface\\AddOns\\pfUI\\fonts\\PT-Sans-Narrow-Bold.ttf:PT-Sans-Narrow-Bold",
         "Interface\\AddOns\\pfUI\\fonts\\PT-Sans-Narrow-Regular.ttf:PT-Sans-Narrow-Regular"
       },

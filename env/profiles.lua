@@ -8,7 +8,7 @@ local modern = {
     },
   },
   ["global"] = {
-    ["font_unit"] = "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf",
+    ["font_unit"] = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf",
     ["font_size"] = "11",
     ["font_unit_size"] = "11",
   },
@@ -708,7 +708,7 @@ local light = {
     },
   },
   ["global"] = {
-    ["font_unit"] = "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf",
+    ["font_unit"] = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf",
     ["font_size"] = "11",
     ["font_unit_size"] = "11",
   },
@@ -726,7 +726,7 @@ local light = {
   },
   ["appearance"] = {
     ["cd"] = {
-      ["font"] = "Interface\\AddOns\\pfUI\\fonts\\Myriad-Pro.ttf",
+      ["font"] = "Interface\\AddOns\\pfUI\\fonts\\ZhunYuan.ttf",
     },
     ["castbar"] = {
       ["texture"] = "Interface\\AddOns\\pfUI\\img\\bar_gradient",

@@ -46,7 +46,7 @@ pfUI:RegisterModule("easteregg", "vanilla:tbc", function ()
     fireworks.stext:SetText("|cff33ffccShagu|cffffffff wishes you a")
 
     fireworks.text = fireworks:CreateFontString("Status", "LOW", "GameFontWhite")
-    fireworks.text:SetFont(pfUI.media["font:BigNoodleTitling.ttf"], 38)
+    fireworks.text:SetFont(pfUI.media["font:ZhunYuan.ttf"], 38)
     fireworks.text:SetPoint("TOP", 0, -400)
     fireworks.text:SetText("happy new year!")
 
