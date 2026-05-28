@@ -1,5 +1,9 @@
 # CHANGELOG - Global Chat Translator
 
+## [7.3.4] - 2026-05-28
+### Añadido
+- **🧠 WCS_Brain Integration [God-Tier]**: Se documentó formalmente la compatibilidad nativa de análisis visual de la interfaz. La predictibilidad de las barras de pfUI permite a la IA de Mascotas leer el entorno de combate (HP, Buffs) en milisegundos con cero margen de error.
+
 ## [7.3.3] - 2026-05-27
 ### Corregido
 - **[COMPATIBILIDAD] Desincronización de Fuentes Externas**: Mejorada la interoperabilidad y documentación con AddOns de terceros (`QuestVoice`, `pfQuest`). La inyección asíncrona de fuentes asiáticas (`ZYHei`) introducidas por las traducciones de Turtle WoW mediante `WoWTranslate.dll` no rompe complementos externos que dependen de `pfUI_config` en su fase de inicialización prematura.

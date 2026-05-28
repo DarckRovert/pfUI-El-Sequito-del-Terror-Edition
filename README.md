@@ -28,6 +28,13 @@ El **Global Chat Translator** es una pieza nuclear de ingeniería para el ecosis
 | **Channel Filter** | Comm Control | Gestión Granular | Selección bajo demanda de canales a traducir (World, LFG, Guild, Say, Party). |
 | **LRU Cache** | Memory Mgmt | Alto Rendimiento | Caché de **1024 registros** para un hit-rate del >95% con latencia sub-milisegundo. |
 
+---
+
+## 🧠 WCS_Brain Integration [God-Tier]
+
+> [!IMPORTANT]
+> **Compatibilidad de Análisis de UI:** Los eventos visuales y perfiles visuales del Séquito en pfUI proporcionan un entorno limpio y predecible que **[WCS_Brain (El Núcleo Neuronal)](https://github.com/DarckRovert/WCS_Brain-v9.3.1-God-Tier)** puede leer para analizar la salud del jugador de forma instantánea.
+
 ### ⚡ PERFORMANCE BENCHMARKS (DIAMOND-TIER)
 
 | Proceso | Latencia Séquito (v7.1.0) | Latencia Standard | Estado |
